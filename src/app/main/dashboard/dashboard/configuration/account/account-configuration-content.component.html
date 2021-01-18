@@ -1,0 +1,74 @@
+<div class="mt-20" fxLayout="column">
+  <!-- <h1>Account config content</h1> -->
+
+  <div fxLayout="row">
+    <div fxFlex="15%" fxFlex.xs="5%"></div>
+    <div class="mt-20" fxFlex="70%" fxFlex.xs="90%">
+      <mat-card fxLayout="column">
+
+        <div fxLayout="row">
+          <p class="mat-title" fxLayoutAlign="start center">
+            <mat-icon class="mr-8">face</mat-icon>
+            Jouw account gegevens
+          </p>
+          <div class="card-option-button" fxFlex fxLayoutAlign="end end">
+            <button [matMenuTriggerFor]="menu" mat-icon-button>
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <ng-container>
+                <button (click)="deleteAccount($event)" mat-menu-item>
+                  <mat-icon class="b-text-action">clear</mat-icon>
+                  Verwijder account
+                </button>
+              </ng-container>
+            </mat-menu>
+          </div>
+        </div>
+
+
+        <p>Hieronder kun je jouw gegevens wijzigen en opslaan</p>
+
+        <form *ngIf="userForm" [formGroup]="userForm" class="mt-20" fxFlex="40%" fxFlex.xs="100%" fxLayout="column"
+              fxLayoutGap="12px" name="form"
+              novalidate>
+
+          <mat-form-field appearance="outline" fxFlex="100%">
+            <mat-label>Voornaam</mat-label>
+            <input formControlName="first_name" id="fname" matInput name="fname" placeholder="Voornaam" type="text">
+            <mat-error>{{userForm.errorMessages.first_name?.errorMessage}}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" fxFlex="100%">
+            <mat-label>Achternaam</mat-label>
+            <input formControlName="last_name" id="lname" matInput name="lname" placeholder="Achternaam" type="text">
+            <mat-error>{{userForm.errorMessages.last_name?.errorMessage}}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" fxFlex="100%">
+            <mat-label>Email</mat-label>
+            <input formControlName="email" matInput name="email" placeholder="Email" type="email">
+            <mat-error>{{userForm.errorMessages.email?.errorMessage}}</mat-error>
+          </mat-form-field>
+
+          <div *ngIf="!userForm?.pristine" class="mt-20" fxLayout="row" fxLayoutAlign="end" fxLayoutGap="20px">
+
+            <button (click)="cancelChanges()" class="b-action" mat-button type="button">
+              Annuleer
+            </button>
+
+            <button (click)="onSubmitForm()" [disabled]="!userForm?.valid" class="b-green" mat-button type="submit">
+              <mat-icon>save</mat-icon>
+              Opslaan
+            </button>
+
+          </div>
+
+        </form>
+
+      </mat-card>
+    </div>
+    <div fxFlex="15%" fxFlex.xs="5%"></div>
+  </div>
+
+</div>

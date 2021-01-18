@@ -1,0 +1,11 @@
+// This file meant to be imported only once! Use oanax.scss to access
+// to the core Oanax and Angular Material mixins
+// Oanax
+@import "gpx";
+@import "gpx-style";
+// Include core Angular Material styles
+@include mat-core();
+// Partials
+@import "partials/helpers";
+@import "partials/general";
+@import "partials/typography";

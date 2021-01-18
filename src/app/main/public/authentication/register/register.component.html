@@ -1,0 +1,76 @@
+<div fxFlex="100%">
+  <mat-card class="p-36 login-card" fxFlex="100%" fxLayout="column">
+
+    <ng-container *ngIf="completeView; else registerView">
+      <gpx-register-complete></gpx-register-complete>
+    </ng-container>
+
+    <ng-template #registerView>
+
+
+      <div fxLayout="row">
+        <div fxFlex="15%"></div>
+        <div fxFlex="70%">
+          <img src="assets/background/sun-background.png">
+        </div>
+
+        <div fxFlex="15%"></div>
+      </div>
+
+      <form (ngSubmit)="onSubmit()" [formGroup]="registerForm" class="mt-40" fxLayout="column" name="registerForm"
+            novalidate>
+
+        <mat-form-field>
+          <input autocapitalize="none" formControlName="username" matInput name="username" placeholder="Gebruikersnaam">
+          <mat-error>
+            {{registerForm.errorMessages.username.errorMessage}}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input [type]="show_password ? 'text' : 'password'" autocapitalize="none" formControlName="password" matInput
+                 name="pwd" placeholder="Wachtwoord">
+          <mat-icon (click)="show_password = !show_password" class="cursor-pointer" matSuffix>
+            {{show_password ? 'visibility' : 'visibility_off'}}
+          </mat-icon>
+          <mat-error>
+            {{registerForm.errorMessages.password.errorMessage}}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="confirm_password" matInput name="pwd_2" placeholder="Bevestig wachtwoord"
+                 type="password">
+          <mat-error>
+            {{registerForm.errorMessages.confirm_password.errorMessage}}
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-error>
+          {{registerForm.errorMessages.errorMessage}}
+        </mat-error>
+
+        <div class="mt-20" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+
+        </div>
+
+        <button [disabled]="registerForm.invalid" aria-label="LOG IN" class="mt-20 b-secondary" mat-raised-button>
+          Account aanmaken
+        </button>
+      </form>
+
+      <div>
+        <mat-divider [inset]="true"></mat-divider>
+      </div>
+
+      <div class="mt-20">
+        <div class="register" fxLayout="column" fxLayoutAlign="center center">
+          <span class="text">Heb je al een account?</span>
+          <a [routerLink]="['/login']" class="b-text-secondary">Login</a>
+        </div>
+      </div>
+    </ng-template>
+
+  </mat-card>
+</div>

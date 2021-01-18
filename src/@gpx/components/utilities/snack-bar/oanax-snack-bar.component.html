@@ -1,0 +1,11 @@
+<div fxLayout="row" fxLayoutAlign="start center">
+  <div class="mr-8" fxFlex fxLayoutAlign="start center" style="color: white">
+    <mat-icon *ngIf="data.icon" class="mr-4">{{ data.icon }}</mat-icon>
+    {{data.title}}
+  </div>
+  <div>
+    <button (click)="onAction()" mat-button>
+      {{data.action || 'Sluiten'}}
+    </button>
+  </div>
+</div>

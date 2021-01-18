@@ -1,0 +1,113 @@
+// -----------------------------------------------------------------------------------------------------
+// @ Theming
+// -----------------------------------------------------------------------------------------------------
+@mixin typography-theme($theme) {
+  $background: map-get($theme, background);
+  $accent: map-get($theme, accent);
+  //  $is-dark: map-get($theme, is-dark);
+  //  a {
+  //   color: map-get($accent, default);
+  //  }
+}
+
+// -----------------------------------------------------------------------------------------------------
+// @ Typography
+// -----------------------------------------------------------------------------------------------------
+html {
+  font-size: 62.5%;
+  font-family: 'Roboto', 'Muli', 'Helvetica Neue', 'Arial', sans-serif;
+  line-height: 1.4 !important;
+  letter-spacing: -0.1px !important;
+}
+
+body {
+  font-size: 16px;
+}
+
+html,
+body {
+  -webkit-font-smoothing: 100%;
+  -moz-osx-font-smoothing: 100%;
+}
+
+// Headings
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-weight: normal;
+}
+
+h1,
+.h1 {
+  font-size: 28px;
+}
+
+h2,
+.h2 {
+  font-size: 24px;
+}
+
+h3,
+.h3 {
+  font-size: 20px;
+}
+
+h4,
+.h4 {
+  font-size: 18px;
+}
+
+h5,
+.h5 {
+  font-size: 16px;
+}
+
+h6,
+.h6 {
+  font-size: 12px !important;
+}
+
+// Links
+a {
+  text-decoration: none;
+
+  &:not(.mat-button):not(.mat-raised-button):not(.mat-flat-button):not(.mat-stroked-button):not(.mat-icon-button):not(.mat-fab):not(.mat-mini-fab):not(.mat-tab-link) {
+    color: $b-color-secondary;
+
+    &:hover,
+    &:active {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}
+
+.mat-list-base .mat-list-item {
+  font-size: 18px !important;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.center-text-xs {
+  @include media-breakpoint('xs') {
+    text-align: center;
+  }
+}
+
+.center-text-gt-xs {
+  @include media-breakpoint('gt-xs') {
+    text-align: center;
+  }
+}
+

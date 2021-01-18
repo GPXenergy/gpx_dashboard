@@ -1,0 +1,52 @@
+<div [fxLayout]="output == 'right' ? 'row' : 'column'">
+  <ng-container *ngIf="output == 'right'; else vertical">
+    <!-- Layout for mobile -->
+    <div fxFlex="60%">
+      <app-group-meter-card [data]="data"></app-group-meter-card>
+    </div>
+    <div fxFlex="40%" fxLayout="column" fxLayoutAlign="center center">
+      <div *ngIf="data" class="mb-8" fxFlex="45%" fxLayoutAlign="center end">
+        {{ data.actual_power | explicitNumber: '1.3' }} kW
+      </div>
+      <div fxFlex="10%" style="width: 100%;">
+        <app-energy-path
+          *ngIf="data"
+          [reverse]="data.actual_power <= 0"
+          [speed]="animationSpeed"
+          direction="rl"
+          orientation="horizontal">
+        </app-energy-path>
+      </div>
+      <div fxFlex="45%"></div>
+    </div>
+  </ng-container>
+
+  <ng-template #vertical>
+    <!-- Layout for desktop -->
+
+    <div fxFlex="20%" fxLayout="column">
+      <div *ngIf="output == 'bottom'">
+        <app-group-meter-card [data]="data"></app-group-meter-card>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center" style="height: 100px">
+        <div fxFlex="45%"></div>
+        <div fxFlex="10%" style="height: 100%;">
+          <app-energy-path
+            *ngIf="data"
+            [direction]="output === 'bottom' ? 'tb' : 'bt'"
+            [reverse]="data.actual_power <= 0"
+            [speed]="animationSpeed"
+            orientation="vertical">
+          </app-energy-path>
+        </div>
+        <div *ngIf="data" class="ml-8" fxFlex="45%" fxLayoutAlign="left center">
+          {{ data.actual_power | explicitNumber: '1.3' }} kW
+        </div>
+      </div>
+      <div *ngIf="output == 'top'">
+        <app-group-meter-card [data]="data"></app-group-meter-card>
+      </div>
+    </div>
+  </ng-template>
+
+</div>

@@ -1,0 +1,33 @@
+.animation-container {
+  background: lightgrey;
+  border-radius: 5px;
+  color: darkgreen;
+}
+
+.animation-container.reverse {
+  background: darkseagreen;
+}
+
+.animation-container.vertical {
+  height: 100%;
+}
+
+.animation-container.horizontal {
+  width: 100%;
+}
+
+.blink {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}

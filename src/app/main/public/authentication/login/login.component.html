@@ -1,0 +1,65 @@
+<div fxFlex="100%">
+  <mat-card class="p-36 login-card" fxFlex="100%" fxLayout="column">
+
+    <div fxLayout="row">
+      <div fxFlex="15%"></div>
+      <div fxFlex="70%">
+        <img src="assets/background/sun-background.png">
+      </div>
+
+      <div fxFlex="15%"></div>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="mt-40" fxLayout="column" name="loginForm" novalidate>
+      <mat-form-field>
+        <input autocapitalize="none" formControlName="username" matInput name="username" placeholder="Gebruikernaam">
+        <mat-error>
+          {{loginForm.errorMessages.username.errorMessage}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input [type]="show_password ? 'text' : 'password'" autocapitalize="none" formControlName="password"
+               matInput name="pwd" placeholder="Wachtwoord">
+        <mat-icon (click)="show_password = !show_password" class="cursor-pointer" matSuffix>
+          {{show_password ? 'visibility' : 'visibility_off'}}
+        </mat-icon>
+        <mat-error>
+          {{loginForm.errorMessages.password.errorMessage}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-error>
+        {{loginForm.errorMessages.errorMessage}}
+      </mat-error>
+
+      <div class="mt-20" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+        <mat-checkbox aria-label="Remember Me" class="remember-me" formControlName="remember">
+          Onthouden
+        </mat-checkbox>
+
+        <a class="forgot-password b-text-secondary" routerLink="/forgot-password">
+          Wachtwoord vergeten
+        </a>
+      </div>
+
+      <button [disabled]="loginForm.invalid" aria-label="LOG IN" class="mt-20 b-secondary" mat-raised-button>
+        Inloggen
+      </button>
+    </form>
+
+    <div>
+      <mat-divider [inset]="true"></mat-divider>
+    </div>
+
+    <div class="mt-20">
+      <div class="register" fxLayout="column" fxLayoutAlign="center center">
+        <span class="text">Nog geen account?</span>
+        <a [routerLink]="'/register'" class="b-text-secondary">Registreer</a>
+      </div>
+    </div>
+
+  </mat-card>
+</div>
+
+

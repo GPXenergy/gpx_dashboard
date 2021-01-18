@@ -1,0 +1,113 @@
+<div class="mt-20 mb-40" fxFlex="100%" fxLayout="row">
+  <div fxFlex="20%" fxFlex.md="15%" fxFlex.sm="2.5%" fxFlex.xs="2.5%"></div>
+  <div fxFlex="60%" fxFlex.md="70%" fxFlex.sm="95%" fxFlex.xs="95%" fxLayout="column">
+    <h1>Quick start handleiding</h1>
+
+    <p>
+      Ben je net in bezit gekomen van een GPX-Connector en wil je weten hoe je deze in een paar simpele stappen aan de
+      praat krijgt? Dan ben je hier op de goede plek! In de Quick start handleiding wordt je door het proces geleid om
+      het apparaat in te stellen en te installeren in je meterkast! Ben je eerder benieuwd wat het apparaat allemaal
+      doet? Kijk dan in de <a routerLink="/manual">gebruikershandleiding</a>!
+    </p>
+
+    <div>
+
+      <h2>Inhoud</h2>
+      <ol>
+        <li><a href="/manual/setup#prerequisites">Benodigdheden</a></li>
+        <li><a href="/manual/setup#create-account">Een account aanmaken</a></li>
+        <li><a href="/manual/setup#configure-device">Apparaatinstellingen configureren</a></li>
+        <li><a href="/manual/setup#configure-connection">Verbindingsinstellingen configureren</a></li>
+        <li><a href="/manual/setup#connect-smart-meter">Koppelen aan de slimme meter</a></li>
+        <li><a href="/manual/setup#connect-inverter">Koppelen aan de zonnepanelen-omvormer (toekomstig)</a></li>
+      </ol>
+
+    </div>
+
+    <div id="prerequisites">
+
+      <h2>1. Benodigdheden</h2>
+
+      <p>
+        Om de GPX-Connector succesvol te installeren zijn een aantal zaken nodig. De eerste stap in om te controleren
+        of deze aanwezig zijn:
+      </p>
+
+      <ul>
+        <li>Een GPX-Connector apparaat</li>
+        <li>Een RJ12 kabel</li>
+        <li>Een micro-USB voeding</li>
+        <li>Een mobiele telefoon of laptop (apparaat met WiFi)</li>
+        <li>Een slimme meter in de meterkast (met meter type bij de hand)</li>
+      </ul>
+    </div>
+
+    <div id="create-account">
+
+      <h2>2. Een account aanmaken</h2>
+      <p>
+        De tweede stap is om een account aan te maken op het dashboard. Aan dit account wordt straks jouw slimme meter
+        gekoppeld.
+        <span *ngIf="!user">
+          <a routerLink="/register">Klik hier</a>
+          om een nieuw account te registreren, voordat je verder gaat met de volgende stap! Heb je al een account? Log
+          dan <a routerLink="/register">hier</a> in voordat je verder gaat!
+        </span>
+      </p>
+
+      <p *ngIf="user">
+        Het lijkt erop dat je al bent ingelogd, ga verder met stap 3.
+      </p>
+
+    </div>
+
+    <div id="configure-device">
+
+      <h2>3. Apparaatinstellingen configureren</h2>
+      <p>
+        * Plug GPX-Connector in stopcontact (USB power)<br>
+        * Schakel modus naar configuratiemodus (lampje nu kleur x)<br>
+        * Pak mobiel/laptop en verbind met gpxconnector (password smartgpx)<br>
+        * Navigeer naar http://gpxconnector.local of http://192.168.5.1<br>
+        * Configureer de meterinstellinen (baud en parity, TODO: lijst hierbij met types)<br/>
+        * (optioneel, pas ssid en wachtwoord aan)<br>
+        * Sla de instellingen op<br/>
+      </p>
+    </div>
+
+    <div id="configure-connection">
+
+      <h2>4. Verbindingsinstellingen configureren</h2>
+      <p>
+
+        * Ga naar verbindingsinstellingen<br/>
+        * Vul thuisnetwerk in (WiFi SSID en wachtwoord)<br/>
+        * Voer de API key in. <span *ngIf="user">API key van {{user.username}}: {{user.api_key}}</span><br/>
+        * Sla de instellingen op<br/>
+        * Schakel de GPX-Connector naar actieve modus<br/>
+      </p>
+    </div>
+
+    <div id="connect-smart-meter">
+
+      <h2>5. Koppelen aan de slimme meter</h2>
+      <p>
+
+        * Sluit de GPX-Connector aan de slimme meter<br/>
+        * Plug usb power in<br/>
+        * ???<br/>
+        * Profit!<br/>
+      </p>
+    </div>
+
+    <div id="connect-inverter">
+
+      <h2>6. Koppelen aan de zonnepanelen-omvormer (optioneel)</h2>
+      <p>
+        Wordt in deze versie nog niet ondersteund.
+      </p>
+    </div>
+
+  </div>
+  <div fxFlex="15%" fxFlex.sm="2.5%" fxFlex.xs="2.5%"></div>
+</div>

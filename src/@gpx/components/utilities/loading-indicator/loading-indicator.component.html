@@ -1,0 +1,16 @@
+<ng-container *ngIf="loading">
+  <div class="spinner-container" fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner [color]="'accent'"></mat-spinner>
+    <p class="mat-title mt-20">
+      {{ loadingIndicatorText}}
+    </p>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!loading && (listLength === 0 || objectFound)">
+  <div class="spinner-container" fxLayout="column" fxLayoutAlign="center center">
+    <p class="mat-title b-text-middle-grey">
+      {{ noLengthText }}
+    </p>
+  </div>
+</ng-container>

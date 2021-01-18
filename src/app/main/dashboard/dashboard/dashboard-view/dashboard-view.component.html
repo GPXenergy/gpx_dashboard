@@ -1,0 +1,191 @@
+<mat-drawer-container [hasBackdrop]="false" fxFlex="100%" xmlns="http://www.w3.org/1999/html">
+  <mat-drawer #drawer class="drawer-container" mode="'over'" position="end">
+    <div class="p-16" fxLayout="column">
+      <div class="mb-12">
+        <button (click)="drawer.toggle()" class="b-secondary" mat-icon-button>
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </div>
+      <div style="margin-left: -16px; margin-right: -16px">
+        <mat-divider></mat-divider>
+      </div>
+      <div class="mt-20">
+        <mat-icon>info</mat-icon>
+      </div>
+      <p>Wordt bewust van je energie opwekking en opnamen</p>
+
+    </div>
+
+  </mat-drawer>
+  <mat-drawer-content>
+
+    <div fxLayout="column">
+      <div class="p-16" fxLayout="row">
+
+        <div fxFlex>
+          <p class="mat-body-2 mt-8 mb--12">{{meter?.name}} gegevens</p>
+        </div>
+        <div class="ml-8">
+
+          <button (click)="drawer.toggle()" mat-stroked-button>
+            <mat-icon>info</mat-icon>
+            <span class="mat-caption" style="color: black;">
+              Meer info
+            </span>
+          </button>
+        </div>
+
+
+        <!-- <button mat-stroked-button *ngIf="groupMeter?.public" class="float-right" style="float: right">
+          <span style="color: black;" class="mat-caption">
+            <a [href]="groupMeter.publicUrl" target="_blank">Publieke link</a>
+          </span>
+        </button> -->
+
+      </div>
+
+      <div>
+        <mat-divider></mat-divider>
+      </div>
+
+      <div class="mt-40 mb-40" fxFlex="100%" fxLayout="row">
+        <div fxFlex="5%" fxFlex.xs="2.5%"></div>
+        <div fxFlex="90%" fxFlex.xs="95%" fxLayout="row" fxLayout.xs="column">
+
+          <div class="mb-32" fxFlex="26%" fxFlex.xs="100%" fxFlexOrder="3" fxFlexOrder.xs="1">
+            <mat-card>
+              <ng-container *ngIf="meter">
+                <p class="mat-title">Meter gegevens</p>
+                <p>
+                  Meterstanden<br/>
+                  <em>Op {{meter.power_timestamp | date: "dd-MM-yy HH:mm:ss"}}</em><br/>
+                  Import 1: -{{meter.power_import_1 | number }} kWh <br/>
+                  Import 2: -{{meter.power_import_2 | number }} kWh <br/>
+                  Export 1: {{meter.power_export_1 | number }} kWh <br/>
+                  Export 2: {{meter.power_export_2 | number }} kWh <br/>
+                  --- <br/>
+                  Totaal import: -{{meter.totalPowerImport | number }} kWh <br/>
+                  Totaal export: {{meter.totalPowerExport | number }} kWh <br/>
+                  Totaal: {{meter.totalPower | number }} kWh <br/>
+                </p>
+                <p>
+                  Actueel verbruik <br/>
+                  Tarief: {{meter.tariff | number }}<br/>
+                  Vermogen: {{meter.actualPower | number }} kW <br/>
+                </p>
+                <p *ngIf="meter.gas > 0">
+                  Gas <br/>
+                  <em>Op {{meter.gas_timestamp | date: "dd-MM-yy HH:mm:ss"}}</em><br/>
+                  Totaal: {{meter.gas | number }} m³ <br/>
+                </p>
+                <p *ngIf="meter.solar_timestamp">
+                  Zonproductie <br/>
+                  <em>Op {{meter.solar_timestamp | date: "dd-MM-yy HH:mm:ss"}}</em><br/>
+                  Vermogen: {{meter.solar | number }} kW <br/>
+                </p>
+              </ng-container>
+            </mat-card>
+          </div>
+
+          <div fxFlex="4%" fxFlexOrder="2" fxHide.xs></div>
+
+
+          <div fxFlex="70%" fxFlex.xs="100%" fxFlexOrder="1" fxFlexOrder.xs="2">
+            <div fxLayout="column" fxLayoutGap="32px">
+              <mat-card fxFlex="100%">
+
+                <div fxLayout="row">
+
+                  <mat-form-field appearance="outline">
+                    <mat-label>Datum range</mat-label>
+                    <mat-select (selectionChange)="onRangeFilterChange($event.value, energyMeasurementFilter); getMeterPowerData()"
+                                [value]="filterRangeOptions.day" [(ngModel)]="rangeSelectPower">
+                      <mat-option [value]="filterRangeOptions.day">
+                        Afgelopen 24 uur
+                      </mat-option>
+                      <mat-option [value]="filterRangeOptions.week">
+                        Afgelopen week
+                      </mat-option>
+                      <mat-option [value]="filterRangeOptions.month">
+                        Afgelopen maand
+                      </mat-option>
+                      <mat-option [value]="filterRangeOptions.year">
+                        Afgelopen Jaar
+                      </mat-option>
+
+                    </mat-select>
+                  </mat-form-field>
+
+<!--                  <div class="mr-8 ml-8">-->
+<!--                    <mat-checkbox [(ngModel)]="invertPowerImport" labelPosition="after" (change)="setPowerSet()">-->
+<!--                      Inverteer import.-->
+<!--                    </mat-checkbox>-->
+<!--                  </div>-->
+                </div>
+
+                <ng-container *ngIf="loadingEnergy; else energyChart">
+                  <div class="mt-40 mb-40" fxLayout="column" fxLayoutAlign="center center">
+                    <mat-spinner></mat-spinner>
+                    <div class="mt-20 mat-body-2">
+                      Data aan het laden
+                    </div>
+                  </div>
+                </ng-container>
+
+                <ng-template #energyChart>
+                  <dashboard-graph [chartInput]="energyChartInput" yAxisLabel="Vermogen (kW)"></dashboard-graph>
+                </ng-template>
+
+              </mat-card>
+
+
+              <mat-card fxFlex="100%">
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Datum range</mat-label>
+                  <mat-select (selectionChange)="onRangeFilterChange($event.value, gasMeasurementFilter); getMeterGasData()"
+                              [value]="filterRangeOptions.day" [(ngModel)]="rangeSelectGas">
+                    <mat-option [value]="filterRangeOptions.day">
+                      Afgelopen 24 uur
+                    </mat-option>
+                    <mat-option [value]="filterRangeOptions.week">
+                      Afgelopen week
+                    </mat-option>
+                    <mat-option [value]="filterRangeOptions.month">
+                      Afgelopen maand
+                    </mat-option>
+                    <mat-option [value]="filterRangeOptions.year">
+                      Afgelopen Jaar
+                    </mat-option>
+
+                  </mat-select>
+                </mat-form-field>
+
+
+                <ng-container *ngIf="loadingGas; else gasChart">
+                  <div class="mt-40 mb-40" fxLayout="column" fxLayoutAlign="center center">
+                    <mat-spinner></mat-spinner>
+                    <div class="mt-20 mat-body-2">
+                      Data aan het laden
+                    </div>
+                  </div>
+                </ng-container>
+
+                <ng-template #gasChart>
+                  <dashboard-graph [chartInput]="gasChartInput" yAxisLabel="Gas (m³)"></dashboard-graph>
+                </ng-template>
+
+              </mat-card>
+            </div>
+
+
+          </div>
+
+
+        </div>
+        <div fxFlex="5%" fxFlex.xs="2.5%"></div>
+      </div>
+    </div>
+
+  </mat-drawer-content>
+</mat-drawer-container>

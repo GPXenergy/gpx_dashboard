@@ -1,0 +1,59 @@
+@import '@gpx/styles/gpx';
+
+.mat-menu-content {
+  padding-bottom: unset !important;
+}
+
+toolbar {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  z-index: 4;
+
+  .mat-toolbar {
+    position: relative;
+    background: inherit !important;
+    color: inherit !important;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    margin-left: 28px;
+
+    @include media-breakpoint('xs') {
+      margin-left: 12px;
+    }
+
+    .logo-icon {
+      width: 110px;
+      // @include media-breakpoint('xs') {
+      //   width: 28px;
+      // }
+    }
+  }
+
+  .toolbar-button {
+    margin-left: 50px;
+    @include media-breakpoint('gt-md') {
+      margin-left: 150px;
+    }
+  }
+
+  .user-button,
+  .language-button,
+  .mat-toolbar-row, .mat-toolbar-single-row {
+    min-width: 56px;
+    height: 56px;
+
+    .toolbar-separator {
+      height: 56px;
+      width: 1px;
+
+      &.language {
+        border-left: 1px solid #888888;
+      }
+    }
+  }
+}
+

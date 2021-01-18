@@ -1,0 +1,66 @@
+<div *ngIf="!loading">
+
+  <div fxLayout="row">
+    <h1 class="mat-title" fxFlex>
+      Sluit je aan bij {{groupMeter?.name}}!
+    </h1>
+    <div class="card-option-button" fxLayoutAlign="end">
+      <button (click)="onNoClick()" mat-icon-button type="button">
+        <mat-icon class="b-text-action">clear</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <form *ngIf="groupParticipantForm; else noMeter" [formGroup]="groupParticipantForm"
+        class="mt-24" fxLayout="column" fxLayoutGap="20px" name="form"
+        novalidate>
+
+
+    <mat-error>
+      {{groupParticipantForm.errorMessages.group?.errorMessage}}
+      {{groupParticipantForm.errorMessages.errorMessage}}
+    </mat-error>
+
+
+    <mat-form-field appearance="outline">
+      <mat-label>Jouw meter</mat-label>
+      <mat-select formControlName="meter">
+        <mat-option *ngFor="let meter of availableMeters" [disabled]="meter.in_group"
+                    [value]="meter.pk">{{meter.name}}</mat-option>
+      </mat-select>
+      <mat-error>
+        {{groupParticipantForm.errorMessages.meter?.errorMessage}}
+      </mat-error>
+      <mat-hint>
+        Selecteer een groeploze meter.
+      </mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Jouw naam in de groep</mat-label>
+      <input [placeholder]="'Naam'" autocomplete="off" formControlName="display_name" matInput/>
+      <mat-error>
+        {{groupParticipantForm.errorMessages.display_name?.errorMessage}}
+      </mat-error>
+      <mat-hint>
+        De naam van jouw meter in deze groep.
+      </mat-hint>
+    </mat-form-field>
+
+
+    <div class="mt-20" fxLayoutAlign="end">
+      <button (click)="onSubmit()" [disabled]="!groupParticipantForm.valid" class="b-secondary" mat-button
+              type="submit">
+        Meedoen
+      </button>
+    </div>
+  </form>
+
+
+  <ng-template #noMeter>
+
+    <p>Voeg eerst een meter toe aan je account, voordat je mee kan doen met een groepsmeter.</p>
+
+  </ng-template>
+
+</div>

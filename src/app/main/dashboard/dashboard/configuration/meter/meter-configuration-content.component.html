@@ -1,0 +1,136 @@
+<div class="mt-20" fxLayout="column">
+  <!-- <h1>Account config content</h1> -->
+
+  <div fxLayout="row">
+    <div fxFlex="15%" fxFlex.xs="5%"></div>
+    <div class="mt-20" fxFlex="70%" fxFlex.xs="90%">
+
+      <mat-card>
+
+        <div fxLayout="row">
+          <p class="mat-title" fxLayoutAlign="start center">
+            <mat-icon class="mr-8">device_hub</mat-icon>
+            Nieuwe meters koppelen
+          </p>
+          <div class="card-option-button" fxFlex fxLayoutAlign="end end">
+            <button [matMenuTriggerFor]="menu" mat-icon-button>
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <ng-container>
+                <button (click)="newApiKey($event)" [disabled]="true" mat-menu-item>
+                  <mat-icon class="b-text-action">refresh</mat-icon>
+                  Vraag nieuwe API key aan
+                </button>
+              </ng-container>
+            </mat-menu>
+          </div>
+        </div>
+
+        <p>
+          (informatie om een nieuwe meter te koppelen aan jouw account)
+        </p>
+
+        <div *ngIf="user" class="mt-12 mb-12" fxLayout="row" fxLayoutGap="15px">
+          <div fxFlex>
+            <mat-form-field appearance="outline" fxFlex="100%">
+              <mat-label>API key</mat-label>
+              <input (click)="$event.target.select()" [value]="user.api_key" matInput readonly>
+              <mat-hint>
+                De API key stel je in op jouw GPX-Connector.
+              </mat-hint>
+            </mat-form-field>
+          </div>
+          <!-- <div fxLayoutAlign="center center"> -->
+          <button (cdkCopyToClipboardCopied)="copyLink()" [cdkCopyToClipboard]="user.api_key" [class.b-green]="isCopied" class="mt-8"
+                  mat-icon-button matTooltip="Copy">
+            <mat-icon>content_copy</mat-icon>
+          </button>
+
+          <!-- </div> -->
+
+        </div>
+
+      </mat-card>
+
+      <mat-card *ngIf="selectedMeter" class="mat-card-outline mt-20" fxLayout="column">
+
+        <div fxLayout="row">
+          <p class="mat-title" fxLayoutAlign="start center">
+            <mat-icon class="mr-8">offline_bolt</mat-icon>
+            Gegevens {{ selectedMeter?.name }}
+          </p>
+          <div class="card-option-button" fxFlex fxLayoutAlign="end end">
+            <button [matMenuTriggerFor]="menu" mat-icon-button>
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <ng-container>
+                <button (click)="deleteMeter($event)" mat-menu-item>
+                  <mat-icon class="b-text-action">clear</mat-icon>
+                  Verwijder <em>{{ selectedMeter.name }}</em>
+                </button>
+              </ng-container>
+            </mat-menu>
+          </div>
+        </div>
+
+        <p>
+          Hieronder staan de gegevens van meter <em>{{ selectedMeter.name }}</em>.
+        </p>
+
+
+        <app-loading-indicator [loading]="loading" [noLengthText]="'Geen meter data gevonden'"
+                               [objectFound]="!selectedMeter"></app-loading-indicator>
+
+        <form *ngIf="meterForm" [formGroup]="meterForm" class="mt-20" fxFlex="40%" fxFlex.xs="100%" fxLayout="column"
+              fxLayoutGap="12px" name="form" novalidate>
+
+          <mat-form-field appearance="outline" fxFlex="100%">
+            <mat-label>Meternaam</mat-label>
+            <input autocomplete="off" formControlName="name" matInput placeholder="Meter naam" type="text">
+            <mat-error>{{meterForm.errorMessages.name?.errorMessage}}</mat-error>
+            <mat-hint>
+              Deze meternaam is alleen voor jou zichtbaar, voor identificatie wanneer je meerdere meters hebt.
+            </mat-hint>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" fxFlex="100%">
+            <mat-label>Catergorie</mat-label>
+            <mat-select matInput [placeholder]="'PLACEMENT_CREATE.INDUSTRY' | translate" formControlName="type" required>
+              <mat-option value="consumer">Consument (verbruikt alleen energie)</mat-option>
+              <mat-option value="prosumer">Prosument (verbruikt en wekt energie op)</mat-option>
+              <mat-option value="battery">Batterij</mat-option>
+              <mat-option value="producer_solar">Producent (Zon)</mat-option>
+              <mat-option value="producer_wind">Producent (Wind)</mat-option>
+              <mat-option value="producer_other">Producent (Anders)</mat-option>
+            </mat-select>
+            <mat-error>{{meterForm.errorMessages.type?.errorMessage}}</mat-error>
+            <mat-hint>
+              Het type wordt gebruikt bij het correct weergeven van jouw meter in de groepsmeter.
+            </mat-hint>
+          </mat-form-field>
+
+
+          <div *ngIf="!meterForm?.pristine" class="mt-20" fxLayout="row" fxLayoutAlign="end" fxLayoutGap="20px">
+
+            <button (click)="cancelChanges()" class="b-action" mat-button type="button">
+              Annuleer
+            </button>
+
+            <button (click)="onSubmitForm()" [disabled]="!meterForm?.valid" class="b-green" mat-button type="submit">
+              <mat-icon>save</mat-icon>
+              Opslaan
+            </button>
+
+          </div>
+
+        </form>
+
+      </mat-card>
+
+    </div>
+    <div fxFlex="15%" fxFlex.xs="5%"></div>
+  </div>
+
+</div>

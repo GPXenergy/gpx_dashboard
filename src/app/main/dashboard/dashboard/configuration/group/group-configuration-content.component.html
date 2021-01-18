@@ -1,0 +1,203 @@
+<div class="mt-20" fxLayout="column">
+
+  <div fxLayout="row">
+    <div fxFlex="15%" fxFlex.xs="5%"></div>
+    <div class="mt-20" fxFlex="70%" fxFlex.xs="90%">
+
+      <mat-card *ngIf="!groupParticipant && !selectedMeter" class="mb-20">
+        <p class="mat-title">Groepsmeter informatie</p>
+        <p>Voeg eerst een meter toe aan je account, voordat je mee kan doen met een groepsmeter.</p>
+      </mat-card>
+
+      <mat-card *ngIf="!groupParticipant && selectedMeter" class="mb-20">
+        <p class="mat-title">Groepsmeter informatie</p>
+        <p>Begin een nieuwe groepsmeter!</p>
+
+        <div fxLayoutAlign="end">
+          <button (click)="createGroupMeter()" aria-label="Voeg nieuwe meter toe" class="b-green" mat-fab>
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </mat-card>
+
+      <mat-card *ngIf="groupParticipant" fxLayout="column">
+        <div fxLayout="row">
+          <p class="mat-title" fxLayoutAlign="start center">
+            <mat-icon class="mr-8">group</mat-icon>
+            {{ groupMeter?.name }}
+          </p>
+          <div class="card-option-button" fxFlex fxLayoutAlign="end end">
+            <button [matMenuTriggerFor]="menu" mat-icon-button>
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <ng-container>
+                <button (click)="leaveGroup($event)" *ngIf="!isGroupManager" [disabled]="isGroupManager" mat-menu-item>
+                  <mat-icon class="b-text-action">clear</mat-icon>
+                  Verlaat {{ groupMeter?.name }}
+                </button>
+                <button (click)="deleteGroup($event)" *ngIf="isGroupManager" mat-menu-item>
+                  <mat-icon class="b-text-action">clear</mat-icon>
+                  Verwijder {{ groupMeter?.name }}
+                </button>
+              </ng-container>
+            </mat-menu>
+          </div>
+        </div>
+
+        <form *ngIf="groupMeterForm" [formGroup]="groupMeterForm" class="mt-20" fxFlex="100%" fxLayout="column"
+              fxLayoutGap="12px"
+              name="form" novalidate>
+
+          <mat-form-field appearance="outline" fxFlex="100%">
+            <mat-label>Groepsnaam</mat-label>
+            <input autocomplete="off" formControlName="name" matInput placeholder="Meter naam" type="text">
+            <mat-error>
+              {{groupMeterForm.errorMessages.name?.errorMessage}}
+            </mat-error>
+            <mat-hint>
+              De naam van de groepsmeter.
+            </mat-hint>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" fxFlex="100%">
+            <mat-label>Beschrijving</mat-label>
+            <textarea autocomplete="off" cdkAutosizeMaxRows="5" cdkAutosizeMinRows="1" cdkTextareaAutosize
+                      formControlName="summary" matInput placeholder="Een korte beschrijving" style="padding: 0" type="text">
+            </textarea>
+            <mat-error>
+              {{groupMeterForm.errorMessages.name?.errorMessage}}
+            </mat-error>
+            <mat-hint>
+              Een korte beschrijving van de groep, optioneel.
+            </mat-hint>
+          </mat-form-field>
+
+          <div class="mr-8 ml-8">
+            <mat-checkbox formControlName="public" labelPosition="after">
+              Deze groepsmeter mag publiek benaderd worden.
+            </mat-checkbox>
+          </div>
+
+          <mat-form-field *ngIf="groupMeterForm.get('public').value" appearance="outline">
+            <mat-label>Wijzig de publieke link voor je groep</mat-label>
+            <input autocapitalize="none" autocomplete="off"
+                   formControlName="public_key" matInput placeholder="Stel je eigen unieke url in! (laat leeg om een unieke url te genereren)">
+            <mat-error>
+              {{groupMeterForm.errorMessages.public_key?.errorMessage}}
+            </mat-error>
+            <mat-hint>
+              Zo ziet jouw groep-link er dan uit:
+              <a href="{{ groupMeter.public_key ? groupMeter.publicUrl : '#'}}" target="_blank">
+                <em>{{groupMeterForm.getModel().publicUrl || '(Een nieuwe link wordt gegenereerd bij het opslaan)' }}</em>
+              </a>. Deze link kan je delen met wie je wil!
+            </mat-hint>
+          </mat-form-field>
+
+          <div class="mt-8 mr-8 ml-8">
+            <mat-checkbox formControlName="allow_invite" labelPosition="after">
+              Gebruikers kunnen uitgenodigd worden voor deze groep
+            </mat-checkbox>
+          </div>
+
+          <div *ngIf="groupMeterForm.get('allow_invite').value" class="mb-12" fxLayout="row" fxLayoutGap="15px">
+            <div fxFlex>
+              <mat-form-field appearance="outline" fxFlex="100%">
+                <mat-label>Uitnodigingslink</mat-label>
+                <input [value]="invitationUrl" matInput readonly>
+                <mat-hint>
+                  Via deze link kunnen anderen zich aansluiten bij <em>{{ groupMeter?.name }}</em>.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <button (cdkCopyToClipboardCopied)="copyLink()" [cdkCopyToClipboard]="groupMeter?.invitationUrl" [class.b-green]="isCopied" class="mt-8"
+                    mat-icon-button matTooltip="Copy" type="button">
+              <mat-icon>content_copy</mat-icon>
+            </button>
+          </div>
+
+          <div *ngIf="!groupMeterForm?.pristine" class="mt-20" fxLayout="row" fxLayoutAlign="end" fxLayoutGap="20px">
+
+            <button (click)="initGroupMeterForm(groupMeter)" class="b-action" mat-button type="button">
+              Annuleer
+            </button>
+
+            <button (click)="updateGroupMeter()" [disabled]="!groupMeterForm?.valid" class="b-green" mat-button
+                    type="submit">
+              <mat-icon>save</mat-icon>
+              Opslaan
+            </button>
+          </div>
+
+        </form>
+
+
+        <p *ngIf="groupMeter && !isGroupManager">
+          {{ groupMeter.summary }}
+        </p>
+
+        <div *ngIf="groupParticipantForm && groupMeterForm" class="pt-12 pb-12">
+          <mat-divider></mat-divider>
+        </div>
+
+        <div class="pt-12 pb-12">
+          <mat-divider></mat-divider>
+        </div>
+
+        <div fxLayout="column">
+          <p class="mat-title mt-12">Groepsleden</p>
+
+          <form *ngIf="groupParticipantForm" [formGroup]="groupParticipantForm" class="mt-20 mb-20" fxFlex="100%"
+                fxLayout="column" fxLayoutGap="12px" name="form" novalidate>
+
+            <mat-form-field appearance="outline" fxFlex="100%">
+              <mat-label>Jouw naam in de groep</mat-label>
+              <input autocomplete="off" formControlName="display_name" matInput placeholder="Publieke Meter naam"
+                     type="text">
+              <mat-error>
+                {{groupParticipantForm.errorMessages.display_name?.errorMessage}}
+              </mat-error>
+              <mat-hint>
+                De naam van jouw meter in deze groep, deze is zichtbaar voor alle leden in de groep<span
+                *ngIf="groupMeter?.public"> en het publiek</span>.
+              </mat-hint>
+            </mat-form-field>
+
+            <div *ngIf="!groupParticipantForm?.pristine" class="mt-20" fxLayout="row" fxLayoutAlign="end"
+                 fxLayoutGap="20px">
+
+              <button (click)="initParticipantForm(groupParticipant)" class="b-action" mat-button type="button">
+                Annuleer
+              </button>
+
+              <button (click)="updateGroupParticipant()" [disabled]="!groupParticipantForm?.valid" class="b-green" mat-button
+                      type="submit">
+                <mat-icon>save</mat-icon>
+                Opslaan
+              </button>
+            </div>
+
+          </form>
+
+          <div *ngFor="let participant of groupMeter?.getParticipants()" fxLayout="column">
+            <div class="p-8" fxLayout="row">
+              <div fxFlex="70%" fxLayoutAlign="start center">
+                <mat-icon class="mr-8">offline_bolt</mat-icon>
+                {{ participant?.display_name }}
+              </div>
+              <div class="ml-8">{{ participant?.joined_on | date:'dd-MM-yyyy' }}</div>
+            </div>
+            <div>
+              <mat-divider [inset]="true"></mat-divider>
+            </div>
+          </div>
+        </div>
+
+
+      </mat-card>
+
+    </div>
+    <div fxFlex="15%" fxFlex.xs="5%"></div>
+  </div>
+
+</div>

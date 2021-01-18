@@ -1,0 +1,38 @@
+<mat-card [ngClass]="data ? 'active' : 'inactive'">
+  <ng-container *ngIf="data">
+    <mat-card-header>
+      <mat-card-title [matTooltip]="data.display_name">
+        {{ data.display_name }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        Sinds {{ data.joined_on | date }}
+
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="ml-16" fxFlex>
+        <div matTooltip="laatste activiteit:&#10;{{data.last_activity | date: 'HH:mm (dd MMM yyyy)'}}">
+          <mat-icon [inline]="true">{{ statusIcon() }}</mat-icon>
+          {{ statusText() }}
+        </div>
+        <div
+          matTooltip="Import: {{data.total_import | explicitNumber: '1.3': null: true}} kWh&#10;Export: {{data.total_export | explicitNumber: '1.3'}} kWh">
+          <mat-icon [inline]="true">flash_on</mat-icon>
+          {{ data.totalPower | explicitNumber: '1.3' }} kWh
+        </div>
+        <div *ngIf="data.total_gas > 0" matTooltip="Gas verbruik">
+          <mat-icon [inline]="true">local_fire_department</mat-icon>
+          {{ data.total_gas | explicitNumber: '1.3':null:true }} m³
+        </div>
+        <div *ngIf="data.type === 'prosumer'" matTooltip="Actueel opwek: {{data.actual_solar | explicitNumber: '1.3'}} kW">
+          <mat-icon [inline]="true">wb_sunny</mat-icon>
+          {{ data.actual_solar | explicitNumber: '1.3' }} kW
+        </div>
+        <div *ngIf="data.type === 'prosumer'" matTooltip="Intern verbruik: {{data.actualInternal | number: '1.3'}} kW">
+          <mat-icon [inline]="true">power</mat-icon>
+          {{ data.actualInternal | number: '1.3' }} kW
+        </div>
+      </div>
+    </mat-card-content>
+  </ng-container>
+</mat-card>

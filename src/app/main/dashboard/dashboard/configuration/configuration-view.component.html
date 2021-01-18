@@ -1,0 +1,18 @@
+<div class="mt-20 mb-40" fxFlex="100%" fxLayout="row">
+  <div fxFlex="5%" fxFlex.xs="2.5%"></div>
+  <div fxFlex="90%" fxFlex.xs="95%" fxLayout="column">
+
+    <nav mat-tab-nav-bar>
+      <a #rla="routerLinkActive"
+         *ngFor="let link of navLinks"
+         [active]="rla.isActive"
+         [routerLink]="link.link" mat-tab-link
+         routerLinkActive>
+        {{ link.label }}
+      </a>
+    </nav>
+    <router-outlet></router-outlet>
+
+  </div>
+  <div fxFlex="5%" fxFlex.xs="2.5%"></div>
+</div>

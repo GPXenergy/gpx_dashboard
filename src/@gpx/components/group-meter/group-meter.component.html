@@ -1,0 +1,182 @@
+<mat-drawer-container [hasBackdrop]="false" fxFlex="100%">
+  <mat-drawer #drawer class="drawer-container" mode="'over'" position="end">
+    <div *ngIf="groupMeter" class="p-16" fxLayout="column">
+      <div class="mb-12">
+        <button (click)="drawer.toggle()" class="b-secondary" mat-icon-button>
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </div>
+      <div style="margin-left: -16px; margin-right: -16px">
+        <mat-divider></mat-divider>
+      </div>
+
+      <h2 class="mt-16">
+        <mat-icon>info</mat-icon>
+        {{ groupMeter.name }}
+      </h2>
+
+      <p>
+        {{ groupMeter.summary }}
+      </p>
+
+      <div *ngIf="groupMeter.public_key" class="mt-24 mb-12" fxLayout="column" fxLayoutGap="15px">
+        <p>
+          Deze groepsmeter is publiek zichtbaar!
+        </p>
+        <div fxLayout="row">
+          <div fxFlex>
+            <mat-form-field appearance="outline" class="h6" fxFlex="100%">
+              <mat-label>Publieke link</mat-label>
+              <input (click)="$event.target.select()" [value]="groupMeter.publicUrl" matInput readonly>
+            </mat-form-field>
+          </div>
+          <button (cdkCopyToClipboardCopied)="copyPublicLink()" [cdkCopyToClipboard]="groupMeter.publicUrl" [class.b-green]="isCopied" class="mt-8"
+                  mat-icon-button matTooltip="Copy" type="button">
+            <mat-icon>content_copy</mat-icon>
+          </button>
+        </div>
+
+      </div>
+
+      <mat-divider></mat-divider>
+      <p></p>
+
+      <p>
+
+        <mat-icon [inline]="true">{{ groupMeter.actual_power > 0 ? 'trending_up' : 'trending_down' }}</mat-icon>&nbsp;
+        kW: Actueel vermogen van de groepsleden<br/>
+        <mat-icon [inline]="true">flash_on</mat-icon>&nbsp;
+        kWh: Totaal energieverbruik<br/>
+        <mat-icon [inline]="true">local_fire_department</mat-icon>&nbsp;
+        m³: Totaal gasverbruik<br/>
+
+      </p>
+
+      <mat-divider></mat-divider>
+      <p></p>
+
+      <p>
+
+        <mat-icon [inline]="true">signal_cellular_4_bar</mat-icon>&nbsp;
+        Live: Meterdata van het afgelopen uur<br/>
+        <mat-icon [inline]="true">signal_cellular_connected_no_internet_4_bar</mat-icon>&nbsp;
+        Inactief: Meer dan een uur geen verse gegevens<br/>
+        <mat-icon [inline]="true">signal_cellular_off</mat-icon>&nbsp;
+        Offline: Meer dan een dag geen verse gegevens<br/>
+
+      </p>
+
+    </div>
+
+  </mat-drawer>
+  <mat-drawer-content>
+
+    <div *ngIf="groupMeter" fxLayout="column">
+      <div class="p-16" fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+        <button disabled mat-stroked-button>
+          <span class="mat-caption" style="color: black;">
+            {{ groupMeter.name }}
+          </span>
+        </button>
+        <button *ngIf="!mobileView" disabled mat-stroked-button>
+          <span class="mat-caption" style="color: black;">
+
+            <mat-icon [inline]="true">{{ groupMeter.actual_power > 0 ? 'trending_up' : 'trending_down' }}</mat-icon>&nbsp;
+            {{ groupMeter.actual_power | explicitNumber }} kW &nbsp;&nbsp;|&nbsp;&nbsp;
+            <mat-icon [inline]="true">flash_on</mat-icon>&nbsp;
+            {{ groupMeter.totalPower | explicitNumber }} kWh &nbsp;&nbsp;|&nbsp;&nbsp;
+            <mat-icon [inline]="true">local_fire_department</mat-icon>&nbsp;
+            {{ groupMeter.total_gas | explicitNumber: null:null:true }} m³ &nbsp;&nbsp;|&nbsp;&nbsp;
+            Sinds {{ groupMeter.created_on | date }}
+
+          </span>
+        </button>
+        <button (click)="drawer.toggle()" mat-stroked-button>
+          <mat-icon>info</mat-icon>
+          <span class="mat-caption" style="color: black;">
+          Meer info
+          </span>
+        </button>
+
+      </div>
+
+      <div>
+        <mat-divider></mat-divider>
+      </div>
+
+
+      <div class="mt-40 mb-40" fxFlex="100%" fxLayout="row">
+        <div fxFlex="5%" fxFlex.xs="2.5%"></div>
+        <div fxFlex="90%" fxFlex.xs="95%" fxLayout="column">
+
+
+          <div fxFlex="100%" fxLayout="column">
+
+            <ng-container *ngIf="mobileView; else normalView">
+
+              <div fxLayout="row">
+                <div fxFlex="95%" fxLayout="column" fxLayoutGap="32px">
+                  <ng-container *ngFor="let data of groupMeter.getParticipants()">
+                    <app-group-meter-participant [data]="data" output="right"></app-group-meter-participant>
+                  </ng-container>
+                </div>
+                <div fxFlex="5%" fxLayout="column" fxLayoutAlign="center center">
+
+                  <app-energy-net-path [reverse]="groupMeter.actual_power > 0" orientation="vertical"
+                                       style="height: 100%;">
+                  </app-energy-net-path>
+
+                </div>
+              </div>
+
+              <div class="mt-12" fxLayoutAlign="end">
+                <button [disabled]="true" mat-stroked-button style="color: black; width: 100%">
+
+                  <mat-icon
+                    [inline]="true">{{ groupMeter.actual_power > 0 ? 'trending_up' : 'trending_down' }}</mat-icon>&nbsp;
+                  {{ groupMeter.actual_power | explicitNumber }} kW<br/>
+                  <mat-icon [inline]="true">flash_on</mat-icon>&nbsp;
+                  {{ groupMeter.totalPower | explicitNumber }} kWh<br/>
+                  <mat-icon [inline]="true">local_fire_department</mat-icon>&nbsp;
+                  {{ groupMeter.total_gas | explicitNumber: null:null:true }} m³<br/>
+                  Sinds {{ groupMeter.created_on | date }}
+
+                </button>
+              </div>
+            </ng-container>
+
+
+            <ng-template #normalView>
+
+              <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="12px">
+                <div *ngFor="let data of topRowParticipants" fxFlex="20%">
+                  <app-group-meter-participant [data]="data" output="bottom"></app-group-meter-participant>
+                </div>
+              </div>
+
+              <div class="middle-line" fxLayout="row">
+                <app-energy-net-path [reverse]="groupMeter.actual_power > 0" orientation="horizontal"
+                                     style="width: 100%">
+                </app-energy-net-path>
+              </div>
+
+
+              <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="12px">
+                <div *ngFor="let data of bottomRowParticipants" fxFlex="20%">
+                  <app-group-meter-participant [data]="data" output="top"></app-group-meter-participant>
+                </div>
+              </div>
+            </ng-template>
+
+          </div>
+
+
+        </div>
+        <div fxFlex="5%" fxFlex.xs="2.5%"></div>
+      </div>
+    </div>
+
+
+  </mat-drawer-content>
+</mat-drawer-container>
+

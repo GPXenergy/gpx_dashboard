@@ -1,0 +1,52 @@
+<div fxLayout="row">
+  <h1 class="mat-title" fxFlex>
+    Maak nieuwe groepsmeter aan
+  </h1>
+  <div class="card-option-button" fxLayoutAlign="end">
+    <button (click)="onNoClick()" mat-icon-button type="button">
+      <mat-icon class="b-text-action">clear</mat-icon>
+    </button>
+  </div>
+</div>
+
+<form *ngIf="groupMeterForm" [formGroup]="groupMeterForm" class="mt-24" fxLayout="column" fxLayoutGap="20px" name="form"
+      novalidate>
+
+
+  <mat-form-field appearance="outline">
+    <mat-label>Jouw meter</mat-label>
+    <mat-select formControlName="meter">
+      <mat-option *ngFor="let meter of availableMeters" [disabled]="meter.in_group"
+                  [value]="meter.pk">{{meter.name}}</mat-option>
+    </mat-select>
+    <mat-error>
+      {{groupMeterForm.errorMessages.meter?.errorMessage}}
+    </mat-error>
+    <mat-hint>
+      Selecteer de meter met welke je de groep wil starten.
+    </mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Groepnaam</mat-label>
+    <input autocomplete="off" formControlName="name" matInput placeholder="Groep xyz"/>
+    <mat-error>
+      {{groupMeterForm.errorMessages.name?.errorMessage}}
+    </mat-error>
+    <mat-hint>
+      De naam van de groepsmeter.
+    </mat-hint>
+  </mat-form-field>
+
+  <div class="mr-8 ml-8" fxLayout="column">
+    <mat-checkbox formControlName="public" labelPosition="after">
+      Deze groepsmeter mag publiek benaderd worden.
+    </mat-checkbox>
+  </div>
+
+  <div class="mt-20" fxLayoutAlign="end">
+    <button (click)="onSubmit()" [disabled]="!groupMeterForm.valid" class="b-secondary" mat-button type="submit">
+      Groep starten
+    </button>
+  </div>
+</form>

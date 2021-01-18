@@ -1,0 +1,96 @@
+<div id="main">
+
+  <!-- TOOLBAR: Above -->
+  <toolbar></toolbar>
+  <!-- / TOOLBAR: Above -->
+
+  <mat-sidenav-container [hasBackdrop]="isMobileState" autosize class="main-sidenav-container">
+    <mat-sidenav #snav [disableClose]="!isMobileState" [fixedInViewport]="isMobileState"
+                 [mode]="isMobileState ? 'over': 'side'" [opened]="false" class="main-sidenav"
+                 fixedTopGap="56">
+
+      <div fxFlex="100%" fxLayout="column">
+        <div class="p-16">
+
+          <ng-container *ngIf="availableMeters?.length === 0">
+            <button class="meter-picker no-hover" fxFlex="100%" mat-raised-button>
+              <div [routerLink]="[ 'configure', 'meter']" class="pt-8 pb-8" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="link-icon">info</mat-icon>
+                <div class="ml-8 mat-caption" fxFlex>
+                  Koppel een meter
+                </div>
+              </div>
+            </button>
+          </ng-container>
+
+          <ng-container *ngIf="availableMeters?.length > 0">
+            <button [matMenuTriggerFor]="meterPicker" class="meter-picker no-hover" fxFlex="100%" mat-raised-button>
+              <div class="pt-8 pb-8" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="link-icon">offline_bolt</mat-icon>
+                <div class="ml-8 mat-caption" fxFlex>
+                  {{ selectedMeter?.name }}
+                </div>
+                <mat-icon class="link-icon link-icon-right mt-4">keyboard_arrow_down</mat-icon>
+              </div>
+            </button>
+            <mat-menu #meterPicker="matMenu" class="meter-picker-menu">
+              <button (click)="selectMeter(meter)" *ngFor="let meter of availableMeters" mat-menu-item>
+                {{ meter.name }}
+              </button>
+              <mat-divider></mat-divider>
+              <button mat-menu-item routerLink="/configure/meter">
+                <em>Extra meters koppelen</em>
+              </button>
+            </mat-menu>
+          </ng-container>
+        </div>
+
+        <div>
+          <mat-divider></mat-divider>
+        </div>
+
+        <div class="main-sidenav-content p-16" fxFlex="100%" fxLayout="column" fxLayoutGap="20px">
+
+          <button #rla="routerLinkActive" [disabled]="!selectedMeter" [routerLink]="[ 'dashboard' ]" mat-button
+                  routerLinkActive="b-secondary" style="width: 100%;">
+            Dashboard
+          </button>
+
+          <button #rla="routerLinkActive" [disabled]="!selectedMeter" [routerLink]="[ 'group' ]" mat-button
+                  routerLinkActive="b-secondary" style="width: 100%;">
+            Groepsmeter
+          </button>
+
+          <button #rla="routerLinkActive" [routerLink]="[ 'configure' ]" mat-button routerLinkActive="b-secondary"
+                  style="width: 100%;">
+            Instellingen
+          </button>
+
+        </div>
+
+      </div>
+
+
+    </mat-sidenav>
+
+    <mat-sidenav-content #snavContent>
+
+      <div class="main-container">
+        <!-- <div class="main-container" [perfectScrollbar] (psScrollY)="scrollEvent()"> -->
+
+        <!-- CONTENT -->
+        <div class="content">
+          <main-content></main-content>
+        </div>
+        <!-- / CONTENT -->
+
+        <!-- FOOTER: Below static -->
+        <footer></footer>
+        <!-- / FOOTER: Below static -->
+
+      </div>
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+</div>

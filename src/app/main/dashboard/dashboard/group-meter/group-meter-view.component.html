@@ -1,0 +1,32 @@
+<group-meter *ngIf="selectedMeter?.in_group; else noGroup" [as_public]="false" [groupMeter]="groupMeter" fxFlex="100%"
+             fxLayout="column"></group-meter>
+
+<ng-template #noGroup>
+  <div fxFlex="100%" fxLayout="column">
+    <div class="p-16" fxLayout="row" fxLayoutAlign="space-between center">
+      <button disabled mat-stroked-button>
+      <span class="mat-caption" style="color: black;">
+        {{ 'Geen groepsmeter gevonden'}}
+      </span>
+      </button>
+    </div>
+
+    <div>
+      <mat-divider></mat-divider>
+    </div>
+
+
+    <div class="mt-40 mb-40" fxFlex="100%" fxLayout="row">
+      <div fxFlex="5%" fxFlex.xs="2.5%"></div>
+      <div fxFlex="90%" fxFlex.xs="95%" fxLayout="column">
+
+        <span>
+          Je zit niet in een groepsmeter met <em>{{ selectedMeter.name }}</em>.
+        </span>
+
+      </div>
+      <div fxFlex="5%" fxFlex.xs="2.5%"></div>
+    </div>
+  </div>
+
+</ng-template>

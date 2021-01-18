@@ -1,0 +1,140 @@
+// -----------------------------------------------------------------------------------------------------
+// @ Custom color maps for Fuse
+// -----------------------------------------------------------------------------------------------------
+$fuse-navy: (
+  50: #ECECEE,
+  100: #C5C6CB,
+  200: #9EA1A9,
+  300: #7D818C,
+  400: #5C616F,
+  500: #006937,
+  600: #353A48,
+  700: #2D323E,
+  800: #262933,
+  900: #1E2129,
+  A100: #C5C6CB,
+  A200: #9EA1A9,
+  A400: #5C616F,
+  A700: #2D323E,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$oanax-accent: (
+  50 : #e8f4fa,
+  100 : #c5e4f2,
+  200 : #9ed2ea,
+  300 : #77c0e2,
+  400 : #59b3db,
+  500 : #3ca5d5,
+  600 : #369dd0,
+  700 : #2e93ca,
+  800 : #278ac4,
+  900 : #1a79ba,
+  A100 : #eff8ff,
+  A200 : #bce2ff,
+  A400 : #89ccff,
+  A700 : #6fc0ff,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$oanax-warn: (
+  50 : #fce8e7,
+  100 : #f9c7c2,
+  200 : #f5a19a,
+  300 : #f07b72,
+  400 : #ed5f53,
+  500 : #ea4335,
+  600 : #e73d30,
+  700 : #e43428,
+  800 : #e12c22,
+  900 : #db1e16,
+  A100 : #ffffff,
+  A200 : #ffdad9,
+  A400 : #ffa8a6,
+  A700 : #ff908c,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+
+// -----------------------------------------------------------------------------------------------------
+// @ Typography
+// -----------------------------------------------------------------------------------------------------
+
+// Force the input field font sizes to 16px
+$typography: mat-typography-config(
+  $font-family: 'Roboto, Muli, Helvetica Neue, Arial, sans-serif',
+  $title: mat-typography-level(28px, 32px, 500),
+  $body-2: mat-typography-level(16px, 24px, 600),
+  $button: mat-typography-level(14px, 14px, 500),
+  $input: mat-typography-level(16px, 1.125, 400) // line-height must be unitless !!!
+);
+
+// Setup the typography
+@include angular-material-typography($typography);
+
+// -----------------------------------------------------------------------------------------------------
+// @ Define the default theme
+// -----------------------------------------------------------------------------------------------------
+
+// Define the primary, accent and warn palettes
+$default-primary-palette: mat-palette($fuse-navy);
+$default-accent-palette: mat-palette($oanax-accent, 500, 300, 700);
+$default-warn-palette: mat-palette($oanax-warn, 500);
+
+// Create the Material theme object
+$theme: mat-light-theme($default-primary-palette, $default-accent-palette, $default-warn-palette);
+
+// Add ".theme-default" class to the body to activate this theme.
+// Class name must start with "theme-" !!!
+body {
+  // Create an Angular Material theme from the $theme map
+  @include angular-material-theme($theme);
+
+}
+
+

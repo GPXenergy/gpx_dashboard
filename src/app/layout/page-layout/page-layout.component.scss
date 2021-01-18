@@ -1,0 +1,75 @@
+@import '@gpx/styles/gpx';
+
+gpx-layout {
+  display: flex;
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+
+  #main {
+    position: relative;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    // width: 100%;
+    // height: 100%;
+    // z-index: 1;
+    min-width: 0;
+
+    > .container {
+      position: relative;
+      display: flex;
+      flex: 1 1 0%;
+      width: 100%;
+      // min-height: 100%;
+      // min-height: 0;
+      // min-width: 0;
+      flex-direction: column;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+
+    }
+
+    .main-container {
+      position: relative;
+      height: calc(100vh - 56px);
+    }
+  }
+
+  .content {
+    // position: relative;
+    display: flex;
+    z-index: 1;
+    flex: 1 0 auto;
+    min-height: calc(100vh - 120px);
+
+    @include media-breakpoint('xs') {
+      min-height: calc(100vh - 112px);
+    }
+
+    > *:not(router-outlet),
+    .layout-container > *:not(router-outlet) {
+      display: flex;
+      flex: 1 0 auto;
+      width: 100%;
+      min-width: 100%;
+    }
+  }
+}
+
+// meter picker
+.mat-raised-button.meter-picker {
+  text-align: start !important;
+}
+
+.link-icon-right {
+  margin-left: 10px;
+  margin-right: -10px;
+  justify-content: flex-end !important;
+}
+
+.link-icon {
+  font-size: 16px !important;
+  width: 16px !important;
+  height: 16px !important;
+}

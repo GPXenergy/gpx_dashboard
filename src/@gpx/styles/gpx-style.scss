@@ -1,0 +1,305 @@
+@import '@gpx/styles/gpx';
+
+.b-text-black {
+  color: black !important;
+}
+
+.b-primary {
+  background-color: $b-color-primary;
+  color: white !important;
+}
+
+.b-secondary {
+  background-color: $b-color-secondary;
+  color: white !important;
+}
+
+.b-secondary:disabled {
+  background-color: rgba(0, 0, 0, 0.12) !important;
+  color: rgba(0, 0, 0, 0.26) !important;
+  cursor: not-allowed !important;
+}
+
+.b-action {
+  background-color: $b-color-action;
+  color: white !important;
+}
+
+.b-green {
+  background-color: $b-color-green;
+  color: white !important;
+}
+
+.b-green:disabled {
+  background-color: $b-color-middle-grey;
+}
+
+.fuse-navy-700 {
+  background-color: #2D323E !important;
+  color: white !important;
+}
+
+.b-message-color {
+  background-color: $b-message-color;
+}
+
+.b-text-primary {
+  color: $b-color-primary;
+}
+
+.b-text-secondary {
+  color: $b-color-secondary
+}
+
+.b-text-action {
+  color: $b-color-action;
+}
+
+.b-text-green {
+  color: $b-color-green;
+}
+
+.b-text-white {
+  color: white;
+}
+
+.bg-white {
+  background: white !important;
+}
+
+.b-text-dark-grey {
+  color: $b-color-dark-grey;
+}
+
+.b-grey {
+  background-color: #5C616F !important;
+  color: white;
+
+  &:hover:not(.no-hover) {
+    background-color: $b-color-secondary;
+  }
+}
+
+.bg-dark-grey {
+  background: $b-color-dark-grey;
+}
+
+.bg-middle-grey {
+  background: $b-color-middle-grey;
+}
+
+.bg-light-grey {
+  background: $b-color-light-grey;
+}
+
+.bg-primary-dark {
+  background: $b-color-primary-dark;
+}
+
+.b-text-middle-grey {
+  color: $b-color-middle-grey;
+}
+
+.b-text-light-grey {
+  color: $b-color-light-grey;
+}
+
+.b-secondary-focus {
+  // background-color: #e8f4fa !important;
+  background-color: #E0EBFD !important;
+  color: black !important;
+}
+
+
+/* Oanax margins and paddings */
+
+// used for mat-divider
+.b-divider-p {
+  padding: 20px 0 20px 0;
+}
+
+.b-divider-p-small {
+  padding: 10px 0 10px 0;
+}
+
+.b-large-margin-t {
+  margin-top: 40px;
+}
+
+.b-minus-margin-t {
+  margin-top: -10px;
+}
+
+.clear-button-top {
+  margin-bottom: -10px;
+}
+
+/* End Region */
+
+
+// icon resizing
+.mat-icon.middle-icon {
+  font-size: 45px !important;
+  width: 45px !important;
+  height: 45px !important;
+  line-height: 45px !important;
+}
+
+.mat-menu-content {
+  padding-bottom: unset !important;
+}
+
+.no-select {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+.b-page-layout {
+  padding: 0px 4px 0px 4px;
+  margin: auto !important;
+
+  @include media-breakpoint('xs') {
+    width: 95% !important;
+    min-width: 95% !important;
+  }
+
+  @include media-breakpoint('sm') {
+    width: 85% !important;
+    min-width: 85% !important;
+  }
+
+  @include media-breakpoint('md') {
+    width: 80% !important;
+    min-width: 80% !important;
+  }
+
+  @include media-breakpoint('gt-md') {
+    width: 75% !important;
+    min-width: 75% !important;
+  }
+}
+
+._container-break {
+  padding: 125px 0 125px 0;
+
+  @include media-breakpoint('lt-md') {
+    padding: 55px 0 55px 0;
+  }
+}
+
+._container-break-half {
+  padding: 62px 0 62px 0;
+
+  @include media-breakpoint('lt-md') {
+    padding: 27px 0 27px 0;
+  }
+}
+
+.border-line {
+  width: 60px;
+  height: 6px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background-color: $b-color-primary;
+  border-color: $b-color-primary;
+
+  &.centered {
+    margin: auto;
+  }
+
+  &.longer-line {
+    margin: 20px auto 20px auto;
+    width: 300px;
+  }
+}
+
+.larger-icon {
+  font-size: 70px !important;
+  height: 70px !important;
+  width: 70px !important;
+  margin: auto;
+}
+
+.main-sidenav-container {
+  height: 100vh !important;
+
+
+  .main-sidenav {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    background: #fafafa !important;
+
+
+    // color: white;
+
+    .main-sidenav-content {
+      width: 259px;
+      max-width: 259px;
+
+      @include media-breakpoint('xs') {
+        min-width: 0 !important;
+        max-width: 80vw !important;
+        width: 80vw !important;
+      }
+    }
+
+  }
+
+}
+
+.user-dropdown + * .mat-menu-panel {
+  width: 330px;
+  max-width: 330px;
+
+}
+
+.meter-picker-menu {
+  width: 227px !important;
+
+  @include media-breakpoint('xs') {
+    max-width: 75vw !important;
+    width: 75vw !important;
+  }
+}
+
+// card designs
+.mat-card-outline {
+  border-radius: 4px !important;
+  background-color: #fff !important;
+  border: 1px solid #e0e0e0 !important;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, .2), 0 0 0 0 rgba(0, 0, 0, .14), 0 0 0 0 rgba(0, 0, 0, .12) !important;
+}
+
+/* Safari fix */
+div[fxLayout="column"] > div[fxFlex] {
+  flex: 1 0 auto !important;
+}
+
+.card-option-button {
+  margin: -10px -10px 10px 10px;
+}
+
+.mat-snack-bar-container {
+  margin-top: 80px !important;
+}
+
+// adds breaks to the mat-checkboxes with long labels
+.mat-checkbox-layout {
+  white-space: normal !important;
+}
+
+// rather than center the checkbox, put the checkbox in the first line
+.mat-checkbox-inner-container {
+  margin-top: 5px !important;
+}
