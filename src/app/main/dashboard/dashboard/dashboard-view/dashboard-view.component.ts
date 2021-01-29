@@ -122,9 +122,9 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
   }
 
   setPowerSet(): void {
-    const energy = {name: 'import', series: []};
-    const energy_ex = {name: 'export', series: []};
-    const solar = {name: 'solar', series: []};
+    const energy = {name: 'levering', series: []};
+    const energy_ex = {name: 'teruglevering', series: []};
+    const solar = {name: 'zon-productie', series: []};
     this.powerMeasurement.forEach((obj, ind) => {
       energy.series.push({name: new Date(obj.timestamp), value: this.invertPowerImport ? -obj.power_imp : +obj.power_imp});
       if (this.meter.totalPowerExport > 0) {

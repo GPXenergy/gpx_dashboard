@@ -18,7 +18,7 @@ export class DashboardGraphComponent implements OnInit {
   // multi: any[];
   view: any[] = [700, 300];
   // options
-  legend: boolean = true;
+  legend: boolean = false;
   showLabels: boolean = true;
   animations: boolean = true;
   xAxis: boolean = true;
