@@ -22,12 +22,18 @@ export class LoginComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private modelFormBuilder: ModelFormBuilder,
               private titleService: Title) {
-    titleService.setTitle('Inloggen | GPX');
+    this.titleService.setTitle('Inloggen | GPX');
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.nextUrl = params['next'] || '/dashboard';
+    });
+
+    this.authService.user.then(user => {
+      if (user) {
+        this.redirectAfterLogin();
+      }
     });
 
     this.loginForm = this.modelFormBuilder.modelGroup(LoginUser, null, {

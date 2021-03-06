@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private modelFormBuilder: ModelFormBuilder,
               private titleService: Title) {
-    titleService.setTitle('Registreren | GPX');
+    this.titleService.setTitle('Registreren | GPX');
 
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
@@ -48,6 +48,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.nextUrl = params['next'] || '/login';
+    });
+
+    this.authService.user.then(user => {
+      if (user) {
+        this.redirectAfterLogin();
+      }
     });
 
     this.registerForm = this.modelFormBuilder.modelGroup(AuthUser, null, {
@@ -91,5 +97,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   redirectAfterRegister() {
     this.router.navigate(['complete'], {relativeTo: this.route});
+  }
+
+  redirectAfterLogin() {
+    this.router.navigateByUrl(this.nextUrl);
   }
 }
