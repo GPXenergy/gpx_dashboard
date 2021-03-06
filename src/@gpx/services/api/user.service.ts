@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { DataService } from './data.service';
 import { pkType } from '@gpx/models/base';
 import { User } from '@gpx/models/user.model';
+import { AuthUser } from '@gpx/models/auth-user.model';
 
 export type UserList = User[];
 
@@ -32,11 +33,15 @@ export class UserService extends DataService<UserList, User> {
     return this.remove({user_pk: userPk});
   }
 
+  public updateUserPassword(user: AuthUser, userPk: pkType): Observable<User> {
+    return this.update(user, {user_pk: userPk, password: ''});
+  }
+
   /**
    * Uri for the manage group meter endpoint
    */
   protected getActionUrl(): string {
-    return '/api/users/{{user_pk?}}/';
+    return '/api/users/{{user_pk?}}/{%{{password}}password/%}';
   }
 
 }

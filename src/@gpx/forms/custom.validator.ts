@@ -214,4 +214,20 @@ export class CustomValidators {
       return c?.value?.length > max ? {'maxarraylength': {'max': max, 'actual': c.value.length}} : null;
     };
   }
+
+  /** requires 1 capital, 1 number and at least 8 chars */
+  public static strongPassword(): ValidatorFn {
+    return (c: AbstractControl): ValidationErrors => {
+      const hasNumber = /\d/.test(c.value);
+      const hasUpper = /[A-Z]/.test(c.value);
+      const hasLower = /[a-z]/.test(c.value);
+      // const hasEnoughChars = /[A-Za-z\d$@$!%*?&].{8,}/.test(c.value);
+      const valid = hasNumber && hasUpper && hasLower;
+      if (!valid) {
+        // return what´s not valid
+        return {'password': true};
+      }
+      return null;
+    };
+  }
 }

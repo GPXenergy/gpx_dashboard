@@ -58,30 +58,26 @@
                 <p class="mat-title">Meter gegevens</p>
                 <p>
                   Meterstanden<br/>
-                  <em>Op {{meter.power_timestamp | date: "dd-MM-yy HH:mm:ss"}}</em><br/>
-                  Import 1: -{{meter.power_import_1 | number }} kWh <br/>
-                  Import 2: -{{meter.power_import_2 | number }} kWh <br/>
-                  Export 1: {{meter.power_export_1 | number }} kWh <br/>
-                  Export 2: {{meter.power_export_2 | number }} kWh <br/>
+                  <em>Laatste update {{meter.power_timestamp | date: "dd-MM-yy HH:mm:ss"}}</em><br/>
+                  Levering 1: -{{meter.power_import_1 | number }} kWh <br/>
+                  Levering 2: -{{meter.power_import_2 | number }} kWh <br/>
+                  Teruglevering 1: {{meter.power_export_1 | number }} kWh <br/>
+                  Teruglevering 2: {{meter.power_export_2 | number }} kWh <br/>
                   --- <br/>
-                  Totaal import: -{{meter.totalPowerImport | number }} kWh <br/>
-                  Totaal export: {{meter.totalPowerExport | number }} kWh <br/>
+                  Totaal levering: -{{meter.totalPowerImport | number }} kWh <br/>
+                  Totaal teruglevering: {{meter.totalPowerExport | number }} kWh <br/>
                   Totaal: {{meter.totalPower | number }} kWh <br/>
                 </p>
-                <p>
-                  Actueel verbruik <br/>
-                  Tarief: {{meter.tariff | number }}<br/>
-                  Vermogen: {{meter.actualPower | number }} kW <br/>
-                </p>
                 <p *ngIf="meter.gas > 0">
-                  Gas <br/>
-                  <em>Op {{meter.gas_timestamp | date: "dd-MM-yy HH:mm:ss"}}</em><br/>
-                  Totaal: {{meter.gas | number }} m³ <br/>
+                  <em>Laatste update {{meter.gas_timestamp | date: "dd-MM-yy HH:mm:ss"}}</em><br/>
+                  Gas: {{meter.gas | number }} m³ <br/>
+                </p>
+                <h3>Actueel</h3>
+                <p>
+                  Stroom: {{meter.actualPower | number }} kW (Tarief: {{meter.tariff | number }})<br/>
                 </p>
                 <p *ngIf="meter.solar_timestamp">
-                  Zonproductie <br/>
-                  <em>Op {{meter.solar_timestamp | date: "dd-MM-yy HH:mm:ss"}}</em><br/>
-                  Vermogen: {{meter.solar | number }} kW <br/>
+                  Zonproductie: {{meter.solar | number }} kW <br/>
                 </p>
               </ng-container>
             </mat-card>
@@ -98,8 +94,9 @@
 
                   <mat-form-field appearance="outline">
                     <mat-label>Datum range</mat-label>
-                    <mat-select (selectionChange)="onRangeFilterChange($event.value, energyMeasurementFilter); getMeterPowerData()"
-                                [value]="filterRangeOptions.day" [(ngModel)]="rangeSelectPower">
+                    <mat-select
+                      (selectionChange)="onRangeFilterChange($event.value, energyMeasurementFilter); getMeterPowerData()"
+                      [value]="filterRangeOptions.day" [(ngModel)]="rangeSelectPower">
                       <mat-option [value]="filterRangeOptions.day">
                         Afgelopen 24 uur
                       </mat-option>
@@ -116,11 +113,11 @@
                     </mat-select>
                   </mat-form-field>
 
-<!--                  <div class="mr-8 ml-8">-->
-<!--                    <mat-checkbox [(ngModel)]="invertPowerImport" labelPosition="after" (change)="setPowerSet()">-->
-<!--                      Inverteer import.-->
-<!--                    </mat-checkbox>-->
-<!--                  </div>-->
+                  <div class="mr-8 ml-8">
+                    <mat-checkbox [(ngModel)]="invertPowerImport" labelPosition="after" (change)="setPowerSet()">
+                      Inverteer import.
+                    </mat-checkbox>
+                  </div>
                 </div>
 
                 <ng-container *ngIf="loadingEnergy; else energyChart">
@@ -133,7 +130,7 @@
                 </ng-container>
 
                 <ng-template #energyChart>
-                  <dashboard-graph [chartInput]="energyChartInput" yAxisLabel="Vermogen (kW)"></dashboard-graph>
+                  <dashboard-graph [chartInput]="energyChartInput" yAxisLabel="Stroom (kW)"></dashboard-graph>
                 </ng-template>
 
               </mat-card>
@@ -143,8 +140,9 @@
 
                 <mat-form-field appearance="outline">
                   <mat-label>Datum range</mat-label>
-                  <mat-select (selectionChange)="onRangeFilterChange($event.value, gasMeasurementFilter); getMeterGasData()"
-                              [value]="filterRangeOptions.day" [(ngModel)]="rangeSelectGas">
+                  <mat-select
+                    (selectionChange)="onRangeFilterChange($event.value, gasMeasurementFilter); getMeterGasData()"
+                    [value]="filterRangeOptions.day" [(ngModel)]="rangeSelectGas">
                     <mat-option [value]="filterRangeOptions.day">
                       Afgelopen 24 uur
                     </mat-option>
