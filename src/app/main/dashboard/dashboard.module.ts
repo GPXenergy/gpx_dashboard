@@ -8,7 +8,7 @@ const routes: Route[] = [
     component: DashboardLayoutComponent,
     children: [
       {
-        path: 'dashboard',
+        path: 'personal-meter',
         loadChildren: () => import('./dashboard/dashboard-view/dashboard-view.module').then(m => m.DashboardViewModule),
       },
       {

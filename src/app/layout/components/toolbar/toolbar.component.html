@@ -15,7 +15,7 @@
         <img class="logo-icon" src="assets/logo/gpx-logo.png">
       </div> -->
 
-      <a [routerLink]="user ? ['dashboard'] : ['login'] " fxLayout="row" fxLayoutAlign="start center">
+      <a [routerLink]="user ? ['personal-meter'] : ['login'] " fxLayout="row" fxLayoutAlign="start center">
         <div class="logo">
           <img class="logo-icon" src="assets/logo/gpx-logo.png">
           <!-- <img class="logo-icon" src="assets/logo/oanax-edu-logo.svg"> -->
@@ -40,7 +40,7 @@
 
         <mat-menu #userMenu="matMenu" [overlapTrigger]="false" backdropClass="user-dropdown">
 
-          <div class="mb-32 mt-24" fxLayout="column" fxLayoutAlign="center center" routerLink="/dashboard"
+          <div class="mb-32 mt-24" fxLayout="column" fxLayoutAlign="center center" routerLink="/personal-meter"
                style="cursor: pointer">
             <mat-icon class="middle-icon mb-8">
               account_circle
@@ -54,9 +54,9 @@
           </div>
 
           <div class="m-12" fxLayoutAlign="center center">
-            <button fxFlex="80%" mat-stroked-button routerLink="/dashboard">
+            <button fxFlex="80%" mat-stroked-button routerLink="/personal-meter">
               <mat-icon class="b-text-dark-grey mr-4">dashboard</mat-icon>
-              <span class="b-text-dark-grey">Dashboard</span>
+              <span class="b-text-dark-grey">Persoonlijke meter</span>
             </button>
           </div>
 

@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { registerLocaleData } from '@angular/common';
 import localeNl from '@angular/common/locales/nl';
 
@@ -61,6 +61,7 @@ export const appRoutes: Routes = [
     InitialLoadingIndicatorModule,
     TranslateModule.forRoot(),
     GpxModule.forRoot(CONFIGS.public),
+    MatNativeDateModule
   ],
   providers: [
     {
@@ -68,8 +69,11 @@ export const appRoutes: Routes = [
       useClass: ApiInterceptor,
       multi: true
     },
-    {provide: LOCALE_ID, useValue: 'nl-NL'},
+    // {provide: LOCALE_ID, useValue: 'nl-NL'},
+    { provide: LOCALE_ID, useValue: 'nl-NL' },
+    // {provide: MAT_DATE_LOCALE, useValue: 'nl-NL'},
     {provide: MAT_DATE_LOCALE, useValue: 'nl-NL'},
+
 
   ],
   bootstrap: [

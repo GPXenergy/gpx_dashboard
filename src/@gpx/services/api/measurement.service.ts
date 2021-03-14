@@ -11,6 +11,9 @@ export type SolarMeasurementList = SolarMeasurement[];
 export class MeasurementFilter extends QueryParams {
   timestamp_after: string;
   timestamp_before: string;
+
+  start_date: Date;
+  end_date: Date;
 }
 
 

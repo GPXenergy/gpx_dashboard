@@ -93,7 +93,7 @@
                 <div fxLayout="row">
 
                   <mat-form-field appearance="outline">
-                    <mat-label>Datum range</mat-label>
+                    <mat-label>Selecteer range</mat-label>
                     <mat-select
                       (selectionChange)="onRangeFilterChange($event.value, energyMeasurementFilter); getMeterPowerData()"
                       [value]="filterRangeOptions.day" [(ngModel)]="rangeSelectPower">
@@ -112,6 +112,39 @@
 
                     </mat-select>
                   </mat-form-field>
+
+
+                  <form *ngIf="rangePickerForm" [formGroup]="rangePickerForm">
+                    <mat-form-field appearance="outline" fxFlex="235px" class="ml-12">
+                      <mat-label>Datum range</mat-label>
+                      <mat-date-range-input
+                        [formGroup]="rangePickerForm"
+                        [rangePicker]="rangePicker">
+                        <input matStartDate placeholder="Start datum" formControlName="start" [rangePicker]="rangePicker" 
+                        (mousedown)="rangePicker.open(); $event.preventDefault" 
+                        readonly=true>
+                        <input matEndDate placeholder="Eind datum" formControlName="end"
+                        [rangePicker]="rangePicker" 
+                        (mousedown)="rangePicker.open(); $event.preventDefault" 
+                        readonly=true>
+                      </mat-date-range-input>
+                      <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+                      <mat-date-range-picker #rangePicker (closed)="closedRangePicker()"></mat-date-range-picker>
+                    </mat-form-field>
+
+                    <!-- <mat-form-field appearance="outline" fxFlex="155px" class="mr-8 ml-16">
+                      <mat-label>Start</mat-label>
+                      <input matInput formControlName="start" autocomplete="off" readonly>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" fxFlex="155px" class="mr-8 ml-8">
+                      <mat-label>Eind</mat-label>
+                      <input matInput formControlName="end" autocomplete="off" readonly>
+                    </mat-form-field> -->
+                  </form>
+
+
+
 
                   <div class="mr-8 ml-8">
                     <mat-checkbox [(ngModel)]="invertPowerImport" labelPosition="after" (change)="setPowerSet()">

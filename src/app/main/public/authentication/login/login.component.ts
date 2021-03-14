@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      this.nextUrl = params['next'] || '/dashboard';
+      this.nextUrl = params['next'] || '/personal-meter';
     });
 
     this.authService.user.then(user => {

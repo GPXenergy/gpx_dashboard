@@ -14,6 +14,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
 
 const routes: Route[] = [
   {
@@ -38,6 +40,7 @@ const routes: Route[] = [
     MatIconModule,
     MatSidenavModule,
     MatCheckboxModule,
+    MatDatepickerModule
   ],
   declarations: [
     DashboardViewComponent,
