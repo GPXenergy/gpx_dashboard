@@ -223,26 +223,8 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
         // end: new FormControl(format(end, 'dd-MM-yyyy HH:mm'))
       });
 
-      
-      this.rangePickerForm.get('start').markAsUntouched();
-      this.rangePickerForm.get('end').markAsUntouched();
-      this.rangePickerForm.markAsUntouched();
-      // this.rangePickerForm.markAsPristine();
-
       this.rangePickerForm.valueChanges.pipe(takeUntil(this._unsubscribeAll)).subscribe(changes => {
         // console.log(changes, new Date(changes.start).toISOString());
-
-        // if (changes.start && changes.end) {
-        //   this.energyMeasurementFilter.assign({
-        //     timestamp_after: new Date(start).toISOString(),
-        //     timestamp_before: new Date(end).toISOString(),
-        //   });
-        // } else if (changes.start) {
-        //   this.energyMeasurementFilter.assign({
-        //     timestamp_after: new Date(start).toISOString(),
-        //     timestamp_before: new Date().toISOString(),
-        //   });
-        // }
       });
     } else {
       this.rangePickerForm.get('start').patchValue(new Date(start), { emitEvent: false });
@@ -251,16 +233,12 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
       // this.rangePickerForm.get('end').patchValue(format(end, 'dd-MM-yyyy HH:mm'), { emitEvent: false });
     }
 
-    this.rangePickerForm.markAsUntouched();
-    this.rangePickerForm.markAsPristine();
-
-    
-
-
   }
 
-  closedRangePicker(gas?: boolean) {
-    if (!this.rangePickerForm.dirty) {
+  closedRangePicker(gas?: boolean): void {
+
+    // will be fixed in angular 11 (currently does not work)
+    if (this.rangePickerForm.pristine) {
       return;
     }
     console.log(this.rangePickerForm, this.rangePickerForm.dirty);
@@ -275,11 +253,13 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
         timestamp_before: new Date().toISOString(),
       });
     }
-    console.log('fire2');
 
-    clearInterval(this.interval);
-    this.interval = setInterval(this.getLatestMeterData, 300000);
-    // console.log(this.rangePickerForm.get('start').value);
+    this.getMeterPowerData();
+    this.rangePickerForm.markAsUntouched();
+    this.rangePickerForm.markAsPristine();
+
+
+    // this.getMeterGasData();
   }
 
 
