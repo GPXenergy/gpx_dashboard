@@ -44,7 +44,6 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
   loadingGas: boolean;
 
   /* For filtering */
-  invertPowerImport: boolean;
   filterRangeOptions = TimestampRange;
   rangeSelectPower: TimestampRange = TimestampRange.day;
   energyMeasurementFilter: MeasurementFilter;
@@ -52,6 +51,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
   rangeSelectGas: TimestampRange = TimestampRange.day;
 
   rangePickerForm: FormGroup;
+  rangeValueDisplay: string;
   /* end filtering */
 
   interval: NodeJS.Timeout;
@@ -74,7 +74,6 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadingEnergy = true;
     this.loadingGas = true;
-    this.invertPowerImport = false;
     this.energyMeasurementFilter = new MeasurementFilter();
     this.gasMeasurementFilter = new MeasurementFilter();
     this.meterSelectionService.availableMeters.pipe(takeUntil(this._unsubscribeAll)).subscribe(meters => {
@@ -131,7 +130,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
     const energy_ex = { name: 'teruglevering', series: [] };
     const solar = { name: 'zon-productie', series: [] };
     this.powerMeasurement.forEach((obj, ind) => {
-      energy.series.push({ name: new Date(obj.timestamp), value: this.invertPowerImport ? -obj.power_imp : +obj.power_imp });
+      energy.series.push({ name: new Date(obj.timestamp), value: +obj.power_imp });
       if (this.meter.totalPowerExport > 0) {
         energy_ex.series.push({ name: new Date(obj.timestamp), value: +obj.power_exp });
       }
@@ -233,6 +232,14 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
       // this.rangePickerForm.get('end').patchValue(format(end, 'dd-MM-yyyy HH:mm'), { emitEvent: false });
     }
 
+    this.setupRangeValueDisplay();
+
+
+  }
+
+  setupRangeValueDisplay() {
+    this.rangeValueDisplay = format(new Date(this.energyMeasurementFilter.timestamp_after), 'dd/MM/yyyy HH:mm')
+    + ' -- ' + format(new Date(this.energyMeasurementFilter.timestamp_before), 'dd/MM/yyyy HH:mm');
   }
 
   closedRangePicker(gas?: boolean): void {
@@ -253,7 +260,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
         timestamp_before: new Date().toISOString(),
       });
     }
-
+    this.setupRangeValueDisplay();
     this.getMeterPowerData();
     this.rangePickerForm.markAsUntouched();
     this.rangePickerForm.markAsPristine();
