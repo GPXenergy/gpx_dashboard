@@ -30,8 +30,7 @@
         <p>Hieronder kun je jouw gegevens wijzigen en opslaan</p>
 
         <form *ngIf="userForm" [formGroup]="userForm" class="mt-20" fxFlex="40%" fxFlex.xs="100%" fxLayout="column"
-              fxLayoutGap="12px" name="form"
-              novalidate>
+          fxLayoutGap="12px" name="form" novalidate>
 
           <mat-form-field appearance="outline" fxFlex="100%">
             <mat-label>Voornaam</mat-label>
@@ -65,6 +64,25 @@
           </div>
 
         </form>
+
+      </mat-card>
+
+
+      <mat-card fxLayout="column" class="mt-32">
+
+        <div fxLayout="row">
+          <p class="mat-title" fxLayoutAlign="start center">
+            Wachtwoord wijzigen
+          </p>
+        </div>
+
+        <p>Gebruik je oude wachtwoord om een nieuwe aan te maken</p>
+
+
+        <div class="mt-20">
+          <change-password></change-password>
+        </div>
+
 
       </mat-card>
     </div>
