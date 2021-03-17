@@ -33,10 +33,6 @@ export class UserService extends DataService<UserList, User> {
     return this.remove({user_pk: userPk});
   }
 
-  public updateUserPassword(user: AuthUser, userPk: pkType): Observable<User> {
-    return this.update(user, {user_pk: userPk, password: ''});
-  }
-
   /**
    * Uri for the manage group meter endpoint
    */

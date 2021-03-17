@@ -9,6 +9,12 @@ import { AuthService } from '@gpx/services/auth.service';
 import { SnackBarService } from '@gpx/services/snack-bar.service';
 import { UserService } from '@gpx/services/api/user.service';
 import { Router } from '@angular/router';
+import {
+  JoinGroupMeterDialogComponent,
+  JoinGroupMeterDialogResult
+} from '../group/join-group-meter-dialog/join-group-meter-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ChangePasswordComponent } from './change-password-dialog/change-password.component';
 
 
 @Component({
@@ -24,6 +30,7 @@ export class AccountConfigurationContentComponent implements OnInit, OnDestroy {
   constructor(private changeDetectorRef: ChangeDetectorRef,
               private _snackBar: SnackBarService,
               private router: Router,
+              private dialog: MatDialog,
               private authService: AuthService,
               private userService: UserService,
               private formBuilder: ModelFormBuilder,
@@ -72,6 +79,21 @@ export class AccountConfigurationContentComponent implements OnInit, OnDestroy {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
+  }
+
+  changePassword(event): void {
+    const dialogRef = this.dialog.open(ChangePasswordComponent, {
+      width: '500px',
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this._snackBar.success({
+          title: `Wachtwoord is gewijzigd!`,
+        });
+      }
+    });
   }
 
   deleteAccount(event): void {

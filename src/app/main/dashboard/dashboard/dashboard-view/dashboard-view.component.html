@@ -57,27 +57,33 @@
               <ng-container *ngIf="meter">
                 <p class="mat-title">Meter gegevens</p>
                 <p>
-                  Meterstanden<br/>
                   <em>Laatste update {{meter.power_timestamp | date: "dd-MM-yy HH:mm:ss"}}</em><br/>
-                  Levering 1: -{{meter.power_import_1 | number }} kWh <br/>
-                  Levering 2: -{{meter.power_import_2 | number }} kWh <br/>
-                  Teruglevering 1: {{meter.power_export_1 | number }} kWh <br/>
-                  Teruglevering 2: {{meter.power_export_2 | number }} kWh <br/>
+                  Import 1: -{{meter.total_power_import_1 | number }} kWh <br/>
+                  Import 2: -{{meter.total_power_import_2 | number }} kWh <br/>
+                  Export 1: {{meter.total_power_export_1 | number }} kWh <br/>
+                  Export 2: {{meter.total_power_export_2 | number }} kWh <br/>
                   --- <br/>
-                  Totaal levering: -{{meter.totalPowerImport | number }} kWh <br/>
-                  Totaal teruglevering: {{meter.totalPowerExport | number }} kWh <br/>
-                  Totaal: {{meter.totalPower | number }} kWh <br/>
+                  Totaal import: -{{meter.totalPowerImport | number }} kWh <br/>
+                  Totaal export: {{meter.totalPowerExport | number }} kWh <br/>
+                  Meter balans: {{meter.totalPower | number }} kWh <br/>
                 </p>
-                <p *ngIf="meter.gas > 0">
+                <p *ngIf="meter.total_gas > 0">
                   <em>Laatste update {{meter.gas_timestamp | date: "dd-MM-yy HH:mm:ss"}}</em><br/>
-                  Gas: {{meter.gas | number }} m³ <br/>
+                  Totaal gasverbruik: {{meter.total_gas | number }} m³ <br/>
+                </p>
+                <p *ngIf="meter.total_solar">
+                  <em>Laatste update {{meter.solar_timestamp | date: "dd-MM-yy HH:mm:ss"}}</em><br/>
+                  Totaal zonproductie: {{meter.total_solar | number }} kW <br/>
                 </p>
                 <h3>Actueel</h3>
                 <p>
                   Stroom: {{meter.actualPower | number }} kW (Tarief: {{meter.tariff | number }})<br/>
                 </p>
+                <p *ngIf="meter.total_gas">
+                  Gasverbruik: {{meter.actual_gas | number }} m³/h <br/>
+                </p>
                 <p *ngIf="meter.solar_timestamp">
-                  Zonproductie: {{meter.solar | number }} kW <br/>
+                  Zonproductie: {{meter.actual_solar | number }} kW <br/>
                 </p>
               </ng-container>
             </mat-card>
@@ -170,7 +176,7 @@
                 </ng-container>
 
                 <ng-template #gasChart>
-                  <dashboard-graph [chartInput]="gasChartInput" yAxisLabel="Gas (m³)"></dashboard-graph>
+                  <dashboard-graph [chartInput]="gasChartInput" yAxisLabel="Gas (m³/h)"></dashboard-graph>
                 </ng-template>
 
               </mat-card>

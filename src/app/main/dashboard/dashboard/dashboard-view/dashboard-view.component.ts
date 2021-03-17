@@ -126,14 +126,14 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
     const energy_ex = {name: 'teruglevering', series: []};
     const solar = {name: 'zon-productie', series: []};
     this.powerMeasurement.forEach((obj, ind) => {
-      energy.series.push({name: new Date(obj.timestamp), value: this.invertPowerImport ? -obj.power_imp : +obj.power_imp});
+      energy.series.push({name: new Date(obj.timestamp), value: this.invertPowerImport ? -obj.actual_import : +obj.actual_import});
       if (this.meter.totalPowerExport > 0) {
-        energy_ex.series.push({name: new Date(obj.timestamp), value: +obj.power_exp});
+        energy_ex.series.push({name: new Date(obj.timestamp), value: +obj.actual_export});
       }
     });
 
     this.solarMeasurement.forEach(obj => {
-      solar.series.push({name: new Date(obj.timestamp), value: +obj.solar});
+      solar.series.push({name: new Date(obj.timestamp), value: +obj.actual_solar});
     });
     this.energyChartInput = [energy];
     if (this.meter.totalPowerExport > 0) {
@@ -164,7 +164,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
   setGasSet(): void {
     const gas = {name: 'Gas', series: []};
     this.gasMeasurement.forEach((obj, ind) => {
-      gas.series.push({name: new Date(obj.timestamp), value: +obj.gas});
+      gas.series.push({name: new Date(obj.timestamp), value: +obj.actual_gas});
     });
 
     this.gasChartInput = [gas];

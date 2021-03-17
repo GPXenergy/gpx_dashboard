@@ -12,7 +12,7 @@ export class Meter extends BaseModel {
   // # Customizable name for this meter, for identification to the user
   name: string;
   // If the meter name and relations are made public when the group meter is made public
-  public: boolean;
+  visibility_type: 'private' | 'group' | 'public';
   // Meter type, configurable by the user, used to display better information on group meter
   type: 'consumer' | 'prosumer' | 'battery' | 'producer_solar' | 'producer_wind' | 'producer_other';
   //  GPX - Connector version
@@ -26,10 +26,10 @@ export class Meter extends BaseModel {
   /// Power data
   sn_power: string;
   power_timestamp: Date;
-  power_import_1: number;
-  power_import_2: number;
-  power_export_1: number;
-  power_export_2: number;
+  total_power_import_1: number;
+  total_power_import_2: number;
+  total_power_export_1: number;
+  total_power_export_2: number;
   tariff: number;
   actual_power_import: number;
   actual_power_export: number;
@@ -37,11 +37,13 @@ export class Meter extends BaseModel {
   /// Gas data
   sn_gas: string;
   gas_timestamp: Date;
-  gas: number;
+  actual_gas: number;
+  total_gas: number;
 
   /// Solar data
   solar_timestamp: Date;
-  solar: number;
+  actual_solar: number;
+  total_solar: number;
 
   /**
    * Flag this user is in a group meter
@@ -54,14 +56,14 @@ export class Meter extends BaseModel {
    * Sum of export 1 and export 2
    */
   public get totalPowerExport(): number {
-    return this.power_export_1 + this.power_export_2;
+    return this.total_power_export_1 + this.total_power_export_2;
   }
 
   /**
    * Sum of import 1 and import 2
    */
   public get totalPowerImport(): number {
-    return this.power_import_1 + this.power_import_2;
+    return this.total_power_import_1 + this.total_power_import_2;
   }
 
   /**
@@ -98,31 +100,37 @@ export class Meter extends BaseModel {
 
   protected cleanFields(): void {
     super.cleanFields();
-    this.power_import_1 = +this.power_import_1;
-    this.power_import_2 = +this.power_import_2;
-    this.power_export_1 = +this.power_export_1;
-    this.power_export_2 = +this.power_export_2;
+    this.total_power_import_1 = +this.total_power_import_1;
+    this.total_power_import_2 = +this.total_power_import_2;
+    this.total_power_export_1 = +this.total_power_export_1;
+    this.total_power_export_2 = +this.total_power_export_2;
     this.actual_power_import = +this.actual_power_import;
     this.actual_power_export = +this.actual_power_export;
-    this.gas = +this.gas;
-    this.solar = +this.solar;
+    this.total_gas = +this.total_gas;
+    this.actual_solar = +this.actual_solar;
   }
 }
 
 export class SolarMeasurement extends BaseModel {
   timestamp: Date;
-  solar: number;
+  actual_solar: number;
+  total_solar: number;
 }
 
 
 export class PowerMeasurement extends BaseModel {
   timestamp: Date;
-  power_imp: number;
-  power_exp: number;
+  actual_import: number;
+  actual_export: number;
+  total_import_1: number;
+  total_import_2: number;
+  total_export_1: number;
+  total_export_2: number;
 }
 
 
 export class GasMeasurement extends BaseModel {
   timestamp: Date;
-  gas: number;
+  actual_gas: number;
+  total_gas: number;
 }

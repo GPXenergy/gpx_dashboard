@@ -62,7 +62,7 @@ export class MeterConfigurationContentComponent implements OnInit, OnDestroy {
   initForm(meter: Meter): void {
     this.meterForm = this.formBuilder.modelGroup(Meter, meter, {
       name: ['', Validators.required],
-      public: [null],
+      visibility_type: [null, Validators.required],
       type: [null, Validators.required],
     });
   }
