@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { pkType } from '../models/base';
 import { AuthService } from './auth.service';
 import { Meter } from '../models/meter.model';
 import { AuthUser } from '../models/auth-user.model';
 import { MeterService } from './api/meter.service';
 import { UserService } from './api/user.service';
+import { ResettableReplaySubject } from '../rxjs-subjects/resettable-replay-subject';
 
 
 /**
@@ -15,8 +16,8 @@ import { UserService } from './api/user.service';
   providedIn: 'root'
 })
 export class MeterSelectionService {
-  private _selectedMeterSubject: ReplaySubject<Meter> = new ReplaySubject<Meter>(1);
-  private _availableMetersSubject: ReplaySubject<Meter[]> = new ReplaySubject<Meter[]>(1);
+  private _selectedMeterSubject: ResettableReplaySubject<Meter> = new ResettableReplaySubject<Meter>(1);
+  private _availableMetersSubject: ResettableReplaySubject<Meter[]> = new ResettableReplaySubject<Meter[]>(1);
 
   constructor(private authService: AuthService,
               private userService: UserService,
@@ -31,6 +32,8 @@ export class MeterSelectionService {
         this._availableMeters = null;
         this._selectedMeterSubject.next(new Meter());
         this._availableMetersSubject.next([]);
+        this._selectedMeterSubject.reset();
+        this._availableMetersSubject.reset();
       }
     });
   }
@@ -55,13 +58,13 @@ export class MeterSelectionService {
    * Select a new meter (called in the sidenav dropdown)
    * @param meterPk: new meters pk
    */
-  setMeter(meterPk: pkType) {
+  setMeter(meterPk: pkType): void {
     if (!this._availableMeters) {
       // No available meters, cant change meter if there are no meters
       return;
     }
     // find the newly selected meter in the available meters
-    const meter = this._availableMeters.find(meter => meter.pk === meterPk);
+    const meter = this._availableMeters.find(m => m.pk === meterPk);
     if (meter) {
       // Update the default_meter for this user
       this.authService.user.then(user => {
@@ -80,7 +83,7 @@ export class MeterSelectionService {
 
   /**
    * Retrieves a list of meters for given user
-   * @param user
+   * @param user: update meters for this user
    */
   public updateMeters(user: AuthUser): void {
     this.meterService.getMeterList(user.pk).subscribe(
