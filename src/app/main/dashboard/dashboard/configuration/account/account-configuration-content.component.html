@@ -17,6 +17,10 @@
             </button>
             <mat-menu #menu="matMenu">
               <ng-container>
+                <button (click)="changePassword($event)" mat-menu-item>
+                  <mat-icon>password</mat-icon>
+                  Wijzig wachtwoord
+                </button>
                 <button (click)="deleteAccount($event)" mat-menu-item>
                   <mat-icon class="b-text-action">clear</mat-icon>
                   Verwijder account
@@ -67,24 +71,6 @@
 
       </mat-card>
 
-
-      <mat-card fxLayout="column" class="mt-32">
-
-        <div fxLayout="row">
-          <p class="mat-title" fxLayoutAlign="start center">
-            Wachtwoord wijzigen
-          </p>
-        </div>
-
-        <p>Gebruik je oude wachtwoord om een nieuwe aan te maken</p>
-
-
-        <div class="mt-20">
-          <change-password></change-password>
-        </div>
-
-
-      </mat-card>
     </div>
     <div fxFlex="15%" fxFlex.xs="5%"></div>
   </div>
