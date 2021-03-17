@@ -12,7 +12,7 @@ export class Meter extends BaseModel {
   // # Customizable name for this meter, for identification to the user
   name: string;
   // If the meter name and relations are made public when the group meter is made public
-  public: boolean;
+  visibility_type: 'private' | 'group' | 'public';
   // Meter type, configurable by the user, used to display better information on group meter
   type: 'consumer' | 'prosumer' | 'battery' | 'producer_solar' | 'producer_wind' | 'producer_other';
   //  GPX - Connector version
