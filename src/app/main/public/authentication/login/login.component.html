@@ -10,7 +10,7 @@
       <div fxFlex="15%"></div>
     </div>
 
-    <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="mt-40" fxLayout="column" name="loginForm" novalidate>
+    <form (ngSubmit)="onSubmit()" *ngIf="loginForm" [formGroup]="loginForm" class="mt-40" fxLayout="column" name="loginForm" novalidate>
       <mat-form-field>
         <input autocapitalize="none" formControlName="username" matInput name="username" placeholder="Gebruikernaam">
         <mat-error>
