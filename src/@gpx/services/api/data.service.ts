@@ -119,7 +119,7 @@ export abstract class DataService<TList extends TObject[] | PaginatorModel<TObje
    * @param urlParams: (optional) parameters in action url
    * @param query: (optional) query params dict for filtering
    */
-  protected getList(query?: QueryParams, urlParams?: object): Observable<TList> {
+  protected getList(urlParams?: object, query?: QueryParams): Observable<TList> {
     return this.deserializeResponseList(
       this.http.get<TList>(
         this.buildUrl(urlParams),
@@ -131,11 +131,13 @@ export abstract class DataService<TList extends TObject[] | PaginatorModel<TObje
   /**
    * Retrieve single object.
    * @param urlParams: (optional) parameters in action url
+   * @param query: (optional) query params dict for filtering
    */
-  protected get(urlParams?: object): Observable<TObject> {
+  protected get(urlParams?: object, query?: QueryParams): Observable<TObject> {
     return this.deserializeResponseObject(
       this.http.get<TObject>(
-        this.buildUrl(urlParams)
+        this.buildUrl(urlParams),
+        {params: query ? query.getParams() : null}
       )
     );
   }

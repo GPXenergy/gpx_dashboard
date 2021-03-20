@@ -27,7 +27,7 @@ export class PowerMeasurementService extends DataService<PowerMeasurementList, P
   protected model = PowerMeasurement;
 
   public getMeasurementList(userPk: pkType, meterPk: pkType, filter?: MeasurementFilter): Observable<PowerMeasurementList> {
-    return this.getList(filter, {user_pk: userPk, meter_pk: meterPk});
+    return this.getList({user_pk: userPk, meter_pk: meterPk}, filter);
   }
 
   /**
@@ -48,7 +48,7 @@ export class GasMeasurementService extends DataService<GasMeasurementList, GasMe
   protected model = GasMeasurement;
 
   public getMeasurementList(userPk: pkType, meterPk: pkType, filter?: MeasurementFilter): Observable<GasMeasurementList> {
-    return this.getList(filter, {user_pk: userPk, meter_pk: meterPk});
+    return this.getList({user_pk: userPk, meter_pk: meterPk}, filter);
   }
 
   /**
@@ -69,7 +69,7 @@ export class SolarMeasurementService extends DataService<SolarMeasurementList, S
   protected model = SolarMeasurement;
 
   public getMeasurementList(userPk: pkType, meterPk: pkType, filter?: MeasurementFilter): Observable<SolarMeasurementList> {
-    return this.getList(filter, {user_pk: userPk, meter_pk: meterPk});
+    return this.getList({user_pk: userPk, meter_pk: meterPk}, filter);
   }
 
   /**

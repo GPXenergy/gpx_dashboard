@@ -18,7 +18,7 @@ export class GroupMeterService extends DataService<GroupMeterList, GroupMeter> {
   protected model = GroupMeter;
 
   public getGroupMeterList(userPk: pkType, filter?: any): Observable<GroupMeterList> {
-    return this.getList(filter, {user_pk: userPk});
+    return this.getList({user_pk: userPk}, filter);
   }
 
   public getGroupMeter(userPk: pkType, groupPk: pkType): Observable<GroupMeter> {
@@ -71,7 +71,7 @@ export class GroupParticipationService extends DataService<GroupParticipantList,
   protected model = GroupParticipant;
 
   public getGroupParticipantList(userPk: pkType, filter?: any): Observable<GroupParticipantList> {
-    return this.getList(filter, {user_pk: userPk});
+    return this.getList({user_pk: userPk}, filter);
   }
 
   public getGroupParticipant(userPk: pkType, groupParticipantPk: pkType): Observable<GroupParticipant> {
