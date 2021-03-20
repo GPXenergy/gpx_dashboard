@@ -15,6 +15,7 @@ import {
 import { AuthService } from '@gpx/services/auth.service';
 import { AuthUser } from '@gpx/models/auth-user.model';
 import { MeterService } from '@gpx/services/api/meter.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 
 enum TimestampRange {
@@ -33,19 +34,24 @@ enum TimestampRange {
 export class DashboardViewComponent implements OnInit, OnDestroy {
   meter: Meter;
   user: AuthUser;
-  filterRangeOptions = TimestampRange;
   powerMeasurement: PowerMeasurement[] = [];
   solarMeasurement: SolarMeasurement[] = [];
-  energyMeasurementFilter: MeasurementFilter;
-  rangeSelectPower: TimestampRange = TimestampRange.day;
   energyChartInput: IChartData[];
   loadingEnergy: boolean;
   gasMeasurement: GasMeasurement[] = [];
-  gasMeasurementFilter: MeasurementFilter;
-  rangeSelectGas: TimestampRange = TimestampRange.day;
   gasChartInput: IChartData[];
   loadingGas: boolean;
-  invertPowerImport: boolean;
+
+  /* For filtering */
+  filterRangeOptions = TimestampRange;
+  rangeSelectPower: TimestampRange = TimestampRange.day;
+  energyMeasurementFilter: MeasurementFilter;
+  gasMeasurementFilter: MeasurementFilter;
+  rangeSelectGas: TimestampRange = TimestampRange.day;
+
+  rangePickerForm: FormGroup;
+  rangeValueDisplay: string;
+  /* end filtering */
 
   interval: NodeJS.Timeout;
 
@@ -60,14 +66,13 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
               private solarMeasurementService: SolarMeasurementService,
               private changeDetectorRef: ChangeDetectorRef,
               private titleService: Title) {
-    titleService.setTitle('Dashboard | GPX');
+    titleService.setTitle('Persoonlijke meter | GPX');
   }
 
 
   ngOnInit(): void {
     this.loadingEnergy = true;
     this.loadingGas = true;
-    this.invertPowerImport = false;
     this.energyMeasurementFilter = new MeasurementFilter();
     this.gasMeasurementFilter = new MeasurementFilter();
     this.meterSelectionService.availableMeters.pipe(takeUntil(this._unsubscribeAll)).subscribe(meters => {
@@ -89,14 +94,9 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
         }
       });
     });
+
   }
 
-  ngOnDestroy(): void {
-    // Unsubscribe from all subscriptions
-    clearInterval(this.interval);
-    this._unsubscribeAll.next();
-    this._unsubscribeAll.complete();
-  }
 
   getMeterData(): void {
     this.meterService.getMeter(this.user.pk, this.meter.pk).subscribe(
@@ -126,7 +126,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
     const energy_ex = {name: 'teruglevering', series: []};
     const solar = {name: 'zon-productie', series: []};
     this.powerMeasurement.forEach((obj, ind) => {
-      energy.series.push({name: new Date(obj.timestamp), value: this.invertPowerImport ? -obj.actual_import : +obj.actual_import});
+      energy.series.push({name: new Date(obj.timestamp), value: +obj.actual_import});
       if (this.meter.totalPowerExport > 0) {
         energy_ex.series.push({name: new Date(obj.timestamp), value: +obj.actual_export});
       }
@@ -203,17 +203,78 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
         });
         break;
     }
+    this.setupRangePicker(new Date(filter.timestamp_after), new Date(filter.timestamp_before));
     clearInterval(this.interval);
     this.interval = setInterval(this.getLatestMeterData, 300000);
   }
 
+  setupRangePicker(start, end): void {
 
-  getLatestMeterData = () => {
+    if (!this.rangePickerForm) {
+      this.rangePickerForm = new FormGroup({
+        start: new FormControl(new Date(start)),
+        end: new FormControl(new Date(end))
+      });
+
+      this.rangePickerForm.valueChanges.pipe(takeUntil(this._unsubscribeAll)).subscribe(changes => {
+        // console.log(changes, new Date(changes.start).toISOString());
+      });
+    } else {
+      this.rangePickerForm.get('start').patchValue(new Date(start), {emitEvent: false});
+      this.rangePickerForm.get('end').patchValue(new Date(end), {emitEvent: false});
+    }
+
+    this.setupRangeValueDisplay();
+
+
+  }
+
+  setupRangeValueDisplay(): void {
+    // this.rangeValueDisplay = new Date(this.energyMeasurementFilter.timestamp_after), 'dd/MM/yyyy HH:mm')
+    //   + ' -- ' + new Date(this.energyMeasurementFilter.timestamp_before), 'dd/MM/yyyy HH:mm');
+  }
+
+  closedRangePicker(gas?: boolean): void {
+
+    // will be fixed in angular 11 (currently does not work)
+    if (this.rangePickerForm.pristine) {
+      return;
+    }
+    console.log(this.rangePickerForm, this.rangePickerForm.dirty);
+    if (this.rangePickerForm.get('start').value && this.rangePickerForm.get('end').value) {
+      this.energyMeasurementFilter.assign({
+        timestamp_after: new Date(this.rangePickerForm.get('start').value).toISOString(),
+        timestamp_before: new Date(this.rangePickerForm.get('end').value).toISOString(),
+      });
+    } else if (this.rangePickerForm.get('start').value) {
+      this.energyMeasurementFilter.assign({
+        timestamp_after: new Date(this.rangePickerForm.get('start').value).toISOString(),
+        timestamp_before: new Date().toISOString(),
+      });
+    }
+    this.setupRangeValueDisplay();
+    this.getMeterPowerData();
+    this.rangePickerForm.markAsUntouched();
+    this.rangePickerForm.markAsPristine();
+
+
+    // this.getMeterGasData();
+  }
+
+
+  getLatestMeterData(): void {
     this.onRangeFilterChange(this.rangeSelectPower, this.energyMeasurementFilter);
     this.onRangeFilterChange(this.rangeSelectGas, this.gasMeasurementFilter);
     this.getMeterPowerData();
     this.getMeterGasData();
     this.getMeterData();
-  };
+  }
+
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions
+    clearInterval(this.interval);
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
+  }
 
 }

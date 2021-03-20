@@ -16,7 +16,7 @@
 
       <ng-template #seriesTooltipTemplate let-model="model">
         <div class="area-tooltip-container">
-          <div>
+          <div *ngIf="model && model.length">
             {{ model[0].name | date: tooltipDateFormat }}
           </div>
           <div *ngFor="let tooltipItem of model" class="tooltip-item">
