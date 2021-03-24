@@ -152,6 +152,8 @@ export class Meter extends BaseModel {
         total_export_1: measurement[5],
         total_export_2: measurement[6],
       }));
+    } else {
+      this.power_measurement_set = [];
     }
     if (this.solar_set) {
       this.solar_measurement_set = this.solar_set.map(measurement => new SolarMeasurement().deserialize({
@@ -159,6 +161,8 @@ export class Meter extends BaseModel {
         actual_solar: measurement[1],
         total_solar: measurement[2],
       }));
+    } else {
+      this.solar_measurement_set = [];
     }
     if (this.gas_set) {
       this.gas_measurement_set = this.gas_set.map(measurement => new GasMeasurement().deserialize({
@@ -166,6 +170,8 @@ export class Meter extends BaseModel {
         actual_gas: measurement[1],
         total_gas: measurement[2],
       }));
+    } else {
+      this.gas_measurement_set = [];
     }
   }
 }
