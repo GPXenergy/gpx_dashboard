@@ -7,6 +7,9 @@ import { MeasurementFilter } from './measurement.service';
 
 export type MeterList = Meter[];
 
+export class MeterMeasurementFilter extends MeasurementFilter {
+  measurements = true;
+}
 
 /**
  *
@@ -17,11 +20,18 @@ export type MeterList = Meter[];
 export class MeterService extends DataService<MeterList, Meter> {
   protected model = Meter;
 
+  /**
+   * Uri for the manage meter endpoint
+   */
+  protected getActionUrl(): string {
+    return '/api/users/{{user_pk}}/meters/{{meter_pk?}}';
+  }
+
   public getMeterList(userPk: pkType, filter?: any): Observable<MeterList> {
     return this.getList({user_pk: userPk}, filter);
   }
 
-  public getMeter(userPk: pkType, meterPk: pkType, measurementFilter?: MeasurementFilter): Observable<Meter> {
+  public getMeter(userPk: pkType, meterPk: pkType, measurementFilter?: MeterMeasurementFilter): Observable<Meter> {
     return this.get({user_pk: userPk, meter_pk: meterPk}, measurementFilter);
   }
 
@@ -31,13 +41,6 @@ export class MeterService extends DataService<MeterList, Meter> {
 
   public removeMeter(userPk: pkType, meterPk: pkType): Observable<Meter> {
     return this.remove({user_pk: userPk, meter_pk: meterPk});
-  }
-
-  /**
-   * Uri for the manage meter endpoint
-   */
-  protected getActionUrl(): string {
-    return '/api/users/{{user_pk}}/meters/{{meter_pk?}}';
   }
 
 }

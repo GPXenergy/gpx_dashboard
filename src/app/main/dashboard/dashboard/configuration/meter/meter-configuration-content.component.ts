@@ -10,7 +10,7 @@ import { Validators } from '@angular/forms';
 import { SnackBarService } from '@gpx/services/snack-bar.service';
 import { AuthUser } from '@gpx/models/auth-user.model';
 import { MeterService } from '@gpx/services/api/meter.service';
-import { Meter } from '@gpx/models/meter.model';
+import { EMeterType, EMeterVisibility, Meter } from '@gpx/models/meter.model';
 
 
 @Component({
@@ -19,6 +19,8 @@ import { Meter } from '@gpx/models/meter.model';
   styleUrls: ['./meter-configuration-content.component.scss'],
 })
 export class MeterConfigurationContentComponent implements OnInit, OnDestroy {
+  meterTypes = EMeterType;
+  meterVisibilityTypes = EMeterVisibility;
   user: AuthUser;
   selectedMeter: Meter;
   meterForm: ModelFormGroup<Meter>;

@@ -98,12 +98,12 @@
           <mat-form-field appearance="outline" fxFlex="100%">
             <mat-label>Catergorie</mat-label>
             <mat-select matInput formControlName="type" required>
-              <mat-option value="consumer">Consument (verbruikt alleen energie)</mat-option>
-              <mat-option value="prosumer">Prosument (verbruikt en wekt energie op)</mat-option>
-              <mat-option value="battery">Batterij</mat-option>
-              <mat-option value="producer_solar">Producent (Zon)</mat-option>
-              <mat-option value="producer_wind">Producent (Wind)</mat-option>
-              <mat-option value="producer_other">Producent (Anders)</mat-option>
+              <mat-option [value]="meterTypes.CONSUMER">Consument (verbruikt alleen energie)</mat-option>
+              <mat-option [value]="meterTypes.PROSUMER">Prosument (verbruikt en wekt energie op)</mat-option>
+              <mat-option [value]="meterTypes.BATTERY">Batterij</mat-option>
+              <mat-option [value]="meterTypes.PRODUCER_SOLAR">Producent (Zon)</mat-option>
+              <mat-option [value]="meterTypes.PRODUCER_WIND">Producent (Wind)</mat-option>
+              <mat-option [value]="meterTypes.PRODUCER_OTHER">Producent (Anders)</mat-option>
             </mat-select>
             <mat-error>{{meterForm.errorMessages.type?.errorMessage}}</mat-error>
             <mat-hint>
@@ -114,19 +114,19 @@
           <mat-form-field appearance="outline" fxFlex="100%">
             <mat-label>Privacyinstellinen metergegevens</mat-label>
             <mat-select matInput formControlName="visibility_type" required disabled>
-              <mat-option value="private">Alleen privé</mat-option>
-              <mat-option value="group">Inzichtelijk voor groep</mat-option>
-              <mat-option value="public">Inzichtelijk voor publiek</mat-option>
+              <mat-option [value]="meterVisibilityTypes.PRIVATE">Alleen privé</mat-option>
+              <mat-option [value]="meterVisibilityTypes.GROUP">Inzichtelijk voor groep</mat-option>
+              <mat-option [value]="meterVisibilityTypes.PUBLIC">Inzichtelijk voor publiek</mat-option>
             </mat-select>
             <mat-error>{{meterForm.errorMessages.visibility_type?.errorMessage}}</mat-error>
             <mat-hint>
-              <span *ngIf="meterForm.get('visibility_type').value === 'private'">
+              <span *ngIf="meterForm.get('visibility_type').value === meterVisibilityTypes.PRIVATE">
                 Metergegevens en metingen zijn alleen inzichtelijk voor jou.
               </span>
-              <span *ngIf="meterForm.get('visibility_type').value === 'group'">
+              <span *ngIf="meterForm.get('visibility_type').value === meterVisibilityTypes.GROUP">
                 Metergegevens en metingen zijn inzichtelijk voor jou en groepsleden.
               </span>
-              <span *ngIf="meterForm.get('visibility_type').value === 'public'">
+              <span *ngIf="meterForm.get('visibility_type').value === meterVisibilityTypes.PUBLIC">
                 Metergegevens en metingen zijn voor iedereen inzichtelijk.
               </span>
             </mat-hint>

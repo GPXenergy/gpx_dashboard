@@ -2,6 +2,22 @@ import { BaseModel, modelPropertiesObj, modelRelation } from './base';
 import { GroupParticipant } from './group-meter.model';
 import { User } from './user.model';
 
+export enum EMeterType {
+  CONSUMER = 'consumer',
+  PROSUMER = 'prosumer',
+  BATTERY = 'battery',
+  PRODUCER_SOLAR = 'producer_solar',
+  PRODUCER_WIND = 'producer_wind',
+  PRODUCER_OTHER = 'producer_other',
+}
+
+export enum EMeterVisibility {
+  PRIVATE = 'private',
+  GROUP = 'group',
+  PUBLIC = 'public',
+}
+
+
 /**
  * Meter model
  */
@@ -12,9 +28,9 @@ export class Meter extends BaseModel {
   // # Customizable name for this meter, for identification to the user
   name: string;
   // If the meter name and relations are made public when the group meter is made public
-  visibility_type: 'private' | 'group' | 'public';
+  visibility_type: EMeterVisibility;
   // Meter type, configurable by the user, used to display better information on group meter
-  type: 'consumer' | 'prosumer' | 'battery' | 'producer_solar' | 'producer_wind' | 'producer_other';
+  type: EMeterType;
   //  GPX - Connector version
   gpx_version: string; // 'x.y.z'
   // Timestamp of last change to this model
@@ -44,6 +60,24 @@ export class Meter extends BaseModel {
   solar_timestamp: Date;
   actual_solar: number;
   total_solar: number;
+
+  /// Period data (for dashboard
+  period_import_1: number;
+  period_import_2: number;
+  period_export_1: number;
+  period_export_2: number;
+  period_gas: number;
+  period_solar: number;
+
+  /// measurement sets from meter with measurement endpoint for personal dashboard
+  power_set: any[];
+  solar_set: any[];
+  gas_set: any[];
+
+  /// measurement sets from meter with measurement endpoint for personal dashboard
+  power_measurement_set: PowerMeasurement[];
+  solar_measurement_set: SolarMeasurement[];
+  gas_measurement_set: GasMeasurement[];
 
   /**
    * Flag this user is in a group meter
@@ -108,6 +142,31 @@ export class Meter extends BaseModel {
     this.actual_power_export = +this.actual_power_export;
     this.total_gas = +this.total_gas;
     this.actual_solar = +this.actual_solar;
+    if (this.power_set) {
+      this.power_measurement_set = this.power_set.map(measurement => new PowerMeasurement().deserialize({
+        timestamp: measurement[0],
+        actual_import: measurement[1],
+        actual_export: measurement[2],
+        total_import_1: measurement[3],
+        total_import_2: measurement[4],
+        total_export_1: measurement[5],
+        total_export_2: measurement[6],
+      }));
+    }
+    if (this.solar_set) {
+      this.solar_measurement_set = this.solar_set.map(measurement => new SolarMeasurement().deserialize({
+        timestamp: measurement[0],
+        actual_solar: measurement[1],
+        total_solar: measurement[2],
+      }));
+    }
+    if (this.gas_set) {
+      this.gas_measurement_set = this.gas_set.map(measurement => new GasMeasurement().deserialize({
+        timestamp: measurement[0],
+        actual_gas: measurement[1],
+        total_gas: measurement[2],
+      }));
+    }
   }
 }
 

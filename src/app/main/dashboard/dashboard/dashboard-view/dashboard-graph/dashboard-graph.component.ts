@@ -1,4 +1,7 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { MobileService } from '@gpx/services/mobile.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 
 export interface IChartData {
@@ -11,14 +14,16 @@ export interface IChartData {
   templateUrl: './dashboard-graph.component.html',
   styleUrls: ['./dashboard-graph.component.scss']
 })
-export class DashboardGraphComponent implements OnInit {
+export class DashboardGraphComponent implements OnInit, OnDestroy {
+
+  private readonly _unsubscribeAll = new Subject<void>();
 
   @Input() chartInput: IChartData[] = [];
 
   // multi: any[];
   view: any[] = [700, 300];
   // options
-  legend: boolean = false;
+  legend: boolean = true;
   showLabels: boolean = true;
   animations: boolean = true;
   xAxis: boolean = true;
@@ -33,7 +38,10 @@ export class DashboardGraphComponent implements OnInit {
     domain: ['#FF3B4E', '#006937', '#FFE224']
   };
 
-  constructor(private cd: ChangeDetectorRef) {
+  constructor(private cd: ChangeDetectorRef, mb: MobileService) {
+    mb.isMobile.pipe(takeUntil(this._unsubscribeAll)).subscribe(
+      isMobile => this.legend = !isMobile
+    );
   }
 
   ngOnInit(): void {
@@ -75,4 +83,11 @@ export class DashboardGraphComponent implements OnInit {
     }
     return 'dd MMM yyyy';
   }
+
+  ngOnDestroy(): void {
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
+  }
+
+
 }

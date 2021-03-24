@@ -18,18 +18,41 @@
       <div class="mt-16">
         <!-- <mat-card> -->
         <ng-container *ngIf="meter">
-          <p class="mat-title">Meter gegevens</p>
-          <p>
-            <em>Laatste update {{meter.power_timestamp | date: "dd-MM-yy HH:mm:ss"}}</em><br/>
-            Import 1: -{{meter.total_power_import_1 | number }} kWh <br/>
-            Import 2: -{{meter.total_power_import_2 | number }} kWh <br/>
-            Export 1: {{meter.total_power_export_1 | number }} kWh <br/>
-            Export 2: {{meter.total_power_export_2 | number }} kWh <br/>
-            --- <br/>
-            Totaal import: -{{meter.totalPowerImport | number }} kWh <br/>
-            Totaal export: {{meter.totalPowerExport | number }} kWh <br/>
-            Meter balans: {{meter.totalPower | number }} kWh <br/>
-          </p>
+          <div>
+            <p class="mat-title">In deze periode</p>
+            <p>
+              <em>van {{rangePickerForm.get('timestamp_after').value | date: "short"}}</em><br/>
+              <em>tot {{rangePickerForm.get('timestamp_before').value | date: "short"}}</em><br/>
+            </p>
+            <p>
+              Stroom import (1): {{meter.period_import_1}}<br/>
+              Stroom import (2): {{meter.period_import_2}}<br/>
+              Stroom export (1): {{meter.period_export_1}}<br/>
+              Stroom export (2): {{meter.period_export_2}}<br/>
+              Zonproductie: {{meter.period_gas}}<br/>
+              Gas: {{meter.period_solar}}<br/>
+            </p>
+          </div>
+          <div>
+            <p class="mat-title">Stroom</p>
+            <p>
+              <em>Laatste update {{meter.power_timestamp | date: "dd-MM-yy HH:mm:ss"}}</em><br/>
+            </p>
+            <p>
+              Actueel: {{meter.actualPower | number }} kW (Tarief: {{meter.tariff | number }})<br/>
+            </p>
+            <p>
+              Import 1: {{meter.total_power_import_1 | number }} kWh <br/>
+              Import 2: {{meter.total_power_import_2 | number }} kWh <br/>
+              Export 1: {{meter.total_power_export_1 | number }} kWh <br/>
+              Export 2: {{meter.total_power_export_2 | number }} kWh <br/>
+              --- <br/>
+              Totaal import: {{meter.totalPowerImport | number }} kWh <br/>
+              Totaal export: {{meter.totalPowerExport | number }} kWh <br/>
+              Meter balans: {{meter.totalPower | number }} kWh <br/>
+            </p>
+          </div>
+          <p class="mat-title">Solar</p>
           <p *ngIf="meter.total_gas > 0">
             <em>Laatste update {{meter.gas_timestamp | date: "dd-MM-yy HH:mm:ss"}}</em><br/>
             Totaal gasverbruik: {{meter.total_gas | number }} m³ <br/>
@@ -39,9 +62,6 @@
             Totaal zonproductie: {{meter.total_solar | number }} kW <br/>
           </p>
           <h3>Actueel</h3>
-          <p>
-            Stroom: {{meter.actualPower | number }} kW (Tarief: {{meter.tariff | number }})<br/>
-          </p>
           <p *ngIf="meter.total_gas">
             Gasverbruik: {{meter.actual_gas | number }} m³/h <br/>
           </p>
@@ -91,70 +111,74 @@
         <div fxFlex="90%" fxFlex.xs="95%">
 
           <div fxLayout="column" fxLayoutGap="32px">
+
             <mat-card fxFlex="100%">
 
-              <div fxLayout="row" fxLayout.lt-md="column">
+              <form *ngIf="rangePickerForm" [formGroup]="rangePickerForm">
 
-                <mat-form-field appearance="outline">
-                  <mat-label>Selecteer range</mat-label>
-                  <mat-select
-                    (selectionChange)="onRangeFilterChange($event.value, energyMeasurementFilter); getMeterPowerData()"
-                    [value]="filterRangeOptions.day" [(ngModel)]="rangeSelectPower">
-                    <!-- <mat-optgroup label="Voortschrijdend"> -->
-                    <mat-option [value]="filterRangeOptions.day">
+                <mat-form-field appearance="outline" fxFlex="100%">
+
+                  <mat-label>
+                    Periode
+                  </mat-label>
+                  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start center">
+                    <input matInput [placeholder]="'ORGANIZATIONS.NAME' | translate" autocomplete="off" [matMenuTriggerFor]="rangeMenu"
+                           [value]="rangePickerForm.get('timestamp_after').value | date: 'short'" style="width: auto">
+                    <span style="margin: 0 15px">-</span>
+                    <input matInput [placeholder]="'ORGANIZATIONS.NAME' | translate" autocomplete="off" [matMenuTriggerFor]="rangeMenu"
+                           [value]="rangePickerForm.get('timestamp_before').value | date: 'short'" style="width: auto">
+
+                  </div>
+
+
+                  <mat-menu #rangeMenu="matMenu" focusFirstItem="false">
+                    <button mat-menu-item (click)="rangePicker.open()">
+                      Custom datum
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item (click)="onRangeFilterChange(filterRangeOptions.day)">
                       Afgelopen 24 uur
-                    </mat-option>
-                    <mat-option [value]="filterRangeOptions.week">
+                    </button>
+                    <button mat-menu-item (click)="onRangeFilterChange(filterRangeOptions.week)">
                       Afgelopen week
-                    </mat-option>
-                    <mat-option [value]="filterRangeOptions.month">
+                    </button>
+                    <button mat-menu-item (click)="onRangeFilterChange(filterRangeOptions.month)">
                       Afgelopen maand
-                    </mat-option>
-                    <mat-option [value]="filterRangeOptions.year">
+                    </button>
+                    <button mat-menu-item (click)="onRangeFilterChange(filterRangeOptions.year)">
                       Afgelopen Jaar
-                    </mat-option>
-                    <!-- </mat-optgroup> -->
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item (click)="onRangeFilterChange(filterRangeOptions.current_day)">
+                      Vandaag
+                    </button>
+                    <button mat-menu-item (click)="onRangeFilterChange(filterRangeOptions.current_week)">
+                      Deze week
+                    </button>
+                    <button mat-menu-item (click)="onRangeFilterChange(filterRangeOptions.current_month)">
+                      Deze maand
+                    </button>
+                    <button mat-menu-item (click)="onRangeFilterChange(filterRangeOptions.current_year)">
+                      Dit jaar
+                    </button>
+                  </mat-menu>
 
-                    <mat-optgroup label="Vanaf">
-                      <mat-option [value]="filterRangeOptions.day">
-                        Vanaf 0.00 uur
-                      </mat-option>
-                      <mat-option [value]="filterRangeOptions.day">
-                        Week vanaf maandag
-                      </mat-option>
-                      <mat-option [value]="filterRangeOptions.day">
-                        1e van de maand
-                      </mat-option>
-                      <mat-option [value]="filterRangeOptions.day">
-                        1e van het Jaar
-                      </mat-option>
-                    </mat-optgroup>
-
-                  </mat-select>
+                  <div [hidden]="true">
+                    <mat-date-range-input [formGroup]="rangePickerForm" [rangePicker]="rangePicker">
+                      <input matStartDate placeholder="Start datum" formControlName="timestamp_after"
+                             [rangePicker]="rangePicker" (mousedown)="rangePicker.open(); $event.preventDefault"
+                             readonly=true>
+                      <input matEndDate placeholder="Eind datum" formControlName="timestamp_before"
+                             [rangePicker]="rangePicker"
+                             (mousedown)="rangePicker.open(); $event.preventDefault" readonly=true>
+                    </mat-date-range-input>
+                  </div>
+                  <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+                  <mat-date-range-picker #rangePicker (closed)="closedRangePicker()"></mat-date-range-picker>
                 </mat-form-field>
 
 
                 <div>
-                  <form *ngIf="rangePickerForm" [formGroup]="rangePickerForm">
-                    <mat-form-field appearance="outline" fxFlex="340px" class="ml-12">
-                      <mat-label>Datum range</mat-label>
-                      <input matInput placeholder="Start datum" [(ngModel)]="rangeValueDisplay"
-                             (mousedown)="rangePicker.open(); $event.preventDefault" readonly=true
-                             [ngModelOptions]="{standalone: true}">
-                      <div [hidden]="true">
-                        <mat-date-range-input [formGroup]="rangePickerForm" [rangePicker]="rangePicker">
-                          <input matStartDate placeholder="Start datum" formControlName="start"
-                                 [rangePicker]="rangePicker" (mousedown)="rangePicker.open(); $event.preventDefault"
-                                 readonly=true>
-                          <input matEndDate placeholder="Eind datum" formControlName="end" [rangePicker]="rangePicker"
-                                 (mousedown)="rangePicker.open(); $event.preventDefault" readonly=true>
-                        </mat-date-range-input>
-                      </div>
-                      <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
-                      <mat-date-range-picker #rangePicker (closed)="closedRangePicker()"></mat-date-range-picker>
-                    </mat-form-field>
-
-
                     <!-- <mat-form-field appearance="outline" fxFlex="155px" class="mr-8 ml-16">
                     <mat-label>Start</mat-label>
                     <input matInput formControlName="start" autocomplete="off" readonly>
@@ -164,10 +188,13 @@
                     <mat-label>Eind</mat-label>
                     <input matInput formControlName="end" autocomplete="off" readonly>
                   </mat-form-field> -->
-                  </form>
                 </div>
 
-              </div>
+              </form>
+
+            </mat-card>
+
+            <mat-card fxFlex="100%">
 
               <ng-container *ngIf="loadingEnergy; else energyChart">
                 <div class="mt-40 mb-40" fxLayout="column" fxLayoutAlign="center center">
@@ -186,28 +213,6 @@
 
 
             <mat-card fxFlex="100%">
-
-              <!-- <mat-form-field appearance="outline">
-                <mat-label>Datum range</mat-label>
-                <mat-select
-                  (selectionChange)="onRangeFilterChange($event.value, gasMeasurementFilter); getMeterGasData()"
-                  [value]="filterRangeOptions.day" [(ngModel)]="rangeSelectGas">
-                  <mat-option [value]="filterRangeOptions.day">
-                    Afgelopen 24 uur
-                  </mat-option>
-                  <mat-option [value]="filterRangeOptions.week">
-                    Afgelopen week
-                  </mat-option>
-                  <mat-option [value]="filterRangeOptions.month">
-                    Afgelopen maand
-                  </mat-option>
-                  <mat-option [value]="filterRangeOptions.year">
-                    Afgelopen Jaar
-                  </mat-option>
-
-                </mat-select>
-              </mat-form-field> -->
-
 
               <ng-container *ngIf="loadingGas; else gasChart">
                 <div class="mt-40 mb-40" fxLayout="column" fxLayoutAlign="center center">
