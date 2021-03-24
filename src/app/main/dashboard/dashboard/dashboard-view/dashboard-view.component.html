@@ -25,18 +25,18 @@
               <em>tot {{rangePickerForm.get('timestamp_before').value | date: "short"}}</em><br/>
             </p>
             <p>
-              Stroom import (1): {{meter.period_import_1}}<br/>
-              Stroom import (2): {{meter.period_import_2}}<br/>
-              Stroom export (1): {{meter.period_export_1}}<br/>
-              Stroom export (2): {{meter.period_export_2}}<br/>
-              Zonproductie: {{meter.period_gas}}<br/>
-              Gas: {{meter.period_solar}}<br/>
+              Stroom import (1): {{meter.period_import_1}} kWh<br/>
+              Stroom import (2): {{meter.period_import_2}} kWh<br/>
+              Stroom export (1): {{meter.period_export_1}} kWh<br/>
+              Stroom export (2): {{meter.period_export_2}} kWh<br/>
+              Zonproductie: {{meter.period_solar}} kWh<br/>
+              Gas: {{meter.period_gas}} m³<br/>
             </p>
           </div>
           <div>
             <p class="mat-title">Stroom</p>
             <p>
-              <em>Laatste update {{meter.power_timestamp | date: "dd-MM-yy HH:mm:ss"}}</em><br/>
+              <em>Laatste update {{meter.power_timestamp | date: "short"}}</em><br/>
             </p>
             <p>
               Actueel: {{meter.actualPower | number }} kW (Tarief: {{meter.tariff | number }})<br/>
@@ -52,21 +52,17 @@
               Meter balans: {{meter.totalPower | number }} kWh <br/>
             </p>
           </div>
-          <p class="mat-title">Solar</p>
-          <p *ngIf="meter.total_gas > 0">
-            <em>Laatste update {{meter.gas_timestamp | date: "dd-MM-yy HH:mm:ss"}}</em><br/>
+          <p class="mat-title">Gas</p>
+          <p *ngIf="meter.gas_timestamp">
+            <em>Laatste update {{meter.gas_timestamp | date: "short"}}</em><br/>
+            Actueel gasverbruik: {{meter.actual_gas | number }} m³/h <br/>
             Totaal gasverbruik: {{meter.total_gas | number }} m³ <br/>
           </p>
-          <p *ngIf="meter.total_solar">
-            <em>Laatste update {{meter.solar_timestamp | date: "dd-MM-yy HH:mm:ss"}}</em><br/>
-            Totaal zonproductie: {{meter.total_solar | number }} kW <br/>
-          </p>
-          <h3>Actueel</h3>
-          <p *ngIf="meter.total_gas">
-            Gasverbruik: {{meter.actual_gas | number }} m³/h <br/>
-          </p>
+          <p class="mat-title">Solar</p>
           <p *ngIf="meter.solar_timestamp">
-            Zonproductie: {{meter.actual_solar | number }} kW <br/>
+            <em>Laatste update {{meter.solar_timestamp | date: "short"}}</em><br/>
+            Actueel productie: {{meter.actual_solar | number }} kW <br/>
+            <span *ngIf="meter.total_solar">Totaal zonproductie: {{meter.total_solar | number }} kWh </span><br/>
           </p>
         </ng-container>
         <!-- </mat-card> -->
