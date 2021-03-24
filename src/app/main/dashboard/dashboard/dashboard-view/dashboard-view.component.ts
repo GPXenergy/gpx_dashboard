@@ -201,6 +201,11 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
   }
 
   closedRangePicker(): void {
+    const end: Date = this.rangePickerForm.value.timestamp_before;
+    const _23h59m = (23 * 60 * 60 * 1000) + (59 * 60 * 1000);
+    this.rangePickerForm.patchValue({
+      timestamp_before: new Date(end.getTime() + _23h59m)
+    });
     this.applyNewRangeSelection();
   }
 
