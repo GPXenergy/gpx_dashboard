@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { OanaxPipesModule } from '@gpx/pipes/pipes.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { GPXDirectivesModule } from '@gpx/directives/directives';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     OanaxPipesModule,
     MatSnackBarModule,
     MatTooltipModule,
+    GPXDirectivesModule
   ],
 })
 export class GPXSharedModule {

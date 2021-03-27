@@ -1,4 +1,4 @@
-<mat-card [ngClass]="data ? 'active' : 'inactive'">
+<mat-card [ngClass]="data ? 'active' : 'inactive'" appMaterialElevation (click)="groupParticipantDetail()" class="cursor-pointer">
   <ng-container *ngIf="data">
     <mat-card-header>
       <mat-card-title [matTooltip]="data.display_name">

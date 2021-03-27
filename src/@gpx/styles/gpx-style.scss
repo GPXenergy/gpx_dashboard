@@ -303,3 +303,56 @@ div[fxLayout="column"] > div[fxFlex] {
 .mat-checkbox-inner-container {
   margin-top: 5px !important;
 }
+
+
+.dialog-no-padding {
+  .mat-dialog-container {
+    padding: 0 !important;
+  }
+}
+
+// page layout
+
+.gpx-sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+     causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
+  // height: 100%;
+  background-color: transparent !important;
+
+  .gpx-sidenav {
+    min-width: 260px !important;
+    max-width: 300px !important;
+    width: 260px !important;
+  }
+
+  .standard-sidenav {
+
+    &.height-self {
+      .mat-drawer-inner-container {
+        height: unset !important;
+      }
+    }
+
+    &:not(.no-padding) {
+      padding: 16px;
+
+    }
+    min-width: 360px !important;
+    max-width: 360px !important;
+    width: 360px !important;
+
+    @include media-breakpoint ('xs') {
+      min-width: 320px !important;
+      max-width: 320px !important;
+      width: 320px !important;
+    }
+
+  }
+
+  &.hide-backdrop {
+    .mat-drawer-shown {
+      background-color: transparent !important;
+    }
+  }
+}
