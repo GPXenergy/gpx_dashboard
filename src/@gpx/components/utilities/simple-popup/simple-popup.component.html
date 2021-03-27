@@ -1,0 +1,11 @@
+<ng-template
+cdkConnectedOverlay
+[cdkConnectedOverlayPanelClass]="'simple-popup-component'"
+[cdkConnectedOverlayPush]="true"
+[cdkConnectedOverlayOrigin]="overlayOrigin"
+[cdkConnectedOverlayOpen]="isOpened"
+(detach)="connectedOverlayDetach()">
+<div #dialog role="dialog" aria-label="Dialog" [ngStyle]="{'max-width.px': maxWidth}" [ngClass]="{'overlay-container bg-white border mat-elevation-z2': !noStyle}">
+  <ng-content></ng-content>
+</div>
+</ng-template>

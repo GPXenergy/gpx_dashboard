@@ -1,3 +1,5 @@
+@import '@gpx/styles/gpx';
+
 :host {
   height: 100%;
 
@@ -5,4 +7,9 @@
     width: 350px;
     max-width: 350px;
   }
+
+  .filter-input {
+    width: 130px;
+  }
+
 }
