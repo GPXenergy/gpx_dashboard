@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
-import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { DateAdapter, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { registerLocaleData } from '@angular/common';
 import localeNl from '@angular/common/locales/nl';
 
@@ -18,6 +18,7 @@ import { NotFoundComponent } from './main/error-pages/not-found/not-found.compon
 import { LoginRequiredChildrenGuard } from '@gpx/guards/auth-route.guard';
 import { ApiInterceptor } from '@gpx/services/api.intercepter';
 import { GPXSharedModule } from '@gpx/shared.module';
+import { CustomDateAdapter } from '../@gpx/adapters/date.adapter';
 
 registerLocaleData(localeNl, 'nl');
 
@@ -69,13 +70,12 @@ export const appRoutes: Routes = [
       useClass: ApiInterceptor,
       multi: true
     },
-    // {provide: LOCALE_ID, useValue: 'nl-NL'},
-    { provide: LOCALE_ID, useValue: 'nl-NL' },
-    // {provide: MAT_DATE_LOCALE, useValue: 'nl-NL'},
+    {provide: LOCALE_ID, useValue: 'nl-NL'},
     {provide: MAT_DATE_LOCALE, useValue: 'nl-NL'},
-
+    {provide: DateAdapter, useClass: CustomDateAdapter}
 
   ],
+
   bootstrap: [
     AppComponent
   ]

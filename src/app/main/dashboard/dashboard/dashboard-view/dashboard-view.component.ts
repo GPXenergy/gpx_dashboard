@@ -79,7 +79,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
       this.meterSelectionService.selectedMeter.pipe(takeUntil(this._unsubscribeAll)).subscribe(meter => {
         if (meter) {
           this.meter = meter;
-          this.onRangeFilterChange(TimestampRange.day);
+          this.onRangeFilterChange(TimestampRange.current_day);
           this.changeDetectorRef.detectChanges();
         }
       });
@@ -144,59 +144,48 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
 
   /// On changing the range filter
   onRangeFilterChange(value: TimestampRange): void {
-    const now = new Date();
-    const lastUpdate = new Date(this.meter.last_update);
-    const day = 24 * 60 * 60 * 1000; // calculated to day for Date object
+    const after = new Date();
+    const before = new Date();
     switch (value) {
       case TimestampRange.day:
-        this.rangePickerForm.patchValue({
-          timestamp_after: new Date(now.getTime() - day),
-          timestamp_before: now,
-        });
+        after.setDate(after.getDate() - 1);
         break;
       case TimestampRange.week:
-        this.rangePickerForm.patchValue({
-          timestamp_after: new Date(now.getTime() - (day * 7)),
-          timestamp_before: now,
-        });
+        after.setDate(after.getDate() - 7);
         break;
       case TimestampRange.month:
-        this.rangePickerForm.patchValue({
-          timestamp_after: new Date(now.getTime() - (day * 30)),
-          timestamp_before: now,
-        });
+        after.setDate(after.getDate() - 31);
         break;
       case TimestampRange.year:
-        this.rangePickerForm.patchValue({
-          timestamp_after: new Date(now.getTime() - (day * 365)),
-          timestamp_before: now,
-        });
+        after.setDate(after.getDate() - 365);
         break;
       case TimestampRange.current_day:
-        this.rangePickerForm.patchValue({
-          timestamp_after: new Date(now.getTime() - day),
-          timestamp_before: now,
-        });
+        after.setHours(0, 0, 0, 0);
+        before.setHours(23, 59, 59, 999);
         break;
       case TimestampRange.current_week:
-        this.rangePickerForm.patchValue({
-          timestamp_after: new Date(now.getTime() - (day * 7)),
-          timestamp_before: now,
-        });
+        after.setDate(after.getDate() - after.getDay() + 1);
+        after.setHours(0, 0, 0, 0);
+        before.setDate(before.getDate() - before.getDay() + 7);
+        before.setHours(23, 59, 59, 999);
         break;
       case TimestampRange.current_month:
-        this.rangePickerForm.patchValue({
-          timestamp_after: new Date(now.getTime() - (day * 30)),
-          timestamp_before: now,
-        });
+        after.setFullYear(after.getFullYear(), after.getMonth(), 1);
+        after.setHours(0, 0, 0, 0);
+        before.setFullYear(before.getFullYear(), before.getMonth() + 1, 0);
+        before.setHours(23, 59, 59, 999);
         break;
       case TimestampRange.current_year:
-        this.rangePickerForm.patchValue({
-          timestamp_after: new Date(now.getTime() - (day * 365)),
-          timestamp_before: now,
-        });
+        after.setFullYear(after.getFullYear(), 0, 1);
+        after.setHours(0, 0, 0, 0);
+        before.setFullYear(before.getFullYear() + 1, 0, 0);
+        before.setHours(23, 59, 59, 999);
         break;
     }
+    this.rangePickerForm.patchValue({
+      timestamp_after: after,
+      timestamp_before: before,
+    });
     this.applyNewRangeSelection();
   }
 

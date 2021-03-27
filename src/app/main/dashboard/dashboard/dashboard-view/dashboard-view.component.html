@@ -118,12 +118,11 @@
                     Periode
                   </mat-label>
                   <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start center">
-                    <input matInput [placeholder]="'ORGANIZATIONS.NAME' | translate" autocomplete="off" [matMenuTriggerFor]="rangeMenu"
+                    <input matInput placeholder="Startdatum" autocomplete="off" [matMenuTriggerFor]="rangeMenu"
                            [value]="rangePickerForm.get('timestamp_after').value | date: 'short'" style="width: auto">
                     <span style="margin: 0 15px">-</span>
-                    <input matInput [placeholder]="'ORGANIZATIONS.NAME' | translate" autocomplete="off" [matMenuTriggerFor]="rangeMenu"
+                    <input matInput placeholder="Einddatum" autocomplete="off" [matMenuTriggerFor]="rangeMenu"
                            [value]="rangePickerForm.get('timestamp_before').value | date: 'short'" style="width: auto">
-
                   </div>
 
 
