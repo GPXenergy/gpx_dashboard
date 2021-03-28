@@ -14,7 +14,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatInputModule } from '@angular/material/input';
-import { GroupMeterParticipantDialogModule } from './group-meter-participant-dialog/group-meter-participant-dialog.module';
+import { GroupMeterParticipantDialogModule } from './group-meter-participant/group-meter-participant-dialog/group-meter-participant-dialog.module';
+import { GroupMeterInfoDialogModule } from './group-meter-info-dialog/group-meter-info-dialog.module';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { GroupMeterParticipantDialogModule } from './group-meter-participant-dia
     MatFormFieldModule,
     MatInputModule,
     ClipboardModule,
-    GroupMeterParticipantDialogModule
+    GroupMeterParticipantDialogModule,
+    GroupMeterInfoDialogModule,
   ],
   declarations: [
     GroupMeterComponent,

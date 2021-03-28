@@ -8,4 +8,64 @@
     height: 200px;
   }
 
+  .participant-container {
+    position: relative;
+    padding: 0;
+    border-radius: 10px;
+    border: 2px solid;
+    height: 200px;
+
+    .name-container {
+      background-color: #fafafa;
+      position: absolute;
+    }
+
+    .name-container.bottom, .name-container.side {
+      top: 0;
+      left: 12px;
+      transform: translate(0, -50%);
+    }
+    .name-container.top {
+      bottom: 0;
+      left: 12px;
+      transform: translate(0, 50%);
+    }
+
+    .net-connect {
+      padding: 5px 25px;
+      text-align: center;
+      &.top {
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+      &.bottom {
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+      }
+      &.side {
+        border-bottom-left-radius: 5px;
+        border-top-left-radius: 5px;
+      }
+    }
+  }
+
+  .participant-container:hover {
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+  }
+
+  .participant-container.producing {
+    border-color: darkseagreen;
+
+    .net-connect {
+      background-color: darkseagreen;
+    }
+  }
+
+  .participant-container.consuming {
+    border-color: lightgrey;
+
+    .net-connect {
+      background-color: lightgray;
+    }
+  }
 }

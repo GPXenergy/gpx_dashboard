@@ -5,25 +5,23 @@
     <div fxFlex fxLayoutAlign="start center" class="mt--10 mb-0 mat-title" [ngClass.xs]="'mat-body-2'"
       fxLayout="row wrap">
 
-      Overview
-
-
+      Participant {{ participant.display_name }}
 
 
     </div>
 
     <div fxLayout="row" class="card-option-button">
-      <button mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon>settings</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          settings?
-        </button>
-      </mat-menu>
-      <div class="mr-8 ml-8">
-        <mat-divider [vertical]="true" style="height: 100%;"></mat-divider>
-      </div>
+<!--      <button mat-icon-button [matMenuTriggerFor]="menu">-->
+<!--        <mat-icon>settings</mat-icon>-->
+<!--      </button>-->
+<!--      <mat-menu #menu="matMenu">-->
+<!--        <button mat-menu-item>-->
+<!--          settings?-->
+<!--        </button>-->
+<!--      </mat-menu>-->
+<!--      <div class="mr-8 ml-8">-->
+<!--        <mat-divider [vertical]="true" style="height: 100%;"></mat-divider>-->
+<!--      </div>-->
       <button mat-icon-button (click)="dialogRef.close()">
         <mat-icon class="b-text-action">clear</mat-icon>
       </button>
@@ -55,7 +53,8 @@
     <mat-drawer-content class="inner-container">
 
 
-
+      <!--   TEMP CONTENT   -->
+      <div style="height: 450px"></div>
 
 
 

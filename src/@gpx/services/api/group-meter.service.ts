@@ -113,6 +113,8 @@ function MOCK_GROUP_METER(): GroupMeter {
     total_export: 0,
     total_gas: 123,
     actual_power: 12.34,
+    actual_solar: 4.55,
+    actual_gas: 3.34,
     participants: [
       new GroupParticipant().deserialize({
         pk: 421,

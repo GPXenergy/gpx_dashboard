@@ -77,19 +77,6 @@
             {{ groupMeter.name }}
           </span>
         </button>
-        <button *ngIf="!mobileView" disabled mat-stroked-button>
-          <span class="mat-caption" style="color: black;">
-
-            <mat-icon [inline]="true">{{ groupMeter.actual_power > 0 ? 'trending_up' : 'trending_down' }}</mat-icon>&nbsp;
-            {{ groupMeter.actual_power | explicitNumber }} kW &nbsp;&nbsp;|&nbsp;&nbsp;
-            <mat-icon [inline]="true">flash_on</mat-icon>&nbsp;
-            {{ groupMeter.totalPower | explicitNumber }} kWh &nbsp;&nbsp;|&nbsp;&nbsp;
-            <mat-icon [inline]="true">local_fire_department</mat-icon>&nbsp;
-            {{ groupMeter.total_gas | explicitNumber: null:null:true }} m³ &nbsp;&nbsp;|&nbsp;&nbsp;
-            Sinds {{ groupMeter.created_on | date }}
-
-          </span>
-        </button>
         <button (click)="drawer.toggle()" mat-stroked-button>
           <mat-icon>info</mat-icon>
           <span class="mat-caption" style="color: black;">
@@ -129,18 +116,7 @@
               </div>
 
               <div class="mt-12" fxLayoutAlign="end">
-                <button [disabled]="true" mat-stroked-button style="color: black; width: 100%">
-
-                  <mat-icon
-                    [inline]="true">{{ groupMeter.actual_power > 0 ? 'trending_up' : 'trending_down' }}</mat-icon>&nbsp;
-                  {{ groupMeter.actual_power | explicitNumber }} kW<br/>
-                  <mat-icon [inline]="true">flash_on</mat-icon>&nbsp;
-                  {{ groupMeter.totalPower | explicitNumber }} kWh<br/>
-                  <mat-icon [inline]="true">local_fire_department</mat-icon>&nbsp;
-                  {{ groupMeter.total_gas | explicitNumber: null:null:true }} m³<br/>
-                  Sinds {{ groupMeter.created_on | date }}
-
-                </button>
+                <ng-container *ngTemplateOutlet="groupInfo"></ng-container>
               </div>
             </ng-container>
 
@@ -156,6 +132,8 @@
               <div class="middle-line" fxLayout="row">
                 <app-energy-net-path [reverse]="groupMeter.actual_power > 0" orientation="horizontal"
                                      style="width: 100%">
+
+                  <ng-container *ngTemplateOutlet="groupInfo"></ng-container>
                 </app-energy-net-path>
               </div>
 
@@ -179,3 +157,38 @@
   </mat-drawer-content>
 </mat-drawer-container>
 
+
+<ng-template #groupInfo>
+
+  <mat-card appMaterialElevation (click)="openGroupDetail()" class="cursor-pointer">
+    <ng-container>
+      <mat-card-content fxLayout="row" fxLayoutAlign="space-around center" fxLayout.lt-sm="column">
+        <span fxHide.lt-md></span>
+        <span fxHide.lt-md></span>
+        <span fxHide.lt-lg></span>
+        <span fxHide.lt-lg></span>
+
+        <span class="mat-caption" style="color: black;">
+          <mat-icon [inline]="true">{{ groupMeter.actual_power > 0 ? 'trending_up' : 'trending_down' }}</mat-icon>&nbsp;
+          {{ groupMeter.actual_power | explicitNumber }} kW
+        </span>
+        <span class="mat-caption" style="color: black;">
+          <mat-icon [inline]="true">wb_sunny</mat-icon>
+          {{ groupMeter.actual_solar | explicitNumber }} kW
+        </span>
+        <span class="mat-caption" style="color: black;">
+          <mat-icon [inline]="true">local_fire_department</mat-icon>&nbsp;
+          {{ groupMeter.actual_gas | explicitNumber: null:null:true  }} m³/h
+        </span>
+
+        <span fxHide.lt-lg></span>
+        <span fxHide.lt-lg></span>
+        <span fxHide.lt-md></span>
+        <span fxHide.lt-md></span>
+      </mat-card-content>
+    </ng-container>
+  </mat-card>
+
+
+
+</ng-template>

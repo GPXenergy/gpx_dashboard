@@ -5,6 +5,9 @@ import { Title } from '@angular/platform-browser';
 import { SocketService } from '@gpx/services/socket.service';
 import { takeUntil } from 'rxjs/operators';
 import { MobileService } from '@gpx/services/mobile.service';
+import { GroupMeterInfoDialogComponent } from './group-meter-info-dialog/group-meter-info-dialog.component';
+import { MediaObserver } from '@angular/flex-layout';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'group-meter',
@@ -25,7 +28,9 @@ export class GroupMeterComponent implements OnInit, OnChanges, OnDestroy {
   constructor(private mobileService: MobileService,
               private titleService: Title,
               private changeDetectorRef: ChangeDetectorRef,
-              private socketService: SocketService) {
+              private socketService: SocketService,
+              private media: MediaObserver,
+              private dialog: MatDialog) {
   }
 
   get totalPower(): number {
@@ -36,7 +41,6 @@ export class GroupMeterComponent implements OnInit, OnChanges, OnDestroy {
     this.mobileService.isMobile.pipe(takeUntil(this._unsubscribeAll)).subscribe(mobile => this.mobileView = mobile);
     this.socketService.groupUpdates.pipe(takeUntil(this._unsubscribeAll)).subscribe(group => {
       // Apply the new group data to the local group meter
-      console.log('Real time data', group);
       this.groupMeter.applyUpdates(group);
       this.changeDetectorRef.detectChanges();
     });
@@ -77,6 +81,21 @@ export class GroupMeterComponent implements OnInit, OnChanges, OnDestroy {
       // Subscribe to the group real time updates
       this.socketService.subscribeToGroup(this.groupMeter, this.as_public);
     }
+  }
+
+  openGroupDetail(): void {
+    const dialogRef = this.dialog.open(GroupMeterInfoDialogComponent, {
+      width: '800px',
+      maxWidth: '95vw',
+      maxHeight: this.media.isActive('xs') ? '90vh' : '600px',
+      autoFocus: false,
+      panelClass: 'dialog-no-padding',
+      data: this.groupMeter,
+      closeOnNavigation: false
+    });
+    dialogRef.afterClosed().pipe(takeUntil(this._unsubscribeAll)).subscribe(response => {
+
+    });
   }
 
   copyPublicLink(): void {

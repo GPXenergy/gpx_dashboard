@@ -17,7 +17,6 @@
   }
 
   .outer-container {
-    height: 75vh;
 
     @include media-breakpoint ('xs') {
       height: calc(90vh - 73px);

@@ -5,25 +5,25 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MediaObserver } from '@angular/flex-layout';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ActivatedRoute } from '@angular/router';
-
-export interface IGroupMeterParticipantDialogData {
-}
+import { GroupMeter } from '@gpx/models/group-meter.model';
 
 
 @Component({
-  selector: 'app-group-meter-participant-dialog',
-  templateUrl: './group-meter-participant-dialog.component.html',
-  styleUrls: ['./group-meter-participant-dialog.component.scss'],
+  selector: 'app-group-meter-info-dialog',
+  templateUrl: './group-meter-info-dialog.component.html',
+  styleUrls: ['./group-meter-info-dialog.component.scss'],
 })
-export class GroupMeterParticipantDialogComponent implements OnInit, OnDestroy {
+export class GroupMeterInfoDialogComponent implements OnInit, OnDestroy {
+  meter: GroupMeter;
 
   private readonly onDestroy = new Subject<void>();
   @ViewChild('drawer', {static: true}) matDrawer: MatDrawer;
 
-  constructor(public dialogRef: MatDialogRef<GroupMeterParticipantDialogComponent>,
+  constructor(public dialogRef: MatDialogRef<GroupMeterInfoDialogComponent>,
               public media: MediaObserver,
               private route: ActivatedRoute,
-              @Inject(MAT_DIALOG_DATA) private data: IGroupMeterParticipantDialogData) {
+              @Inject(MAT_DIALOG_DATA) private data: GroupMeter) {
+    this.meter = data;
   }
 
 

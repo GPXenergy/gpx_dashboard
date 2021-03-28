@@ -1,29 +1,16 @@
-
-
-<div *ngIf="orientation === 'horizontal'" class="animation-container horizontal {{reverse ? 'reverse' : ''}}"
-     fxLayout="row">
-  <div class="b-text-green ml-8 blink" fxFlex fxLayoutAlign="start center">
-    <mat-icon>{{reverse ? 'keyboard_arrow_left' : 'keyboard_arrow_right'}}</mat-icon>
-    <mat-icon>{{reverse ? 'keyboard_arrow_left' : 'keyboard_arrow_right'}}</mat-icon>
-    <mat-icon>{{reverse ? 'keyboard_arrow_left' : 'keyboard_arrow_right'}}</mat-icon>
+<div *ngIf="orientation === 'horizontal'" fxLayout="row" fxLayoutAlign="center center">
+  <div fxFlex="10%" class="side-path left horizontal {{reverse ? 'reverse' : ''}}">
   </div>
-  <div class="b-text-green mr-8 blink" fxFlex fxLayoutAlign="end center">
-    <mat-icon>{{reverse ? 'keyboard_arrow_right' : 'keyboard_arrow_left'}}</mat-icon>
-    <mat-icon>{{reverse ? 'keyboard_arrow_right' : 'keyboard_arrow_left'}}</mat-icon>
-    <mat-icon>{{reverse ? 'keyboard_arrow_right' : 'keyboard_arrow_left'}}</mat-icon>
+  <div fxFlex="80%" class="center-circle-container horizontal {{reverse ? 'reverse' : ''}}">
+    <div class="group-info-container">
+      <ng-content></ng-content>
+    </div>
+  </div>
+  <div fxFlex="10%" class="side-path right horizontal {{reverse ? 'reverse' : ''}}">
   </div>
 </div>
 
-<div *ngIf="orientation === 'vertical'" class="animation-container vertical {{reverse ? 'reverse' : ''}}">
-  <div class="inner-item" fxFlex fxLayout="column">
-    <div class="mt-8 blink" fxFlex fxLayout="column" fxLayoutAlign="start center">
-      <mat-icon>{{reverse ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</mat-icon>
-      <mat-icon>{{reverse ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</mat-icon>
-    </div>
-    <div class="b-text-green mt-8 blink" fxFlex fxLayout="column" fxLayoutAlign="end center">
-      <mat-icon>{{reverse ? 'keyboard_arrow_down' : 'keyboard_arrow_up'}}</mat-icon>
-      <mat-icon>{{reverse ? 'keyboard_arrow_down' : 'keyboard_arrow_up'}}</mat-icon>
-    </div>
-  </div>
+
+<div *ngIf="orientation === 'vertical'" class="path vertical {{reverse ? 'reverse' : ''}}">
 
 </div>

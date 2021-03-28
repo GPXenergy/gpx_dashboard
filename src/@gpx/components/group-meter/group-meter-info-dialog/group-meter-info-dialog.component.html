@@ -1,0 +1,63 @@
+<div fxLayout="column" class="dialog-outer-container">
+
+  <div fxLayout="row" class="top-container">
+
+    <div fxFlex fxLayoutAlign="start center" class="mt--10 mb-0 mat-title" [ngClass.xs]="'mat-body-2'"
+      fxLayout="row wrap">
+
+      Groepsmeter {{ meter.name }}
+
+    </div>
+
+    <div fxLayout="row" class="card-option-button">
+<!--      <button mat-icon-button [matMenuTriggerFor]="menu">-->
+<!--        <mat-icon>settings</mat-icon>-->
+<!--      </button>-->
+<!--      <mat-menu #menu="matMenu">-->
+<!--        <button mat-menu-item>-->
+<!--          settings?-->
+<!--        </button>-->
+<!--      </mat-menu>-->
+<!--      <div class="mr-8 ml-8">-->
+<!--        <mat-divider [vertical]="true" style="height: 100%;"></mat-divider>-->
+<!--      </div>-->
+      <button mat-icon-button (click)="dialogRef.close()">
+        <mat-icon class="b-text-action">clear</mat-icon>
+      </button>
+    </div>
+
+  </div>
+
+  <mat-drawer-container class="outer-container gpx-sidenav-container"
+    [hasBackdrop]="media.isActive('lt-md')">
+    <mat-drawer #drawer [disableClose]="!media.isActive('lt-md')"
+      [mode]="!media.isActive('lt-md') ? 'side' : 'over'" [opened]="!media.isActive('lt-md')" position="end"
+      class="standard-sidenav no-padding height-self">
+
+      <div class="p-16" fxLayout="column">
+
+        <div fxLayout="column" fxHide.gt-sm>
+          <button mat-icon-button class="b-secondary" (click)="matDrawer.close()">
+            <mat-icon>arrow_forward</mat-icon>
+          </button>
+        </div>
+
+        <!-- // default drawer view -->
+
+
+
+      </div>
+
+    </mat-drawer>
+    <mat-drawer-content class="inner-container">
+
+
+      <!--   TEMP CONTENT   -->
+      <div style="height: 450px"></div>
+
+
+    </mat-drawer-content>
+  </mat-drawer-container>
+
+
+</div>

@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { GroupParticipant, ParticipantConnection } from '@gpx/models/group-meter.model';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { GroupMeterParticipantDialogComponent, IGroupMeterParticipantDialogData } from '../../group-meter-participant-dialog/group-meter-participant-dialog.component';
+import { GroupMeterParticipantDialogComponent } from '../group-meter-participant-dialog/group-meter-participant-dialog.component';
 
 @Component({
   selector: 'app-group-meter-card',
@@ -15,28 +15,26 @@ export class GroupMeterCardComponent implements OnInit, OnDestroy {
 
   private readonly _unsubscribeAll = new Subject<void>();
 
-
-  @Input() data: GroupParticipant;
+  @Input() connection: 'top' | 'bottom' | 'side';
+  @Input() participant: GroupParticipant;
 
   constructor(private media: MediaObserver,
-    private dialog: MatDialog) {
+              private dialog: MatDialog) {
   }
 
 
   ngOnInit(): void {
   }
 
-  groupParticipantDetail() {
+  groupParticipantDetail(): void {
 
-    const data: IGroupMeterParticipantDialogData = {
-    };
     const dialogRef = this.dialog.open(GroupMeterParticipantDialogComponent, {
-      width: '1200px',
+      width: '800px',
       maxWidth: '95vw',
-      maxHeight: this.media.isActive('xs') ? '90vh' : '900px',
+      maxHeight: this.media.isActive('xs') ? '90vh' : '600px',
       autoFocus: false,
       panelClass: 'dialog-no-padding',
-      data: data,
+      data: this.participant,
       closeOnNavigation: false
     });
     dialogRef.afterClosed().pipe(takeUntil(this._unsubscribeAll)).subscribe(response => {
@@ -45,7 +43,7 @@ export class GroupMeterCardComponent implements OnInit, OnDestroy {
   }
 
   statusIcon(): string {
-    switch (this.data.lastActivity) {
+    switch (this.participant.lastActivity) {
       case ParticipantConnection.ACTIVE:
         return 'signal_cellular_4_bar';
       case ParticipantConnection.INACTIVE:
@@ -56,7 +54,7 @@ export class GroupMeterCardComponent implements OnInit, OnDestroy {
   }
 
   statusText(): string {
-    switch (this.data.lastActivity) {
+    switch (this.participant.lastActivity) {
       case ParticipantConnection.ACTIVE:
         return 'Live';
       case ParticipantConnection.INACTIVE:

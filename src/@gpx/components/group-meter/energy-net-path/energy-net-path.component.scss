@@ -1,33 +1,85 @@
-.animation-container {
-  background: lightgrey;
-  border-radius: 5px;
-  color: darkgreen;
+.path {
 }
 
-.animation-container.reverse {
-  background: darkseagreen;
+.path.reverse {
 }
 
-.animation-container.vertical {
+.path.vertical {
   height: 100%;
+  width: 24px;
 }
 
-.animation-container.horizontal {
+.path.horizontal {
   width: 100%;
+  height: 24px;
 }
 
-.blink {
-  animation: blinker 1s linear infinite;
-}
+.center-circle-container {
+  height: auto;
+  border-radius: 15px;
 
-@keyframes blinker {
-  0% {
-    opacity: 1;
+  .group-info-container {
+    z-index: 2;
+    border-radius: 5px;
+    margin: 10px;
   }
-  50% {
-    opacity: 0;
+
+  background: linear-gradient(90deg, darkgrey 50%, transparent 50%), linear-gradient(90deg, darkgrey 50%, transparent 50%), linear-gradient(0deg, darkgrey 50%, transparent 50%), linear-gradient(0deg, darkgrey 50%, transparent 50%);
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+  background-size: 16px 8px, 16px 8px, 8px 16px, 8px 16px;
+  animation: border-dance 0.33s infinite linear;
+
+  &.reverse {
+    background: linear-gradient(90deg, darkseagreen 50%, transparent 50%), linear-gradient(90deg, darkseagreen 50%, transparent 50%), linear-gradient(0deg, darkseagreen 50%, transparent 50%), linear-gradient(0deg, darkseagreen 50%, transparent 50%);
+    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    background-size: 16px 8px, 16px 8px, 8px 16px, 8px 16px;
+  }
+}
+
+.side-path {
+
+  height: 8px;
+  background: linear-gradient(90deg, darkgrey 50%, transparent 50%);
+  background-repeat: repeat-x;
+  background-size: 16px 8px;
+
+  &.reverse {
+    background: linear-gradient(90deg, darkseagreen 50%, transparent 50%);
+    background-repeat: repeat-x;
+    background-size: 16px 8px;
+  }
+
+  &.left.reverse, &.right {
+    animation: border-dance 0.33s infinite linear reverse;
+  }
+
+  &.right.reverse, &.left {
+    animation: border-dance 0.33s infinite linear;
+    background-size: 16px 8px;
+  }
+}
+
+.vertical.path {
+
+  background: linear-gradient(0deg, darkgrey 50%, transparent 50%), linear-gradient(0deg, darkseagreen 50%, transparent 50%), linear-gradient(0deg, darkgrey 50%, transparent 50%);
+  background-repeat: repeat-y;
+  background-size: 0 0, 0 0, 8px 16px;
+  animation: border-dance 0.33s infinite linear;
+
+  &.reverse {
+    background: linear-gradient(0deg, darkseagreen 50%, transparent 50%), linear-gradient(0deg, darkseagreen 50%, transparent 50%), linear-gradient(0deg, darkseagreen 50%, transparent 50%);
+    background-repeat: repeat-y;
+    background-size: 0 0, 0 0, 8px 16px;
+    animation: border-dance 0.33s infinite linear reverse;
+  }
+}
+
+
+@keyframes border-dance {
+  0% {
+    background-position: 0px 0px, 100% 100%, 0px 100%, 100% 0px;
   }
   100% {
-    opacity: 0.3;
+    background-position: 16px 0px, calc(100% - 16px) 100%, 0px calc(100% - 16px), 100% 16px;
   }
 }
