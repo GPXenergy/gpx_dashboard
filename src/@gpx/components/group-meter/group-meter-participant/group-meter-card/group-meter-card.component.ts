@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 import { MatDialog } from '@angular/material/dialog';
-import { GroupParticipant, ParticipantConnection } from '@gpx/models/group-meter.model';
+import { GroupMeter, GroupParticipant, ParticipantConnection } from '@gpx/models/group-meter.model';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { GroupMeterParticipantDialogComponent } from '../group-meter-participant-dialog/group-meter-participant-dialog.component';
@@ -17,6 +17,7 @@ export class GroupMeterCardComponent implements OnInit, OnDestroy {
 
   @Input() connection: 'top' | 'bottom' | 'side';
   @Input() participant: GroupParticipant;
+  @Input() groupMeter: GroupMeter;
 
   constructor(private media: MediaObserver,
               private dialog: MatDialog) {
@@ -34,7 +35,10 @@ export class GroupMeterCardComponent implements OnInit, OnDestroy {
       maxHeight: this.media.isActive('xs') ? '90vh' : '600px',
       autoFocus: false,
       panelClass: 'dialog-no-padding',
-      data: this.participant,
+      data: {
+        participant: this.participant,
+        group: this.groupMeter
+      },
       closeOnNavigation: false
     });
     dialogRef.afterClosed().pipe(takeUntil(this._unsubscribeAll)).subscribe(response => {

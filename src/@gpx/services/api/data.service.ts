@@ -51,7 +51,7 @@ export abstract class RootService {
     }
   }
 
-  protected abstract getActionUrl(): string;
+  protected abstract get actionUrl(): string;
 
   /**
    * builds api url: api root + action url. Adds given arguments (as url parameters) to the uri.
@@ -62,7 +62,7 @@ export abstract class RootService {
    * @param urlParams: object with url parameters
    */
   protected buildUrl(urlParams: object = {}): string {
-    let uri: string = this.getActionUrl();
+    let uri: string = this.actionUrl;
     let match = /{%([^%]+)%}/g.exec(uri);
     while (match) {
       const fullOptionalUriMatch = match[0];

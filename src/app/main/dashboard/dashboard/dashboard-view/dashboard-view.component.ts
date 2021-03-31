@@ -96,6 +96,8 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
 
 
   getMeterData(filter: MeterMeasurementFilter): void {
+    this.loadingEnergy = true;
+    this.loadingGas = true;
     this.meterService.getMeter(this.user.pk, this.meter.pk, filter).subscribe({
         next: (meter) => {
           this.meter = meter;

@@ -103,7 +103,7 @@
               <div fxLayout="row">
                 <div fxFlex="95%" fxLayout="column" fxLayoutGap="32px">
                   <ng-container *ngFor="let data of groupMeter.getParticipants()">
-                    <app-group-meter-participant [data]="data" output="right"></app-group-meter-participant>
+                    <app-group-meter-participant [data]="data" [group]="groupMeter" output="right"></app-group-meter-participant>
                   </ng-container>
                 </div>
                 <div fxFlex="5%" fxLayout="column" fxLayoutAlign="center center">
@@ -125,7 +125,7 @@
 
               <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="12px">
                 <div *ngFor="let data of topRowParticipants" fxFlex="20%">
-                  <app-group-meter-participant [data]="data" output="bottom"></app-group-meter-participant>
+                  <app-group-meter-participant [data]="data" [group]="groupMeter" output="bottom"></app-group-meter-participant>
                 </div>
               </div>
 
@@ -140,7 +140,7 @@
 
               <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="12px">
                 <div *ngFor="let data of bottomRowParticipants" fxFlex="20%">
-                  <app-group-meter-participant [data]="data" output="top"></app-group-meter-participant>
+                  <app-group-meter-participant [data]="data" [group]="groupMeter" output="top"></app-group-meter-participant>
                 </div>
               </div>
             </ng-template>
@@ -160,7 +160,7 @@
 
 <ng-template #groupInfo>
 
-  <mat-card appMaterialElevation (click)="openGroupDetail()" class="cursor-pointer">
+  <mat-card appMaterialElevation (click)="openGroupDetail()" class="cursor-pointer no-select">
     <ng-container>
       <mat-card-content fxLayout="row" fxLayoutAlign="space-around center" fxLayout.lt-sm="column">
         <span fxHide.lt-md></span>
@@ -170,15 +170,15 @@
 
         <span class="mat-caption" style="color: black;">
           <mat-icon [inline]="true">{{ groupMeter.actual_power > 0 ? 'trending_up' : 'trending_down' }}</mat-icon>&nbsp;
-          {{ groupMeter.actual_power | explicitNumber }} kW
+          {{ groupMeter.actual_power | explicitNumber: '1.1-2' }} kW
         </span>
         <span class="mat-caption" style="color: black;">
           <mat-icon [inline]="true">wb_sunny</mat-icon>
-          {{ groupMeter.actual_solar | explicitNumber }} kW
+          {{ groupMeter.actual_solar | explicitNumber: '1.1-2' }} kW
         </span>
         <span class="mat-caption" style="color: black;">
           <mat-icon [inline]="true">local_fire_department</mat-icon>&nbsp;
-          {{ groupMeter.actual_gas | explicitNumber: null:null:true  }} m³/h
+          {{ groupMeter.actual_gas | explicitNumber: '1.1-2':null:true  }} m³/h
         </span>
 
         <span fxHide.lt-lg></span>

@@ -109,12 +109,12 @@
           <div fxLayout="column" fxLayoutGap="32px">
 
             <div>
-              <mat-card fxFlex="400px" fxFlex.xs="100%">
+              <mat-card fxFlex="420px" fxFlex.xs="100%">
 
                 <form *ngIf="rangePickerForm" [formGroup]="rangePickerForm">
 
                   <div>
-                    <mat-form-field appearance="outline" fxFlex="360px" fxFlex.lt-md="100%" class="mb--16" >
+                    <mat-form-field appearance="outline" fxFlex fxFlex.lt-md="100%" class="range-input-field" [matMenuTriggerFor]="rangeMenu">
                       <mat-label>
                         Periode
                       </mat-label>
@@ -123,7 +123,7 @@
                         <input matEndDate placeholder="Eind datum" formControlName="timestamp_before" [rangePicker]="rangePicker" readonly>
                       </mat-date-range-input>
 
-                      <div role="group" fxLayout.lt-md="column" fxLayoutAlign="start center" [matMenuTriggerFor]="rangeMenu">
+                      <div role="group" fxLayout.lt-md="column" fxLayoutAlign="start center">
                         <input matInput placeholder="Startdatum" autocomplete="off" readonly
                                [value]="rangePickerForm.get('timestamp_after').value | date: 'short'" class="filter-input">
                         <span style="margin: 0 15px">-</span>
@@ -131,7 +131,9 @@
                                [value]="rangePickerForm.get('timestamp_before').value | date: 'short'" class="filter-input">
                       </div>
 
-                      <mat-datepicker-toggle class="date-range-icon" matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+                      <mat-hint>Selecteer een periode</mat-hint>
+<!--                      <mat-icon matPrefix class="mr-8">keyboard_arrow_down</mat-icon>-->
+                      <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
 
                       <mat-menu #rangeMenu="matMenu" focusFirstItem="false">
                         <button mat-menu-item (click)="rangePicker.open()">
@@ -164,7 +166,6 @@
                           Dit jaar
                         </button>
                       </mat-menu>
-
                       <mat-date-range-picker #rangePicker (closed)="closedRangePicker()"></mat-date-range-picker>
                     </mat-form-field>
                   </div>
@@ -188,36 +189,18 @@
 
             <mat-card fxFlex="100%">
 
-              <ng-container *ngIf="loadingEnergy; else energyChart">
-                <div class="mt-40 mb-40" fxLayout="column" fxLayoutAlign="center center">
-                  <mat-spinner></mat-spinner>
-                  <div class="mt-20 mat-body-2">
-                    Data aan het laden
-                  </div>
-                </div>
-              </ng-container>
+              <h1>Stroomverbruik</h1>
 
-              <ng-template #energyChart>
-                <dashboard-graph [chartInput]="energyChartInput" yAxisLabel="Stroom (kW)"></dashboard-graph>
-              </ng-template>
+              <dashboard-graph [chartInput]="energyChartInput" [loading]="loadingEnergy" yAxisLabel="Stroom (kW)"></dashboard-graph>
 
             </mat-card>
 
 
             <mat-card fxFlex="100%">
 
-              <ng-container *ngIf="loadingGas; else gasChart">
-                <div class="mt-40 mb-40" fxLayout="column" fxLayoutAlign="center center">
-                  <mat-spinner></mat-spinner>
-                  <div class="mt-20 mat-body-2">
-                    Data aan het laden
-                  </div>
-                </div>
-              </ng-container>
+              <h1>Gasverbruik</h1>
 
-              <ng-template #gasChart>
-                <dashboard-graph [chartInput]="gasChartInput" yAxisLabel="Gas (m³/h)"></dashboard-graph>
-              </ng-template>
+              <dashboard-graph [chartInput]="gasChartInput" [loading]="loadingGas" yAxisLabel="Gas (m³/h)"></dashboard-graph>
 
             </mat-card>
           </div>

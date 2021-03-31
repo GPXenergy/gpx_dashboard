@@ -7,6 +7,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { GPXSharedModule } from '@gpx/shared.module';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -21,6 +23,8 @@ import { GPXSharedModule } from '@gpx/shared.module';
     MatDividerModule,
     MatSidenavModule,
     MatMenuModule,
+    MatTabsModule,
+    MatCardModule,
   ],
 })
 export class GroupMeterParticipantDialogModule { }

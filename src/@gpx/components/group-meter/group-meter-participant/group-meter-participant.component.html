@@ -2,7 +2,7 @@
   <ng-container *ngIf="output == 'right'; else vertical">
     <!-- Layout for mobile -->
     <div fxFlex="60%">
-      <app-group-meter-card [participant]="data" connection="side"></app-group-meter-card>
+      <app-group-meter-card [participant]="data" [groupMeter]="group" connection="side"></app-group-meter-card>
     </div>
     <div fxFlex="40%" fxLayout="column" fxLayoutAlign="center center">
       <div fxFlex="10%" style="width: 100%;">
@@ -23,7 +23,7 @@
 
     <div fxFlex="20%" fxLayout="column">
       <div *ngIf="output == 'bottom'">
-        <app-group-meter-card [participant]="data" connection="bottom"></app-group-meter-card>
+        <app-group-meter-card [participant]="data" [groupMeter]="group" connection="bottom"></app-group-meter-card>
       </div>
       <div fxLayout="row" fxLayoutAlign="center center" style="height: 100px">
         <div style="height: 100%;">
@@ -37,7 +37,7 @@
         </div>
       </div>
       <div *ngIf="output == 'top'">
-        <app-group-meter-card [participant]="data" connection="top"></app-group-meter-card>
+        <app-group-meter-card [participant]="data" [groupMeter]="group" connection="top"></app-group-meter-card>
       </div>
     </div>
   </ng-template>

@@ -1,38 +1,48 @@
-<ng-container *ngIf="chartInput && chartInput.length; else noData">
-  <div #ContainerRef class="container" fxFlex="100%">
-    <ngx-charts-area-chart (select)="onSelect($event)" [gradient]="gradient" [legend]="legend"
-                           [results]="chartInput" [scheme]="colorScheme" [showXAxisLabel]="showXAxisLabel"
-                           [showYAxisLabel]="showYAxisLabel" [timeline]="timeline"
-                           [view]="[ContainerRef.offsetWidth, 450]" [xAxisLabel]="xAxisLabel"
-                           [xAxisTickFormatting]="formatDate" [baseValue]="0"
-                           [xAxis]="xAxis" [yAxisLabel]="yAxisLabel" [yAxis]="yAxis">
-
-      <ng-template #tooltipTemplate let-model="model">
-        <div class="area-tooltip-container">
-          <span class="tooltip-label">{{ model.series }} • {{ model.name | date: tooltipDateFormat }}</span>
-          <span class="tooltip-val">{{ model.value | number: '1.3' }}</span>
-        </div>
-      </ng-template>
-
-      <ng-template #seriesTooltipTemplate let-model="model">
-        <div class="area-tooltip-container">
-          <div *ngIf="model && model.length">
-            {{ model[0].name | date: tooltipDateFormat }}
-          </div>
-          <div *ngFor="let tooltipItem of model" class="tooltip-item">
-            <span class="tooltip-item-color" [style.background-color]="tooltipItem.color"></span>
-            {{ tooltipItem.series }}: {{ tooltipItem.value | number: '1.3' }}
-          </div>
-        </div>
-      </ng-template>
-
-    </ngx-charts-area-chart>
+<ng-container *ngIf="loading; else loaded">
+  <div fxFlex="100%" class="mt-40 mb-40" fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner></mat-spinner>
+    <div class="mt-20 mat-body-2">
+      Data aan het laden
+    </div>
   </div>
-
 </ng-container>
 
-<ng-template #noData>
-  <p class="mt-40 mb-40 center-text mat-title b-text-middle-grey" fxFlex="100%" fxLayoutAlign="center center">
-    Geen data beschikbaar met de geselecteerde filters
-  </p>
+<ng-template #loaded>
+  <ng-container *ngIf="!loading && chartInput && chartInput.length && chartInput[0].series.length; else noData">
+    <div #ContainerRef class="container" fxFlex="100%">
+      <ngx-charts-area-chart (select)="onSelect($event)" [gradient]="gradient" [legend]="legend"
+                             [results]="chartInput" [scheme]="colorScheme" [showXAxisLabel]="showXAxisLabel"
+                             [showYAxisLabel]="showYAxisLabel" [timeline]="timeline"
+                             [view]="[ContainerRef.offsetWidth, 450]" [xAxisLabel]="xAxisLabel"
+                             [xAxisTickFormatting]="formatDate" [baseValue]="0"
+                             [xAxis]="xAxis" [yAxisLabel]="yAxisLabel" [yAxis]="yAxis">
+
+        <ng-template #tooltipTemplate let-model="model">
+          <div class="area-tooltip-container">
+            <span class="tooltip-label">{{ model.series }} • {{ model.name | date: tooltipDateFormat }}</span>
+            <span class="tooltip-val">{{ model.value | number: '1.3' }}</span>
+          </div>
+        </ng-template>
+
+        <ng-template #seriesTooltipTemplate let-model="model">
+          <div class="area-tooltip-container">
+            <div *ngIf="model && model.length">
+              {{ model[0].name | date: tooltipDateFormat }}
+            </div>
+            <div *ngFor="let tooltipItem of model" class="tooltip-item">
+              <span class="tooltip-item-color" [style.background-color]="tooltipItem.color"></span>
+              {{ tooltipItem.series }}: {{ tooltipItem.value | number: '1.3' }}
+            </div>
+          </div>
+        </ng-template>
+
+      </ngx-charts-area-chart>
+    </div>
+
+  </ng-container>
+  <ng-template #noData>
+    <p class="mt-40 mb-40 center-text mat-title b-text-middle-grey" fxFlex="100%" fxLayoutAlign="center center">
+      Geen data beschikbaar voor de geselecteerde periode
+    </p>
+  </ng-template>
 </ng-template>

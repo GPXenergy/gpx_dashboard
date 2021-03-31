@@ -1,16 +1,23 @@
 <div *ngIf="orientation === 'horizontal'" fxLayout="row" fxLayoutAlign="center center">
-  <div fxFlex="10%" class="side-path left horizontal {{reverse ? 'reverse' : ''}}">
-  </div>
-  <div fxFlex="80%" class="center-circle-container horizontal {{reverse ? 'reverse' : ''}}">
-    <div class="group-info-container">
-      <ng-content></ng-content>
+  <div class="path-container" fxFlex="10%">
+    <div fxFlex="100%" class="side-path left horizontal {{reverse ? 'reverse' : ''}}">
     </div>
   </div>
-  <div fxFlex="10%" class="side-path right horizontal {{reverse ? 'reverse' : ''}}">
+  <div class="center-circle-container path-container" fxFlex="80%">
+    <div fxFlex="100%" class="center-circle horizontal {{reverse ? 'reverse' : ''}}">
+      <div class="group-info-container">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+  <div class="path-container" fxFlex="10%">
+    <div fxFlex="100%" class="side-path right horizontal {{reverse ? 'reverse' : ''}}">
+    </div>
   </div>
 </div>
 
+<div *ngIf="orientation === 'vertical'" class="path-container">
+  <div class="mobile-path vertical {{reverse ? 'reverse' : ''}}">
 
-<div *ngIf="orientation === 'vertical'" class="path vertical {{reverse ? 'reverse' : ''}}">
-
+  </div>
 </div>

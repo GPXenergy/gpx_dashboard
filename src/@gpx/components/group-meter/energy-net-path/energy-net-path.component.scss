@@ -1,39 +1,32 @@
-.path {
-}
-
-.path.reverse {
-}
-
-.path.vertical {
+.path-container {
   height: 100%;
-  width: 24px;
-}
-
-.path.horizontal {
-  width: 100%;
-  height: 24px;
+  background-color: #eaeaea;
 }
 
 .center-circle-container {
   height: auto;
   border-radius: 15px;
+  overflow: hidden;
 
-  .group-info-container {
-    z-index: 2;
-    border-radius: 5px;
-    margin: 10px;
-  }
+  .center-circle {
+    .group-info-container {
+      z-index: 2;
+      border-radius: 5px;
+      margin: 10px;
+    }
 
-  background: linear-gradient(90deg, darkgrey 50%, transparent 50%), linear-gradient(90deg, darkgrey 50%, transparent 50%), linear-gradient(0deg, darkgrey 50%, transparent 50%), linear-gradient(0deg, darkgrey 50%, transparent 50%);
-  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
-  background-size: 16px 8px, 16px 8px, 8px 16px, 8px 16px;
-  animation: border-dance 0.33s infinite linear;
-
-  &.reverse {
-    background: linear-gradient(90deg, darkseagreen 50%, transparent 50%), linear-gradient(90deg, darkseagreen 50%, transparent 50%), linear-gradient(0deg, darkseagreen 50%, transparent 50%), linear-gradient(0deg, darkseagreen 50%, transparent 50%);
+    background: linear-gradient(90deg, darkgrey 50%, transparent 50%), linear-gradient(90deg, darkgrey 50%, transparent 50%), linear-gradient(0deg, darkgrey 50%, transparent 50%), linear-gradient(0deg, darkgrey 50%, transparent 50%);
     background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
     background-size: 16px 8px, 16px 8px, 8px 16px, 8px 16px;
+    animation: border-dance 0.33s infinite linear;
+
+    &.reverse {
+      background: linear-gradient(90deg, darkseagreen 50%, transparent 50%), linear-gradient(90deg, darkseagreen 50%, transparent 50%), linear-gradient(0deg, darkseagreen 50%, transparent 50%), linear-gradient(0deg, darkseagreen 50%, transparent 50%);
+      background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+      background-size: 16px 8px, 16px 8px, 8px 16px, 8px 16px;
+    }
   }
+
 }
 
 .side-path {
@@ -59,7 +52,9 @@
   }
 }
 
-.vertical.path {
+.mobile-path {
+  height: 100%;
+  width: 24px;
 
   background: linear-gradient(0deg, darkgrey 50%, transparent 50%), linear-gradient(0deg, darkseagreen 50%, transparent 50%), linear-gradient(0deg, darkgrey 50%, transparent 50%);
   background-repeat: repeat-y;

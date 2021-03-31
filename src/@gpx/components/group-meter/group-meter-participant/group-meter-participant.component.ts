@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { GroupParticipant } from '@gpx/models/group-meter.model';
+import { GroupMeter, GroupParticipant } from '@gpx/models/group-meter.model';
 import { AnimationSpeed } from './energy-path/energy-path.component';
 
 
@@ -11,6 +11,7 @@ import { AnimationSpeed } from './energy-path/energy-path.component';
 export class GroupMeterParticipantComponent {
 
   @Input() data: GroupParticipant;
+  @Input() group: GroupMeter;
   @Input() output: 'top' | 'right' | 'bottom';
 
   constructor() {

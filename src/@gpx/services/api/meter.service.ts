@@ -18,14 +18,8 @@ export class MeterMeasurementFilter extends MeasurementFilter {
   providedIn: 'root'
 })
 export class MeterService extends DataService<MeterList, Meter> {
-  protected model = Meter;
-
-  /**
-   * Uri for the manage meter endpoint
-   */
-  protected getActionUrl(): string {
-    return '/api/users/{{user_pk}}/meters/{{meter_pk?}}';
-  }
+  protected readonly model = Meter;
+  protected readonly actionUrl = '/api/users/{{user_pk}}/meters/{{meter_pk?}}';
 
   public getMeterList(userPk: pkType, filter?: any): Observable<MeterList> {
     return this.getList({user_pk: userPk}, filter);

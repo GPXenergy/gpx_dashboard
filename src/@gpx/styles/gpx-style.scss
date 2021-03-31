@@ -338,15 +338,9 @@ div[fxLayout="column"] > div[fxFlex] {
       padding: 16px;
 
     }
-    min-width: 360px !important;
-    max-width: 360px !important;
-    width: 360px !important;
-
-    @include media-breakpoint ('xs') {
-      min-width: 320px !important;
-      max-width: 320px !important;
-      width: 320px !important;
-    }
+    min-width: 280px !important;
+    max-width: 280px !important;
+    width: 280px !important;
 
   }
 
@@ -355,4 +349,10 @@ div[fxLayout="column"] > div[fxFlex] {
       background-color: transparent !important;
     }
   }
+}
+
+
+.dialog-title-subtitle {
+  color: darkgrey;
+  font-size: 1.1em;
 }

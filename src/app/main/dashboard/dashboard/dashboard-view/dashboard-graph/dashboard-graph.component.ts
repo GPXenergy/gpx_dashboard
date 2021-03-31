@@ -19,6 +19,7 @@ export class DashboardGraphComponent implements OnInit, OnDestroy {
   private readonly _unsubscribeAll = new Subject<void>();
 
   @Input() chartInput: IChartData[] = [];
+  @Input() loading: boolean = true;
 
   // multi: any[];
   view: any[] = [700, 300];

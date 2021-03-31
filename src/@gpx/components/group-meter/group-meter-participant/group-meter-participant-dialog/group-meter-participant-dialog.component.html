@@ -1,27 +1,23 @@
 <div fxLayout="column" class="dialog-outer-container">
 
-  <div fxLayout="row" class="top-container">
+  <div fxLayout="row" class="top-container" fxLayoutAlign="space-between center">
 
-    <div fxFlex fxLayoutAlign="start center" class="mt--10 mb-0 mat-title" [ngClass.xs]="'mat-body-2'"
-      fxLayout="row wrap">
-
-      Participant {{ participant.display_name }}
-
-
+    <div fxLayout="row" fxLayout.lt-md="column">
+      <div class="mt--10 mb-0 mat-title" [ngClass.xs]="'mat-body-2'">
+        {{ participant.display_name }}
+      </div>
+      <div class="ml-12 dialog-title-subtitle" fxHide.lt-md>
+        Actief sinds {{participant.joined_on | date: 'longDate'}}
+      </div>
     </div>
 
     <div fxLayout="row" class="card-option-button">
-<!--      <button mat-icon-button [matMenuTriggerFor]="menu">-->
-<!--        <mat-icon>settings</mat-icon>-->
-<!--      </button>-->
-<!--      <mat-menu #menu="matMenu">-->
-<!--        <button mat-menu-item>-->
-<!--          settings?-->
-<!--        </button>-->
-<!--      </mat-menu>-->
-<!--      <div class="mr-8 ml-8">-->
-<!--        <mat-divider [vertical]="true" style="height: 100%;"></mat-divider>-->
-<!--      </div>-->
+      <button mat-icon-button (click)="drawer.open()" *ngIf="media.isActive('lt-md')">
+        <mat-icon>info</mat-icon>
+      </button>
+      <div class="mr-8 ml-8" *ngIf="media.isActive('lt-md')">
+        <mat-divider [vertical]="true" style="height: 100%;"></mat-divider>
+      </div>
       <button mat-icon-button (click)="dialogRef.close()">
         <mat-icon class="b-text-action">clear</mat-icon>
       </button>
@@ -30,8 +26,8 @@
   </div>
 
   <mat-drawer-container class="outer-container gpx-sidenav-container"
-    [hasBackdrop]="media.isActive('lt-md') ? true : false">
-    <mat-drawer #drawer [disableClose]="media.isActive('lt-md') ? false : true"
+    [hasBackdrop]="media.isActive('lt-md')">
+    <mat-drawer #drawer [disableClose]="!media.isActive('lt-md')"
       [mode]="!media.isActive('lt-md') ? 'side' : 'over'" [opened]="!media.isActive('lt-md')" position="end"
       class="standard-sidenav no-padding height-self">
 
@@ -43,20 +39,87 @@
           </button>
         </div>
 
-        <!-- // default drawer view -->
+        <img src="/assets/group-meter/participant-icon-PLACEHOLDER.png" alt="group type" width="auto">
 
+        <p>
+          {{ participant.display_name }}
+        </p>
 
+        <div fxHide.gt-sm>
+          Actief sinds {{participant.joined_on | date: 'longDate'}}
+        </div>
 
       </div>
 
     </mat-drawer>
     <mat-drawer-content class="inner-container">
 
+      <div style="height: 450px" fxLayout="column" fxFlex="100%">
 
-      <!--   TEMP CONTENT   -->
-      <div style="height: 450px"></div>
+        <h2>Groepscontributie</h2>
 
+        <div fxLayout="column" fxFlex="100%" fxLayoutAlign="start start">
+          <div>
+            <span class="span-header mt-8">Stroom</span>
+          </div>
+          <div>
+            <span style="width: 120px"> Totaal export </span>
+            <span> {{participant.total_export | explicitNumber: '1.3'}} kWh </span>
+          </div>
+          <div>
+            <span> Totaal import </span>
+            <span> {{participant.total_import | explicitNumber: '1.3': null:true}} kWh </span>
+          </div>
+          <div>
+            <span> Balans </span>
+            <span> {{participant.totalPower | explicitNumber: '1.3'}} kWh </span>
+          </div>
+          <div>
+            <span class="span-header mt-8">Gas</span>
+          </div>
+          <div>
+            <span> Totaal verbruik </span>
+            <span> {{participant.total_gas | number: '1.3'}} m³ </span>
+          </div>
+        </div>
 
+        <mat-card>
+          <mat-card-content>
+            <mat-tab-group>
+              <mat-tab label="Actueel">
+
+                <div fxLayout="column" fxFlex="100%" fxLayoutAlign="start start">
+                  <div>
+                    <span class="span-header mt-8">Stroom</span>
+                  </div>
+                  <div>
+                    <span style="width: 120px"> Uitwisseling </span>
+                    <span> {{participant.actual_power | number: '1.3'}} kW </span>
+                  </div>
+                  <div>
+                    <span class="span-header mt-8">Gas</span>
+                  </div>
+                  <div>
+                    <span> Actueel verbruik </span>
+                    <span> {{participant.actual_gas | number: '1.3'}} m³/h </span>
+                  </div>
+                  <div>
+                    <span class="span-header mt-8">Solar</span>
+                  </div>
+                  <div>
+                    <span> Actueel productie </span>
+                    <span> {{participant.actual_solar | number: '1.3'}} kW </span>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Statistieken" [disabled]="true">
+
+              </mat-tab>
+            </mat-tab-group>
+          </mat-card-content>
+        </mat-card>
+
+      </div>
 
     </mat-drawer-content>
   </mat-drawer-container>

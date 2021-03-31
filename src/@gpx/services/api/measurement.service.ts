@@ -21,17 +21,11 @@ export class MeasurementFilter extends QueryParams {
   providedIn: 'root'
 })
 export class PowerMeasurementService extends DataService<PowerMeasurementList, PowerMeasurement> {
-  protected model = PowerMeasurement;
+  protected readonly model = PowerMeasurement;
+  protected readonly actionUrl = '/api/users/{{user_pk}}/meters/{{meter_pk}}/power/';
 
   public getMeasurementList(userPk: pkType, meterPk: pkType, filter?: MeasurementFilter): Observable<PowerMeasurementList> {
     return this.getList({user_pk: userPk, meter_pk: meterPk}, filter);
-  }
-
-  /**
-   * Uri for the power measurement list
-   */
-  protected getActionUrl(): string {
-    return '/api/users/{{user_pk}}/meters/{{meter_pk}}/power/';
   }
 }
 
@@ -42,17 +36,11 @@ export class PowerMeasurementService extends DataService<PowerMeasurementList, P
   providedIn: 'root'
 })
 export class GasMeasurementService extends DataService<GasMeasurementList, GasMeasurement> {
-  protected model = GasMeasurement;
+  protected readonly model = GasMeasurement;
+  protected readonly actionUrl = '/api/users/{{user_pk}}/meters/{{meter_pk}}/gas/';
 
-  public getMeasurementList(userPk: pkType, meterPk: pkType, filter?: MeasurementFilter): Observable<GasMeasurementList> {
+    public getMeasurementList(userPk: pkType, meterPk: pkType, filter?: MeasurementFilter): Observable<GasMeasurementList> {
     return this.getList({user_pk: userPk, meter_pk: meterPk}, filter);
-  }
-
-  /**
-   * Uri for the gas measurement list
-   */
-  protected getActionUrl(): string {
-    return '/api/users/{{user_pk}}/meters/{{meter_pk}}/gas/';
   }
 }
 
@@ -63,16 +51,10 @@ export class GasMeasurementService extends DataService<GasMeasurementList, GasMe
   providedIn: 'root'
 })
 export class SolarMeasurementService extends DataService<SolarMeasurementList, SolarMeasurement> {
-  protected model = SolarMeasurement;
+  protected readonly model = SolarMeasurement;
+  protected readonly actionUrl = '/api/users/{{user_pk}}/meters/{{meter_pk}}/solar/';
 
   public getMeasurementList(userPk: pkType, meterPk: pkType, filter?: MeasurementFilter): Observable<SolarMeasurementList> {
     return this.getList({user_pk: userPk, meter_pk: meterPk}, filter);
-  }
-
-  /**
-   * Uri for the solar measurement list
-   */
-  protected getActionUrl(): string {
-    return '/api/users/{{user_pk}}/meters/{{meter_pk}}/solar/';
   }
 }

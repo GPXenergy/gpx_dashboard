@@ -5,36 +5,34 @@
   </legend>
   <div fxLayout="column" fxLayout.sm="row" fxLayoutAlign="space-between center" style="height: 100%">
     <div *ngIf="connection === 'top'" class="net-connect" [ngClass]="connection">
-      <div matTooltip="Import: {{participant.total_import | explicitNumber: '1.1-2': null: true}} kWh&#10;Export: {{participant.total_export | explicitNumber: '1.1-2'}} kWh">
+      <div matTooltip="Actuele uitwisseling met het net">
         <strong>{{ participant.actual_power | explicitNumber: '1.1-2' }}</strong> <br/> kW
       </div>
     </div>
 
     <div fxLayout="column" class="p-16">
-      <div *ngIf="participant.type === 'prosumer'"
-           matTooltip="Actueel opwek: {{participant.actual_solar | explicitNumber: '1.1-2'}} kW">
+      <div *ngIf="participant.type === 'prosumer'" matTooltip="Actueel opwek">
         <mat-icon [inline]="true">wb_sunny</mat-icon>
         {{ participant.actual_solar | explicitNumber: '1.1-2' }} kW
       </div>
-      <div *ngIf="participant.type === 'prosumer' || participant.type === 'consumer'"
-           matTooltip="Intern verbruik: {{participant.actualInternal | number: '1.1-2'}} kW">
+      <div *ngIf="participant.type === 'prosumer' || participant.type === 'consumer'" matTooltip="Intern verbruik (berekend)">
         <mat-icon [inline]="true">power</mat-icon>
         {{ participant.actualInternal | number: '1.1-2' }} kW
       </div>
-      <div *ngIf="participant.total_gas > 0" matTooltip="Gas verbruik">
+      <div *ngIf="participant.total_gas > 0" matTooltip="Actueel Gasverbruik">
         <mat-icon [inline]="true">local_fire_department</mat-icon>
         {{ participant.actual_gas | number: '1.1-2':null }} m³/h
       </div>
     </div>
 
     <div *ngIf="connection === 'bottom'" class="net-connect" [ngClass]="connection">
-      <div matTooltip="Import: {{participant.total_import | explicitNumber: '1.1-2': null: true}} kWh&#10;Export: {{participant.total_export | explicitNumber: '1.1-2'}} kWh">
+      <div matTooltip="Actuele uitwisseling met het net">
         <strong>{{ participant.actual_power | explicitNumber: '1.1-2' }}</strong> <br/> kW
       </div>
     </div>
 
     <div *ngIf="connection === 'side'" class="net-connect" [ngClass]="connection">
-      <div matTooltip="Import: {{participant.total_import | explicitNumber: '1.1-2': null: true}} kWh&#10;Export: {{participant.total_export | explicitNumber: '1.1-2'}} kWh">
+      <div matTooltip="Actuele uitwisseling met het net">
         <strong>{{ participant.actual_power | explicitNumber: '1.1-2' }}</strong> <br/> kW
       </div>
     </div>

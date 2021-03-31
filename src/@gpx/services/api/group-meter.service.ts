@@ -9,13 +9,19 @@ export type GroupParticipantList = GroupParticipant[];
 
 
 /**
- *
+ * Manage group meter endpoint, can generate:
+ * /api/users/userpk/meters/groups/pk? - For group list / detail for user meters
+ * /api/meters/groups/pk? - For display
+ * /api/meters/groups/public/public_key? - For public display
+ * /api/meters/groups/invite/invite_key? - For checking invitation key and displaying group info when joining
  */
 @Injectable({
   providedIn: 'root'
 })
 export class GroupMeterService extends DataService<GroupMeterList, GroupMeter> {
-  protected model = GroupMeter;
+  protected readonly model = GroupMeter;
+  protected readonly actionUrl = '/api/{%users/{{user_pk}}/%}meters/groups/{%public/{{public_key}}%}' +
+    '{%invite/{{invite_key}}%}{{group_pk?}}/';
 
   public getGroupMeterList(userPk: pkType, filter?: any): Observable<GroupMeterList> {
     return this.getList({user_pk: userPk}, filter);
@@ -52,23 +58,14 @@ export class GroupMeterService extends DataService<GroupMeterList, GroupMeter> {
     return this.remove({user_pk: userPk, group_pk: meterPk});
   }
 
-  /**
-   * Uri for the manage group meter endpoint, can generate:
-   * /api/users/userpk/meters/groups/pk? - For group list / detail for user meters
-   * /api/meters/groups/pk? - For display
-   * /api/meters/groups/public/public_key? - For public display
-   * /api/meters/groups/invite/invite_key? - For checking invitation key and displaying group info when joining
-   */
-  protected getActionUrl(): string {
-    return '/api/{%users/{{user_pk}}/%}meters/groups/{%public/{{public_key}}%}{%invite/{{invite_key}}%}{{group_pk?}}/';
-  }
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class GroupParticipationService extends DataService<GroupParticipantList, GroupParticipant> {
-  protected model = GroupParticipant;
+  protected readonly model = GroupParticipant;
+  protected readonly actionUrl = '/api/users/{{user_pk}}/meters/participation/{{participation_pk?}}';
 
   public getGroupParticipantList(userPk: pkType, filter?: any): Observable<GroupParticipantList> {
     return this.getList({user_pk: userPk}, filter);
@@ -88,13 +85,6 @@ export class GroupParticipationService extends DataService<GroupParticipantList,
 
   public deleteGroupParticipant(userPk: pkType, participantPk: pkType): Observable<null> {
     return this.remove({user_pk: userPk, participation_pk: participantPk});
-  }
-
-  /**
-   * Uri for the manage group meter endpoint
-   */
-  protected getActionUrl(): string {
-    return '/api/users/{{user_pk}}/meters/participation/{{participation_pk?}}';
   }
 
 }

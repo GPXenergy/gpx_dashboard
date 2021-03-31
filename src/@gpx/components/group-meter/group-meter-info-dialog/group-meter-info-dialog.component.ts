@@ -14,7 +14,7 @@ import { GroupMeter } from '@gpx/models/group-meter.model';
   styleUrls: ['./group-meter-info-dialog.component.scss'],
 })
 export class GroupMeterInfoDialogComponent implements OnInit, OnDestroy {
-  meter: GroupMeter;
+  group: GroupMeter;
 
   private readonly onDestroy = new Subject<void>();
   @ViewChild('drawer', {static: true}) matDrawer: MatDrawer;
@@ -23,7 +23,7 @@ export class GroupMeterInfoDialogComponent implements OnInit, OnDestroy {
               public media: MediaObserver,
               private route: ActivatedRoute,
               @Inject(MAT_DIALOG_DATA) private data: GroupMeter) {
-    this.meter = data;
+    this.group = data;
   }
 
 

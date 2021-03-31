@@ -22,6 +22,8 @@ interface AuthResponse {
   providedIn: 'root'
 })
 export class AuthService extends RootService {
+  protected readonly actionUrl = '/api/auth/{{type}}/';
+
   private tokenCookieName = 'session';
   private expireCookieName = 'session-expiry';
 
@@ -164,14 +166,6 @@ export class AuthService extends RootService {
     }
     this._user.deserialize(user);
     this._userUpdated.next(this._user);
-  }
-
-  /**
-   * Auth action url
-   * type can be : verify | login | logout | logoutall
-   */
-  protected getActionUrl(): string {
-    return '/api/auth/{{type}}/';
   }
 
   /**
