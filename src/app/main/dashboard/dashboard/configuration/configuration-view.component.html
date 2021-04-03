@@ -2,7 +2,7 @@
   <div fxFlex="5%" fxFlex.xs="2.5%"></div>
   <div fxFlex="90%" fxFlex.xs="95%" fxLayout="column">
 
-    <nav mat-tab-nav-bar>
+    <nav mat-tab-nav-bar class="no-select">
       <a #rla="routerLinkActive"
          *ngFor="let link of navLinks"
          [active]="rla.isActive"

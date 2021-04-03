@@ -117,6 +117,7 @@ function MOCK_GROUP_METER(): GroupMeter {
         actual_gas: 0,
         joined_on: new Date(),
         last_activity: new Date(),
+        type: 'prosumer',
       }),
       new GroupParticipant().deserialize({
         pk: 435,
@@ -129,6 +130,7 @@ function MOCK_GROUP_METER(): GroupMeter {
         actual_gas: 0,
         joined_on: new Date(),
         last_activity: new Date(),
+        type: 'battery',
       }),
       new GroupParticipant().deserialize({
         pk: 155,
@@ -141,6 +143,7 @@ function MOCK_GROUP_METER(): GroupMeter {
         actual_gas: 0,
         joined_on: new Date(),
         last_activity: new Date(),
+        type: 'consumer',
       }),
       new GroupParticipant().deserialize({
         pk: 48,
@@ -153,6 +156,7 @@ function MOCK_GROUP_METER(): GroupMeter {
         actual_gas: 0,
         joined_on: new Date(),
         last_activity: new Date(),
+        type: 'producer_solar',
       }),
       new GroupParticipant().deserialize({
         pk: 552,
@@ -165,6 +169,7 @@ function MOCK_GROUP_METER(): GroupMeter {
         actual_gas: 0,
         joined_on: new Date(),
         last_activity: new Date(),
+        type: 'consumer',
       }),
       new GroupParticipant().deserialize({
         pk: 421,
@@ -177,6 +182,7 @@ function MOCK_GROUP_METER(): GroupMeter {
         actual_gas: 6,
         joined_on: new Date(),
         last_activity: new Date(),
+        type: 'prosumer',
       }),
       new GroupParticipant().deserialize({
         pk: 86,
@@ -189,6 +195,7 @@ function MOCK_GROUP_METER(): GroupMeter {
         actual_gas: 0,
         joined_on: new Date(),
         last_activity: new Date(),
+        type: 'consumer',
       }),
     ],
   });

@@ -15,7 +15,7 @@ export class GroupMeterCardComponent implements OnInit, OnDestroy {
 
   private readonly _unsubscribeAll = new Subject<void>();
 
-  @Input() connection: 'top' | 'bottom' | 'side';
+  @Input() connection: 'top' | 'bottom';
   @Input() participant: GroupParticipant;
   @Input() groupMeter: GroupMeter;
 

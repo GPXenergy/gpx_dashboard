@@ -1,39 +1,65 @@
-<fieldset (click)="groupParticipantDetail()" class="cursor-pointer participant-container"
+<fieldset (click)="groupParticipantDetail()" class="cursor-pointer participant-container no-select"
           fxFlex="100%" *ngIf="participant" [ngClass]="participant.actual_power > 0 ? 'producing' : 'consuming'">
   <legend class="pl-8 pr-8 mat-body-strong name-container" [ngClass]="connection">
     {{ participant.display_name }} <mat-icon [matTooltip]="statusText()" [inline]="true">{{ statusIcon() }}</mat-icon>
   </legend>
-  <div fxLayout="column" fxLayout.sm="row" fxLayoutAlign="space-between center" style="height: 100%">
-    <div *ngIf="connection === 'top'" class="net-connect" [ngClass]="connection">
-      <div matTooltip="Actuele uitwisseling met het net">
-        <strong>{{ participant.actual_power | explicitNumber: '1.1-2' }}</strong> <br/> kW
+  <div fxLayout="column" fxLayout.lt-md="row" fxLayoutAlign="space-between stretch" style="height: 100%">
+    <div *ngIf="connection === 'top'" fxLayout.gt-sm="row" fxLayoutAlign="center center">
+      <div matTooltip="Actuele uitwisseling met het net" class="net-connect top-connected">
+        <strong>{{ participant.actual_power | explicitNumber: '1.1-2' }}</strong>
+        <div class="unit">kW</div>
       </div>
     </div>
 
-    <div fxLayout="column" class="p-16">
-      <div *ngIf="participant.type === 'prosumer'" matTooltip="Actueel opwek">
-        <mat-icon [inline]="true">wb_sunny</mat-icon>
-        {{ participant.actual_solar | explicitNumber: '1.1-2' }} kW
+    <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutAlign="space-around start" fxFlex="100%" class="p-16">
+      <div fxLayout.gt-sm="column" fxLayout.lt-md="row" fxLayoutAlign="center center" *ngIf="participant.type === 'prosumer'" matTooltip="Actueel opwek">
+        <img src="/assets/group-meter/solar.png" alt="solar" class="card-icon">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <div>{{ participant.actual_solar | number: '1.1-2' }}</div>
+          <div class="unit">kW</div>
+        </div>
       </div>
-      <div *ngIf="participant.type === 'prosumer' || participant.type === 'consumer'" matTooltip="Intern verbruik (berekend)">
-        <mat-icon [inline]="true">power</mat-icon>
-        {{ participant.actualInternal | number: '1.1-2' }} kW
+      <div fxLayout.gt-sm="column" fxLayout.lt-md="row" fxLayoutAlign="center center" *ngIf="participant.type === 'battery'" matTooltip="Batterij">
+        <img src="/assets/group-meter/battery.png" alt="solar" class="card-icon">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <div>{{ participant.actual_power | number: '1.1-2' }}</div>
+          <div class="unit">kW</div>
+        </div>
       </div>
-      <div *ngIf="participant.total_gas > 0" matTooltip="Actueel Gasverbruik">
-        <mat-icon [inline]="true">local_fire_department</mat-icon>
-        {{ participant.actual_gas | number: '1.1-2':null }} m³/h
+      <div fxLayout.gt-sm="column" fxLayout.lt-md="row" fxLayoutAlign="center center" *ngIf="participant.type === 'producer_solar'" matTooltip="Zonproductie">
+        <img src="/assets/group-meter/producer_solar.png" alt="solar" class="card-icon">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <div>{{ participant.actual_power | number: '1.1-2' }}</div>
+          <div class="unit">kW</div>
+        </div>
+      </div>
+      <div fxLayout.gt-sm="column" fxLayout.lt-md="row" fxLayoutAlign="center center" *ngIf="participant.type === 'prosumer' || participant.type === 'consumer'" matTooltip="Intern verbruik (berekend)">
+        <img src="/assets/group-meter/lightbulb.png" alt="lightbulb" class="card-icon">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <div>{{ participant.actualInternal | number: '1.1-2' }}</div>
+          <div class="unit">kW</div>
+        </div>
+      </div>
+      <div fxLayout.gt-sm="column" fxLayout.lt-md="row" fxLayoutAlign="center center" *ngIf="participant.total_gas > 0" matTooltip="Actueel Gasverbruik">
+        <img src="/assets/group-meter/flame.png" alt="flame" class="card-icon">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <div>{{ participant.actual_gas | number: '1.1-2':null }}</div>
+          <div class="unit"> m³/h</div>
+        </div>
       </div>
     </div>
 
-    <div *ngIf="connection === 'bottom'" class="net-connect" [ngClass]="connection">
-      <div matTooltip="Actuele uitwisseling met het net">
-        <strong>{{ participant.actual_power | explicitNumber: '1.1-2' }}</strong> <br/> kW
+    <div *ngIf="connection === 'bottom'" fxLayout.gt-sm="row" fxLayoutAlign="center center">
+      <div matTooltip="Actuele uitwisseling met het net" class="net-connect bottom-connected">
+        <strong>{{ participant.actual_power | explicitNumber: '1.1-2' }}</strong>
+        <div class="unit">kW</div>
       </div>
     </div>
 
-    <div *ngIf="connection === 'side'" class="net-connect" [ngClass]="connection">
-      <div matTooltip="Actuele uitwisseling met het net">
-        <strong>{{ participant.actual_power | explicitNumber: '1.1-2' }}</strong> <br/> kW
+    <div *ngIf="connection === 'side'" fxLayout.gt-sm="column" fxLayoutAlign="center center">
+      <div matTooltip="Actuele uitwisseling met het net" class="net-connect side-connected">
+        <strong>{{ participant.actual_power | explicitNumber: '1.1-2' }}</strong>
+        <div class="unit">kW</div>
       </div>
     </div>
 

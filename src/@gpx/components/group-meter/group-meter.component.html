@@ -98,12 +98,12 @@
 
           <div fxFlex="100%" fxLayout="column">
 
-            <ng-container *ngIf="mobileView; else normalView">
+            <div fxHide.gt-sm>
 
               <div fxLayout="row">
                 <div fxFlex="95%" fxLayout="column" fxLayoutGap="32px">
                   <ng-container *ngFor="let data of groupMeter.getParticipants()">
-                    <app-group-meter-participant [data]="data" [group]="groupMeter" output="right"></app-group-meter-participant>
+                    <app-group-meter-participant [data]="data" [group]="groupMeter" connection="side"></app-group-meter-participant>
                   </ng-container>
                 </div>
                 <div fxFlex="5%" fxLayout="column" fxLayoutAlign="center center">
@@ -118,14 +118,14 @@
               <div class="mt-12" fxLayoutAlign="end">
                 <ng-container *ngTemplateOutlet="groupInfo"></ng-container>
               </div>
-            </ng-container>
+            </div>
 
 
-            <ng-template #normalView>
+            <div  fxHide.lt-md>
 
               <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="12px">
                 <div *ngFor="let data of topRowParticipants" fxFlex="20%">
-                  <app-group-meter-participant [data]="data" [group]="groupMeter" output="bottom"></app-group-meter-participant>
+                  <app-group-meter-participant [data]="data" [group]="groupMeter" connection="bottom"></app-group-meter-participant>
                 </div>
               </div>
 
@@ -140,10 +140,10 @@
 
               <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="12px">
                 <div *ngFor="let data of bottomRowParticipants" fxFlex="20%">
-                  <app-group-meter-participant [data]="data" [group]="groupMeter" output="top"></app-group-meter-participant>
+                  <app-group-meter-participant [data]="data" [group]="groupMeter" connection="top"></app-group-meter-participant>
                 </div>
               </div>
-            </ng-template>
+            </div>
 
           </div>
 

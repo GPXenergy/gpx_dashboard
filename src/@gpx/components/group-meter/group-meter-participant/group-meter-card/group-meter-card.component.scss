@@ -14,39 +14,45 @@
     border-radius: 10px;
     border: 2px solid;
     height: 200px;
+    background: #fff;
 
     .name-container {
-      background-color: #fafafa;
       position: absolute;
-    }
-
-    .name-container.bottom, .name-container.side {
+      background: linear-gradient(to bottom, #fafafa, #fff);
       top: 0;
       left: 12px;
       transform: translate(0, -50%);
     }
-    .name-container.top {
+
+    .name-container.top { // Top output
+      background: linear-gradient(to top, #fafafa, #fff);
       bottom: 0;
-      left: 12px;
+      top: unset;
       transform: translate(0, 50%);
     }
 
     .net-connect {
-      padding: 5px 20px;
-      width: 80px;
+      padding: 5px 12px;
+      width: 70px;
       text-align: center;
-      &.top {
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
+      &.top-connected {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
       }
-      &.bottom {
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
+      &.bottom-connected {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
       }
-      &.side {
-        border-bottom-left-radius: 5px;
-        border-top-left-radius: 5px;
+      &.side-connected {
+        border-bottom-left-radius: 8px;
+        border-top-left-radius: 8px;
       }
+    }
+
+    .card-icon {
+      margin: 5px;
+      width: 40px;
+      height: 40px;
     }
   }
 
@@ -69,4 +75,8 @@
       background-color: lightgray;
     }
   }
+}
+
+.unit {
+  font-size: 0.9em;
 }

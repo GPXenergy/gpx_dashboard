@@ -180,12 +180,15 @@
           </form>
 
           <div *ngFor="let participant of groupMeter?.getParticipants()" fxLayout="column">
-            <div class="p-8" fxLayout="row">
-              <div fxFlex="70%" fxLayoutAlign="start center">
+            <div class="p-8" fxLayout="row" fxLayoutAlign="space-between center">
+              <div fxFlex="30x%" fxLayoutAlign="start center">
                 <mat-icon class="mr-8">offline_bolt</mat-icon>
                 {{ participant?.display_name }}
               </div>
-              <div class="ml-8">{{ participant?.joined_on | date:'dd-MM-yyyy' }}</div>
+              <div>
+                {{participant.typeName}}
+              </div>
+              <div class="ml-8">{{ participant?.joined_on | date:'longDate' }}</div>
             </div>
             <div>
               <mat-divider [inset]="true"></mat-divider>

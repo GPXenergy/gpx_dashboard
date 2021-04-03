@@ -155,7 +155,7 @@ export class GroupParticipant extends BaseModel {
    * Applies updates from incoming real time data for participant
    * @param participant: new participant data
    */
-  public applyUpdates(participant: GroupParticipant) {
+  public applyUpdates(participant: GroupParticipant): void {
     this.last_activity = new Date();
     this.total_import = participant.total_import;
     this.total_export = participant.total_export;
@@ -163,6 +163,31 @@ export class GroupParticipant extends BaseModel {
     this.actual_power = participant.actual_power;
     this.actual_gas = participant.actual_gas;
     this.actual_solar = participant.actual_solar;
+  }
+
+  public get typeName(): string {
+    switch (this.type){
+      case 'consumer':
+        return 'Consument';
+      case 'prosumer':
+        return 'Prosument';
+      case 'battery':
+        return 'Batterij';
+      case 'producer_solar':
+        return 'Zonnepark';
+      case 'producer_wind':
+        return 'Windpark';
+      case 'producer_other':
+        return 'Producent (anders)';
+      default:
+        return 'Onbekend'
+    }
+
+
+
+
+
+
   }
 
   protected createModelRelations(values: modelPropertiesObj<this>): void {

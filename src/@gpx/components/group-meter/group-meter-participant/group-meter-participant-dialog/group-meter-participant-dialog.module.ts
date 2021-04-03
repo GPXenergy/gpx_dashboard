@@ -9,6 +9,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { GPXSharedModule } from '@gpx/shared.module';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { MatCardModule } from '@angular/material/card';
     MatMenuModule,
     MatTabsModule,
     MatCardModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class GroupMeterParticipantDialogModule { }

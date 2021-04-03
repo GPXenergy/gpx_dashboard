@@ -12,7 +12,7 @@ export class GroupMeterParticipantComponent {
 
   @Input() data: GroupParticipant;
   @Input() group: GroupMeter;
-  @Input() output: 'top' | 'right' | 'bottom';
+  @Input() connection: 'top' | 'bottom' | 'side';
 
   constructor() {
   }

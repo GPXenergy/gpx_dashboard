@@ -19,7 +19,6 @@ export class GroupMeterComponent implements OnInit, OnChanges, OnDestroy {
   @Input() as_public: boolean;
   topRowParticipants: GroupParticipant[] = [];
   bottomRowParticipants: GroupParticipant[] = [];
-  mobileView: boolean;
   // Copy public link things
   isCopied: boolean;
   timeOut = null;
@@ -38,7 +37,6 @@ export class GroupMeterComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.mobileService.isMobile.pipe(takeUntil(this._unsubscribeAll)).subscribe(mobile => this.mobileView = mobile);
     this.socketService.groupUpdates.pipe(takeUntil(this._unsubscribeAll)).subscribe(group => {
       // Apply the new group data to the local group meter
       this.groupMeter.applyUpdates(group);

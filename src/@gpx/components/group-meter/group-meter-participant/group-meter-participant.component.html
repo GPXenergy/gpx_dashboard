@@ -1,45 +1,38 @@
-<div [fxLayout]="output == 'right' ? 'row' : 'column'">
-  <ng-container *ngIf="output == 'right'; else vertical">
-    <!-- Layout for mobile -->
-    <div fxFlex="60%">
-      <app-group-meter-card [participant]="data" [groupMeter]="group" connection="side"></app-group-meter-card>
-    </div>
-    <div fxFlex="40%" fxLayout="column" fxLayoutAlign="center center">
-      <div fxFlex="10%" style="width: 100%;">
-        <app-energy-path
-          *ngIf="data"
-          [reverse]="data.actual_power <= 0"
-          [speed]="animationSpeed"
-          direction="rl"
-          orientation="horizontal">
-        </app-energy-path>
-      </div>
-      <div fxFlex="45%"></div>
-    </div>
-  </ng-container>
-
-  <ng-template #vertical>
-    <!-- Layout for desktop -->
-
-    <div fxFlex="20%" fxLayout="column">
-      <div *ngIf="output == 'bottom'">
-        <app-group-meter-card [participant]="data" [groupMeter]="group" connection="bottom"></app-group-meter-card>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="center center" style="height: 100px">
-        <div style="height: 100%;">
-          <app-energy-path
-            *ngIf="data"
-            [direction]="output === 'bottom' ? 'tb' : 'bt'"
-            [reverse]="data.actual_power <= 0"
-            [speed]="animationSpeed"
-            orientation="vertical">
-          </app-energy-path>
-        </div>
-      </div>
-      <div *ngIf="output == 'top'">
-        <app-group-meter-card [participant]="data" [groupMeter]="group" connection="top"></app-group-meter-card>
-      </div>
-    </div>
-  </ng-template>
-
+<div fxHide.gt-sm fxLayout="row">
+  <!-- Layout for mobile -->
+  <div fxFlex="70%">
+    <app-group-meter-card [participant]="data" [groupMeter]="group" connection="side"></app-group-meter-card>
+  </div>
+  <div fxFlex="30%" fxLayout="column" fxLayoutAlign="center center">
+    <app-energy-path
+      style="width: 100%;"
+      *ngIf="data"
+      [reverse]="data.actual_power <= 0"
+      [speed]="animationSpeed"
+      direction="rl"
+      orientation="horizontal">
+    </app-energy-path>
+  </div>
 </div>
+
+<div fxHide.lt-md fxLayout="column">
+  <!-- Layout for desktop -->
+
+  <div *ngIf="connection == 'bottom'">
+    <app-group-meter-card [participant]="data" [groupMeter]="group" [connection]="connection"></app-group-meter-card>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center" style="height:100px">
+    <app-energy-path
+      style="height: 100%;"
+      *ngIf="data"
+      [direction]="connection === 'bottom' ? 'tb' : 'bt'"
+      [reverse]="data.actual_power <= 0"
+      [speed]="animationSpeed"
+      orientation="vertical">
+    </app-energy-path>
+  </div>
+  <div *ngIf="connection == 'top'">
+    <app-group-meter-card [participant]="data" [groupMeter]="group" [connection]="connection"></app-group-meter-card>
+  </div>
+</div>
+
