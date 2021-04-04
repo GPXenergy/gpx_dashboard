@@ -173,12 +173,12 @@
           {{ groupMeter.actual_power | explicitNumber: '1.1-2' }} kW
         </span>
         <span class="mat-caption" style="color: black;">
-          <mat-icon [inline]="true">wb_sunny</mat-icon>
-          {{ groupMeter.actual_solar | explicitNumber: '1.1-2' }} kW
+          <mat-icon [inline]="true">wb_sunny</mat-icon>&nbsp;
+          {{ groupMeter.actual_solar | number: '1.1-2' }} kW
         </span>
         <span class="mat-caption" style="color: black;">
           <mat-icon [inline]="true">local_fire_department</mat-icon>&nbsp;
-          {{ groupMeter.actual_gas | explicitNumber: '1.1-2':null:true  }} m³/h
+          {{ groupMeter.actual_gas | number: '1.1-2'  }} m³/h
         </span>
 
         <span fxHide.lt-lg></span>

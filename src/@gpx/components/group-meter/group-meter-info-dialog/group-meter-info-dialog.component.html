@@ -60,25 +60,26 @@
 
         <div fxLayout="column" fxFlex="100%" fxLayoutAlign="start start">
           <div>
-            <span class="span-header mt-8">Stroom</span>
+            <p>Stroom</p>
           </div>
           <div>
-            <span style="width: 120px"> Totaal export </span>
+            <span> Export: </span>
             <span> {{group.total_export | explicitNumber: '1.3'}} kWh </span>
           </div>
           <div>
-            <span> Totaal import </span>
+            <span> Import: </span>
             <span> {{group.total_import | explicitNumber: '1.3': null:true}} kWh </span>
           </div>
           <div>
-            <span> Balans </span>
+            <span> Totaal balans: </span>
             <span> {{group.totalPower | explicitNumber: '1.3'}} kWh </span>
           </div>
           <div>
-            <span class="span-header mt-8">Gas</span>
+            <br/>
+            <p>Gas</p>
           </div>
           <div>
-            <span> Totaal verbruik </span>
+            <span> Totaal verbruik: </span>
             <span> {{group.total_gas | number: '1.3'}} m³ </span>
           </div>
         </div>
@@ -88,29 +89,30 @@
             <mat-tab-group>
               <mat-tab label="Actueel">
 
-                <div fxLayout="column" fxFlex="100%" fxLayoutAlign="start start">
-                  <div>
-                    <span class="span-header mt-8">Stroom</span>
+                <div fxLayout="row" fxLayoutAlign="space-around start" fxFlex="100%" class="p-16">
+                  <div fxLayout="column" fxLayoutAlign="center center" matTooltip="Actueel zonproductie in de groep">
+                    <img src="/assets/group-meter/solar.png" alt="solar" class="card-icon">
+                    <div fxLayout="column" fxLayoutAlign="center center">
+                      <div>{{ group.actual_solar | number: '1.1-2' }}</div>
+                      <div class="unit">kW</div>
+                    </div>
                   </div>
-                  <div>
-                    <span style="width: 120px"> Uitwisseling </span>
-                    <span> {{group.actual_power | number: '1.3'}} kW </span>
+                  <div fxLayout="column" fxLayoutAlign="center center" matTooltip="Actuele uitwisseling met het net als groep">
+                    <img src="/assets/group-meter/importexport.png" alt="solar" class="card-icon">
+                    <div fxLayout="column" fxLayoutAlign="center center">
+                      <div>{{ group.actual_power | explicitNumber: '1.1-2' }}</div>
+                      <div class="unit">kW</div>
+                    </div>
                   </div>
-                  <div>
-                    <span class="span-header mt-8">Gas</span>
-                  </div>
-                  <div>
-                    <span> Actueel verbruik </span>
-                    <span> {{group.actual_gas | number: '1.3'}} m³/h </span>
-                  </div>
-                  <div>
-                    <span class="span-header mt-8">Solar</span>
-                  </div>
-                  <div>
-                    <span> Actueel productie </span>
-                    <span> {{group.actual_solar | number: '1.3'}} kW </span>
+                  <div fxLayout="column" fxLayoutAlign="center center" *ngIf="group.total_gas > 0" matTooltip="Actueel Gasverbruik in de groep">
+                    <img src="/assets/group-meter/flame.png" alt="flame" class="card-icon">
+                    <div fxLayout="column" fxLayoutAlign="center center">
+                      <div>{{ group.actual_gas | number: '1.1-2':null }}</div>
+                      <div class="unit">m³/h</div>
+                    </div>
                   </div>
                 </div>
+
               </mat-tab>
               <mat-tab label="Statistieken" [disabled]="true">
 

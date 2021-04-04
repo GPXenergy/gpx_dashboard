@@ -166,9 +166,9 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
         before.setHours(23, 59, 59, 999);
         break;
       case TimestampRange.current_week:
-        after.setDate(after.getDate() - after.getDay() + 1);
+        after.setDate(after.getDate() + (-after.getDay() || -7) + 1);
         after.setHours(0, 0, 0, 0);
-        before.setDate(before.getDate() - before.getDay() + 7);
+        before.setDate(before.getDate() + (-before.getDay() || -7) + 7);
         before.setHours(23, 59, 59, 999);
         break;
       case TimestampRange.current_month:
