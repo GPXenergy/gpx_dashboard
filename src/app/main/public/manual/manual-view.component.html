@@ -4,9 +4,11 @@
     <h1>Gebruikershandleiding</h1>
 
     <p>
-      Om gebruik te maken van het GPX persoonlijke meter is het nodig om een GPX-Connector aan te sluiten in de meterkast.
+      Om gebruik te maken van het GPX persoonlijke meter is het nodig om een GPX-Connector aan te sluiten in de
+      meterkast.
       Deze leest de slimme meter en wanneer aanwezig een zonnepanelen-omvormer uit, en stuurt de gegevens door naar
-      de persoonlijke meter. In deze gebruikershandleiding lees je meer over de GPX-Connector, hoe deze werkt en wat je er mee
+      de persoonlijke meter. In deze gebruikershandleiding lees je meer over de GPX-Connector, hoe deze werkt en wat je
+      er mee
       kan doen. De GPX-Connector is momenteel in prototype-fase, deze pagina kan in komende iteraties wijzigen.
     </p>
 
@@ -21,10 +23,10 @@
       <ol>
         <li><a href="/manual#general">De GPX-Connector</a></li>
         <li><a href="/manual#modus">Apparaatmodus</a></li>
-          <ul>
-            <li><a href="/manual#modus-active">Actieve modus</a></li>
-            <li><a href="/manual#modus-config">Configuratiemodus</a></li>
-          </ul>
+        <ul>
+          <li><a href="/manual#modus-active">Actieve modus</a></li>
+          <li><a href="/manual#modus-config">Configuratiemodus</a></li>
+        </ul>
         <li><a href="/manual#smart-meter">Slimme meter aansluiting</a></li>
         <li><a href="/manual#solar-inverter">Zonnepanelen-omvormer aansluiting</a></li>
         <li><a href="/manual#status-led">Status lampje</a></li>
@@ -85,9 +87,54 @@
     <div id="status-led">
 
       <h2>5. Status lampje</h2>
-      <p>
-
-      </p>
+      <table>
+        <thead>
+        <tr>
+          <th>Kleur</th>
+          <th>Knipper</th>
+          <th>Betekenis</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Groen/Blauw</td>
+          <td>Geen</td>
+          <td>configuratiemodus</td>
+        </tr>
+        <tr>
+          <td>Wit (alle kleuren)</td>
+          <td>Kort per 4 seconde</td>
+          <td>Idle (wacht op data van meter)</td>
+        </tr>
+        <tr>
+          <td>Groen</td>
+          <td>Kort per seconde</td>
+          <td>Data succesvol verzonden!</td>
+        </tr>
+        <tr>
+          <td rowspan="2">rood</td>
+          <td>Geen</td>
+          <td>Kan niet verbinden met de wifi</td>
+        </tr>
+        <tr>
+          <td>2x per seconde</td>
+          <td>Fout in de uitgelezen data (kan gebeuren)</td>
+        </tr>
+        <tr>
+          <td rowspan="3">paars</td>
+          <td>Geen</td>
+          <td>Verkeerde API key ingesteld</td>
+        </tr>
+        <tr>
+          <td>Lang per 2 seconden</td>
+          <td>Fout in de data richting de API</td>
+        </tr>
+        <tr>
+          <td>Kort per 4 seconden</td>
+          <td>Server is niet bereikbaar vanuit jouw netwerk</td>
+        </tr>
+        </tbody>
+      </table>
     </div>
     <div id="power-supply">
 

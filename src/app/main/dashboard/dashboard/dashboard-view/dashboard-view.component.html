@@ -25,12 +25,12 @@
               <em>tot {{rangePickerForm.get('timestamp_before').value | date: "short"}}</em><br />
             </p>
             <p>
-              Stroom import (1): {{meter.period_import_1}} kWh<br/>
-              Stroom import (2): {{meter.period_import_2}} kWh<br/>
-              Stroom export (1): {{meter.period_export_1}} kWh<br/>
-              Stroom export (2): {{meter.period_export_2}} kWh<br/>
-              Zonproductie: {{meter.period_solar}} kWh<br/>
-              Gas: {{meter.period_gas}} m³<br/>
+              Stroom import (1): {{ meter.period_import_1 | number }} kWh<br/>
+              Stroom import (2): {{ meter.period_import_2 | number }} kWh<br/>
+              Stroom export (1): {{ meter.period_export_1 | number }} kWh<br/>
+              Stroom export (2): {{ meter.period_export_2 | number }} kWh<br/>
+              Zonproductie: {{ meter.period_solar | number }} kWh<br/>
+              Gas: {{ meter.period_gas | number }} m³<br/>
             </p>
           </div>
           <div>

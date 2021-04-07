@@ -79,6 +79,10 @@
           Hieronder staan de gegevens van meter <em>{{ selectedMeter.name }}</em>.
         </p>
 
+        <p *ngIf="selectedMeter.gpx_version">
+          GPX-Connector firmware versienummer <em>{{ selectedMeter.gpx_version }}</em>
+        </p>
+
 
         <app-loading-indicator [loading]="loading" [noLengthText]="'Geen meter data gevonden'"
                                [objectFound]="!selectedMeter"></app-loading-indicator>
