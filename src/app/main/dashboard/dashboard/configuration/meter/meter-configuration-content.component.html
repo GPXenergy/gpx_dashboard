@@ -28,9 +28,9 @@
         </div>
 
         <p>
-          Hieronder vind jij jouw <em>API key</em>, jouw persoonlijke en unieke code die je instelt op jouw GPX-Connector
-          apparaat. Houdt deze bij de hand wanneer je jouw apparaat gaat instellen. Heb je net een apparaat ingesteld en
-          aangesloten, maar zie je de meter nog niet hier verschijnen? Ververs dan deze pagina. De complete
+          Hieronder vind je de <em>API key</em>, jouw persoonlijke en unieke code die je instelt op de GPXconnector.
+          Kopiëer deze of houdt deze bij de hand wanneer je het apparaat gaat instellen. Heb je net een GPXconnector
+          ingesteld en aangesloten, maar zie je de meter nog niet hier verschijnen? Ververs dan deze pagina. De complete
           setup-handleiding is <a routerLink="/manual/setup">hier</a> te vinden.
         </p>
 
@@ -40,7 +40,7 @@
               <mat-label>API key</mat-label>
               <input (click)="$event.target.select()" [value]="user.api_key" matInput readonly>
               <mat-hint>
-                De API key stel je in op jouw GPX-Connector.
+                De API key stel je in op jouw GPXconnector.
               </mat-hint>
             </mat-form-field>
           </div>
@@ -86,7 +86,7 @@
         </p>
 
         <p *ngIf="selectedMeter.gpx_version">
-          GPX-Connector firmware versienummer <em>{{ selectedMeter.gpx_version }}</em>
+          GPXconnector firmware versienummer <em>{{ selectedMeter.gpx_version }}</em>
         </p>
 
 
