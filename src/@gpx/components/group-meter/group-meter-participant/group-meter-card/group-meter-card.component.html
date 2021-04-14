@@ -40,11 +40,11 @@
           <div class="unit">kW</div>
         </div>
       </div>
-      <div fxLayout.gt-sm="column" fxLayout.lt-md="row" fxLayoutAlign="center center" *ngIf="participant.total_gas > 0" matTooltip="Actueel Gasverbruik">
+      <div fxLayout.gt-sm="column" fxLayout.lt-md="row" fxLayoutAlign="center center" *ngIf="participant.type === 'prosumer' || participant.type === 'consumer'" matTooltip="Actueel Gasverbruik">
         <img src="/assets/group-meter/flame.png" alt="flame" class="card-icon">
         <div fxLayout="column" fxLayoutAlign="center center">
           <div>{{ participant.actual_gas | number: '1.1-2':null }}</div>
-          <div class="unit"> m³/h</div>
+          <div class="unit">m³/h</div>
         </div>
       </div>
     </div>

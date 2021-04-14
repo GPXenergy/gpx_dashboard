@@ -132,13 +132,13 @@ export class GroupParticipant extends BaseModel {
   }
 
   public get lastActivity(): ParticipantConnection {
-    const HOUR = 1000 * 60 * 60,
-      DAY = 24 * HOUR,
+    const MINUTE = 1000 * 60,
+      HOUR = 60 * MINUTE,
       now = Date.now();
 
-    if (now - HOUR < this.last_activity.valueOf()) {
+    if (now - (MINUTE * 30) < this.last_activity.valueOf()) {
       return ParticipantConnection.ACTIVE;
-    } else if (now - DAY < this.last_activity.valueOf()) {
+    } else if (now - (HOUR * 2) < this.last_activity.valueOf()) {
       return ParticipantConnection.INACTIVE;
     }
     return ParticipantConnection.OFFLINE;

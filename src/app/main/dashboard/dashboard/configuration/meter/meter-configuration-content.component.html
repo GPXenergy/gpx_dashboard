@@ -28,7 +28,10 @@
         </div>
 
         <p>
-          (informatie om een nieuwe meter te koppelen aan jouw account)
+          Hieronder vind jij jouw <em>API key</em>, jouw persoonlijke en unieke code die je instelt op jouw GPX-Connector
+          apparaat. Houdt deze bij de hand wanneer je jouw apparaat gaat instellen. Heb je net een apparaat ingesteld en
+          aangesloten, maar zie je de meter nog niet hier verschijnen? Ververs dan deze pagina. De complete
+          setup-handleiding is <a routerLink="/manual/setup">hier</a> te vinden.
         </p>
 
         <div *ngIf="user" class="mt-12 mb-12" fxLayout="row" fxLayoutGap="15px">
@@ -41,15 +44,18 @@
               </mat-hint>
             </mat-form-field>
           </div>
-          <!-- <div fxLayoutAlign="center center"> -->
-          <button (cdkCopyToClipboardCopied)="copyLink()" [cdkCopyToClipboard]="user.api_key" [class.b-green]="isCopied" class="mt-8"
-                  mat-icon-button matTooltip="Copy">
+          <button (cdkCopyToClipboardCopied)="copyLink()" [cdkCopyToClipboard]="user.api_key" [class.b-green]="isCopied"
+                  class="mt-8" mat-icon-button matTooltip="Copy">
             <mat-icon>content_copy</mat-icon>
           </button>
-
-          <!-- </div> -->
-
         </div>
+
+        <p>
+          Wanneer je over meerdere meters beschikt (bijvoorbeeld van meerdere woningen, of je bent verhuisd) kan je
+          dezelfde API key gebruiken om de nieuwe meter aan jouw account te koppelen. Linksbovenin het menu kan je dan
+          van meter wisselen. Verschillende meters zijn onafhankelijk van elkaar, en kunnen bij dezelfde of
+          verschillende groepsmeters aangesloten zijn.
+        </p>
 
       </mat-card>
 
@@ -92,7 +98,7 @@
 
           <mat-form-field appearance="outline" fxFlex="100%">
             <mat-label>Meternaam</mat-label>
-            <input autocomplete="off" formControlName="name" matInput placeholder="Meter naam" type="text">
+            <input required autocomplete="off" formControlName="name" matInput placeholder="Meter naam" type="text">
             <mat-error>{{meterForm.errorMessages.name?.errorMessage}}</mat-error>
             <mat-hint>
               Deze meternaam is alleen voor jou zichtbaar, voor identificatie wanneer je meerdere meters hebt.

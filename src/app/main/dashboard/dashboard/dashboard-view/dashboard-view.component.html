@@ -132,12 +132,12 @@
                       </div>
 
                       <mat-hint>Selecteer een periode</mat-hint>
-<!--                      <mat-icon matPrefix class="mr-8">keyboard_arrow_down</mat-icon>-->
+                      <mat-icon matPrefix class="mr-8">keyboard_arrow_down</mat-icon>
                       <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
 
                       <mat-menu #rangeMenu="matMenu" focusFirstItem="false">
                         <button mat-menu-item (click)="rangePicker.open()">
-                          Selecteer custom periode
+                          Kies periode via kalender
                         </button>
                         <mat-divider></mat-divider>
                         <button mat-menu-item (click)="onRangeFilterChange(filterRangeOptions.day)">

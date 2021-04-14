@@ -51,7 +51,7 @@
 
           <mat-form-field appearance="outline" fxFlex="100%">
             <mat-label>Groepsnaam</mat-label>
-            <input autocomplete="off" formControlName="name" matInput placeholder="Meter naam" type="text">
+            <input autocomplete="off" formControlName="name" matInput placeholder="Meter naam" type="text" required>
             <mat-error>
               {{groupMeterForm.errorMessages.name?.errorMessage}}
             </mat-error>
@@ -153,7 +153,7 @@
             <mat-form-field appearance="outline" fxFlex="100%">
               <mat-label>Jouw naam in de groep</mat-label>
               <input autocomplete="off" formControlName="display_name" matInput placeholder="Publieke Meter naam"
-                     type="text">
+                     type="text" required>
               <mat-error>
                 {{groupParticipantForm.errorMessages.display_name?.errorMessage}}
               </mat-error>
