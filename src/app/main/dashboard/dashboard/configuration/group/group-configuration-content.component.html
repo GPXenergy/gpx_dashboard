@@ -142,7 +142,7 @@
             <em>{{ groupMeter.summary }}</em>
           </p>
           <b>Publiek: </b> {{groupMeter.public ? 'Ja' : 'Nee'}}
-          <p *ngIf="groupMeter.public_key">
+          <p *ngIf="groupMeter.public">
             <a [href]="groupMeter.publicUrl" target="_blank">{{groupMeter.publicUrl}}</a>
           </p>
         </div>

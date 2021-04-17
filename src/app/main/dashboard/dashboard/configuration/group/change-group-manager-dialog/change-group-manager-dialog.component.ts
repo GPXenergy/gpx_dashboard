@@ -66,7 +66,7 @@ export class ChangeGroupManagerDialogComponent implements OnInit, OnDestroy {
     if (this.groupMeterForm.valid) {
       this.manageGroupMeterService.updateGroupMeter(this.user?.pk, this.data.group.pk, this.groupMeterForm.getModel()).subscribe(response => {
         this.dialogRef.close({
-          groupMeter: response
+          manager: response.getParticipants().find(participant => participant.user_pk === response.getManager().pk)
         });
       }, e => {
         if (e.error && e.status === 400) {
@@ -80,7 +80,7 @@ export class ChangeGroupManagerDialogComponent implements OnInit, OnDestroy {
 
   onNoClick(): void {
     this.dialogRef.close({
-      groupMeter: null
+      manager: null
     });
   }
 

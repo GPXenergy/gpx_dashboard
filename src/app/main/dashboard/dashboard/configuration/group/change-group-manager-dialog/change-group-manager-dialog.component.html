@@ -16,7 +16,7 @@
     <mat-label>Nieuwe groepmanager</mat-label>
     <mat-select formControlName="manager" required>
       <mat-option *ngFor="let participant of groupMeter.getParticipants()" [disabled]="participant.user_pk == user?.pk"
-                  [value]="participant.pk">{{participant.display_name}}</mat-option>
+                  [value]="participant.user_pk">{{participant.display_name}}</mat-option>
     </mat-select>
     <mat-error>
       {{groupMeterForm.errorMessages.manager?.errorMessage}}
