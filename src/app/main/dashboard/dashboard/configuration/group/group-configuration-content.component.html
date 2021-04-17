@@ -22,19 +22,23 @@
 
       <mat-card *ngIf="groupParticipant" fxLayout="column">
         <div fxLayout="row">
-          <p class="mat-title" fxLayoutAlign="start center">
+          <p class="mat-title b-text-secondary" fxLayoutAlign="start center">
             <mat-icon class="mr-8">group</mat-icon>
             {{ groupMeter?.name }}
           </p>
           <div class="card-option-button" fxFlex fxLayoutAlign="end end">
             <button [matMenuTriggerFor]="menu" mat-icon-button>
-              <mat-icon>more_vert</mat-icon>
+              <mat-icon class="b-text-secondary">settings</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
               <ng-container>
-                <button (click)="leaveGroup($event)" *ngIf="!isGroupManager" [disabled]="isGroupManager" mat-menu-item>
+                <button (click)="leaveGroup($event)" *ngIf="!isGroupManager" mat-menu-item>
                   <mat-icon class="b-text-action">clear</mat-icon>
                   Verlaat {{ groupMeter?.name }}
+                </button>
+                <button (click)="transferManager($event)" *ngIf="isGroupManager" mat-menu-item>
+                  <mat-icon>compare_arrows</mat-icon>
+                  Draag groep over
                 </button>
                 <button (click)="deleteGroup($event)" *ngIf="isGroupManager" mat-menu-item>
                   <mat-icon class="b-text-action">clear</mat-icon>
@@ -132,12 +136,15 @@
         </form>
 
 
-        <p *ngIf="groupMeter && !isGroupManager">
-          {{ groupMeter.summary }}
-        </p>
-
-        <div *ngIf="groupParticipantForm && groupMeterForm" class="pt-12 pb-12">
-          <mat-divider></mat-divider>
+        <div *ngIf="groupMeter && !isGroupManager">
+          <b>Groepsbeschrijving</b>
+          <p>
+            <em>{{ groupMeter.summary }}</em>
+          </p>
+          <b>Publiek: </b> {{groupMeter.public ? 'Ja' : 'Nee'}}
+          <p *ngIf="groupMeter.public_key">
+            <a [href]="groupMeter.publicUrl" target="_blank">{{groupMeter.publicUrl}}</a>
+          </p>
         </div>
 
         <div class="pt-12 pb-12">
@@ -145,7 +152,16 @@
         </div>
 
         <div fxLayout="column">
-          <p class="mat-title mt-12">Groepsleden</p>
+
+          <div fxLayout="row">
+            <p class="mat-title b-text-secondary" fxLayoutAlign="start center">
+              <mat-icon class="mr-8">emoji_people</mat-icon>
+              Groepsleden
+            </p>
+            <div class="card-option-button" fxFlex fxLayoutAlign="end end">
+            </div>
+          </div>
+
 
           <form *ngIf="groupParticipantForm" [formGroup]="groupParticipantForm" class="mt-20 mb-20" fxFlex="100%"
                 fxLayout="column" fxLayoutGap="12px" name="form" novalidate>
@@ -179,21 +195,46 @@
 
           </form>
 
-          <div *ngFor="let participant of groupMeter?.getParticipants()" fxLayout="column">
-            <div class="p-8" fxLayout="row" fxLayoutAlign="space-between center">
-              <div fxFlex="30x%" fxLayoutAlign="start center">
-                <mat-icon class="mr-8">offline_bolt</mat-icon>
+          <table mat-table [dataSource]="groupMeter?.getParticipants()">
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Deelnemer </th>
+              <td mat-cell *matCellDef="let participant">
                 {{ participant?.display_name }}
-              </div>
-              <div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="type">
+              <th mat-header-cell *matHeaderCellDef> Type </th>
+              <td mat-cell *matCellDef="let participant">
                 {{participant.typeName}}
-              </div>
-              <div class="ml-8">{{ participant?.joined_on | date:'longDate' }}</div>
-            </div>
-            <div>
-              <mat-divider [inset]="true"></mat-divider>
-            </div>
-          </div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef> In groep sinds </th>
+              <td mat-cell *matCellDef="let participant">
+                {{ participant?.joined_on | date:'longDate' }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="icon">
+              <th mat-header-cell *matHeaderCellDef style="width: 50px"></th>
+              <td mat-cell *matCellDef="let participant">
+                <mat-icon [matTooltip]="participant.statusText()" [inline]="true">
+                  {{ participant.statusIcon() }}
+                </mat-icon>
+              </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="['name', 'type', 'date', 'icon']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['name', 'type', 'date', 'icon'];"></tr>
+          </table>
+
         </div>
 
 

@@ -23,6 +23,10 @@ import {
   JoinGroupMeterDialogResult
 } from './join-group-meter-dialog/join-group-meter-dialog.component';
 import { Meter } from '@gpx/models/meter.model';
+import {
+  ChangeGroupManagerDialogComponent,
+  ChangeGroupManagerDialogResult
+} from './change-group-manager-dialog/change-group-manager-dialog.component';
 
 
 @Component({
@@ -109,7 +113,7 @@ export class GroupConfigurationContentComponent implements OnInit, OnDestroy {
   createGroupMeter(): void {
     const dialogRef = this.dialog.open(CreateGroupMeterDialogComponent, {
       width: '500px',
-      disableClose: true,
+      autoFocus: false,
     });
 
     dialogRef.afterClosed().subscribe((result: CreateGroupMeterDialogResult) => {
@@ -122,11 +126,13 @@ export class GroupConfigurationContentComponent implements OnInit, OnDestroy {
     });
   }
 
-  joinGroupMeter(invitationKey: string): void {
+  joinGroupMeter(key: string): void {
     const dialogRef = this.dialog.open(JoinGroupMeterDialogComponent, {
       width: '500px',
-      disableClose: true,
-      data: {invitationKey: invitationKey}
+      autoFocus: false,
+      data: {
+        invitationKey: key
+      }
     });
 
     dialogRef.afterClosed().subscribe((result: JoinGroupMeterDialogResult) => {
@@ -237,5 +243,24 @@ export class GroupConfigurationContentComponent implements OnInit, OnDestroy {
         }
       );
     }
+  }
+
+  transferManager(event): void {
+    const dialogRef = this.dialog.open(ChangeGroupManagerDialogComponent, {
+      width: '500px',
+      autoFocus: false,
+      data: {
+        group: this.groupMeter
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result: ChangeGroupManagerDialogResult) => {
+      if (result?.manager) {
+        this._snackBar.success({
+          title: `Groep is overgedragen naar ${result.manager.display_name}`,
+        });
+        this.meterSelectionService.updateMeters(this.user);
+      }
+    });
   }
 }

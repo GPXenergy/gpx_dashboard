@@ -126,11 +126,11 @@ class ErrorFormGroup extends FormGroup {
     return this._errorMessages;
   }
 
-  public runValidation() {
+  public runValidation(): void {
     this._formValidatorService.validateForm(this, this._errorMessages);
   }
 
-  public applyRemoteErrors(remoteErrors: IRemoteErrors) {
+  public applyRemoteErrors(remoteErrors: IRemoteErrors): void {
     this._formValidatorService.applyRemoteErrors(this, this._errorMessages, remoteErrors);
   }
 

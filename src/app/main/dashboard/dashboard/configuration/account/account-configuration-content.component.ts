@@ -84,7 +84,7 @@ export class AccountConfigurationContentComponent implements OnInit, OnDestroy {
   changePassword(event): void {
     const dialogRef = this.dialog.open(ChangePasswordComponent, {
       width: '500px',
-      disableClose: true,
+      autoFocus: false,
     });
 
     dialogRef.afterClosed().subscribe((result: boolean) => {

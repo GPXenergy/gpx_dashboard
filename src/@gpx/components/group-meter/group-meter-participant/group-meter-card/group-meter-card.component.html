@@ -1,7 +1,7 @@
 <fieldset (click)="groupParticipantDetail()" class="cursor-pointer participant-container no-select"
           fxFlex="100%" *ngIf="participant" [ngClass]="participant.actual_power > 0 ? 'producing' : 'consuming'">
   <legend class="pl-8 pr-8 mat-body-strong name-container" [ngClass]="connection">
-    {{ participant.display_name }} <mat-icon [matTooltip]="statusText()" [inline]="true">{{ statusIcon() }}</mat-icon>
+    {{ participant.display_name }} <mat-icon [matTooltip]="participant.statusText()" [inline]="true">{{ participant.statusIcon() }}</mat-icon>
   </legend>
   <div fxLayout="column" fxLayout.lt-md="row" fxLayoutAlign="space-between stretch" style="height: 100%">
     <div *ngIf="connection === 'top'" fxLayout.gt-sm="row" fxLayoutAlign="center center">

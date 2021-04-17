@@ -106,6 +106,8 @@ export class GroupParticipant extends BaseModel {
   left_on: Date;
   display_name: string;
 
+  user_pk: number;
+
   // total usage by this participant,  calculated properties for showing in group meter page
   total_import: number;
   total_export: number;
@@ -142,6 +144,28 @@ export class GroupParticipant extends BaseModel {
       return ParticipantConnection.INACTIVE;
     }
     return ParticipantConnection.OFFLINE;
+  }
+
+  public statusIcon(): string {
+    switch (this.lastActivity) {
+      case ParticipantConnection.ACTIVE:
+        return 'signal_cellular_4_bar';
+      case ParticipantConnection.INACTIVE:
+        return 'signal_cellular_connected_no_internet_4_bar';
+      case ParticipantConnection.OFFLINE:
+        return 'signal_cellular_off';
+    }
+  }
+
+  public statusText(): string {
+    switch (this.lastActivity) {
+      case ParticipantConnection.ACTIVE:
+        return 'Live';
+      case ParticipantConnection.INACTIVE:
+        return 'Inactief';
+      case ParticipantConnection.OFFLINE:
+        return 'Offline';
+    }
   }
 
   /**

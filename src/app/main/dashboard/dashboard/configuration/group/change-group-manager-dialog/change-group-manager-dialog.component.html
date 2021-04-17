@@ -1,0 +1,35 @@
+<div fxLayout="row">
+  <h1 class="mat-title" fxFlex>
+    Draag je groep over
+  </h1>
+  <div class="card-option-button" fxLayoutAlign="end">
+    <button (click)="onNoClick()" mat-icon-button type="button">
+      <mat-icon class="b-text-action">clear</mat-icon>
+    </button>
+  </div>
+</div>
+
+<form *ngIf="groupMeterForm" [formGroup]="groupMeterForm" class="mt-24" fxLayout="column" fxLayoutGap="20px" name="form"
+      novalidate>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Nieuwe groepmanager</mat-label>
+    <mat-select formControlName="manager" required>
+      <mat-option *ngFor="let participant of groupMeter.getParticipants()" [disabled]="participant.user_pk == user?.pk"
+                  [value]="participant.pk">{{participant.display_name}}</mat-option>
+    </mat-select>
+    <mat-error>
+      {{groupMeterForm.errorMessages.manager?.errorMessage}}
+    </mat-error>
+    <mat-hint>
+      Selecteer een nieuwe groepmanager voor <em>{{groupMeter.name}}</em>. Na het overdragen ben je nog wel aangesloten bij de
+      groep, maar niet meer als manager. Je hebt dan geen rechten meer om deze groep te beheren.
+    </mat-hint>
+  </mat-form-field>
+
+  <div class="mt-20" fxLayoutAlign="end">
+    <button (click)="onSubmit()" [disabled]="!groupMeterForm.valid" class="b-secondary" mat-button type="submit">
+      Groep overdragen
+    </button>
+  </div>
+</form>

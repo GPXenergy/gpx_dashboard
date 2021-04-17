@@ -46,28 +46,6 @@ export class GroupMeterCardComponent implements OnInit, OnDestroy {
     });
   }
 
-  statusIcon(): string {
-    switch (this.participant.lastActivity) {
-      case ParticipantConnection.ACTIVE:
-        return 'signal_cellular_4_bar';
-      case ParticipantConnection.INACTIVE:
-        return 'signal_cellular_connected_no_internet_4_bar';
-      case ParticipantConnection.OFFLINE:
-        return 'signal_cellular_off';
-    }
-  }
-
-  statusText(): string {
-    switch (this.participant.lastActivity) {
-      case ParticipantConnection.ACTIVE:
-        return 'Live';
-      case ParticipantConnection.INACTIVE:
-        return 'Inactief';
-      case ParticipantConnection.OFFLINE:
-        return 'Offline';
-    }
-  }
-
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();

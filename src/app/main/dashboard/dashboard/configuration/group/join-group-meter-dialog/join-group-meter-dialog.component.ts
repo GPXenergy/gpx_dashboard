@@ -28,7 +28,7 @@ class JoinGroupParticipant extends GroupParticipant {
 }
 
 @Component({
-  selector: 'join-group-meter-dialog',
+  selector: 'app-join-group-meter-dialog',
   templateUrl: './join-group-meter-dialog.component.html',
   styleUrls: ['./join-group-meter-dialog.component.scss']
 })
@@ -37,8 +37,8 @@ export class JoinGroupMeterDialogComponent implements OnInit, OnDestroy {
   user: User;
   availableMeters: Meter[];
   groupMeter: GroupMeter;
-  validInvitation: boolean = true;
-  loading: boolean = true;
+  validInvitation = true;
+  loading = true;
   private readonly _unsubscribeAll = new Subject<void>();
 
   constructor(public dialogRef: MatDialogRef<JoinGroupMeterDialogComponent>,
@@ -51,7 +51,7 @@ export class JoinGroupMeterDialogComponent implements OnInit, OnDestroy {
               @Inject(MAT_DIALOG_DATA) private data: JoinGroupMeterDialogData) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.authService.user.then(user => this.user = user);
     this.meterSelectService.availableMeters.pipe(takeUntil(this._unsubscribeAll)).subscribe(
       availableMeters => this.availableMeters = availableMeters
@@ -78,14 +78,14 @@ export class JoinGroupMeterDialogComponent implements OnInit, OnDestroy {
 
   /**
    * Validator function for meter selection, meter must not be in a group already
-   * @param c
+   * @param c: control
    */
   meterNotInGroup(c: AbstractControl): ValidationErrors {
-    const meter = this.availableMeters.find(meter => meter.pk === c.value);
-    return meter.in_group ? {'meteringroup': true} : null;
+    const meter = this.availableMeters.find(m => m.pk === c.value);
+    return meter.in_group ? {meteringroup: true} : null;
   }
 
-  initForm(initialMeter: Meter, group: GroupMeter) {
+  initForm(initialMeter: Meter, group: GroupMeter): void {
     this.groupParticipantForm = this.modelFormBuilder.modelGroup(JoinGroupParticipant, null, {
       meter: [initialMeter?.pk, [Validators.required, (c: AbstractControl) => this.meterNotInGroup(c)]],
       display_name: [null],
@@ -93,9 +93,10 @@ export class JoinGroupMeterDialogComponent implements OnInit, OnDestroy {
       invitation_key: [group.invitation_key],
     });
     this.groupParticipantForm.markAllAsTouched();
+    this.groupParticipantForm.runValidation();
   }
 
-  onSubmit() {
+  onSubmit(): void {
     this.groupParticipantForm.markAsTouched();
 
     if (this.groupParticipantForm.valid) {
@@ -112,8 +113,6 @@ export class JoinGroupMeterDialogComponent implements OnInit, OnDestroy {
         }
       );
     }
-
-
   }
 
   onNoClick(): void {

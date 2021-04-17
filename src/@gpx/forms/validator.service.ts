@@ -22,7 +22,8 @@ export const errorMessageKeys: { [key: string]: string } = {
   invalidchars: 'Ongeldige characters',
   phonenumber: 'Ongeldige telefoonnummer',
   fieldsnotequal: 'Bovenstaande velden zijn niet gelijk',
-  password: 'Vereist minimaal 1 hoofdletter en 1 cijfer'
+  password: 'Vereist minimaal 1 hoofdletter en 1 cijfer',
+  meteringroup: 'Deze meter is al aangesloten in een groep'
 };
 
 @Injectable({

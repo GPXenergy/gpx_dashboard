@@ -21,6 +21,8 @@ import { OanaxSnackBarModule } from '@gpx/components/utilities/snack-bar/oanax-s
 import { JoinGroupMeterDialogModule } from './group/join-group-meter-dialog/join-group-meter-dialog.module';
 import { MatSelectModule } from '@angular/material/select';
 import { ChangePasswordModule } from './account/change-password-dialog/change-password.module';
+import { ChangeGroupManagerDialogModule } from './group/change-group-manager-dialog/change-group-manager-dialog.module';
+import { MatTableModule } from '@angular/material/table';
 
 
 const routes: Route[] = [
@@ -72,9 +74,11 @@ const routes: Route[] = [
     ClipboardModule,
     CreateGroupMeterDialogModule,
     JoinGroupMeterDialogModule,
+    ChangeGroupManagerDialogModule,
     ChangePasswordModule,
     OanaxSnackBarModule,
     MatSelectModule,
+    MatTableModule,
   ]
 })
 export class ConfigurationViewModule {
