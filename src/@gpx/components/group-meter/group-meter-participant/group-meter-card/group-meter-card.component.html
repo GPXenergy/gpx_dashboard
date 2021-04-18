@@ -33,6 +33,13 @@
           <div class="unit">kW</div>
         </div>
       </div>
+      <div fxLayout.gt-sm="column" fxLayout.lt-md="row" fxLayoutAlign="center center" *ngIf="participant.type === 'producer_wind'" matTooltip="Windproductie">
+        <img src="/assets/group-meter/producer_wind.png" alt="wind" class="card-icon">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <div>{{ participant.actual_power | number: '1.1-2' }}</div>
+          <div class="unit">kW</div>
+        </div>
+      </div>
       <div fxLayout.gt-sm="column" fxLayout.lt-md="row" fxLayoutAlign="center center" *ngIf="participant.type === 'prosumer' || participant.type === 'consumer'" matTooltip="Intern verbruik (berekend)">
         <img src="/assets/group-meter/lightbulb.png" alt="lightbulb" class="card-icon">
         <div fxLayout="column" fxLayoutAlign="center center">

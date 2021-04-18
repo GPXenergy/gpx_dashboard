@@ -105,6 +105,10 @@ export class MeterConfigurationContentComponent implements OnInit, OnDestroy {
   }
 
   deleteMeter(event): void {
+    if (this.selectedMeter.getGroupParticipation()?.getGroup()?.getManager()?.pk === this.user.pk) {
+      alert(`Kan ${this.selectedMeter.name} nog niet verwijderen, je bent beheerder van de groepsmeter. Draag de groep eerst over naar een andere gebruiker of verwijder de groep!`);
+      return;
+    }
     if (confirm(`Weet je zeker dat je ${this.selectedMeter.name} wil verwijderen? Alle meter-gerelateerde data wordt verwijderd!`)) {
       this.meterService.removeMeter(this.user.pk, this.selectedMeter.pk).subscribe(
         result => {
