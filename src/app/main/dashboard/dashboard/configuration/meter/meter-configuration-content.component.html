@@ -1,5 +1,4 @@
 <div class="mt-20" fxLayout="column">
-  <!-- <h1>Account config content</h1> -->
 
   <div fxLayout="row">
     <div fxFlex="15%" fxFlex.xs="5%"></div>
@@ -10,7 +9,7 @@
         <div fxLayout="row">
           <p class="mat-title b-text-secondary" fxLayoutAlign="start center">
             <mat-icon class="mr-8">device_hub</mat-icon>
-            Nieuwe meters koppelen
+            Nieuwe meter koppelen
           </p>
           <div class="card-option-button" fxFlex fxLayoutAlign="end end">
             <button [matMenuTriggerFor]="menu" mat-icon-button>
@@ -52,12 +51,14 @@
 
         <p>
           Wanneer je over meerdere meters beschikt (bijvoorbeeld van meerdere woningen, of je bent verhuisd) kan je
-          dezelfde API key gebruiken om de nieuwe meter aan jouw account te koppelen. Linksbovenin het menu kan je dan
+          dezelfde API key gebruiken om de nieuwe meter aan jouw account te koppelen. Linksboven in het menu kan je
           van meter wisselen. Verschillende meters zijn onafhankelijk van elkaar, en kunnen bij dezelfde of
           verschillende groepsmeters aangesloten zijn.
         </p>
 
       </mat-card>
+
+
 
       <mat-card *ngIf="selectedMeter" class="mat-card-outline mt-20" fxLayout="column">
 

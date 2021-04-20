@@ -16,14 +16,14 @@ enum eTabIndex {
 export class ConfigurationViewComponent implements OnInit, OnDestroy {
   navLinks = [
     {
-      label: 'Account',
-      link: '/configure/account',
-    }, {
       label: 'Meter',
       link: '/configure/meter',
     }, {
       label: 'Groep',
       link: '/configure/group',
+    }, {
+      label: 'Account',
+      link: '/configure/account',
     },
   ];
   private readonly _unsubscribeAll = new Subject<void>();

@@ -17,7 +17,7 @@
         <div fxFlex="15%"></div>
       </div>
 
-      <form (ngSubmit)="onSubmit()" [formGroup]="registerForm" class="mt-40" fxLayout="column" name="registerForm"
+      <form (ngSubmit)="onSubmit()" [formGroup]="registerForm" *ngIf="registerForm" class="mt-40" fxLayout="column" name="registerForm"
             novalidate>
 
         <mat-form-field>
@@ -55,7 +55,7 @@
 
         </div>
 
-        <button [disabled]="registerForm.invalid" aria-label="LOG IN" class="mt-20 b-secondary" mat-raised-button>
+        <button [disabled]="registerForm.invalid" aria-label="Register" class="mt-20 b-secondary" mat-raised-button>
           Account aanmaken
         </button>
       </form>
