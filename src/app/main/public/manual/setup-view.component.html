@@ -237,7 +237,9 @@
         <mat-icon [inline]="true">person</mat-icon>
         Meters gekoppeld aan jouw account:
         <ul *ngIf="meters">
-          <li *ngFor="let meter of meters">{{meter.name}}</li>
+          <li *ngFor="let meter of meters"><a routerLink="/configure/meter" (click)="meterSelectionService.setMeter(meter.pk)">
+            {{meter.name}}
+          </a></li>
         </ul>
         <span *ngIf="!meters">Geen</span>
         <button mat-button class="b-secondary" [disabled]="refreshDisabled" (click)="refreshMeters()">Ververs gekoppelde meters</button>

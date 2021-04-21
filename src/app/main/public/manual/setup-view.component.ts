@@ -160,7 +160,7 @@ export class SetupViewComponent implements OnInit, OnDestroy {
   };
 
 
-  constructor(private authService: AuthService, private meterSelectionService: MeterSelectionService) {
+  constructor(private authService: AuthService, public meterSelectionService: MeterSelectionService) {
 
   }
 
