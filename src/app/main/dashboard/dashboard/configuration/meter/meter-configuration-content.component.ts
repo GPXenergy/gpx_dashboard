@@ -19,6 +19,7 @@ import { EMeterType, EMeterVisibility, Meter } from '@gpx/models/meter.model';
   styleUrls: ['./meter-configuration-content.component.scss'],
 })
 export class MeterConfigurationContentComponent implements OnInit, OnDestroy {
+  private readonly _unsubscribeAll = new Subject<void>();
   meterTypes = EMeterType;
   meterVisibilityTypes = EMeterVisibility;
   user: AuthUser;
@@ -27,7 +28,6 @@ export class MeterConfigurationContentComponent implements OnInit, OnDestroy {
   loading: boolean;
   isCopied: boolean;
   timeOut: NodeJS.Timeout;
-  private readonly _unsubscribeAll = new Subject<void>();
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
               private _snackBar: SnackBarService,

@@ -58,23 +58,23 @@ export class NavigationBehaviorService {
   /*
   Only to be used by page-layout component
   */
-  setSideNavigation(sideNav: MatSidenav) {
+  setSideNavigation(sideNav: MatSidenav): void {
     this.sideNavigation = sideNav;
   }
 
-  toggleSideNav() {
+  toggleSideNav(): void {
     this.sideNavigation.toggle();
   }
 
-  openSideNav() {
+  openSideNav(): void {
     this.sideNavigation.open();
   }
 
-  closeSideNav() {
+  closeSideNav(): void {
     this.sideNavigation.close();
   }
 
-  private resetSideNavState() {
+  private resetSideNavState(): void {
 
   }
 

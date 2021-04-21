@@ -7,6 +7,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { GroupMeterModule } from '@gpx/components/group-meter/group-meter.module';
 import { MatButtonModule } from '@angular/material/button';
 import { ManualViewComponent } from './manual-view.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
 
 const routes: Route[] = [
   {
@@ -28,7 +32,11 @@ const routes: Route[] = [
     GroupMeterModule,
     MatProgressBarModule,
     MatDividerModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatSelectModule,
+    MatTableModule,
   ],
   declarations: [
     SetupViewComponent,

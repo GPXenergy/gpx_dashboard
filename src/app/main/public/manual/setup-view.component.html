@@ -10,27 +10,31 @@
       doet? Kijk dan in de <a routerLink="/manual">gebruikershandleiding</a>!
     </p>
 
-    <div>
+    <div class="img-container">
+      <img src="/assets/setup/gpxc-setup-device.png" alt="Setup device">
+      <p class="img-subtext">Figuur 1 - De GPXconnector</p>
+    </div>
+
+    <div class="section" fxLayout="column">
 
       <h2>Inhoud</h2>
       <ol>
         <li><a href="/manual/setup#prerequisites">Benodigdheden</a></li>
         <li><a href="/manual/setup#create-account">Een account aanmaken</a></li>
-        <li><a href="/manual/setup#configure-device">Apparaatinstellingen configureren</a></li>
-        <li><a href="/manual/setup#configure-connection">Verbindingsinstellingen configureren</a></li>
+        <li><a href="/manual/setup#configure-device">GPXconnector configureren</a></li>
         <li><a href="/manual/setup#connect-smart-meter">Koppelen aan de slimme meter</a></li>
-        <li><a href="/manual/setup#connect-inverter">Koppelen aan de zonnepanelen-omvormer (toekomstig)</a></li>
+        <li><a href="/manual/setup#connect-inverter">Koppelen aan de zonnepanelen-omvormer</a></li>
       </ol>
 
     </div>
 
-    <div id="prerequisites">
+    <div class="section" id="prerequisites" fxLayout="column">
 
       <h2>1. Benodigdheden</h2>
 
       <p>
-        Om de GPXconnector succesvol te installeren zijn een aantal zaken nodig. De eerste stap in om te controleren
-        of deze aanwezig zijn:
+        Om de GPXconnector succesvol te installeren heb je een aantal dingen nodig. Controleer of de volgende onderdelen
+        aanwezig zijn:
       </p>
 
       <ul>
@@ -42,69 +46,244 @@
       </ul>
     </div>
 
-    <div id="create-account">
+    <div class="img-container">
+      <img src="/assets/setup/gpxc-setup-prerequisites.jpg" alt="Benodigdheden">
+      <p class="img-subtext">Figuur 2 - Benodigdheden voor installatie GPXconnector</p>
+    </div>
+
+    <div class="section" id="create-account" fxLayout="column">
 
       <h2>2. Een account aanmaken</h2>
       <p>
-        De tweede stap is om een account aan te maken op het dashboard. Aan dit account wordt straks jouw slimme meter
-        gekoppeld.
-        <span *ngIf="!user">
-          <a routerLink="/register">Klik hier</a>
-          om een nieuw account te registreren, voordat je verder gaat met de volgende stap! Heb je al een account? Log
-          dan <a routerLink="/register">hier</a> in voordat je verder gaat!
-        </span>
+        De tweede stap is het aanmaken van een account op het dashboard. Aan dit account wordt straks jouw slimme meter
+        gekoppeld. <a routerLink="/register" [queryParams]="{next: '/manual/setup'}">Klik hier</a> om een nieuw account
+        te registreren! Heb je al een account? <a routerLink="/login" [queryParams]="{next: '/manual/setup'}">Log dan
+        in</a> voordat je verder gaat! Door in te loggen wordt deze handleiding verder aangevuld met informatie en
+        functies die voor jou persoonlijk handig zijn!
       </p>
 
-      <p *ngIf="user">
-        Het lijkt erop dat je al bent ingelogd, ga verder met stap 3.
-      </p>
+      <mat-card *ngIf="user" class="user-specific">
+        <mat-icon [inline]="true">person</mat-icon>
+        Je bent ingelogd als <b>{{ user.username }}</b>! Ga verder naar stap 3.
+      </mat-card>
+
 
     </div>
 
-    <div id="configure-device">
+    <div class="section" id="configure-device" fxLayout="column">
 
-      <h2>3. Apparaatinstellingen configureren</h2>
+      <h2>3. GPXconnector configureren</h2>
+
       <p>
-        * Plug GPXconnector in stopcontact (USB power)<br>
-        * Schakel modus naar configuratiemodus (lampje nu kleur x)<br>
-        * Pak mobiel/laptop en verbind met gpxconnector (password smartgpx)<br>
-        * Navigeer naar http://gpxconnector.local of http://192.168.5.1<br>
-        * Configureer de meterinstellinen (baud en parity, TODO: lijst hierbij met types)<br/>
-        * (optioneel, pas ssid en wachtwoord aan)<br>
-        * Sla de instellingen op<br/>
+        In stap 3 gaan wij de GPXconnector instellen zodat deze jouw slimme meter kan uitlezen en de gegevens verzend
+        naar het dashboard via jouw wifi!<br/>
+        De GPXconnector kent 2 modi, de actieve modus en de configuratiemodus, waartussen geschakeld kan worden via de
+        schakelaar op het apparaat. In de actieve modus wordt de meter uitgelezen en gegevens verzonden. In de
+        configuratiemodus start het apparaat een WiFi kanaal waarmee je kan verbinden. In dit hoofdstuk wordt je door de
+        stappen geleid om het apparaat volledig in te stellen.
       </p>
+
+      <h3>3.1. GPXconnector configuratiemodus</h3>
+      <p>
+        Plug GPXconnector in stopcontact (USB power) en schakel modus naar configuratiemodus (zie figuur 3). Als deze in
+        configuratiemodus staat, zal het LEDje groen/blauw zijn. Knippert het LEDje elke 4 seconden wit? Dan zit je nog
+        in de actieve modus! Voor deze stap hoeft het apparaat nog niet aangesloten te zijn aan de slimme meter.
+      </p>
+      <p><em>
+        Note: Gaat de GPXconnector niet aan nadat de je de micro-USB heb aangesloten? Maak dan het doosje open en
+        controleer of de schuifschakelaar bij de voeding richting USB staat.
+      </em></p>
+
+      <div class="img-container">
+        <img src="/assets/setup/gpxc-setup-config.jpg" alt="Schakel naar configuratiemodus">
+        <p class="img-subtext">Figuur 3 - Schakelaar op configuratiemodus</p>
+      </div>
+
+      <p>
+        Nu het apparaat in configuratiemodus staat, kan je er mee verbinden via zijn eigen WiFi kanaal. Gebruik je
+        mobiele telefoon of laptop en zoek naar nieuwe WiFi netwerken. Je kan het netwerk herkennen door de naam
+        "GPXconnector" (zie figuur 4). Het standaard wachtwoord voor dit netwerk is: smartgpx
+      </p>
+      <p>
+        Als je bent verbonden zul je merken dat je geen internettoegang meer hebt op je laptop of mobiel. Je bent nu
+        namelijk
+        verbonden met het privénetwerk van de GPXconnector! Wanneer je een melding krijgt van je mobiel dat er geen
+        internet beschikbaar is, kun je deze dus negeren.
+      </p>
+
+      <div class="img-container">
+        <img src="/assets/setup/gpxc-setup-config-ap.png" alt="Verbind met het WiFi netwerk">
+        <p class="img-subtext">Figuur 4 - Verbinding maken met de GPXconnector in configuratiemodus</p>
+      </div>
+
+      <p>
+        Om de configuratiepagina te bereiken, open je de internet browser (bijvoorbeeld Chrome, Firefox of Edge) en
+        navigeer je naar <a href="http://gpxconnector.local" target="_blank">http://gpxconnector.local</a> (of als die
+        niet werkt, <a href="http://192.168.5.1" target="_blank">http://192.168.5.1</a>). Je belandt dan op de home
+        pagina, zie figuur 5.
+      </p>
+
+      <div class="img-container">
+        <img src="/assets/setup/gpxc-setup-landing.png" alt="home page GPXconnector">
+        <p class="img-subtext">Figuur 5 - Home pagina van de GPXconnector</p>
+      </div>
+
+
+      <h3>3.2. Apparaatinstellingen</h3>
+      <p>
+        Ga naar configure device om de apparaat-specifieke instellingen te configureren. Hier vind je de mogelijkheid om
+        het WiFi netwerk (van de GPXconnector zelf) aan te passen, de slimme meter te configureren en wanneer
+        aanwezig ook de omvormerkoppeling te configureren.
+      </p>
+
+      <p>
+        In de huidige versie van de GPXconnector moet de meterconfiguratie met de hand worden ingevuld. Hieronder is een
+        handige tool, selecteer jouw meter uit de lijst om gemakkelijk de Baudrate en de Parity te vinden.
+      </p>
+
+      <div>
+        <mat-form-field appearance="fill" class="meter-config-help">
+          <mat-label>Merk / Model</mat-label>
+          <mat-select (selectionChange)="meterSelection($event)">
+            <mat-optgroup *ngFor="let group of meterGroups" [label]="group.name">
+              <mat-option *ngFor="let meter of group.meters" [value]="meter.value">
+                {{meter.model}}
+              </mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <ul *ngIf="selectedConfig">
+        <li><b>Baud rate: </b> {{selectedConfig.baud}}</li>
+        <li><b>Parity: </b> {{selectedConfig.parity}}</li>
+      </ul>
+
+      <p>
+        Als je beschikt over een omvormer, dan kan je een stroomtang installeren en aansluiten om de zon-productie te
+        meten. In hoofdstuk 5 lees je meer over het aansluiten hiervan. Voor het configureren, als je (nog) geen
+        stroomtang hebt, laat deze instelling dan uit. Anders kan je de volgende varianten instellen:
+      </p>
+
+      <ul>
+        <li><b>30A/1V</b>: Stroomtang bedoelt voor prosumenten met 230v 1 fase-spanning</li>
+        <li><b>50A/1V</b>: Stroomtang bedoelt voor prosumenten met 400v 3 fasen-spanning</li>
+      </ul>
+
+      <p>
+        Sla de nieuwe instellingen op.
+      </p>
+
+      <div class="img-container">
+        <img src="/assets/setup/gpxc-setup-configure-device.png" alt="Config device">
+        <p class="img-subtext">Figuur 6 - Apparaatinstellingen pagina</p>
+      </div>
+
+
+      <h3>3.3. Verbindingsinstellingen</h3>
+      <p>
+        Ga naar configure network om de verbindingsinstellingen te configureren. Hier kan je jouw thuisnetwerk instellen
+        en vul je de unieke API key in die aan je account gekoppeld is. Als je beschikt over meerdere netwerknamen, vaak
+        een apart 2.4GHz en 5GHz netwerk, gebruik dan het 2.4GHz netwerk. Het 5GHz netwerk is vaak te herkennen aan een
+        "5G" achtervoegsel. Veel fabrikanten gebruiken dezelfde netwerknaam voor 2.4GHz en 5GHz, dan hoef je hier geen
+        zorgen over te maken.
+      </p>
+
+      <p *ngIf="!user">
+        Vul de API key in, te vinden in <a routerLink="/configure/meter">meter instellingen</a> als je bent ingelogd.
+      </p>
+
+      <mat-card *ngIf="user" class="user-specific">
+        <mat-icon [inline]="true">person</mat-icon>
+        Jouw API key is: <span>{{ user.api_key }}</span>
+      </mat-card>
+
+      <p>
+        Selecteer de standaard server zodat jouw meter wordt gekoppelt aan jouw account en de meterdata wordt
+        opgeslagen.
+      </p>
+
+      <p>
+        Sla de nieuwe instellingen op.
+      </p>
+
+      <div class="img-container">
+        <img src="/assets/setup/gpxc-setup-configure-network.png" alt="Config network">
+        <p class="img-subtext">Figuur 7 - Verbindingsinstellingen pagina</p>
+      </div>
+
     </div>
 
-    <div id="configure-connection">
+    <div class="section" id="connect-smart-meter" fxLayout="column">
 
-      <h2>4. Verbindingsinstellingen configureren</h2>
+      <h2>4. Koppelen aan de slimme meter</h2>
       <p>
-
-        * Ga naar verbindingsinstellingen<br/>
-        * Vul thuisnetwerk in (WiFi SSID en wachtwoord)<br/>
-        * Voer de API key in. <span *ngIf="user">API key van {{user.username}}: {{user.api_key}}</span><br/>
-        * Sla de instellingen op<br/>
-        * Schakel de GPXconnector naar actieve modus<br/>
+        Nu het apparaat is ingesteld, is de laatste stap om deze aan de meter te koppelen.
       </p>
+
+      <ul>
+        <li>Plug de RJ12 kabel in de GPXconnector en de andere kant in de slimme meter</li>
+        <li>Stop de micro-USB adapter in het stopcontact</li>
+        <li>Zet de GPXconnector in zijn actieve modus met de modus-schakelaar</li>
+      </ul>
+
+      <p>
+        Na het aansluiten zal het LEDje elke 4 seconden wit knipperen, wat aangeeft dat deze wacht op meterdata. Dit
+        kan enkele seconden duren (afhankelijk van de slimme meter). Wanneer alles goed is ingesteld, zal het LEDje
+        elke seconde groen knipperen.
+      </p>
+
+      <mat-card *ngIf="user" class="user-specific">
+        <mat-icon [inline]="true">person</mat-icon>
+        Meters gekoppeld aan jouw account:
+        <ul *ngIf="meters">
+          <li *ngFor="let meter of meters">{{meter.name}}</li>
+        </ul>
+        <span *ngIf="!meters">Geen</span>
+        <button mat-button class="b-secondary" [disabled]="refreshDisabled" (click)="refreshMeters()">Ververs gekoppelde meters</button>
+      </mat-card>
+
+      <p>
+        Problemen? Geen groen LEDje? Kijk hieronder wat er waarschijnlijk mis is:
+      </p>
+
+      <table mat-table [dataSource]="ledData" fxFlex>
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <ng-container matColumnDef="color">
+          <th mat-header-cell *matHeaderCellDef>Kleur</th>
+          <td mat-cell *matCellDef="let LED">
+            {{LED.color}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="blink">
+          <th mat-header-cell *matHeaderCellDef>Knipperfrequentie</th>
+          <td mat-cell *matCellDef="let LED">
+            {{LED.blink}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell fxHide.lt-md *matHeaderCellDef>Beschrijving</th>
+          <td mat-cell *matCellDef="let LED">
+            {{LED.description}}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['color', 'blink', 'description']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['color', 'blink', 'description'];"></tr>
+      </table>
     </div>
 
-    <div id="connect-smart-meter">
+    <div class="section" id="connect-inverter">
 
-      <h2>5. Koppelen aan de slimme meter</h2>
+      <h2>5. Koppelen aan de zonnepanelen-omvormer (optioneel)</h2>
       <p>
-
-        * Sluit de GPXconnector aan de slimme meter<br/>
-        * Plug usb power in<br/>
-        * ???<br/>
-        * Profit!<br/>
-      </p>
-    </div>
-
-    <div id="connect-inverter">
-
-      <h2>6. Koppelen aan de zonnepanelen-omvormer (optioneel)</h2>
-      <p>
-        Wordt in deze versie nog niet ondersteund.
+        Wordt in deze versie nog niet ondersteund. Voor meer informatie neem contact op met
+        <a href="mailto:bouwhuis@gpx.nl">bouwhuis@gpx.nl</a>.
       </p>
     </div>
 

@@ -2,7 +2,33 @@
   height: 100%;
 }
 
-img {
-  width: 100%;
-  max-width: 400px;
+.img-container {
+  text-align: center;
+
+  img {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .img-subtext {
+    padding-top: 0;
+    padding-bottom: 24px;
+    font-style: italic;
+  }
+}
+
+.section {
+  margin-top: 32px;
+}
+
+h3 {
+  font-weight: bold;
+}
+
+.meter-config-help {
+  width: 300px;
+}
+
+.user-specific {
+  margin-bottom: 12px;
 }
