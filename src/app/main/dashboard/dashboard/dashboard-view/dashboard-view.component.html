@@ -25,18 +25,18 @@
               <em>tot {{rangePickerForm.get('timestamp_before').value | date: "short"}}</em><br />
             </p>
             <p>
-              Stroom import (1): {{ meter.period_import_1 | number }} kWh<br/>
-              Stroom import (2): {{ meter.period_import_2 | number }} kWh<br/>
-              Stroom export (1): {{ meter.period_export_1 | number }} kWh<br/>
-              Stroom export (2): {{ meter.period_export_2 | number }} kWh<br/>
-              Zonproductie: {{ meter.period_solar | number }} kWh<br/>
-              Gas: {{ meter.period_gas | number }} m³<br/>
+              Stroom import (1): {{ meter.period_import_1 | number }} kWh<br />
+              Stroom import (2): {{ meter.period_import_2 | number }} kWh<br />
+              Stroom export (1): {{ meter.period_export_1 | number }} kWh<br />
+              Stroom export (2): {{ meter.period_export_2 | number }} kWh<br />
+              Zonproductie: {{ meter.period_solar | number }} kWh<br />
+              Gas: {{ meter.period_gas | number }} m³<br />
             </p>
           </div>
           <div>
             <p class="mat-title">Stroom</p>
             <p>
-              <em>Laatste update {{meter.power_timestamp | date: "short"}}</em><br/>
+              <em>Laatste update {{meter.power_timestamp | date: "short"}}</em><br />
             </p>
             <p>
               Actueel: {{meter.actualPower | number }} kW (Tarief: {{meter.tariff | number }})<br />
@@ -54,15 +54,15 @@
           </div>
           <p class="mat-title">Gas</p>
           <p *ngIf="meter.gas_timestamp">
-            <em>Laatste update {{meter.gas_timestamp | date: "short"}}</em><br/>
-            Actueel gasverbruik: {{meter.actual_gas | number }} m³/h <br/>
-            Totaal gasverbruik: {{meter.total_gas | number }} m³ <br/>
+            <em>Laatste update {{meter.gas_timestamp | date: "short"}}</em><br />
+            Actueel gasverbruik: {{meter.actual_gas | number }} m³/h <br />
+            Totaal gasverbruik: {{meter.total_gas | number }} m³ <br />
           </p>
           <p class="mat-title">Solar</p>
           <p *ngIf="meter.solar_timestamp">
-            <em>Laatste update {{meter.solar_timestamp | date: "short"}}</em><br/>
-            Actueel productie: {{meter.actual_solar | number }} kW <br/>
-            <span *ngIf="meter.total_solar">Totaal zonproductie: {{meter.total_solar | number }} kWh </span><br/>
+            <em>Laatste update {{meter.solar_timestamp | date: "short"}}</em><br />
+            Actueel productie: {{meter.actual_solar | number }} kW <br />
+            <span *ngIf="meter.total_solar">Totaal zonproductie: {{meter.total_solar | number }} kWh </span><br />
           </p>
         </ng-container>
         <!-- </mat-card> -->
@@ -71,35 +71,37 @@
     </div>
 
   </mat-drawer>
-  <mat-drawer-content>
+  <mat-drawer-content class="content-container">
 
     <div fxLayout="column">
-      <div class="p-16" fxLayout="row">
+      <div fxLayout="column" class="sticky-container">
+        <div class="p-16" fxLayout="row">
 
-        <div fxFlex>
-          <p class="mat-body-2 mt-8 mb--12">{{meter?.name}} gegevens</p>
-        </div>
-        <div class="ml-8">
+          <div fxFlex>
+            <p class="mat-body-2 mt-8 mb--12">{{meter?.name}} gegevens</p>
+          </div>
+          <div class="ml-8">
 
-          <button (click)="drawer.toggle()" mat-stroked-button>
-            <mat-icon>info</mat-icon>
-            <span class="mat-caption" style="color: black;">
-              Meter details
-            </span>
-          </button>
-        </div>
+            <button (click)="drawer.toggle()" mat-stroked-button>
+              <mat-icon>info</mat-icon>
+              <span class="mat-caption" style="color: black;">
+                Meter details
+              </span>
+            </button>
+          </div>
 
 
-        <!-- <button mat-stroked-button *ngIf="groupMeter?.public" class="float-right" style="float: right">
+          <!-- <button mat-stroked-button *ngIf="groupMeter?.public" class="float-right" style="float: right">
           <span style="color: black;" class="mat-caption">
             <a [href]="groupMeter.publicUrl" target="_blank">Publieke link</a>
           </span>
         </button> -->
 
-      </div>
+        </div>
 
-      <div>
-        <mat-divider></mat-divider>
+        <div>
+          <mat-divider></mat-divider>
+        </div>
       </div>
 
       <div class="mt-40 mb-40" fxFlex="100%" fxLayout="row">
@@ -114,21 +116,25 @@
                 <form *ngIf="rangePickerForm" [formGroup]="rangePickerForm">
 
                   <div>
-                    <mat-form-field appearance="outline" fxFlex fxFlex.lt-md="100%" class="range-input-field" [matMenuTriggerFor]="rangeMenu">
+                    <mat-form-field appearance="outline" fxFlex fxFlex.lt-md="100%" class="range-input-field"
+                      [matMenuTriggerFor]="rangeMenu">
                       <mat-label>
                         Periode
                       </mat-label>
-                      <mat-date-range-input style="display: none" [formGroup]="rangePickerForm" [rangePicker]="rangePicker">
-                        <input matStartDate placeholder="Start datum" formControlName="timestamp_after" [rangePicker]="rangePicker" readonly>
-                        <input matEndDate placeholder="Eind datum" formControlName="timestamp_before" [rangePicker]="rangePicker" readonly>
+                      <mat-date-range-input style="display: none" [formGroup]="rangePickerForm"
+                        [rangePicker]="rangePicker">
+                        <input matStartDate placeholder="Start datum" formControlName="timestamp_after"
+                          [rangePicker]="rangePicker" readonly>
+                        <input matEndDate placeholder="Eind datum" formControlName="timestamp_before"
+                          [rangePicker]="rangePicker" readonly>
                       </mat-date-range-input>
 
                       <div role="group" fxLayout.lt-md="column" fxLayoutAlign="start center">
                         <input matInput placeholder="Startdatum" autocomplete="off" readonly
-                               [value]="rangePickerForm.get('timestamp_after').value | date: 'short'" class="filter-input">
+                          [value]="rangePickerForm.get('timestamp_after').value | date: 'short'" class="filter-input">
                         <span style="margin: 0 15px">-</span>
                         <input matInput placeholder="Einddatum" autocomplete="off" readonly
-                               [value]="rangePickerForm.get('timestamp_before').value | date: 'short'" class="filter-input">
+                          [value]="rangePickerForm.get('timestamp_before').value | date: 'short'" class="filter-input">
                       </div>
 
                       <mat-hint>Selecteer een periode</mat-hint>
@@ -191,7 +197,8 @@
 
               <h1>Stroomverbruik</h1>
 
-              <dashboard-graph [chartInput]="energyChartInput" [loading]="loadingEnergy" yAxisLabel="Stroom (kW)"></dashboard-graph>
+              <dashboard-graph [chartInput]="energyChartInput" [loading]="loadingEnergy" yAxisLabel="Stroom (kW)">
+              </dashboard-graph>
 
             </mat-card>
 
@@ -200,7 +207,8 @@
 
               <h1>Gasverbruik</h1>
 
-              <dashboard-graph [chartInput]="gasChartInput" [loading]="loadingGas" yAxisLabel="Gas (m³/h)"></dashboard-graph>
+              <dashboard-graph [chartInput]="gasChartInput" [loading]="loadingGas" yAxisLabel="Gas (m³/h)">
+              </dashboard-graph>
 
             </mat-card>
           </div>

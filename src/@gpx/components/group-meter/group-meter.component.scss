@@ -6,4 +6,17 @@
     max-width: 350px;
   }
 
+  .content-container {
+    position: relative;
+    height: calc(100vh - 125px);
+  }
+
+  .sticky-container {
+    background-color: #fafafa;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+  }
+
 }

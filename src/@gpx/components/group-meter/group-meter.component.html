@@ -30,8 +30,8 @@
               <input (click)="$event.target.select()" [value]="groupMeter.publicUrl" matInput readonly>
             </mat-form-field>
           </div>
-          <button (cdkCopyToClipboardCopied)="copyPublicLink()" [cdkCopyToClipboard]="groupMeter.publicUrl" [class.b-green]="isCopied" class="mt-8"
-                  mat-icon-button matTooltip="Copy" type="button">
+          <button (cdkCopyToClipboardCopied)="copyPublicLink()" [cdkCopyToClipboard]="groupMeter.publicUrl"
+            [class.b-green]="isCopied" class="mt-8" mat-icon-button matTooltip="Copy" type="button">
             <mat-icon>content_copy</mat-icon>
           </button>
         </div>
@@ -44,11 +44,11 @@
       <p>
 
         <mat-icon [inline]="true">{{ groupMeter.actual_power > 0 ? 'trending_up' : 'trending_down' }}</mat-icon>&nbsp;
-        kW: Actueel vermogen van de groepsleden<br/>
+        kW: Actueel vermogen van de groepsleden<br />
         <mat-icon [inline]="true">flash_on</mat-icon>&nbsp;
-        kWh: Totaal energieverbruik<br/>
+        kWh: Totaal energieverbruik<br />
         <mat-icon [inline]="true">local_fire_department</mat-icon>&nbsp;
-        m³: Totaal gasverbruik<br/>
+        m³: Totaal gasverbruik<br />
 
       </p>
 
@@ -57,39 +57,40 @@
       <p>
 
         <mat-icon [inline]="true">signal_cellular_4_bar</mat-icon>&nbsp;
-        Live: Meterdata van het afgelopen half uur<br/>
+        Live: Meterdata van het afgelopen half uur<br />
         <mat-icon [inline]="true">signal_cellular_connected_no_internet_4_bar</mat-icon>&nbsp;
-        Inactief: Meer dan 30 minuten geen verse gegevens<br/>
+        Inactief: Meer dan 30 minuten geen verse gegevens<br />
         <mat-icon [inline]="true">signal_cellular_off</mat-icon>&nbsp;
-        Offline: Meer dan 2 uur geen verse gegevens<br/>
+        Offline: Meer dan 2 uur geen verse gegevens<br />
 
       </p>
 
     </div>
 
   </mat-drawer>
-  <mat-drawer-content>
+  <mat-drawer-content class="content-container">
 
     <div *ngIf="groupMeter" fxLayout="column">
-      <div class="p-16" fxFlex fxLayout="row" fxLayoutAlign="space-between center">
-        <button disabled mat-stroked-button>
-          <span class="mat-caption" style="color: black;">
-            {{ groupMeter.name }}
-          </span>
-        </button>
-        <button (click)="drawer.toggle()" mat-stroked-button>
-          <mat-icon>info</mat-icon>
-          <span class="mat-caption" style="color: black;">
-          Meer info
-          </span>
-        </button>
+      <div fxLayout="column" class="sticky-container">
+        <div class="p-16" fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+          <button disabled mat-stroked-button>
+            <span class="mat-caption" style="color: black;">
+              {{ groupMeter.name }}
+            </span>
+          </button>
+          <button (click)="drawer.toggle()" mat-stroked-button>
+            <mat-icon>info</mat-icon>
+            <span class="mat-caption" style="color: black;">
+              Meer info
+            </span>
+          </button>
 
+        </div>
+
+        <div>
+          <mat-divider></mat-divider>
+        </div>
       </div>
-
-      <div>
-        <mat-divider></mat-divider>
-      </div>
-
 
       <div class="mt-40 mb-40" fxFlex="100%" fxLayout="row">
         <div fxFlex="5%" fxFlex.xs="2.5%"></div>
@@ -103,13 +104,14 @@
               <div fxLayout="row">
                 <div fxFlex="95%" fxLayout="column" fxLayoutGap="32px">
                   <ng-container *ngFor="let data of groupMeter.getParticipants()">
-                    <app-group-meter-participant [data]="data" [group]="groupMeter" connection="side"></app-group-meter-participant>
+                    <app-group-meter-participant [data]="data" [group]="groupMeter" connection="side">
+                    </app-group-meter-participant>
                   </ng-container>
                 </div>
                 <div fxFlex="5%" fxLayout="column" fxLayoutAlign="center center">
 
                   <app-energy-net-path [reverse]="groupMeter.actual_power > 0" orientation="vertical"
-                                       style="height: 100%;">
+                    style="height: 100%;">
                   </app-energy-net-path>
 
                 </div>
@@ -121,17 +123,18 @@
             </div>
 
 
-            <div  fxHide.lt-md>
+            <div fxHide.lt-md>
 
               <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="12px">
                 <div *ngFor="let data of topRowParticipants" fxFlex="20%">
-                  <app-group-meter-participant [data]="data" [group]="groupMeter" connection="bottom"></app-group-meter-participant>
+                  <app-group-meter-participant [data]="data" [group]="groupMeter" connection="bottom">
+                  </app-group-meter-participant>
                 </div>
               </div>
 
               <div class="middle-line" fxLayout="row">
                 <app-energy-net-path [reverse]="groupMeter.actual_power > 0" orientation="horizontal"
-                                     style="width: 100%">
+                  style="width: 100%">
 
                   <ng-container *ngTemplateOutlet="groupInfo"></ng-container>
                 </app-energy-net-path>
@@ -140,7 +143,8 @@
 
               <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="12px">
                 <div *ngFor="let data of bottomRowParticipants" fxFlex="20%">
-                  <app-group-meter-participant [data]="data" [group]="groupMeter" connection="top"></app-group-meter-participant>
+                  <app-group-meter-participant [data]="data" [group]="groupMeter" connection="top">
+                  </app-group-meter-participant>
                 </div>
               </div>
             </div>
@@ -178,7 +182,7 @@
         </span>
         <span class="mat-caption" style="color: black;">
           <mat-icon [inline]="true">local_fire_department</mat-icon>&nbsp;
-          {{ groupMeter.actual_gas | number: '1.1-2'  }} m³/h
+          {{ groupMeter.actual_gas | number: '1.1-2' }} m³/h
         </span>
 
         <span fxHide.lt-lg></span>
