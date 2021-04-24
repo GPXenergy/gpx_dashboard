@@ -19,22 +19,22 @@ export class DashboardGraphComponent implements OnInit, OnDestroy {
   private readonly _unsubscribeAll = new Subject<void>();
 
   @Input() chartInput: IChartData[] = [];
-  @Input() loading: boolean = true;
+  @Input() loading = true;
 
   // multi: any[];
   view: any[] = [700, 300];
   // options
-  legend: boolean = true;
-  showLabels: boolean = true;
-  animations: boolean = true;
-  xAxis: boolean = true;
-  yAxis: boolean = true;
-  showYAxisLabel: boolean = true;
-  showXAxisLabel: boolean = true;
-  @Input() xAxisLabel: string = 'Periode';
+  legend = true;
+  showLabels = true;
+  animations = true;
+  xAxis = true;
+  yAxis = true;
+  showYAxisLabel = true;
+  showXAxisLabel = true;
+  @Input() xAxisLabel = 'Periode';
   @Input() yAxisLabel: string;
-  timeline: boolean = true;
-  gradient: boolean = true;
+  timeline = true;
+  gradient = true;
   colorScheme = {
     domain: ['#FF3B4E', '#006937', '#FFE224']
   };
@@ -68,9 +68,6 @@ export class DashboardGraphComponent implements OnInit, OnDestroy {
     }
   }
 
-  onSelect(event: any) {
-  }
-
   get tooltipDateFormat(): string {
     const series = this.chartInput[0].series,
       firstDate = series[0].name,
@@ -90,5 +87,13 @@ export class DashboardGraphComponent implements OnInit, OnDestroy {
     this._unsubscribeAll.complete();
   }
 
+  unitForSeries(series: string): string {
+    if (['import', 'export', 'zon-productie'].includes(series.toLowerCase())) {
+      return 'kW';
+    }
+    if (['gasconsumptie'].includes(series.toLowerCase())) {
+      return 'm³/h';
+    }
+  }
 
 }

@@ -10,17 +10,17 @@
 <ng-template #loaded>
   <ng-container *ngIf="!loading && chartInput && chartInput.length && chartInput[0].series.length; else noData">
     <div #ContainerRef class="container" fxFlex="100%">
-      <ngx-charts-area-chart (select)="onSelect($event)" [gradient]="gradient" [legend]="legend"
+      <ngx-charts-area-chart [gradient]="gradient" [legend]="legend"
                              [results]="chartInput" [scheme]="colorScheme" [showXAxisLabel]="showXAxisLabel"
                              [showYAxisLabel]="showYAxisLabel" [timeline]="timeline"
                              [view]="[ContainerRef.offsetWidth, 450]" [xAxisLabel]="xAxisLabel"
-                             [xAxisTickFormatting]="formatDate" [baseValue]="0"
+                             [xAxisTickFormatting]="formatDate" [baseValue]="0" legendTitle="Legenda"
                              [xAxis]="xAxis" [yAxisLabel]="yAxisLabel" [yAxis]="yAxis">
 
         <ng-template #tooltipTemplate let-model="model">
           <div class="area-tooltip-container">
             <span class="tooltip-label">{{ model.series }} • {{ model.name | date: tooltipDateFormat }}</span>
-            <span class="tooltip-val">{{ model.value | number: '1.3' }}</span>
+            <span class="tooltip-val">{{ model.value | number: '1.3' }} {{ unitForSeries(model.series) }}</span>
           </div>
         </ng-template>
 
@@ -31,7 +31,7 @@
             </div>
             <div *ngFor="let tooltipItem of model" class="tooltip-item">
               <span class="tooltip-item-color" [style.background-color]="tooltipItem.color"></span>
-              {{ tooltipItem.series }}: {{ tooltipItem.value | number: '1.3' }}
+              {{ tooltipItem.series }}: {{ tooltipItem.value | number: '1.3' }} {{ unitForSeries(tooltipItem.series) }}
             </div>
           </div>
         </ng-template>

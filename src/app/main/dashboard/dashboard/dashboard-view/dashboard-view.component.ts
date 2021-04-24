@@ -15,6 +15,7 @@ import { AuthService } from '@gpx/services/auth.service';
 import { AuthUser } from '@gpx/models/auth-user.model';
 import { MeterMeasurementFilter, MeterService } from '@gpx/services/api/meter.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MobileService } from '@gpx/services/mobile.service';
 
 
 enum TimestampRange {
@@ -42,6 +43,8 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
   loadingEnergy: boolean;
   loadingGas: boolean;
 
+  isMobile: boolean;
+
   /* For filtering */
   filterRangeOptions = TimestampRange;
   rangePickerForm: FormGroup;
@@ -57,6 +60,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
               private gasMeasurementService: GasMeasurementService,
               private solarMeasurementService: SolarMeasurementService,
               private changeDetectorRef: ChangeDetectorRef,
+              private mobileService: MobileService,
               private titleService: Title) {
     titleService.setTitle('Persoonlijke meter | GPX');
   }
@@ -90,8 +94,9 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
       timestamp_before: new FormControl()
     });
 
-    this.rangePickerForm.valueChanges.pipe(takeUntil(this._unsubscribeAll)).subscribe(changes => {
-    });
+    this.mobileService.isMobile.pipe(takeUntil(this._unsubscribeAll)).subscribe(
+      isMobile => this.isMobile = isMobile
+    );
   }
 
 
@@ -109,9 +114,9 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
   }
 
   setPowerSet(): void {
-    const energy = {name: 'import', series: []};
-    const energy_ex = {name: 'export', series: []};
-    const solar = {name: 'zon-productie', series: []};
+    const energy = {name: 'Import', series: []};
+    const energy_ex = {name: 'Export', series: []};
+    const solar = {name: 'Zon-productie', series: []};
     this.meter.power_measurement_set.forEach((obj, ind) => {
       energy.series.push({name: new Date(obj.timestamp), value: +obj.actual_import});
       if (this.meter.totalPowerExport > 0) {
@@ -134,7 +139,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
   }
 
   setGasSet(): void {
-    const gas = {name: 'Gas', series: []};
+    const gas = {name: 'Gasconsumptie', series: []};
     this.meter.gas_measurement_set.forEach((obj, ind) => {
       gas.series.push({name: new Date(obj.timestamp), value: +obj.actual_gas});
     });

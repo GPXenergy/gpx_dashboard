@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
-import { SetupViewComponent } from './setup-view.component';
+import { SetupViewComponent } from './setup-guide/setup-view.component';
 import { GPXSharedModule } from '@gpx/shared.module';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -11,6 +11,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
+import { GpxConnectorManualViewComponent } from './gpxc-manual/gpx-connector-manual-view.component';
+import { DashboardManualViewComponent } from './dashboard-manual/dashboard-manual-view.component';
 
 const routes: Route[] = [
   {
@@ -20,6 +22,14 @@ const routes: Route[] = [
   {
     path: 'setup',
     component: SetupViewComponent
+  },
+  {
+    path: 'gpxconnector',
+    component: GpxConnectorManualViewComponent
+  },
+  {
+    path: 'dashboard',
+    component: DashboardManualViewComponent
   },
 
 ];
@@ -41,6 +51,8 @@ const routes: Route[] = [
   declarations: [
     SetupViewComponent,
     ManualViewComponent,
+    GpxConnectorManualViewComponent,
+    DashboardManualViewComponent,
   ]
 })
 export class ManualViewModule {

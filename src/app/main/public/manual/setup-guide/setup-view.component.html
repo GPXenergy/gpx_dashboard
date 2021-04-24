@@ -1,13 +1,13 @@
 <div class="mt-20 mb-40" fxFlex="100%" fxLayout="row">
   <div fxFlex="20%" fxFlex.md="15%" fxFlex.sm="2.5%" fxFlex.xs="2.5%"></div>
   <div fxFlex="60%" fxFlex.md="70%" fxFlex.sm="95%" fxFlex.xs="95%" fxLayout="column">
-    <h1>Quick start handleiding</h1>
+    <h1><a routerLink="/manual">Handleidingen</a> / Quick start handleiding</h1>
 
     <p>
       Ben je net in bezit gekomen van een GPXconnector en wil je weten hoe je deze in een paar simpele stappen aan de
-      praat krijgt? Dan ben je hier op de goede plek! In de Quick start handleiding wordt je door het proces geleid om
+      praat krijgt? Dan ben je hier op de goede plek! In de Quick-start handleiding wordt je door het proces geleid om
       het apparaat in te stellen en te installeren in je meterkast! Ben je eerder benieuwd wat het apparaat allemaal
-      doet? Kijk dan in de <a routerLink="/manual">gebruikershandleiding</a>!
+      doet? Kijk dan in de <a routerLink="/manual/gpxconnector">gebruikershandleiding</a>!
     </p>
 
     <div class="img-container">
@@ -269,7 +269,7 @@
         </ng-container>
 
         <ng-container matColumnDef="description">
-          <th mat-header-cell fxHide.lt-md *matHeaderCellDef>Beschrijving</th>
+          <th mat-header-cell *matHeaderCellDef>Beschrijving</th>
           <td mat-cell *matCellDef="let LED">
             {{LED.description}}
           </td>

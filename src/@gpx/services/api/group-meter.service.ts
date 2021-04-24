@@ -113,7 +113,7 @@ function MOCK_GROUP_METER(): GroupMeter {
         total_export: 5922.735,
         total_gas: 143,
         actual_power: 1.112,
-        actual_solar: 1.411,
+        actual_solar: null,
         actual_gas: 0,
         joined_on: new Date(),
         last_activity: new Date(),
