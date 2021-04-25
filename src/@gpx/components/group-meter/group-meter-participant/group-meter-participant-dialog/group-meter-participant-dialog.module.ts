@@ -10,6 +10,7 @@ import { GPXSharedModule } from '@gpx/shared.module';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatTabsModule,
     MatCardModule,
     MatProgressSpinnerModule,
+    MatTableModule,
   ],
 })
 export class GroupMeterParticipantDialogModule { }

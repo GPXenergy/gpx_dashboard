@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'user-manual-view',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./manual-view.component.scss'],
 })
 export class ManualViewComponent {
-
+  constructor(private titleService: Title) {
+    this.titleService.setTitle('Handleidingen | GPX');
+  }
 }

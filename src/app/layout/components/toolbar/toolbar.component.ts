@@ -12,6 +12,7 @@ import { LanguageInfo, LocaleService } from '@gpx/services/locale.service';
 import { User } from '@gpx/models/user.model';
 import { AuthService } from '@gpx/services/auth.service';
 import { takeUntil } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -35,7 +36,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   constructor(private changeDetectorRef: ChangeDetectorRef,
               private _sideNavigationService: NavigationBehaviorService,
               private _localeService: LocaleService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              public router: Router) {
   }
 
 

@@ -58,31 +58,32 @@
 
         <h2>Groepscontributie</h2>
 
-        <div fxLayout="column" fxFlex="100%" fxLayoutAlign="start start">
-          <div>
-            <p>Stroom</p>
-          </div>
-          <div>
-            <span> Export: </span>
-            <span> {{participant.total_export | number: '1.3'}} kWh </span>
-          </div>
-          <div>
-            <span> Import: </span>
-            <span> {{participant.total_import | number: '1.3'}} kWh </span>
-          </div>
-          <div>
-            <span> Totaal balans: </span>
-            <span> {{participant.totalPower | explicitNumber: '1.3'}} kWh </span>
-          </div>
-          <div>
-            <br/>
-            <p>Gas</p>
-          </div>
-          <div>
-            <span> Totaal verbruik: </span>
-            <span> {{participant.total_gas | number: '1.3'}} m³ </span>
-          </div>
-        </div>
+        <table mat-table [dataSource]="participantData" fxFlex>
+
+          <ng-container matColumnDef="label">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let dataObj">
+              {{dataObj.label}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef>Totaal</th>
+            <td mat-cell *matCellDef="let dataObj">
+              {{dataObj.total | explicitNumber: '1.3': null: dataObj.inverted}} {{ dataObj.unit }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="daily">
+            <th mat-header-cell *matHeaderCellDef>Gemiddeld<br> per dag</th>
+            <td mat-cell *matCellDef="let dataObj">
+              <span *ngIf="dataObj.average">{{dataObj.average | explicitNumber: '1.1-2': null: dataObj.inverted}} {{ dataObj.unit }}</span>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['label', 'total', 'daily']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['label', 'total', 'daily'];"></tr>
+        </table>
 
         <mat-card>
           <mat-card-content>

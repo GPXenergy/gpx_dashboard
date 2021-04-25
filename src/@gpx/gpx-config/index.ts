@@ -26,7 +26,7 @@ export const CONFIGS: IConfigs = {
     layout: {
       navbar: {
         folded: false,
-        hidden: true,
+        hidden: false,
       },
       toolbar: {
         hidden: false,

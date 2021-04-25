@@ -5,7 +5,6 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { filter, takeUntil } from 'rxjs/operators';
 import { NavigationBehaviorService } from '@gpx/services/navigation-behavior.service';
 import { ConfigService } from '@gpx/services/config.service';
-import { Config } from '@gpx/gpx-config/types';
 import { Meter } from '@gpx/models/meter.model';
 import { MeterSelectionService } from '@gpx/services/meter-selection.service';
 import { User } from '@gpx/models/user.model';
@@ -21,8 +20,6 @@ import { AuthService } from '@gpx/services/auth.service';
 export class PageLayoutComponent implements OnInit, OnDestroy {
 
   @ViewChild('snav', {static: true}) sidenav: MatSidenav;
-  config: Config;
-  // @ViewChild(PerfectScrollbarDirective, { static: false }) directiveRef?: PerfectScrollbarDirective;
   isMobileState: boolean;
   user: User;
   availableMeters: Meter[];
@@ -36,40 +33,31 @@ export class PageLayoutComponent implements OnInit, OnDestroy {
               private meterSelectionService: MeterSelectionService,
               private router: Router) {
 
-    this.navigationBehaviorService.listenToMobileSideNavState.pipe(
-      takeUntil(this._unsubscribeAll)
-    ).subscribe((mobileState: boolean) => {
+    this.navigationBehaviorService.mobileSideNav.pipe(takeUntil(this._unsubscribeAll)).subscribe(mobileState => {
       this.isMobileState = mobileState;
+      this.triggerNav();
     });
 
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       takeUntil(this._unsubscribeAll)
     ).subscribe(() => {
-      if (this.isMobileState) {
-        this.sidenav.close();
-      }
+      this.triggerNav();
     });
 
     // Subscribe to config changes
     this.configService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe((config) => {
-      this.config = config;
-      // this.document.body.classList.add(this.oanaxConfig.colorTheme);
-      if (this.config.layout.navbar.hidden) {
-        this.sidenav?.close();
-      } else if (!this.isMobileState) {
-        this.sidenav?.open();
-      }
+      this.triggerNav();
     });
   }
 
 
   ngOnInit(): void {
-    this.setUpSideNav();
     this.navigationBehaviorService.setSideNavigation(this.sidenav);
 
     this.authService.userUpdated.pipe(takeUntil(this._unsubscribeAll)).subscribe(user => {
       this.user = user;
+      this.triggerNav();
       this.changeDetectorRef.detectChanges();
     });
 
@@ -84,20 +72,16 @@ export class PageLayoutComponent implements OnInit, OnDestroy {
     });
   }
 
+  triggerNav(): void {
+    if (this.sidenav) {
+      this.user && !this.isMobileState ? this.sidenav.open() : this.sidenav.close();
+    }
+  }
+
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
-  }
-
-  setUpSideNav(): void {
-    if (this.config.layout.navbar.hidden) {
-      this.sidenav.close();
-    } else {
-      if (!this.isMobileState) {
-        this.sidenav.open();
-      }
-    }
   }
 
   selectMeter(meter: Meter): void {

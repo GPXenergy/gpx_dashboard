@@ -60,7 +60,7 @@
           </div>
 
           <div class="m-12" fxLayoutAlign="center center">
-            <button fxFlex="80%" mat-stroked-button routerLink="/logout">
+            <button fxFlex="80%" mat-stroked-button routerLink="/logout" [queryParams]="{next: router.url}">
               <mat-icon class="b-text-dark-grey mr-4">exit_to_app</mat-icon>
               <span class="b-text-dark-grey">Uitloggen</span>
             </button>

@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Meter } from '@gpx/models/meter.model';
 import { AuthUser } from '@gpx/models/auth-user.model';
+import { Title } from '@angular/platform-browser';
 
 
 interface MeterModel {
@@ -164,7 +165,9 @@ export class SetupViewComponent implements OnInit, OnDestroy {
   };
 
 
-  constructor(private authService: AuthService, public meterSelectionService: MeterSelectionService) {
+  constructor(private authService: AuthService, public meterSelectionService: MeterSelectionService,
+              private titleService: Title) {
+    this.titleService.setTitle('Quick-start handleiding | GPX');
 
   }
 

@@ -13,6 +13,14 @@ export interface IGroupMeterParticipantDialogData {
   group: GroupMeter;
 }
 
+interface IParticipantTableData{
+  label: string;
+  total: number;
+  average?: number;
+  unit: string;
+  inverted?: boolean;
+}
+
 @Component({
   selector: 'app-group-meter-participant-dialog',
   templateUrl: './group-meter-participant-dialog.component.html',
@@ -21,6 +29,8 @@ export interface IGroupMeterParticipantDialogData {
 export class GroupMeterParticipantDialogComponent implements OnInit, OnDestroy {
   participant: GroupParticipant;
   group: GroupMeter;
+
+  participantData: IParticipantTableData[] = [];
 
   private readonly onDestroy = new Subject<void>();
   @ViewChild('drawer', {static: true}) matDrawer: MatDrawer;
@@ -35,6 +45,41 @@ export class GroupMeterParticipantDialogComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    if (this.participant.total_import) {
+      this.participantData.push({
+        label: 'Stroom (import)',
+        total: this.participant.total_import,
+        average: this.participant.averageImportPerDay,
+        unit: 'kWh',
+        inverted: true,
+      });
+    }
+    if (this.participant.total_export) {
+      this.participantData.push({
+        label: 'Stroom (export)',
+        total: this.participant.total_export,
+        average: this.participant.averageExportPerDay,
+        unit: 'kWh',
+        inverted: false,
+      });
+    }
+    if (this.participant.total_export && this.participant.total_export) {
+      this.participantData.push({
+        label: 'Stroom (balans)',
+        total: this.participant.totalPower,
+        unit: 'kWh',
+        inverted: false,
+      });
+    }
+    if (this.participant.total_import) {
+      this.participantData.push({
+        label: 'Gas',
+        total: this.participant.total_gas,
+        average: this.participant.averageGasPerDay,
+        unit: 'm³',
+        inverted: null,
+      });
+    }
   }
 
   ngOnDestroy(): void {

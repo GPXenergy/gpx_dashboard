@@ -204,14 +204,23 @@ export class GroupParticipant extends BaseModel {
       case 'producer_other':
         return 'Producent (anders)';
       default:
-        return 'Onbekend'
+        return 'Onbekend';
     }
+  }
 
+  public get averageGasPerDay(): number {
+    const span = (this.last_activity.getTime() - this.joined_on.getTime()) / 1000;
+    return span ? this.total_gas / span * 60 * 60 * 24 : 0;
+  }
 
+  public get averageImportPerDay(): number {
+    const span = (this.last_activity.getTime() - this.joined_on.getTime()) / 1000;
+    return span ? this.total_import / span * 60 * 60 * 24 : 0;
+  }
 
-
-
-
+  public get averageExportPerDay(): number {
+    const span = (this.last_activity.getTime() - this.joined_on.getTime()) / 1000;
+    return span ? this.total_export / span * 60 * 60 * 24 : 0;
   }
 
   protected createModelRelations(values: modelPropertiesObj<this>): void {
@@ -222,6 +231,13 @@ export class GroupParticipant extends BaseModel {
   protected cleanFields(): void {
     super.cleanFields();
     this.last_activity = new Date(this.last_activity);
+    this.joined_on = new Date(this.joined_on);
+    this.total_import = +this.total_import;
+    this.total_export = +this.total_export;
+    this.total_gas = +this.total_gas;
+    this.actual_power = +this.actual_power;
+    this.actual_gas = +this.actual_gas;
+    this.actual_solar = +this.actual_solar;
   }
 
 }

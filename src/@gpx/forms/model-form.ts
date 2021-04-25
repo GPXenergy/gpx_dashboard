@@ -8,7 +8,7 @@ import { FormErrors } from './form-error.model';
 // import { QueryParamsService } from '../services/query-params.service';
 
 type controlConfigType<T> = {
-  [key in keyof T]?: [T[key]] | [T[key], (ValidatorFn | ValidatorFn[])] | AbstractControl
+  [key in keyof T]?: [T[key]] | [T[key] | {value: T[key], [key: string]: any}, (ValidatorFn | ValidatorFn[])] | AbstractControl
 };
 
 interface IControlConfig {

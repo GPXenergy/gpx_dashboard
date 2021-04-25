@@ -195,7 +195,10 @@
 
             <mat-card fxFlex="100%">
 
-              <h1>Stroomverbruik</h1>
+              <h1>
+                Stroomverbruik
+                <img src="/assets/group-meter/lightbulb.png" class="header-image" alt="lampje">
+              </h1>
 
               <dashboard-graph [chartInput]="energyChartInput" [loading]="loadingEnergy" yAxisLabel="Stroom (kW)">
               </dashboard-graph>
@@ -205,7 +208,10 @@
 
             <mat-card fxFlex="100%">
 
-              <h1>Gasverbruik</h1>
+              <h1>
+                Gasverbruik
+                <img src="/assets/group-meter/flame.png" class="header-image" alt="vlammetje">
+              </h1>
 
               <dashboard-graph [chartInput]="gasChartInput" [loading]="loadingGas" yAxisLabel="Gas (m³/h)">
               </dashboard-graph>

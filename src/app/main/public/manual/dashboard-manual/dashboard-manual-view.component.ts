@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -10,7 +11,8 @@ import { Subject } from 'rxjs';
 export class DashboardManualViewComponent implements OnInit, OnDestroy {
   private readonly _unsubscribeAll = new Subject<void>();
 
-  constructor() {
+  constructor(private titleService: Title) {
+    this.titleService.setTitle('Gebruikershandleiding Dashboard | GPX');
   }
 
   ngOnInit(): void {

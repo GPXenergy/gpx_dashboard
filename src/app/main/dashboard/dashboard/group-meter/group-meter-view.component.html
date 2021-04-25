@@ -6,7 +6,7 @@
     <div class="p-16" fxLayout="row" fxLayoutAlign="space-between center">
       <button disabled mat-stroked-button>
       <span class="mat-caption" style="color: black;">
-        {{ 'Geen groepsmeter gevonden'}}
+        Geen groepsmeter gevonden
       </span>
       </button>
     </div>
@@ -21,7 +21,7 @@
       <div fxFlex="90%" fxFlex.xs="95%" fxLayout="column">
 
         <span>
-          Je zit niet in een groepsmeter met <em>{{ selectedMeter.name }}</em>.
+          Je zit niet in een groepsmeter met <em>{{ selectedMeter?.name }}</em>.
         </span>
 
       </div>

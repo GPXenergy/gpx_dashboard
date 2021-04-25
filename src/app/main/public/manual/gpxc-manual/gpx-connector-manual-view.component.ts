@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
+import { MeterSelectionService } from '../../../../../@gpx/services/meter-selection.service';
+import { Title } from '@angular/platform-browser';
 
 
 interface MeterModel {
@@ -150,7 +152,8 @@ export class GpxConnectorManualViewComponent implements OnInit, OnDestroy {
     description: 'Server is niet bereikbaar vanuit jouw netwerk',
   }];
 
-  constructor() {
+  constructor(private titleService: Title) {
+    this.titleService.setTitle('Gebruikershandleiding GPXconnector | GPX');
   }
 
   ngOnInit(): void {
