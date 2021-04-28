@@ -2,7 +2,7 @@
   <mat-drawer #drawer class="drawer-container" position="end" mode="over">
     <div class="p-16" fxLayout="column">
       <div class="mb-12">
-        <button (click)="drawer.toggle()" class="b-secondary" mat-icon-button>
+        <button (click)="drawer.toggle()" class="gpx-primary" mat-icon-button>
           <mat-icon>arrow_forward</mat-icon>
         </button>
       </div>
@@ -21,48 +21,48 @@
           <div>
             <p class="mat-title">In deze periode</p>
             <p>
-              <em>van {{rangePickerForm.get('timestamp_after').value | date: "short"}}</em><br />
-              <em>tot {{rangePickerForm.get('timestamp_before').value | date: "short"}}</em><br />
+              <em>van {{rangePickerForm.get('timestamp_after').value | date: "short"}}</em><br/>
+              <em>tot {{rangePickerForm.get('timestamp_before').value | date: "short"}}</em><br/>
             </p>
             <p>
-              Stroom import (1): {{ meter.period_import_1 | number }} kWh<br />
-              Stroom import (2): {{ meter.period_import_2 | number }} kWh<br />
-              Stroom export (1): {{ meter.period_export_1 | number }} kWh<br />
-              Stroom export (2): {{ meter.period_export_2 | number }} kWh<br />
-              Zonproductie: {{ meter.period_solar | number }} kWh<br />
-              Gas: {{ meter.period_gas | number }} m³<br />
+              Stroom import (1): <span class="gpx-text-secondary">{{ meter.period_import_1 | number }} kWh</span><br/>
+              Stroom import (2): <span class="gpx-text-secondary">{{ meter.period_import_2 | number }} kWh</span><br/>
+              Stroom export (1): <span class="gpx-text-secondary">{{ meter.period_export_1 | number }} kWh</span><br/>
+              Stroom export (2): <span class="gpx-text-secondary">{{ meter.period_export_2 | number }} kWh</span><br/>
+              <span *ngIf="meter.total_solar">Zonproductie: {{ meter.period_solar | number }} kWh<br/></span>
+              Gas: <span class="gpx-text-secondary">{{ meter.period_gas | number }} m³</span><br/>
             </p>
           </div>
           <div>
             <p class="mat-title">Stroom</p>
             <p>
-              <em>Laatste update {{meter.power_timestamp | date: "short"}}</em><br />
+              <em>Laatste update  <span class="gpx-text-secondary">{{meter.power_timestamp | date: "short"}}</span></em><br/>
             </p>
             <p>
-              Actueel: {{meter.actualPower | number }} kW (Tarief: {{meter.tariff | number }})<br />
+              Actueel: {{meter.actualPower | number }} kW (Tarief: {{meter.tariff | number }})<br/>
             </p>
             <p>
-              Import 1: {{meter.total_power_import_1 | number }} kWh <br />
-              Import 2: {{meter.total_power_import_2 | number }} kWh <br />
-              Export 1: {{meter.total_power_export_1 | number }} kWh <br />
-              Export 2: {{meter.total_power_export_2 | number }} kWh <br />
-              --- <br />
-              Totaal import: {{meter.totalPowerImport | number }} kWh <br />
-              Totaal export: {{meter.totalPowerExport | number }} kWh <br />
-              Meter balans: {{meter.totalPower | number }} kWh <br />
+              Import 1:  <span class="gpx-text-secondary">{{meter.total_power_import_1 | number }} kWh </span><br/>
+              Import 2:  <span class="gpx-text-secondary">{{meter.total_power_import_2 | number }} kWh </span><br/>
+              Export 1:  <span class="gpx-text-secondary">{{meter.total_power_export_1 | number }} kWh </span><br/>
+              Export 2:  <span class="gpx-text-secondary">{{meter.total_power_export_2 | number }} kWh </span><br/>
+              --- <br/>
+              Totaal import: {{meter.totalPowerImport | number }} kWh <br/>
+              Totaal export: {{meter.totalPowerExport | number }} kWh <br/>
+              Meter balans: {{meter.totalPower | number }} kWh <br/>
             </p>
           </div>
           <p class="mat-title">Gas</p>
           <p *ngIf="meter.gas_timestamp">
-            <em>Laatste update {{meter.gas_timestamp | date: "short"}}</em><br />
-            Actueel gasverbruik: {{meter.actual_gas | number }} m³/h <br />
-            Totaal gasverbruik: {{meter.total_gas | number }} m³ <br />
+            <em>Laatste update  <span class="gpx-text-secondary">{{meter.gas_timestamp | date: "short"}}</span></em><br/>
+            Actueel gasverbruik: {{meter.actual_gas | number }} m³/h <br/>
+            Totaal gasverbruik:  <span class="gpx-text-secondary">{{meter.total_gas | number }} m³ </span> <br/>
           </p>
           <p class="mat-title">Solar</p>
           <p *ngIf="meter.solar_timestamp">
-            <em>Laatste update {{meter.solar_timestamp | date: "short"}}</em><br />
-            Actueel productie: {{meter.actual_solar | number }} kW <br />
-            <span *ngIf="meter.total_solar">Totaal zonproductie: {{meter.total_solar | number }} kWh </span><br />
+            <em>Laatste update {{meter.solar_timestamp | date: "short"}}</em><br/>
+            Actueel productie: {{meter.actual_solar | number }} kW <br/>
+            <span *ngIf="meter.total_solar">Totaal zonproductie: {{meter.total_solar | number }} kWh </span><br/>
           </p>
         </ng-container>
         <!-- </mat-card> -->
@@ -104,11 +104,11 @@
         </div>
       </div>
 
-      <div class="mt-40 mb-40" fxFlex="100%" fxLayout="row">
+      <div class="mt-20 mb-20" fxFlex="100%" fxLayout="row">
         <div fxFlex="5%" fxFlex.xs="2.5%"></div>
         <div fxFlex="90%" fxFlex.xs="95%">
 
-          <div fxLayout="column" fxLayoutGap="32px">
+          <div fxLayout="column" fxLayoutGap="20px">
 
             <div>
               <mat-card fxFlex="420px" fxFlex.xs="100%">
@@ -117,24 +117,24 @@
 
                   <div>
                     <mat-form-field appearance="outline" fxFlex fxFlex.lt-md="100%" class="range-input-field"
-                      [matMenuTriggerFor]="rangeMenu">
+                                    [matMenuTriggerFor]="rangeMenu">
                       <mat-label>
                         Periode
                       </mat-label>
                       <mat-date-range-input style="display: none" [formGroup]="rangePickerForm"
-                        [rangePicker]="rangePicker">
-                        <input matStartDate placeholder="Start datum" formControlName="timestamp_after"
-                          [rangePicker]="rangePicker" readonly>
-                        <input matEndDate placeholder="Eind datum" formControlName="timestamp_before"
-                          [rangePicker]="rangePicker" readonly>
+                                            [rangePicker]="rangePicker">
+                        <input matStartDate placeholder="Start datum" formControlName="timestamp_after" readonly>
+                        <input matEndDate placeholder="Eind datum" formControlName="timestamp_before" readonly>
                       </mat-date-range-input>
 
                       <div role="group" fxLayout.lt-md="column" fxLayoutAlign="start center">
                         <input matInput placeholder="Startdatum" autocomplete="off" readonly
-                          [value]="rangePickerForm.get('timestamp_after').value | date: 'short'" class="filter-input">
+                               [value]="rangePickerForm.get('timestamp_after').value | date: 'short'"
+                               class="filter-input">
                         <span style="margin: 0 15px">-</span>
                         <input matInput placeholder="Einddatum" autocomplete="off" readonly
-                          [value]="rangePickerForm.get('timestamp_before').value | date: 'short'" class="filter-input">
+                               [value]="rangePickerForm.get('timestamp_before').value | date: 'short'"
+                               class="filter-input">
                       </div>
 
                       <mat-hint>Selecteer een periode</mat-hint>
@@ -176,18 +176,6 @@
                     </mat-form-field>
                   </div>
 
-                  <!-- <div> -->
-                  <!-- <mat-form-field appearance="outline" fxFlex="155px" class="mr-8 ml-16">
-                    <mat-label>Start</mat-label>
-                    <input matInput formControlName="start" autocomplete="off" readonly>
-                  </mat-form-field>
-
-                  <mat-form-field appearance="outline" fxFlex="155px" class="mr-8 ml-8">
-                    <mat-label>Eind</mat-label>
-                    <input matInput formControlName="end" autocomplete="off" readonly>
-                  </mat-form-field> -->
-                  <!-- </div> -->
-
                 </form>
 
               </mat-card>
@@ -195,33 +183,43 @@
 
             <mat-card fxFlex="100%">
 
-              <h1>
-                Stroomverbruik
-                <img src="/assets/group-meter/lightbulb.png" class="header-image" alt="lampje">
-              </h1>
+              <mat-tab-group>
+                <mat-tab>
+                  <ng-template mat-tab-label>
+                    <img src="/assets/group-meter/lightbulb.png" class="header-image" alt="lampje">
+                    Stroomverbruik
+                  </ng-template>
 
-              <dashboard-graph [chartInput]="energyChartInput" [loading]="loadingEnergy" yAxisLabel="Stroom (kW)">
-              </dashboard-graph>
+                  <p class="mt-12">
+<!--                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis molestie nulla. Duis sit amet-->
+<!--                    imperdiet arcu, sit amet aliquam enim. Aliquam porttitor lobortis ex sed pretium. Vivamus tempor-->
+<!--                    nibh a est aliquam dignissim. Nam dictum rutrum elit in tincidunt.-->
+                  </p>
+
+                  <dashboard-graph [chartInput]="energyChartInput" [loading]="loadingEnergy" yAxisLabel="Stroom (kW)">
+                  </dashboard-graph>
+                </mat-tab>
+                <mat-tab>
+                  <ng-template mat-tab-label>
+                    <img src="/assets/group-meter/flame.png" class="header-image" alt="vlammetje">
+                    Gasverbruik
+                  </ng-template>
+
+                  <p class="mt-12">
+<!--                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis molestie nulla. Duis sit amet-->
+<!--                    imperdiet arcu, sit amet aliquam enim. Aliquam porttitor lobortis ex sed pretium. Vivamus tempor-->
+<!--                    nibh a est aliquam dignissim. Nam dictum rutrum elit in tincidunt.-->
+                  </p>
+
+                  <dashboard-graph [chartInput]="gasChartInput" [loading]="loadingGas" yAxisLabel="Gas (m³/h)">
+                  </dashboard-graph>
+                </mat-tab>
+              </mat-tab-group>
+
 
             </mat-card>
 
-
-            <mat-card fxFlex="100%">
-
-              <h1>
-                Gasverbruik
-                <img src="/assets/group-meter/flame.png" class="header-image" alt="vlammetje">
-              </h1>
-
-              <dashboard-graph [chartInput]="gasChartInput" [loading]="loadingGas" yAxisLabel="Gas (m³/h)">
-              </dashboard-graph>
-
-            </mat-card>
           </div>
-
-
-          <!-- </div> -->
-
 
         </div>
         <div fxFlex="5%" fxFlex.xs="2.5%"></div>

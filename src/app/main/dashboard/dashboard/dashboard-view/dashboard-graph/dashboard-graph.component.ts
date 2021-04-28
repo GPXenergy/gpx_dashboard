@@ -1,12 +1,17 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { MobileService } from '@gpx/services/mobile.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
-
-export interface IChartData {
+interface IChartData {
   name: string;
   series: { name: Date, value: number }[];
+  unit: string;
+}
+
+export interface IGraphData {
+  data: IChartData[];
+  colorScheme?: {domain: string[]};
 }
 
 @Component({
@@ -14,17 +19,17 @@ export interface IChartData {
   templateUrl: './dashboard-graph.component.html',
   styleUrls: ['./dashboard-graph.component.scss']
 })
-export class DashboardGraphComponent implements OnInit, OnDestroy {
+export class DashboardGraphComponent implements OnChanges, OnDestroy {
 
   private readonly _unsubscribeAll = new Subject<void>();
 
-  @Input() chartInput: IChartData[] = [];
+  @Input() chartInput: IGraphData = {data: []};
   @Input() loading = true;
 
   // multi: any[];
   view: any[] = [700, 300];
   // options
-  legend = true;
+  isMobile = true;
   showLabels = true;
   animations = true;
   xAxis = true;
@@ -33,19 +38,16 @@ export class DashboardGraphComponent implements OnInit, OnDestroy {
   showXAxisLabel = true;
   @Input() xAxisLabel = 'Periode';
   @Input() yAxisLabel: string;
-  timeline = true;
-  gradient = true;
-  colorScheme = {
-    domain: ['#FF3B4E', '#006937', '#FFE224']
-  };
+  gradient = false;
 
   constructor(private cd: ChangeDetectorRef, mb: MobileService) {
     mb.isMobile.pipe(takeUntil(this._unsubscribeAll)).subscribe(
-      isMobile => this.legend = !isMobile
+      isMobile => this.isMobile = isMobile
     );
   }
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
+    this.cd.detectChanges();
   }
 
   /// method, dateTickFormatting...
@@ -69,7 +71,7 @@ export class DashboardGraphComponent implements OnInit, OnDestroy {
   }
 
   get tooltipDateFormat(): string {
-    const series = this.chartInput[0].series,
+    const series = this.chartInput.data[0].series,
       firstDate = series[0].name,
       lastDate = series[series.length - 1].name,
       millisDiff = lastDate.valueOf() - firstDate.valueOf();
@@ -88,12 +90,7 @@ export class DashboardGraphComponent implements OnInit, OnDestroy {
   }
 
   unitForSeries(series: string): string {
-    if (['import', 'export', 'zon-productie'].includes(series.toLowerCase())) {
-      return 'kW';
-    }
-    if (['gasconsumptie'].includes(series.toLowerCase())) {
-      return 'm³/h';
-    }
+    return this.chartInput.data.find(obj => obj.name === series).unit;
   }
 
 }

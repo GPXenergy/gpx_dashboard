@@ -1,37 +1,37 @@
 @import '@gpx/styles/gpx';
 
-.b-text-black {
+.gpx-text-black {
   color: black !important;
 }
 
-.b-primary {
-  background-color: $b-color-primary;
+.gpx-primary {
+  background-color: $gpx-color-primary;
   color: white !important;
 }
 
-.b-secondary {
-  background-color: $b-color-secondary;
+.gpx-secondary {
+  background-color: $gpx-color-secondary;
   color: white !important;
 }
 
-.b-secondary:disabled {
+.gpx-secondary:disabled {
   background-color: rgba(0, 0, 0, 0.12) !important;
   color: rgba(0, 0, 0, 0.26) !important;
   cursor: not-allowed !important;
 }
 
 .b-action {
-  background-color: $b-color-action;
+  background-color: $gpx-color-action;
   color: white !important;
 }
 
 .b-green {
-  background-color: $b-color-green;
+  background-color: $gpx-color-primary;
   color: white !important;
 }
 
 .b-green:disabled {
-  background-color: $b-color-middle-grey;
+  background-color: $gpx-color-middle-grey;
 }
 
 .fuse-navy-700 {
@@ -43,23 +43,19 @@
   background-color: $b-message-color;
 }
 
-.b-text-primary {
-  color: $b-color-primary;
+.gpx-text-primary {
+  color: $gpx-color-primary
 }
 
-.b-text-secondary {
-  color: $b-color-secondary
+.gpx-text-secondary {
+  color: $gpx-color-secondary
 }
 
-.b-text-action {
-  color: $b-color-action;
+.gpx-text-action {
+  color: $gpx-color-action;
 }
 
-.b-text-green {
-  color: $b-color-green;
-}
-
-.b-text-white {
+.gpx-text-white {
   color: white;
 }
 
@@ -67,44 +63,27 @@
   background: white !important;
 }
 
-.b-text-dark-grey {
-  color: $b-color-dark-grey;
-}
-
-.b-grey {
-  background-color: #5C616F !important;
-  color: white;
-
-  &:hover:not(.no-hover) {
-    background-color: $b-color-secondary;
-  }
+.gpx-text-dark-grey {
+  color: $gpx-color-dark-grey;
 }
 
 .bg-dark-grey {
-  background: $b-color-dark-grey;
+  background: $gpx-color-dark-grey;
 }
 
 .bg-middle-grey {
-  background: $b-color-middle-grey;
+  background: $gpx-color-middle-grey;
 }
 
 .bg-light-grey {
-  background: $b-color-light-grey;
+  background: $gpx-color-light-grey;
 }
 
-.bg-primary-dark {
-  background: $b-color-primary-dark;
+.gpx-text-middle-grey {
+  color: $gpx-color-middle-grey;
 }
 
-.b-text-middle-grey {
-  color: $b-color-middle-grey;
-}
-
-.b-text-light-grey {
-  color: $b-color-light-grey;
-}
-
-.b-secondary-focus {
+.gpx-secondary-focus {
   // background-color: #e8f4fa !important;
   background-color: #E0EBFD !important;
   color: black !important;
@@ -202,24 +181,6 @@
 
   @include media-breakpoint('lt-md') {
     padding: 27px 0 27px 0;
-  }
-}
-
-.border-line {
-  width: 60px;
-  height: 6px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-  background-color: $b-color-primary;
-  border-color: $b-color-primary;
-
-  &.centered {
-    margin: auto;
-  }
-
-  &.longer-line {
-    margin: 20px auto 20px auto;
-    width: 300px;
   }
 }
 

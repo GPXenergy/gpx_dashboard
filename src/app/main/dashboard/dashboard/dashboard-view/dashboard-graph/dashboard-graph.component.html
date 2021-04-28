@@ -1,5 +1,5 @@
-<ng-container *ngIf="loading; else loaded">
-  <div fxFlex="100%" class="mt-40 mb-40" fxLayout="column" fxLayoutAlign="center center">
+<ng-container *ngIf="loading; else loaded" >
+  <div fxFlex="100%" class="mt-40 mb-40" fxLayout="column" fxLayoutAlign="center center" [ngStyle]="{'height.px': isMobile ? 150 : 320}">
     <mat-spinner></mat-spinner>
     <div class="mt-20 mat-body-2">
       Data aan het laden
@@ -8,14 +8,14 @@
 </ng-container>
 
 <ng-template #loaded>
-  <ng-container *ngIf="!loading && chartInput && chartInput.length && chartInput[0].series.length; else noData">
-    <div #ContainerRef class="container" fxFlex="100%">
-      <ngx-charts-area-chart [gradient]="gradient" [legend]="legend"
-                             [results]="chartInput" [scheme]="colorScheme" [showXAxisLabel]="showXAxisLabel"
-                             [showYAxisLabel]="showYAxisLabel" [timeline]="timeline"
-                             [view]="[ContainerRef.offsetWidth, 450]" [xAxisLabel]="xAxisLabel"
-                             [xAxisTickFormatting]="formatDate" [baseValue]="0" legendTitle="Legenda"
-                             [xAxis]="xAxis" [yAxisLabel]="yAxisLabel" [yAxis]="yAxis">
+  <ng-container *ngIf="!loading && chartInput && chartInput.data.length && chartInput.data[0].series.length; else noData">
+    <div #containerRef class="container" fxFlex="100%">
+      <ngx-charts-area-chart [gradient]="gradient" [legend]="true" [results]="chartInput.data" [xAxisLabel]="xAxisLabel"
+                             [showYAxisLabel]="showYAxisLabel" [timeline]="!isMobile" [showXAxisLabel]="showXAxisLabel"
+                             [animations]="false"
+                             [view]="[containerRef.offsetWidth, isMobile ? 220 : 400]" [scheme]="chartInput.colorScheme"
+                             [xAxisTickFormatting]="formatDate" [baseValue]="0" legendTitle="Legenda" [yAxis]="yAxis"
+                             [xAxis]="xAxis" [yAxisLabel]="yAxisLabel" [legendPosition]="isMobile ? 'below' : 'right'">
 
         <ng-template #tooltipTemplate let-model="model">
           <div class="area-tooltip-container">
@@ -41,7 +41,7 @@
 
   </ng-container>
   <ng-template #noData>
-    <p class="mt-40 mb-40 center-text mat-title b-text-middle-grey" fxFlex="100%" fxLayoutAlign="center center">
+    <p class="mt-40 mb-40 center-text mat-title gpx-text-middle-grey" fxFlex="100%" fxLayoutAlign="center center">
       Geen data beschikbaar voor de geselecteerde periode
     </p>
   </ng-template>

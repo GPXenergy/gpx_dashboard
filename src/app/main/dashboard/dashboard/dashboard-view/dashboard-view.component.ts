@@ -4,7 +4,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { Meter } from '@gpx/models/meter.model';
-import { IChartData } from './dashboard-graph/dashboard-graph.component';
+import { IGraphData } from './dashboard-graph/dashboard-graph.component';
 import { Title } from '@angular/platform-browser';
 import {
   GasMeasurementService,
@@ -38,8 +38,14 @@ enum TimestampRange {
 export class DashboardViewComponent implements OnInit, OnDestroy {
   meter: Meter;
   user: AuthUser;
-  energyChartInput: IChartData[];
-  gasChartInput: IChartData[];
+  energyChartInput: IGraphData = {
+    data: [],
+    colorScheme: {domain: ['#FF3B4E', '#006937', '#FFE224']},
+  };
+  gasChartInput: IGraphData = {
+    data: [],
+    colorScheme: {domain: ['#FF3B4E']},
+  };
   loadingEnergy: boolean;
   loadingGas: boolean;
 
@@ -114,9 +120,9 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
   }
 
   setPowerSet(): void {
-    const energy = {name: 'Import', series: []};
-    const energy_ex = {name: 'Export', series: []};
-    const solar = {name: 'Zon-productie', series: []};
+    const energy = {name: 'Import', series: [], unit: 'kW'};
+    const energy_ex = {name: 'Export', series: [], unit: 'kW'};
+    const solar = {name: 'Zon-productie', series: [], unit: 'kW'};
     this.meter.power_measurement_set.forEach((obj, ind) => {
       energy.series.push({name: new Date(obj.timestamp), value: +obj.actual_import});
       if (this.meter.totalPowerExport > 0) {
@@ -127,24 +133,24 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
     this.meter.solar_measurement_set.forEach(obj => {
       solar.series.push({name: new Date(obj.timestamp), value: +obj.actual_solar});
     });
-    this.energyChartInput = [energy];
+    this.energyChartInput.data = [energy];
     if (this.meter.totalPowerExport > 0) {
-      this.energyChartInput.push(energy_ex);
+      this.energyChartInput.data.push(energy_ex);
     }
     if (solar.series.length) {
-      this.energyChartInput.push(solar);
+      this.energyChartInput.data.push(solar);
     }
     this.loadingEnergy = false;
 
   }
 
   setGasSet(): void {
-    const gas = {name: 'Gasconsumptie', series: []};
+    const gas = {name: 'Gasconsumptie', series: [], unit: 'm³/h'};
     this.meter.gas_measurement_set.forEach((obj, ind) => {
       gas.series.push({name: new Date(obj.timestamp), value: +obj.actual_gas});
     });
 
-    this.gasChartInput = [gas];
+    this.gasChartInput.data = [gas];
     this.loadingGas = false;
   }
 

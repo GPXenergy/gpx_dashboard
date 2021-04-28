@@ -16,6 +16,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 const routes: Route[] = [
@@ -43,6 +44,7 @@ const routes: Route[] = [
     MatCheckboxModule,
     MatDatepickerModule,
     MatMenuModule,
+    MatTabsModule,
   ],
   declarations: [
     DashboardViewComponent,

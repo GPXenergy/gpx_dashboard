@@ -190,7 +190,7 @@ export class GroupParticipant extends BaseModel {
   }
 
   public get typeName(): string {
-    switch (this.type){
+    switch (this.type) {
       case 'consumer':
         return 'Consument';
       case 'prosumer':
@@ -232,12 +232,24 @@ export class GroupParticipant extends BaseModel {
     super.cleanFields();
     this.last_activity = new Date(this.last_activity);
     this.joined_on = new Date(this.joined_on);
-    this.total_import = +this.total_import;
-    this.total_export = +this.total_export;
-    this.total_gas = +this.total_gas;
-    this.actual_power = +this.actual_power;
-    this.actual_gas = +this.actual_gas;
-    this.actual_solar = +this.actual_solar;
+    if (this.total_import !== null) {
+      this.total_import = +this.total_import;
+    }
+    if (this.total_export !== null) {
+      this.total_export = +this.total_export;
+    }
+    if (this.total_gas !== null) {
+      this.total_gas = +this.total_gas;
+    }
+    if (this.actual_power !== null) {
+      this.actual_power = +this.actual_power;
+    }
+    if (this.actual_gas !== null) {
+      this.actual_gas = +this.actual_gas;
+    }
+    if (this.actual_solar !== null) {
+      this.actual_solar = +this.actual_solar;
+    }
   }
 
 }

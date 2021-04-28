@@ -6,13 +6,13 @@
       <mat-card fxLayout="column">
 
         <div fxLayout="row">
-          <p class="mat-title b-text-secondary" fxLayoutAlign="start center">
+          <p class="mat-title gpx-text-primary" fxLayoutAlign="start center">
             <mat-icon class="mr-8">face</mat-icon>
             Jouw account gegevens
           </p>
           <div class="card-option-button" fxFlex fxLayoutAlign="end end">
             <button [matMenuTriggerFor]="menu" mat-icon-button>
-              <mat-icon class="b-text-secondary">settings</mat-icon>
+              <mat-icon class="gpx-text-primary">settings</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
               <ng-container>
@@ -21,7 +21,7 @@
                   Wijzig wachtwoord
                 </button>
                 <button (click)="deleteAccount($event)" mat-menu-item>
-                  <mat-icon class="b-text-action">clear</mat-icon>
+                  <mat-icon class="gpx-text-action">clear</mat-icon>
                   Verwijder account
                 </button>
               </ng-container>

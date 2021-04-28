@@ -6,7 +6,7 @@
 
       <mat-card *ngIf="!groupParticipant" fxLayout="column">
         <div fxLayout="row">
-          <p class="mat-title b-text-secondary" fxLayoutAlign="start center">
+          <p class="mat-title gpx-text-primary" fxLayoutAlign="start center">
             <mat-icon class="mr-8">group</mat-icon>
             Groepsmeter
           </p>
@@ -31,18 +31,18 @@
 
       <mat-card *ngIf="groupParticipant" fxLayout="column">
         <div fxLayout="row">
-          <p class="mat-title b-text-secondary" fxLayoutAlign="start center">
+          <p class="mat-title gpx-text-primary" fxLayoutAlign="start center">
             <mat-icon class="mr-8">group</mat-icon>
             {{ groupMeter?.name }}
           </p>
           <div class="card-option-button" fxFlex fxLayoutAlign="end end">
             <button [matMenuTriggerFor]="menu" mat-icon-button>
-              <mat-icon class="b-text-secondary">settings</mat-icon>
+              <mat-icon class="gpx-text-primary">settings</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
               <ng-container>
                 <button (click)="leaveGroup($event)" *ngIf="!isGroupManager" mat-menu-item>
-                  <mat-icon class="b-text-action">clear</mat-icon>
+                  <mat-icon class="gpx-text-action">clear</mat-icon>
                   Verlaat {{ groupMeter?.name }}
                 </button>
                 <button (click)="transferManager($event)" *ngIf="isGroupManager" mat-menu-item>
@@ -50,7 +50,7 @@
                   Draag groep over
                 </button>
                 <button (click)="deleteGroup($event)" *ngIf="isGroupManager" mat-menu-item>
-                  <mat-icon class="b-text-action">clear</mat-icon>
+                  <mat-icon class="gpx-text-action">clear</mat-icon>
                   Verwijder {{ groupMeter?.name }}
                 </button>
               </ng-container>
@@ -87,7 +87,7 @@
           </mat-form-field>
 
           <div class="mr-8 ml-8">
-            <mat-checkbox formControlName="public" labelPosition="after">
+            <mat-checkbox color="primary" formControlName="public" labelPosition="after">
               Deze groepsmeter mag publiek benaderd worden.
             </mat-checkbox>
           </div>
@@ -108,7 +108,7 @@
           </mat-form-field>
 
           <div class="mt-8 mr-8 ml-8">
-            <mat-checkbox formControlName="allow_invite" labelPosition="after">
+            <mat-checkbox color="primary" formControlName="allow_invite" labelPosition="after">
               Gebruikers kunnen uitgenodigd worden voor deze groep
             </mat-checkbox>
           </div>
@@ -163,7 +163,7 @@
         <div fxLayout="column">
 
           <div fxLayout="row">
-            <p class="mat-title b-text-secondary" fxLayoutAlign="start center">
+            <p class="mat-title gpx-text-primary" fxLayoutAlign="start center">
               <mat-icon class="mr-8">emoji_people</mat-icon>
               Groepsleden
             </p>

@@ -7,18 +7,18 @@
       <mat-card>
 
         <div fxLayout="row">
-          <p class="mat-title b-text-secondary" fxLayoutAlign="start center">
+          <p class="mat-title gpx-text-primary" fxLayoutAlign="start center">
             <mat-icon class="mr-8">device_hub</mat-icon>
             Nieuwe meter koppelen
           </p>
           <div class="card-option-button" fxFlex fxLayoutAlign="end end">
             <button [matMenuTriggerFor]="menu" mat-icon-button>
-              <mat-icon class="b-text-secondary">settings</mat-icon>
+              <mat-icon class="gpx-text-primary">settings</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
               <ng-container>
                 <button (click)="newApiKey($event)" [disabled]="true" mat-menu-item>
-                  <mat-icon class="b-text-action">refresh</mat-icon>
+                  <mat-icon class="gpx-text-action">refresh</mat-icon>
                   Vraag nieuwe API key aan
                 </button>
               </ng-container>
@@ -63,18 +63,18 @@
       <mat-card *ngIf="selectedMeter" class="mat-card-outline mt-20" fxLayout="column">
 
         <div fxLayout="row">
-          <p class="mat-title b-text-secondary" fxLayoutAlign="start center">
+          <p class="mat-title gpx-text-primary" fxLayoutAlign="start center">
             <mat-icon class="mr-8">offline_bolt</mat-icon>
             Gegevens {{ selectedMeter?.name }}
           </p>
           <div class="card-option-button" fxFlex fxLayoutAlign="end end">
             <button [matMenuTriggerFor]="menu" mat-icon-button>
-              <mat-icon class="b-text-secondary">settings</mat-icon>
+              <mat-icon class="gpx-text-primary">settings</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
               <ng-container>
                 <button (click)="deleteMeter($event)" mat-menu-item>
-                  <mat-icon class="b-text-action">clear</mat-icon>
+                  <mat-icon class="gpx-text-action">clear</mat-icon>
                   Verwijder <em>{{ selectedMeter.name }}</em>
                 </button>
               </ng-container>

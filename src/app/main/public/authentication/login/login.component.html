@@ -34,7 +34,7 @@
       </mat-error>
 
       <div class="mt-20" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
-        <mat-checkbox aria-label="Remember Me" class="remember-me" formControlName="remember">
+        <mat-checkbox color="primary" aria-label="Remember Me" class="remember-me" formControlName="remember">
           Onthouden
         </mat-checkbox>
 
@@ -43,7 +43,7 @@
         </a> -->
       </div>
 
-      <button [disabled]="loginForm.invalid" aria-label="LOG IN" class="mt-20 b-secondary" mat-raised-button>
+      <button [disabled]="loginForm.invalid" aria-label="LOG IN" class="mt-20 gpx-primary" mat-raised-button>
         Inloggen
       </button>
     </form>
@@ -55,7 +55,7 @@
     <div class="mt-20">
       <div class="register" fxLayout="column" fxLayoutAlign="center center">
         <span class="text">Nog geen account?</span>
-        <a [routerLink]="'/register'" class="b-text-secondary">Registreer</a>
+        <a [routerLink]="'/register'" class="gpx-text-primary">Registreer</a>
       </div>
     </div>
 

@@ -19,7 +19,7 @@
         <mat-divider [vertical]="true" style="height: 100%;"></mat-divider>
       </div>
       <button mat-icon-button (click)="dialogRef.close()">
-        <mat-icon class="b-text-action">clear</mat-icon>
+        <mat-icon class="gpx-text-action">clear</mat-icon>
       </button>
     </div>
 
@@ -34,7 +34,7 @@
       <div class="p-16" fxLayout="column">
 
         <div fxLayout="column" fxHide.gt-sm>
-          <button mat-icon-button class="b-secondary" (click)="matDrawer.close()">
+          <button mat-icon-button class="gpx-primary" (click)="matDrawer.close()">
             <mat-icon>arrow_forward</mat-icon>
           </button>
         </div>
@@ -121,7 +121,7 @@
                   </div>
                   <div fxLayout="column" fxLayoutAlign="center center" *ngIf="participant.type === 'prosumer' || participant.type === 'consumer'" [matTooltip]="participant.type === 'prosumer' ? 'Intern verbruik (berekend)' : 'Intern verbruik'">
                     <img src="/assets/group-meter/lightbulb.png" alt="lightbulb" class="card-icon">
-                    <div fxLayout="column" fxLayoutAlign="center center" [ngClass]="{'calculated': participant.type === 'prosumer'}">
+                    <div fxLayout="column" fxLayoutAlign="center center">
                       <div>{{ participant.actualInternal | number: '1.1-2' }}</div>
                       <div class="unit">kW</div>
                     </div>

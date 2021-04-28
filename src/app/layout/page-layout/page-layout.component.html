@@ -49,23 +49,37 @@
           <mat-divider></mat-divider>
         </div>
 
-        <div class="main-sidenav-content p-16" fxFlex="100%" fxLayout="column" fxLayoutGap="20px">
+        <div class="main-sidenav-content p-16" fxFlex="100%" fxLayout="column" fxLayoutAlign="space-between">
+          <div fxFlex="100%" fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="start">
 
-          <button #rla="routerLinkActive" [disabled]="!selectedMeter" [routerLink]="[ 'personal-meter' ]" mat-button
-                  routerLinkActive="b-secondary" style="width: 100%;">
-            Mijn meter
-          </button>
+            <button #rla="routerLinkActive" [disabled]="!selectedMeter" [routerLink]="[ 'personal-meter' ]" mat-button
+                    routerLinkActive="gpx-primary">
+              Mijn meter
+            </button>
 
-          <button #rla="routerLinkActive" [disabled]="!selectedMeter" [routerLink]="[ 'group' ]" mat-button
-                  routerLinkActive="b-secondary" style="width: 100%;">
-            Groepsmeter
-          </button>
+            <button #rla="routerLinkActive" [disabled]="!selectedMeter" [routerLink]="[ 'group' ]" mat-button
+                    routerLinkActive="gpx-primary">
+              Groepsmeter
+            </button>
 
-          <button #rla="routerLinkActive" [routerLink]="[ 'configure' ]" mat-button routerLinkActive="b-secondary"
-                  style="width: 100%;">
-            Instellingen
-          </button>
+            <button #rla="routerLinkActive" [routerLink]="[ 'configure' ]" mat-button routerLinkActive="gpx-primary">
+              Instellingen
+            </button>
 
+          </div>
+
+          <div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="end">
+
+            <button #rla="routerLinkActive" [disabled]="!selectedMeter" [routerLink]="[ 'manual' ]" mat-button
+                    routerLinkActive="gpx-primary">
+              Handleiding
+            </button>
+
+            <a mat-button href="https://github.com/GPXenergy" target="_blank">
+              <img src="/assets/github.png" alt="github" style="display: inline-block; height:14px"> Github
+            </a>
+
+          </div>
         </div>
 
       </div>
@@ -85,7 +99,7 @@
         <!-- / CONTENT -->
 
         <!-- FOOTER: Below static -->
-        <footer></footer>
+<!--        <footer></footer>-->
         <!-- / FOOTER: Below static -->
 
       </div>

@@ -42,7 +42,7 @@
       </div>
       <div fxLayout.gt-sm="column" fxLayout.lt-md="row" fxLayoutAlign="center center" *ngIf="participant.type === 'prosumer' || participant.type === 'consumer'" [matTooltip]="participant.type === 'prosumer' ? 'Intern verbruik (berekend)' : 'Intern verbruik'">
         <img src="/assets/group-meter/lightbulb.png" alt="lightbulb" class="card-icon">
-        <div fxLayout="column" fxLayoutAlign="center center" [ngClass]="{'calculated': participant.type === 'prosumer'}">
+        <div fxLayout="column" fxLayoutAlign="center center">
           <div>{{ participant.actualInternal | number: '1.1-2' }}</div>
           <div class="unit">kW</div>
         </div>
