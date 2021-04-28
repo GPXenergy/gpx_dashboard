@@ -1,7 +1,7 @@
 ### STAGE 1: Build ###
 
 # We label our stage as ‘builder’
-FROM node:alpine3.11 as builder
+FROM node:16.0-alpine3.11 as builder
 
 ## Storing node modules
 RUN mkdir -p /gpx
