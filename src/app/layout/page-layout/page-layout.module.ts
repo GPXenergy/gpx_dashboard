@@ -27,7 +27,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatMenuModule,
     MatDividerModule,
     FlexLayoutModule,
-    // MatListModule,
     RouterModule,
     MatIconModule,
     MatButtonModule

@@ -32,7 +32,7 @@ gpx-layout {
 
     .main-container {
       position: relative;
-      height: calc(100vh - 56px);
+      height: 100%;
     }
   }
 
@@ -41,11 +41,7 @@ gpx-layout {
     display: flex;
     z-index: 1;
     flex: 1 0 auto;
-    min-height: calc(100vh - 120px);
-
-    @include media-breakpoint('xs') {
-      min-height: calc(100vh - 112px);
-    }
+    height: 100%;
 
     > *:not(router-outlet),
     .layout-container > *:not(router-outlet) {
