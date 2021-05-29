@@ -1,6 +1,14 @@
 {
   "name": "gxp-dashboard",
-  "version": "0.0.0",
+  "description": "gpx dashboard",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GPXenergy/gpx_dashboard.git"
+  },
+  "keywords": [],
+  "author": "GPX",
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -11,7 +19,6 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "~10.0.3",
     "@angular/cdk": "^10.0.1",
