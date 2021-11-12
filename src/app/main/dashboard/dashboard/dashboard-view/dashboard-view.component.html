@@ -25,12 +25,12 @@
               <em>tot {{rangePickerForm.get('timestamp_before').value | date: "short"}}</em><br/>
             </p>
             <p>
-              Stroom import (1): <span class="gpx-text-secondary">{{ meter.period_import_1 | number }} kWh</span><br/>
-              Stroom import (2): <span class="gpx-text-secondary">{{ meter.period_import_2 | number }} kWh</span><br/>
-              Stroom export (1): <span class="gpx-text-secondary">{{ meter.period_export_1 | number }} kWh</span><br/>
-              Stroom export (2): <span class="gpx-text-secondary">{{ meter.period_export_2 | number }} kWh</span><br/>
+              Stroom import (1): {{ meter.period_import_1 | number }} kWh<br/>
+              Stroom import (2): {{ meter.period_import_2 | number }} kWh<br/>
+              Stroom export (1): {{ meter.period_export_1 | number }} kWh<br/>
+              Stroom export (2): {{ meter.period_export_2 | number }} kWh<br/>
               <span *ngIf="meter.total_solar">Zonproductie: {{ meter.period_solar | number }} kWh<br/></span>
-              Gas: <span class="gpx-text-secondary">{{ meter.period_gas | number }} m³</span><br/>
+              Gas: {{ meter.period_gas | number }} m³<br/>
             </p>
           </div>
           <div>
@@ -39,7 +39,7 @@
               <em>Laatste update  <span class="gpx-text-secondary">{{meter.power_timestamp | date: "short"}}</span></em><br/>
             </p>
             <p>
-              Actueel: {{meter.actualPower | number }} kW (Tarief: {{meter.tariff | number }})<br/>
+              Actueel: <span class="gpx-text-secondary">{{meter.actualPower | number }} kW (Tarief: {{meter.tariff | number }})</span><br/>
             </p>
             <p>
               Import 1:  <span class="gpx-text-secondary">{{meter.total_power_import_1 | number }} kWh </span><br/>

@@ -16,25 +16,25 @@
       <a routerLink="/manual/setup">Quick start handleiding</a>
     </p>
 
-    <div>class="section"
+    <div class="section">
 
       <h2>Inhoud</h2>
       <ol>
-        <li><a href="/manual/gpxconnector#general">De GPXconnector</a></li>
-        <li><a href="/manual/gpxconnector#status-led">Status LED</a></li>
-        <li><a href="/manual/gpxconnector#modes">Apparaatmodus</a></li>
+        <li><a routerLink="./" (click)="scrollTo(general)">De GPXconnector</a></li>
+        <li><a routerLink="./" (click)="scrollTo(statusLed)">Status LED</a></li>
+        <li><a routerLink="./" (click)="scrollTo(modes)">Apparaatmodus</a></li>
         <ul>
-          <li><a href="/manual/gpxconnector#modus-active">Actieve modus</a></li>
-          <li><a href="/manual/gpxconnector#modus-config">Configuratiemodus</a></li>
+          <li><a routerLink="./" (click)="scrollTo(modeActive)">Actieve modus</a></li>
+          <li><a routerLink="./" (click)="scrollTo(modeConfig)">Configuratiemodus</a></li>
         </ul>
-        <li><a href="/manual/gpxconnector#smart-meter">Slimme meter aansluiting</a></li>
-        <li><a href="/manual/gpxconnector#solar-inverter">Zonnepanelen aansluiting</a></li>
-        <li><a href="/manual/gpxconnector#power-supply">Voeding</a></li>
-        <li><a href="/manual/gpxconnector#update-firmware">Firmware updaten</a></li>
+        <li><a routerLink="./" (click)="scrollTo(smartMeter)">Slimme meter aansluiting</a></li>
+        <li><a routerLink="./" (click)="scrollTo(solarInverter)">Zonnepanelen aansluiting</a></li>
+        <li><a routerLink="./" (click)="scrollTo(powerSupply)">Voeding</a></li>
+        <li><a routerLink="./" (click)="scrollTo(updateFirmware)">Firmware updaten</a></li>
       </ol>
 
     </div>
-    <div class="section" fxLayout="column" id="general">
+    <div class="section" fxLayout="column" #general>
 
       <h2>1. De GPXconnector</h2>
       <p>
@@ -76,7 +76,7 @@
 
 
     </div>
-    <div class="section" fxLayout="column" id="status-led">
+    <div class="section" fxLayout="column" #statusLed>
 
       <h2>2. Status LED</h2>
 
@@ -109,28 +109,28 @@
       </table>
 
     </div>
-    <div class="section" fxLayout="column" id="modus">
+    <div class="section" fxLayout="column" #modes>
 
       <h2>3. Apparaatmodus</h2>
       <p>
         De GPXconnector
       </p>
     </div>
-    <div class="section" fxLayout="column" id="modus-active">
+    <div class="section" fxLayout="column" #modeActive>
 
       <h3>3.1. Actieve modus</h3>
       <p>
 
       </p>
     </div>
-    <div class="section" fxLayout="column" id="modus-config">
+    <div class="section" fxLayout="column" #modeConfig>
 
       <h3>3.2. Configuratiemodus</h3>
       <p>
 
       </p>
     </div>
-    <div class="section" fxLayout="column" id="smart-meter">
+    <div class="section" fxLayout="column" #smartMeter>
 
       <h2>4. Slimme meter aansluiting</h2>
       <p>
@@ -171,21 +171,21 @@
         <tr mat-row *matRowDef="let row; columns: ['make', 'model', 'baud', 'parity'];"></tr>
       </table>
     </div>
-    <div class="section" fxLayout="column" id="solar-inverter">
+    <div class="section" fxLayout="column" #solarInverter>
 
       <h2>5. Zonnepanelen aansluiting</h2>
       <p>
 
       </p>
     </div>
-    <div class="section" fxLayout="column" id="power-supply">
+    <div class="section" fxLayout="column" #powerSupply>
 
       <h2>6. Voeding</h2>
       <p>
 
       </p>
     </div>
-    <div class="section" fxLayout="column" id="update-firmware">
+    <div class="section" fxLayout="column" #updateFirmware>
 
       <h2>7. Firmware updaten</h2>
       <p>

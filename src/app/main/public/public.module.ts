@@ -16,12 +16,16 @@ const routes: Route[] = [
         loadChildren: () => import('./public-group-meter/public-group-meter-view.module').then(m => m.PublicGroupMeterViewModule)
       },
       {
-        path: 'manual',
-        loadChildren: () => import('./manual/manual-view.module').then(m => m.ManualViewModule)
+        path: 'info',
+        loadChildren: () => import('./manual/info-view.module').then(m => m.InfoViewModule)
       },
       {
         path: 'setup',
-        redirectTo: 'manual'
+        redirectTo: 'info/setup'
+      },
+      {
+        path: 'manual',
+        redirectTo: 'info'
       },
     ]
   }

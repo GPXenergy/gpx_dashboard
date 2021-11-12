@@ -53,4 +53,10 @@ export class GpxConnectorManualViewComponent implements OnInit, OnDestroy {
       });
     }));
   }
+
+  scrollTo(el: HTMLElement): void {
+    if (el) {
+      el.scrollIntoView({behavior: 'smooth'});
+    }
+  }
 }

@@ -78,13 +78,14 @@
 
     </ng-container>
     <ng-template #userNotLoggedIn>
-      <button [routerLink]="'/register'" mat-button>
-        <!-- <span>{{'TOOLBAR.REGISTER' | translate}}</span> -->
-        <span>Registreer</span>
+      <button [routerLink]="'/info'" mat-button>
+        <span>Info</span>
       </button>
       <button [routerLink]="'/login'" mat-button>
-        <!-- <span>{{'TOOLBAR.LOGIN' | translate}}</span> -->
         <span>Login</span>
+      </button>
+      <button [routerLink]="'/register'" mat-button>
+        <span>Registreer</span>
       </button>
 
 

@@ -4,63 +4,7 @@
     <div fxFlex="15%" fxFlex.xs="5%"></div>
     <div class="mt-20" fxFlex="70%" fxFlex.xs="90%">
 
-      <mat-card>
-
-        <div fxLayout="row">
-          <p class="mat-title gpx-text-primary" fxLayoutAlign="start center">
-            <mat-icon class="mr-8">device_hub</mat-icon>
-            Nieuwe meter koppelen
-          </p>
-          <div class="card-option-button" fxFlex fxLayoutAlign="end end">
-            <button [matMenuTriggerFor]="menu" mat-icon-button>
-              <mat-icon class="gpx-text-primary">settings</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <ng-container>
-                <button (click)="newApiKey($event)" [disabled]="true" mat-menu-item>
-                  <mat-icon class="gpx-text-action">refresh</mat-icon>
-                  Vraag nieuwe API key aan
-                </button>
-              </ng-container>
-            </mat-menu>
-          </div>
-        </div>
-
-        <p>
-          Hieronder vind je de <em>API key</em>, jouw persoonlijke en unieke code die je instelt op de GPXconnector.
-          Kopiëer deze of houdt deze bij de hand wanneer je het apparaat gaat instellen. Heb je net een GPXconnector
-          ingesteld en aangesloten, maar zie je de meter nog niet hier verschijnen? Ververs dan deze pagina. De complete
-          setup-handleiding is <a routerLink="/manual/setup">hier</a> te vinden.
-        </p>
-
-        <div *ngIf="user" class="mt-12 mb-12" fxLayout="row" fxLayoutGap="15px">
-          <div fxFlex>
-            <mat-form-field appearance="outline" fxFlex="100%">
-              <mat-label>API key</mat-label>
-              <input (click)="$event.target.select()" [value]="user.api_key" matInput readonly>
-              <mat-hint>
-                De API key stel je in op jouw GPXconnector.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <button (cdkCopyToClipboardCopied)="copyLink()" [cdkCopyToClipboard]="user.api_key" [class.b-green]="isCopied"
-                  class="mt-8" mat-icon-button matTooltip="Copy">
-            <mat-icon>content_copy</mat-icon>
-          </button>
-        </div>
-
-        <p>
-          Wanneer je over meerdere meters beschikt (bijvoorbeeld van meerdere woningen, of je bent verhuisd) kan je
-          dezelfde API key gebruiken om de nieuwe meter aan jouw account te koppelen. Linksboven in het menu kan je
-          van meter wisselen. Verschillende meters zijn onafhankelijk van elkaar, en kunnen bij dezelfde of
-          verschillende groepsmeters aangesloten zijn.
-        </p>
-
-      </mat-card>
-
-
-
-      <mat-card *ngIf="selectedMeter" class="mat-card-outline mt-20" fxLayout="column">
+      <mat-card *ngIf="selectedMeter" class="mat-card-outline" fxLayout="column">
 
         <div fxLayout="row">
           <p class="mat-title gpx-text-primary" fxLayoutAlign="start center">
@@ -158,6 +102,60 @@
           </div>
 
         </form>
+
+      </mat-card>
+
+      <mat-card class="mt-20">
+
+        <div fxLayout="row">
+          <p class="mat-title gpx-text-primary" fxLayoutAlign="start center">
+            <mat-icon class="mr-8">device_hub</mat-icon>
+            Nieuwe meter koppelen
+          </p>
+          <div class="card-option-button" fxFlex fxLayoutAlign="end end">
+            <button [matMenuTriggerFor]="menu" mat-icon-button>
+              <mat-icon class="gpx-text-primary">settings</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <ng-container>
+                <button (click)="newApiKey($event)" [disabled]="true" mat-menu-item>
+                  <mat-icon class="gpx-text-action">refresh</mat-icon>
+                  Vraag nieuwe API key aan
+                </button>
+              </ng-container>
+            </mat-menu>
+          </div>
+        </div>
+
+        <p>
+          Hieronder vind je de <em>API key</em>, jouw persoonlijke en unieke code die je instelt op de GPXconnector.
+          Kopiëer deze of houdt deze bij de hand wanneer je het apparaat gaat instellen. Heb je net een GPXconnector
+          ingesteld en aangesloten, maar zie je de meter nog niet hier verschijnen? Ververs dan deze pagina. De complete
+          setup-handleiding is <a routerLink="/manual/setup">hier</a> te vinden.
+        </p>
+
+        <div *ngIf="user" class="mt-12 mb-12" fxLayout="row" fxLayoutGap="15px">
+          <div fxFlex>
+            <mat-form-field appearance="outline" fxFlex="100%">
+              <mat-label>API key</mat-label>
+              <input (click)="$event.target.select()" [value]="user.api_key" matInput readonly>
+              <mat-hint>
+                De API key stel je in op jouw GPXconnector.
+              </mat-hint>
+            </mat-form-field>
+          </div>
+          <button (cdkCopyToClipboardCopied)="copyLink()" [cdkCopyToClipboard]="user.api_key" [class.b-green]="isCopied"
+                  class="mt-8" mat-icon-button matTooltip="Copy">
+            <mat-icon>content_copy</mat-icon>
+          </button>
+        </div>
+
+        <p>
+          Wanneer je over meerdere meters beschikt (bijvoorbeeld van meerdere woningen, of je bent verhuisd) kan je
+          dezelfde API key gebruiken om de nieuwe meter aan jouw account te koppelen. Linksboven in het menu kan je
+          van meter wisselen. Verschillende meters zijn onafhankelijk van elkaar, en kunnen bij dezelfde of
+          verschillende groepsmeters aangesloten zijn.
+        </p>
 
       </mat-card>
 

@@ -24,4 +24,9 @@ export class DashboardManualViewComponent implements OnInit, OnDestroy {
     this._unsubscribeAll.complete();
   }
 
+  scrollTo(el: HTMLElement): void {
+    if (el) {
+      el.scrollIntoView({behavior: 'smooth'});
+    }
+  }
 }

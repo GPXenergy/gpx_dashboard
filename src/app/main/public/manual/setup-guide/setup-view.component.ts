@@ -65,4 +65,9 @@ export class SetupViewComponent implements OnInit, OnDestroy {
     }
   }
 
+  scrollTo(el: HTMLElement): void {
+    if (el) {
+      el.scrollIntoView({behavior: 'smooth'});
+    }
+  }
 }

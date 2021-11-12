@@ -6,7 +6,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { GroupMeterModule } from '@gpx/components/group-meter/group-meter.module';
 import { MatButtonModule } from '@angular/material/button';
-import { ManualViewComponent } from './manual-view.component';
+import { InfoViewComponent } from './info-view.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
@@ -17,7 +17,7 @@ import { DashboardManualViewComponent } from './dashboard-manual/dashboard-manua
 const routes: Route[] = [
   {
     path: '',
-    component: ManualViewComponent
+    component: InfoViewComponent
   },
   {
     path: 'setup',
@@ -31,7 +31,6 @@ const routes: Route[] = [
     path: 'dashboard',
     component: DashboardManualViewComponent
   },
-
 ];
 
 
@@ -50,10 +49,10 @@ const routes: Route[] = [
   ],
   declarations: [
     SetupViewComponent,
-    ManualViewComponent,
+    InfoViewComponent,
     GpxConnectorManualViewComponent,
     DashboardManualViewComponent,
   ]
 })
-export class ManualViewModule {
+export class InfoViewModule {
 }

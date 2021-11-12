@@ -68,15 +68,19 @@
 
           </div>
 
-          <div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="end">
+          <div fxFlex="100%" fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="end">
 
-            <button #rla="routerLinkActive" [disabled]="!selectedMeter" [routerLink]="[ 'manual' ]" mat-button
+            <button #rla="routerLinkActive" [routerLink]="[ 'info' ]" mat-button
                     routerLinkActive="gpx-primary">
-              Handleiding
+              Meer informatie
             </button>
 
+            <a mat-button href="https://app.oanax.com/communities/2" target="_blank">
+              <img src="/assets/oanax.png" alt="oanax" style="display: inline-block; height:16px; margin-top: -3px"> Oanax
+            </a>
+
             <a mat-button href="https://github.com/GPXenergy" target="_blank">
-              <img src="/assets/github.png" alt="github" style="display: inline-block; height:14px"> Github
+              <img src="/assets/github.png" alt="github" style="display: inline-block; height:14px; margin-top: -4px"> GitHub
             </a>
 
           </div>
@@ -90,7 +94,6 @@
     <mat-sidenav-content #snavContent>
 
       <div class="main-container">
-        <!-- <div class="main-container" [perfectScrollbar] (psScrollY)="scrollEvent()"> -->
 
         <!-- CONTENT -->
         <div class="content">

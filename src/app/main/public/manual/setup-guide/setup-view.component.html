@@ -1,13 +1,13 @@
 <div class="mt-20 mb-40" fxFlex="100%" fxLayout="row">
   <div fxFlex="20%" fxFlex.md="15%" fxFlex.sm="2.5%" fxFlex.xs="2.5%"></div>
   <div fxFlex="60%" fxFlex.md="70%" fxFlex.sm="95%" fxFlex.xs="95%" fxLayout="column">
-    <h1><a routerLink="/manual">Handleidingen</a> / Quick start handleiding</h1>
+    <h1><a routerLink="/info">Handleidingen</a> / Quick start handleiding</h1>
 
     <p>
       Ben je net in bezit gekomen van een GPXconnector en wil je weten hoe je deze in een paar simpele stappen aan de
       praat krijgt? Dan ben je hier op de goede plek! In de Quick-start handleiding wordt je door het proces geleid om
       het apparaat in te stellen en te installeren in je meterkast! Ben je eerder benieuwd wat het apparaat allemaal
-      doet? Kijk dan in de <a routerLink="/manual/gpxconnector">gebruikershandleiding</a>!
+      doet? Kijk dan in de <a routerLink="/info/gpxconnector">gebruikershandleiding</a>!
     </p>
 
     <div class="img-container">
@@ -19,16 +19,16 @@
 
       <h2>Inhoud</h2>
       <ol>
-        <li><a href="/manual/setup#prerequisites">Benodigdheden</a></li>
-        <li><a href="/manual/setup#create-account">Een account aanmaken</a></li>
-        <li><a href="/manual/setup#configure-device">GPXconnector configureren</a></li>
-        <li><a href="/manual/setup#connect-smart-meter">Koppelen aan de slimme meter</a></li>
-        <li><a href="/manual/setup#connect-inverter">Koppelen aan de zonnepanelen-omvormer</a></li>
+        <li><a routerLink="./" (click)="scrollTo(prerequisites)">Benodigdheden</a></li>
+        <li><a routerLink="./" (click)="scrollTo(createAccount)"> Een account aanmaken</a></li>
+        <li><a routerLink="./" (click)="scrollTo(configureDevice)">GPXconnector configureren</a></li>
+        <li><a routerLink="./" (click)="scrollTo(connectSmartMeter)">Koppelen aan de slimme meter</a></li>
+        <li><a routerLink="./" (click)="scrollTo(connectInverter)">Koppelen aan de zonnepanelen-omvormer</a></li>
       </ol>
 
     </div>
 
-    <div class="section" id="prerequisites" fxLayout="column">
+    <div class="section" #prerequisites fxLayout="column">
 
       <h2>1. Benodigdheden</h2>
 
@@ -51,13 +51,13 @@
       <p class="img-subtext">Figuur 2 - Benodigdheden voor installatie GPXconnector</p>
     </div>
 
-    <div class="section" id="create-account" fxLayout="column">
+    <div class="section" #createAccount fxLayout="column">
 
       <h2>2. Een account aanmaken</h2>
       <p>
         De tweede stap is het aanmaken van een account op het dashboard. Aan dit account wordt straks jouw slimme meter
-        gekoppeld. <a routerLink="/register" [queryParams]="{next: '/manual/setup'}">Klik hier</a> om een nieuw account
-        te registreren! Heb je al een account? <a routerLink="/login" [queryParams]="{next: '/manual/setup'}">Log dan
+        gekoppeld. <a routerLink="/register" [queryParams]="{next: '/info/setup'}">Klik hier</a> om een nieuw account
+        te registreren! Heb je al een account? <a routerLink="/login" [queryParams]="{next: '/info/setup'}">Log dan
         in</a> voordat je verder gaat! Door in te loggen wordt deze handleiding verder aangevuld met informatie en
         functies die voor jou persoonlijk handig zijn!
       </p>
@@ -70,7 +70,7 @@
 
     </div>
 
-    <div class="section" id="configure-device" fxLayout="column">
+    <div class="section" #configureDevice fxLayout="column">
 
       <h2>3. GPXconnector configureren</h2>
 
@@ -214,7 +214,7 @@
 
     </div>
 
-    <div class="section" id="connect-smart-meter" fxLayout="column">
+    <div class="section" #connectSmartMeter fxLayout="column">
 
       <h2>4. Koppelen aan de slimme meter</h2>
       <p>
@@ -280,7 +280,7 @@
       </table>
     </div>
 
-    <div class="section" id="connect-inverter">
+    <div class="section" #connectInverter>
 
       <h2>5. Koppelen aan de zonnepanelen-omvormer (optioneel)</h2>
       <p>

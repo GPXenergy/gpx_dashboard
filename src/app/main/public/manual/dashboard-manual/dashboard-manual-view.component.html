@@ -10,14 +10,14 @@
 
       <h2>Inhoud</h2>
       <ol>
-        <li><a href="/manual/dashboard#account">Jouw Account</a></li>
-        <li><a href="/manual/dashboard#meter">Jouw meter</a></li>
-        <li><a href="/manual/dashboard#group-meter">De groepsmeter</a></li>
+        <li><a routerLink="./" (click)="scrollTo(account)">Jouw Account</a></li>
+        <li><a routerLink="./" (click)="scrollTo(meter)">Jouw meter</a></li>
+        <li><a routerLink="./" (click)="scrollTo(groupMeter)">De groepsmeter</a></li>
       </ol>
 
     </div>
 
-    <div class="section" id="account" fxLayout="column">
+    <div class="section" #account fxLayout="column">
 
       <h2>1. Jouw account</h2>
       <p>
@@ -26,7 +26,7 @@
 
     </div>
 
-    <div class="section" id="meter" fxLayout="column">
+    <div class="section" #meter fxLayout="column">
 
       <h2>2. Jouw meter</h2>
       <p>
@@ -35,7 +35,7 @@
 
     </div>
 
-    <div class="section" id="group-meter" fxLayout="column">
+    <div class="section" #groupMeter fxLayout="column">
 
       <h2>3. De groepsmeter</h2>
       <p>
