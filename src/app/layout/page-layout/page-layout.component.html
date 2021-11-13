@@ -70,10 +70,14 @@
 
           <div fxFlex="100%" fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="end">
 
-            <button #rla="routerLinkActive" [routerLink]="[ 'info' ]" mat-button
+            <button class="mb-32" #rla="routerLinkActive" [routerLink]="[ 'info' ]" mat-button
                     routerLinkActive="gpx-primary">
               Meer informatie
             </button>
+
+            <div style="text-align: center; font-weight: bold">
+              GPX communities:
+            </div>
 
             <a mat-button href="https://app.oanax.com/communities/2" target="_blank">
               <img src="/assets/oanax.png" alt="oanax" style="display: inline-block; height:16px; margin-top: -3px"> Oanax
