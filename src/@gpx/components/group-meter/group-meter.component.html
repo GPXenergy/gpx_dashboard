@@ -19,7 +19,7 @@
         {{ groupMeter.summary }}
       </p>
 
-      <div *ngIf="groupMeter.public_key" class="mt-24 mb-12" fxLayout="column" fxLayoutGap="15px">
+      <div *ngIf="groupMeter.public && groupMeter.public_key" class="mt-24 mb-12" fxLayout="column" fxLayoutGap="15px">
         <p>
           Deze groepsmeter is publiek zichtbaar!
         </p>
