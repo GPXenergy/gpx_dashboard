@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
-import { DashboardLayoutComponent } from './dashboard-layout.component';
 
 const routes: Route[] = [
   {
     path: '',
-    component: DashboardLayoutComponent,
     children: [
       {
         path: 'personal-meter',
@@ -28,7 +26,6 @@ const routes: Route[] = [
     RouterModule.forChild(routes),
   ],
   declarations: [
-    DashboardLayoutComponent,
   ]
 })
 export class DashboardModule {

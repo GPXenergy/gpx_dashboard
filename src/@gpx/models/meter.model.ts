@@ -1,21 +1,7 @@
 import { BaseModel, modelPropertiesObj, modelRelation } from './base';
 import { GroupParticipant } from './group-meter.model';
 import { User } from './user.model';
-
-export enum EMeterType {
-  CONSUMER = 'consumer',
-  PROSUMER = 'prosumer',
-  BATTERY = 'battery',
-  PRODUCER_SOLAR = 'producer_solar',
-  PRODUCER_WIND = 'producer_wind',
-  PRODUCER_OTHER = 'producer_other',
-}
-
-export enum EMeterVisibility {
-  PRIVATE = 'private',
-  GROUP = 'group',
-  PUBLIC = 'public',
-}
+import { EMeterType, EMeterVisibility, EResidenceEnergyLabel, EResidenceType } from './types';
 
 
 /**
@@ -38,6 +24,11 @@ export class Meter extends BaseModel {
   // current group participation (active)
   group_participation: modelRelation<GroupParticipant>;
 
+  // Residence information
+  resident_count: number;
+  residence_type: EResidenceType;
+  residence_energy_label: EResidenceEnergyLabel;
+  solar_panel_count: number;
 
   /// Power data
   sn_power: string;

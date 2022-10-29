@@ -1,41 +1,55 @@
-<div class="mt-20 mb-40" fxFlex="100%" fxLayout="row">
+<div class="pt-20" fxFlex="100%" fxLayout="row" xmlns="http://www.w3.org/1999/html">
   <div fxFlex="20%" fxFlex.md="15%" fxFlex.sm="2.5%" fxFlex.xs="2.5%"></div>
-  <div fxFlex="60%" fxFlex.md="70%" fxFlex.sm="95%" fxFlex.xs="95%" fxLayout="column">
+  <div fxFlex="60%" fxFlex.md="70%" fxFlex.sm="95%" fxFlex.xs="95%" fxLayout="column" >
     <h1>Wat is het GPX dashboard?</h1>
 
     <p>
-      Het GPX dashboard, ook wel BuurtEnergiePlatform (BEP), is een online dashboard gebouwd door GPX om huishoudens
-      inzicht te geven in hun energieverbruik. De meest innovatie feature van dit dashboard is de groepsmeter, een
-      gezamelijke meter waarin meerdere huishoudens gekoppeld worden. Deze meter is LIVE in te zien door alle deelnemers
-      van de groep, elke 10 seconden wordt het verbruik bijgewerkt. Door een mix te hebben van consumenten, prosumenten
-      (bijv. woning met zonnepaneel) en producenten (bijv. een windpark), geeft de groepsmeter een werkelijk beeld van
-      de energie-flow tussen deelnemers.
+      Het GPX dashboard, ook wel BuurtEnergiePlatform (BEP), is een online dashboard gebouwd door
+      <a href="https://www.gpx.nl" target="_blank">GPX</a> om huishoudens inzicht te geven in hun energieverbruik. De
+      meest innovatie feature van dit dashboard is de groepsmeter, een gezamelijke meter waarin meerdere huishoudens
+      gekoppeld worden. Deze meter is LIVE in te zien door alle deelnemers van de groep, elke 10 seconden wordt het
+      verbruik bijgewerkt. Door een mix te hebben van consumenten, prosumenten (bijv. woning met zonnepaneel) en
+      producenten (bijv. een windpark), geeft de groepsmeter een werkelijk beeld van de energie-flow tussen de
+      deelnemers.
+    </p>
+
+    <p>
+      GPX Dashboard versie: 1.1.0
+    </p>
+
+    <h3 class="mt-24">Dashboard statistieken</h3>
+    <p>
+      Verbonden slimme meters: {{stats?.total_meters || '...'}} (waarvan nu actief: {{stats?.live_meters || '...'}}) <br/>
+      Actieve groepsmeters: {{stats?.total_groups || '...'}}
     </p>
 
     <h1 class="mt-24">Meer informatie</h1>
     <p>
       Een dashboard met A. een ‘eigen meter’ pagina en B. een groepsmeter-pagina.
-      <a href="https://gpx.nl/GPX-Introductie-11jun2021.pdf">Introductie: GPX-introductie-11jun2021 (pdf)</a>.
+      <a target="_blank" href="https://gpx.nl/GPX-Introductie-11jun2021.pdf">Introductie: GPX-introductie-11jun2021 (pdf)</a>.
     </p>
-
-    <h1 class="mt-24">Quick-start handleiding</h1>
     <p>
       Quick Start Handleiding c.q. manual voor de GPXconnector:
-      <a href="https://gpx.nl/Quickstart-handleiding-v10.pdf">Quickstart-handleiding-v10 (pdf)</a>.
+      <a target="_blank" href="https://gpx.nl/Quickstart-handleiding-v10.pdf">Quickstart-handleiding-v10 (pdf)</a>.
     </p>
 
-    <h1 class="mt-24">Veelgestelde vragen</h1>
     <p>
-      Veel gestelde vragen: <a href="https://gpx.nl/FAQ-Veelgesteldevragen-v9.pdf">FAQ-Veelgesteldevragen-v9 (pdf)</a>.
+      Veel gestelde vragen:
+      <a target="_blank" href="https://gpx.nl/FAQ-Veelgesteldevragen-v9.pdf">FAQ-Veelgesteldevragen-v9 (pdf)</a>.
+    </p>
+
+    <p>
+      Heb je andere vragen, wil je meedoen of heb problemen met je account?
+      <a target="_blank" href="https://www.gpx.nl/contactpagina/">Neem contact op met GPX!</a>
     </p>
 
     <h1 class="mt-24">GPX communities</h1>
 
-    <h3>Oanax - sociale omgeving</h3>
+    <h3>Oanax - Sociale omgeving</h3>
     <p>
       Deelnemers zijn welkom om zich aan te sluiten bij de buurtenergiemeter community op Oanax. Deze omgeving brengt
-      deelnemers en andere betrokken partijen bijeen in een gemeenschap, waar wordt gepraat over nieuwe
-      ontwikkelinen, feedback en andere vragen. Je kan een deelnameverzoek indienen rechtsboven op de community-pagina.
+      deelnemers en andere betrokken partijen bijeen in een gemeenschap, waar wordt gepraat over de ontwikkeling van
+      het dashboard, feedback en andere vragen. Je kan een deelnameverzoek indienen rechtsboven op de community-pagina.
     </p>
     <p>
       <a href="https://app.oanax.com/communities/2" target="_blank"><em>Ga naar de Oanax omgeving</em></a>
@@ -48,7 +62,7 @@
       need contact op met <a href="mailto:info@gpx.nl">info@gpx.nl</a>.
 
     </p>
-    <p>
+    <p class="pb-32">
       <a href="https://github.com/GPXenergy" target="_blank"><em>Ga naar de GitHub omgeving</em></a>
     </p>
 

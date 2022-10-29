@@ -6,7 +6,7 @@ import { TranslationLoaderService } from '@gpx/services/translation-loader.servi
 
 export const errorMessageKeys: { [key: string]: string } = {
   required: 'Dit veld is verplicht',
-  email: 'Geen correcte email ingevuld',
+  email: 'Voer een correct email adres in',
   max: 'Max bereikt',
   min: 'Minimale nog niet bereikt',
   maxlength: 'Maximale lengte bereikt',
@@ -21,9 +21,9 @@ export const errorMessageKeys: { [key: string]: string } = {
   matDatepickerParse: 'Ongeldige datum',
   invalidchars: 'Ongeldige characters',
   phonenumber: 'Ongeldige telefoonnummer',
-  fieldsnotequal: 'Bovenstaande velden zijn niet gelijk',
-  password: 'Vereist minimaal 1 hoofdletter en 1 cijfer',
-  meteringroup: 'Deze meter is al aangesloten in een groep'
+  fieldsnotequal: 'Wachtwoorden komen niet overeen',
+  password: 'Wachtwoord moet minimaal 8 karakters hebben met minimaal 1 hoofdletter en 1 cijfer',
+  meteringroup: 'Deze meter is al aangesloten in een groep',
 };
 
 @Injectable({

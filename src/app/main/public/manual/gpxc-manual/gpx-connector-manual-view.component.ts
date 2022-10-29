@@ -17,7 +17,7 @@ interface IMeterTableData extends IMeterModel {
 }
 
 @Component({
-  selector: 'gpxc-manual-view',
+  selector: 'gpx-gpxc-manual-view',
   templateUrl: './gpx-connector-manual-view.component.html',
   styleUrls: ['./gpx-connector-manual-view.component.scss'],
 })

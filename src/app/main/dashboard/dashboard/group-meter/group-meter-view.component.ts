@@ -10,7 +10,7 @@ import { AuthService } from '@gpx/services/auth.service';
 import { MobileService } from '@gpx/services/mobile.service';
 
 @Component({
-  selector: 'group-meter-view',
+  selector: 'gpx-group-meter-view',
   templateUrl: './group-meter-view.component.html',
   styleUrls: ['./group-meter-view.component.scss'],
 })

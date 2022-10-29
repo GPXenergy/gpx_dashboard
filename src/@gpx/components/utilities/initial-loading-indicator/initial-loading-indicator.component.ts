@@ -5,7 +5,7 @@ import { InitialLoadingIndicatorService } from './initial-loading-indicator.serv
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'initial-loading-indicator',
+  selector: 'gpx-initial-loading-indicator',
   templateUrl: './initial-loading-indicator.component.html',
   styleUrls: ['./initial-loading-indicator.component.scss'],
   encapsulation: ViewEncapsulation.None

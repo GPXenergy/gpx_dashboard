@@ -12,6 +12,9 @@ import { LogoutComponent } from './logout/logout.component';
 import { AuthPageComponent } from './auth-page.component';
 import { GPXSharedModule } from '@gpx/shared.module';
 import { MatDividerModule } from '@angular/material/divider';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './forgot-password/reset-password/reset-password.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 const routes = [
@@ -38,19 +41,19 @@ const routes = [
 
         ]
       },
-      // {
-      //   path: 'forgot-password',
-      //   children: [
-      //     {
-      //       path: '',
-      //       component: ForgotPasswordComponent,
-      //     },
-      //     {
-      //       path: 'reset',
-      //       component: ResetPasswordComponent
-      //     },
-      //   ]
-      // }
+      {
+        path: 'forgot-password',
+        children: [
+          {
+            path: '',
+            component: ForgotPasswordComponent,
+          },
+          {
+            path: 'reset',
+            component: ResetPasswordComponent
+          },
+        ]
+      }
     ]
   },
   {
@@ -65,9 +68,9 @@ const routes = [
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
-    RegisterCompleteComponent
-    // ForgotPasswordComponent,
-    // ResetPasswordComponent,
+    RegisterCompleteComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     MatIconModule,
@@ -78,6 +81,7 @@ const routes = [
     GPXSharedModule,
     MatDividerModule,
     RouterModule.forChild(routes),
+    MatProgressSpinnerModule,
   ]
 })
 export class AuthModule {

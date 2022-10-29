@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 
 
 @Component({
-  selector: 'footer',
+  selector: 'gpx-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

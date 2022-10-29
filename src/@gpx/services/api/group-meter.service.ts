@@ -82,11 +82,26 @@ export class GroupParticipationService extends DataService<GroupParticipantList,
   public updateGroupParticipant(userPk: pkType, participantPk: pkType, groupParticipant: GroupParticipant): Observable<GroupParticipant> {
     return this.update(groupParticipant, {user_pk: userPk, participation_pk: participantPk});
   }
+}
 
-  public deleteGroupParticipant(userPk: pkType, participantPk: pkType): Observable<null> {
-    return this.remove({user_pk: userPk, participation_pk: participantPk});
+@Injectable({
+  providedIn: 'root'
+})
+export class ManageGroupParticipationService extends DataService<GroupParticipantList, GroupParticipant> {
+  protected readonly model = GroupParticipant;
+  protected readonly actionUrl = '/api/meters/groups/{{group_pk}}/participants/{{pk?}}';
+
+  public getGroupParticipantList(groupPk: pkType, filter?: any): Observable<GroupParticipantList> {
+    return this.getList({group_pk: groupPk}, filter);
   }
 
+  public getGroupParticipant(groupPk: pkType, participantPk: pkType): Observable<GroupParticipant> {
+    return this.get({group_pk: groupPk, pk: participantPk});
+  }
+
+  public updateGroupParticipant(groupPk: pkType, participantPk: pkType, groupParticipant: GroupParticipant): Observable<GroupParticipant> {
+    return this.update(groupParticipant, {group_pk: groupPk, pk: participantPk});
+  }
 }
 
 

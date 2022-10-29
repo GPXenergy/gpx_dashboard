@@ -28,7 +28,7 @@ class JoinGroupParticipant extends GroupParticipant {
 }
 
 @Component({
-  selector: 'app-join-group-meter-dialog',
+  selector: 'gpx-join-group-meter-dialog',
   templateUrl: './join-group-meter-dialog.component.html',
   styleUrls: ['./join-group-meter-dialog.component.scss']
 })

@@ -41,15 +41,15 @@
             </button>
             <mat-menu #menu="matMenu">
               <ng-container>
-                <button (click)="leaveGroup($event)" *ngIf="!isGroupManager" mat-menu-item>
-                  <mat-icon class="gpx-text-action">clear</mat-icon>
-                  Verlaat {{ groupMeter?.name }}
-                </button>
-                <button (click)="transferManager($event)" *ngIf="isGroupManager" mat-menu-item>
+                <button (click)="transferManager()" *ngIf="isGroupManager" mat-menu-item>
                   <mat-icon>compare_arrows</mat-icon>
                   Draag groep over
                 </button>
-                <button (click)="deleteGroup($event)" *ngIf="isGroupManager" mat-menu-item>
+                <button (click)="leaveGroup()" [disabled]="isGroupManager" [matTooltip]="isGroupManager ? 'Draag eerst de groep over als je de groep wil verlaten': ''" mat-menu-item>
+                  <mat-icon class="gpx-text-action">group_remove</mat-icon>
+                  Verlaat {{ groupMeter?.name }}
+                </button>
+                <button (click)="deleteGroup()" *ngIf="isGroupManager" mat-menu-item>
                   <mat-icon class="gpx-text-action">clear</mat-icon>
                   Verwijder {{ groupMeter?.name }}
                 </button>
@@ -213,6 +213,12 @@
               <th mat-header-cell *matHeaderCellDef style="width: 32px"></th>
               <td mat-cell *matCellDef="let participant">
                 <mat-icon style="margin-left: -16px" matTooltip="Groepmanager" [inline]="true" *ngIf="participant.user_pk === groupMeter.getManager().pk">security</mat-icon>
+
+                <mat-icon style="margin-left: -16px;cursor: pointer" *ngIf="isGroupManager && participant.user_pk !== groupMeter.getManager().pk" [matMenuTriggerFor]="participantOptions" [inline]="true">more_vert</mat-icon>
+                <mat-menu #participantOptions="matMenu">
+                  <button (click)="transferManager(participant)" mat-menu-item>Maak {{ participant?.display_name }} groepsmanager</button>
+                  <button (click)="removeParticipant(participant)" mat-menu-item>Verwijder {{ participant?.display_name }} uit groep</button>
+                </mat-menu>
               </td>
             </ng-container>
 
@@ -249,18 +255,12 @@
               </td>
             </ng-container>
 
-
             <tr mat-header-row *matHeaderRowDef="['manager', 'name', 'type', 'date', 'icon']"></tr>
             <tr mat-row *matRowDef="let row; columns: ['manager', 'name', 'type', 'date', 'icon'];"></tr>
           </table>
-
         </div>
-
-
       </mat-card>
-
     </div>
     <div fxFlex="15%" fxFlex.xs="5%"></div>
   </div>
-
 </div>

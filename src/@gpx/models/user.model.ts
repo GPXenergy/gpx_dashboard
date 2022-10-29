@@ -1,4 +1,5 @@
-import { BaseModel } from './base';
+import { BaseModel, propertyValidators, Validators } from './base';
+import { CustomValidators } from '../forms/custom.validator';
 
 /**
  * Login model with username/password
@@ -15,24 +16,20 @@ export class LoginUser extends BaseModel {
 export class User extends BaseModel {
   /// Required user properties
   username: string;
-  password: string;
 
   /// User settings and personal information
   email: string;
+  verified_email: string;
   first_name: string;
   last_name: string;
-  api_key: string;
 
-  /// Calculated field
-  display_name: string;
-
-  cleanFields(): void {
-    super.cleanFields();
-    if (this.first_name && this.last_name) {
-      this.display_name = this.first_name + ' ' + this.last_name;
-    } else {
-      this.display_name = this.username;
-    }
+  getValidators(): propertyValidators<User> {
+    const validators: propertyValidators<User> = {
+      username: [CustomValidators.simpleText, Validators.maxLength(80)],
+      first_name: [CustomValidators.simpleText, Validators.maxLength(30)],
+      last_name: [CustomValidators.simpleText, Validators.maxLength(150)],
+      email: [Validators.email, Validators.maxLength(254)],
+    };
+    return Object.assign(validators, super.getValidators());
   }
-
 }

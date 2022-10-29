@@ -10,8 +10,6 @@ import localeNl from '@angular/common/locales/nl';
 import { LayoutModule } from './layout/layout.module';
 import { InitialLoadingIndicatorModule } from '@gpx/components/utilities/initial-loading-indicator/initial-loading-indicator.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { GpxModule } from '@gpx/gpx.module';
-import { CONFIGS } from '@gpx/gpx-config';
 import { AppComponent } from './app.component';
 import { LandingComponent } from './main/landing.component';
 import { NotFoundComponent } from './main/error-pages/not-found/not-found.component';
@@ -19,6 +17,7 @@ import { LoginRequiredChildrenGuard } from '@gpx/guards/auth-route.guard';
 import { ApiInterceptor } from '@gpx/services/api.intercepter';
 import { GPXSharedModule } from '@gpx/shared.module';
 import { CustomDateAdapter } from '../@gpx/adapters/date.adapter';
+import { GpxModule } from '../@gpx/gpx.module';
 
 registerLocaleData(localeNl, 'nl');
 
@@ -61,7 +60,7 @@ export const appRoutes: Routes = [
     LayoutModule,
     InitialLoadingIndicatorModule,
     TranslateModule.forRoot(),
-    GpxModule.forRoot(CONFIGS.public),
+    GpxModule,
     MatNativeDateModule
   ],
   providers: [

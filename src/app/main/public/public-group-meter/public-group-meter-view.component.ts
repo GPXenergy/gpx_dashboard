@@ -7,7 +7,7 @@ import { GroupMeterService } from '@gpx/services/api/group-meter.service';
 import { MobileService } from '@gpx/services/mobile.service';
 
 @Component({
-  selector: 'group-meter-view',
+  selector: 'gpx-group-meter-view',
   templateUrl: './public-group-meter-view.component.html',
   styleUrls: ['./public-group-meter-view.component.scss'],
 })

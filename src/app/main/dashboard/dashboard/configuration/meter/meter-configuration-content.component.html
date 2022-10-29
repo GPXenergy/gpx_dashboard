@@ -27,16 +27,16 @@
         </div>
 
         <p>
-          Hieronder staan de gegevens van meter <em>{{ selectedMeter.name }}</em>.
+          Hieronder staan de gegevens van meter <em>{{ selectedMeter.name }}</em><span *ngIf="allMeters.length > 1">, Je kan van meter wisselen rechtsboven in de navigatie</span>.
         </p>
 
         <p *ngIf="selectedMeter.gpx_version">
-          GPXconnector firmware versienummer <em>{{ selectedMeter.gpx_version }}</em>
+          GPXconnector firmware versienummer <em>{{ selectedMeter.gpx_version === 'undefined' ? 'Onbekend' : selectedMeter.gpx_version }}</em>
         </p>
 
 
-        <app-loading-indicator [loading]="loading" [noLengthText]="'Geen meter data gevonden'"
-                               [objectFound]="!selectedMeter"></app-loading-indicator>
+        <gpx-loading-indicator [loading]="loading" [noLengthText]="'Geen meter data gevonden'"
+                               [objectFound]="!selectedMeter"></gpx-loading-indicator>
 
         <form *ngIf="meterForm" [formGroup]="meterForm" class="mt-20" fxFlex="40%" fxFlex.xs="100%" fxLayout="column"
               fxLayoutGap="12px" name="form" novalidate>
@@ -51,27 +51,11 @@
           </mat-form-field>
 
           <mat-form-field appearance="outline" fxFlex="100%">
-            <mat-label>Catergorie</mat-label>
-            <mat-select matInput formControlName="type" required>
-              <mat-option [value]="meterTypes.CONSUMER">Consument (verbruikt alleen energie)</mat-option>
-              <mat-option [value]="meterTypes.PROSUMER">Prosument (verbruikt en wekt energie op)</mat-option>
-              <mat-option [value]="meterTypes.BATTERY">Batterij</mat-option>
-              <mat-option [value]="meterTypes.PRODUCER_SOLAR">Producent (Zon)</mat-option>
-              <mat-option [value]="meterTypes.PRODUCER_WIND">Producent (Wind)</mat-option>
-              <mat-option [value]="meterTypes.PRODUCER_OTHER">Producent (Anders)</mat-option>
-            </mat-select>
-            <mat-error>{{meterForm.errorMessages.type?.errorMessage}}</mat-error>
-            <mat-hint>
-              Het type wordt gebruikt bij het correct weergeven van jouw meter in de groepsmeter.
-            </mat-hint>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" fxFlex="100%">
             <mat-label>Privacyinstellinen metergegevens</mat-label>
-            <mat-select matInput formControlName="visibility_type" required>
+            <mat-select formControlName="visibility_type" required>
               <mat-option [value]="meterVisibilityTypes.PRIVATE">Alleen privé</mat-option>
-              <mat-option [value]="meterVisibilityTypes.GROUP">Inzichtelijk voor groep</mat-option>
-              <mat-option [value]="meterVisibilityTypes.PUBLIC">Inzichtelijk voor publiek</mat-option>
+              <mat-option [value]="meterVisibilityTypes.GROUP" disabled>Inzichtelijk voor groep (Niet beschikbaar)</mat-option>
+              <mat-option [value]="meterVisibilityTypes.PUBLIC" disabled>Inzichtelijk voor publiek (Niet beschikbaar)</mat-option>
             </mat-select>
             <mat-error>{{meterForm.errorMessages.visibility_type?.errorMessage}}</mat-error>
             <mat-hint>
@@ -84,6 +68,88 @@
               <span *ngIf="meterForm.get('visibility_type').value === meterVisibilityTypes.PUBLIC">
                 Metergegevens en metingen zijn voor iedereen inzichtelijk.
               </span>
+            </mat-hint>
+          </mat-form-field>
+
+          <h3>Extra instellingen</h3>
+          <p>
+            Deze extra instellingen zijn inzichtelijk in de groepsmeter voor de deelnemers, om onderling een
+            vergelijking te kunnen maken.
+          </p>
+
+          <mat-form-field appearance="outline" fxFlex="100%">
+            <mat-label>Categorie</mat-label>
+            <mat-select formControlName="type" required>
+              <mat-option [value]="meterTypes.CONSUMER">Consument (verbruikt alleen energie)</mat-option>
+              <mat-option [value]="meterTypes.PROSUMER">Prosument (verbruikt en wekt energie op)</mat-option>
+              <mat-option [value]="meterTypes.BATTERY">Batterij</mat-option>
+              <mat-option [value]="meterTypes.PRODUCER_SOLAR">Producent (Zon)</mat-option>
+              <mat-option [value]="meterTypes.PRODUCER_WIND">Producent (Wind)</mat-option>
+              <mat-option [value]="meterTypes.PRODUCER_OTHER">Producent (Anders)</mat-option>
+            </mat-select>
+            <mat-error>{{meterForm.errorMessages.type?.errorMessage}}</mat-error>
+            <mat-hint>
+              De categorie wordt gebruikt voor het correct weergeven van jouw meter in de groepsmeter.
+            </mat-hint>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" fxFlex="100%">
+            <mat-label>Grootte huishouden</mat-label>
+            <input required autocomplete="off" formControlName="resident_count" matInput placeholder="Aantal bewoners" type="number" min="0" max="99">
+            <mat-error>{{meterForm.errorMessages.name?.errorMessage}}</mat-error>
+            <mat-hint>
+              Vul aan uit hoeveel personen het huishouden bestaat, laat deze op 0 als je deze informatie niet wil delen.
+            </mat-hint>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" fxFlex="100%">
+            <mat-label>Woningtype</mat-label>
+            <mat-select formControlName="residence_type" required>
+              <mat-option [value]="residenceTypes.UNDEFINED">Onbekend</mat-option>
+              <mat-option [value]="residenceTypes.APARTMENT">Appartement</mat-option>
+              <mat-option [value]="residenceTypes.CORNER_HOUSE">Hoekwoning</mat-option>
+              <mat-option [value]="residenceTypes.TERRACED_HOUSE">Tussenwoning</mat-option>
+              <mat-option [value]="residenceTypes.TWO_ONE_ROOF">Twee onder één kap</mat-option>
+              <mat-option [value]="residenceTypes.DETACHED_HOUSE">Vrijstaande woning</mat-option>
+              <mat-option [value]="residenceTypes.GROUND_FLOOR_APARTMENT">Benedenwoning</mat-option>
+              <mat-option [value]="residenceTypes.UPSTAIRS_APARTMENT">Bovenwoning</mat-option>
+            </mat-select>
+            <mat-error>{{meterForm.errorMessages.residence_type?.errorMessage}}</mat-error>
+            <mat-hint>
+
+            </mat-hint>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" fxFlex="100%">
+            <mat-label>Energielabel woning</mat-label>
+            <mat-select formControlName="residence_energy_label" required>
+              <mat-option [value]="residenceEnergyLabels.UNDEFINED">Onbekend</mat-option>
+              <mat-option style="background-color: #009037;" class="energy-label-option" [value]="residenceEnergyLabels.APPPP">A++++</mat-option>
+              <mat-option style="background-color: #009037;" class="energy-label-option" [value]="residenceEnergyLabels.APPP">A+++</mat-option>
+              <mat-option style="background-color: #009037;" class="energy-label-option" [value]="residenceEnergyLabels.APP">A++</mat-option>
+              <mat-option style="background-color: #009037;" class="energy-label-option" [value]="residenceEnergyLabels.AP">A+</mat-option>
+              <mat-option style="background-color: #009037;" class="energy-label-option" [value]="residenceEnergyLabels.A">A</mat-option>
+              <mat-option style="background-color: #55ab26;" class="energy-label-option" [value]="residenceEnergyLabels.B">B</mat-option>
+              <mat-option style="background-color: #c8d100;" class="energy-label-option" [value]="residenceEnergyLabels.C">C</mat-option>
+              <mat-option style="background-color: #ffec00;" class="energy-label-option" [value]="residenceEnergyLabels.D">D</mat-option>
+              <mat-option style="background-color: #faba00;" class="energy-label-option" [value]="residenceEnergyLabels.E">E</mat-option>
+              <mat-option style="background-color: #eb6909;" class="energy-label-option" [value]="residenceEnergyLabels.F">F</mat-option>
+              <mat-option style="background-color: #e2001a;" class="energy-label-option" [value]="residenceEnergyLabels.G">G</mat-option>
+            </mat-select>
+            <mat-error>{{meterForm.errorMessages.residence_energy_label?.errorMessage}}</mat-error>
+            <mat-hint>
+              Elke woning heeft een energielabel. Als je deze niet weet, kan je via
+              <a href="https://energielabel.nl/woningen/zoek-je-energielabel/" target="_blank">energielabel.nl</a>
+              het label vinden dat bij jouw woning hoort.
+            </mat-hint>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" fxFlex="100%" *ngIf="meterForm.get('type').value === meterTypes.PROSUMER">
+            <mat-label>Aantal zonnepanelen</mat-label>
+            <input autocomplete="off" formControlName="solar_panel_count" matInput placeholder="Aantal zonnepanelen" type="number" min="0" max="999">
+            <mat-error>{{meterForm.errorMessages.name?.errorMessage}}</mat-error>
+            <mat-hint>
+              Aantal zonnepanelen bij jouw woning. Als je er (nog) geen hebt, voer dan 0 in.
             </mat-hint>
           </mat-form-field>
 
@@ -138,7 +204,7 @@
           <div fxFlex>
             <mat-form-field appearance="outline" fxFlex="100%">
               <mat-label>API key</mat-label>
-              <input (click)="$event.target.select()" [value]="user.api_key" matInput readonly>
+              <input style="font-family: monospace" (click)="$event.target.select()" [value]="user.api_key" matInput readonly>
               <mat-hint>
                 De API key stel je in op jouw GPXconnector.
               </mat-hint>

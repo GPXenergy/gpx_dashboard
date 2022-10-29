@@ -8,7 +8,7 @@ export enum AnimationSpeed {
 }
 
 @Component({
-  selector: 'app-energy-path',
+  selector: 'gpx-energy-path',
   templateUrl: 'energy-path.component.html',
   styleUrls: ['./energy-path.component.scss'],
 })

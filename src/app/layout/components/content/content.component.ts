@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 
 @Component({
-  selector: 'main-content',
+  selector: 'gpx-main-content',
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.scss'],
 })

@@ -9,7 +9,7 @@ import { GroupMeter } from '@gpx/models/group-meter.model';
 
 
 @Component({
-  selector: 'app-group-meter-info-dialog',
+  selector: 'gpx-group-meter-info-dialog',
   templateUrl: './group-meter-info-dialog.component.html',
   styleUrls: ['./group-meter-info-dialog.component.scss'],
 })

@@ -7,7 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 import { GroupMeterParticipantDialogComponent } from '../group-meter-participant-dialog/group-meter-participant-dialog.component';
 
 @Component({
-  selector: 'app-group-meter-card',
+  selector: 'gpx-group-meter-card',
   templateUrl: './group-meter-card.component.html',
   styleUrls: ['./group-meter-card.component.scss']
 })
@@ -15,7 +15,7 @@ export class GroupMeterCardComponent implements OnInit, OnDestroy {
 
   private readonly _unsubscribeAll = new Subject<void>();
 
-  @Input() connection: 'top' | 'bottom';
+  @Input() connection: 'top' | 'bottom' | 'side';
   @Input() participant: GroupParticipant;
   @Input() groupMeter: GroupMeter;
 

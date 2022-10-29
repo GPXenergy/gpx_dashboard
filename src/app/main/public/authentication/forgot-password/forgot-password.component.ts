@@ -1,71 +1,48 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { fuseAnimations } from '@oanax/animations';
-import { HashService } from '@oanax/services/api/hash.service';
+import { Validators } from '@angular/forms';
+import { ModelFormBuilder, ModelFormGroup } from '@gpx/forms/model-form';
+import { User } from '@gpx/models/user.model';
+import { SnackBarService } from '@gpx/services/snack-bar.service';
+import { ResetPasswordActionService } from '@gpx/services/api/email-action.service';
 
 
 @Component({
-  selector: 'fuse-forgot-password',
+  selector: 'gpx-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss'],
-  animations: fuseAnimations
 })
 export class ForgotPasswordComponent implements OnInit {
-  forgotPasswordForm: FormGroup;
-  forgotPasswordFormErrors: any;
+  forgotPasswordForm: ModelFormGroup<User>;
   submitSuccess: boolean;
 
-  isDarkTheme: boolean;
-
-
-  constructor(private formBuilder: FormBuilder,
-              private hashService: HashService) {
-    this.submitSuccess = false;
-    this.forgotPasswordFormErrors = {
-      email: {}
-    };
+  constructor(private formBuilder: ModelFormBuilder,
+              private snackBar: SnackBarService,
+              private hashService: ResetPasswordActionService) {
   }
 
-  ngOnInit() {
-    this.forgotPasswordForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]]
+  ngOnInit(): void {
+    this.forgotPasswordForm = this.formBuilder.modelGroup(User, null, {
+      username: ['', [Validators.required]]
     });
-
-    this.forgotPasswordForm.valueChanges.subscribe(() => {
-      this.onForgotPasswordFormValuesChanged();
-    });
-    this.isDarkTheme = document.body.classList.contains('theme-dark');
   }
 
-  onForgotPasswordFormValuesChanged() {
-    for (const field in this.forgotPasswordFormErrors) {
-      if (!this.forgotPasswordFormErrors.hasOwnProperty(field)) {
-        continue;
-      }
+  onSubmit(): void {
+    this.forgotPasswordForm.disable();
+    this.hashService.requestPasswordReset(this.forgotPasswordForm.getModel()).subscribe({
 
-      // Clear previous errors
-      this.forgotPasswordFormErrors[field] = {};
-
-      // Get the control
-      const control = this.forgotPasswordForm.get(field);
-
-      if (control && control.dirty && !control.valid) {
-        this.forgotPasswordFormErrors[field] = control.errors;
-      }
-    }
-  }
-
-  onSubmit() {
-    const formValue = this.forgotPasswordForm.getRawValue();
-    this.hashService.forgotPassword(formValue).subscribe(
-      res => {
+      next: res => {
         // success
+        this.snackBar.success({
+          title: `Een email is verzonden met de link om je wachtwoord opnieuw in te stellen`,
+        });
         this.submitSuccess = true;
       },
-      errorResponse => {
-        // fails, check errorResponse.error for {errorField: errorMessage}
-        console.log(errorResponse);
+      error: errorResponse => {
+        this.forgotPasswordForm.enable();
+        if (errorResponse.error && errorResponse.status === 400) {
+          this.forgotPasswordForm.applyRemoteErrors(errorResponse.error);
+        }
       }
-    );
+    });
   }
 }

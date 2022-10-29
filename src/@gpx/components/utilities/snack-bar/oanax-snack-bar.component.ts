@@ -10,7 +10,7 @@ export interface OanaxSnackData {
 }
 
 @Component({
-  selector: 'oanax-snack-bar',
+  selector: 'gpx-oanax-snack-bar',
   templateUrl: './oanax-snack-bar.component.html',
 })
 export class OanaxSnackBarComponent {

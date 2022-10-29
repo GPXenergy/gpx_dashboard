@@ -1,5 +1,6 @@
 import { BaseModel, modelPropertiesObj, modelRelation, modelRelationArray } from './base';
 import { User } from './user.model';
+import { EResidenceEnergyLabel, EResidenceType } from './types';
 
 /**
  * GroupMeter model, connecting multiple meters together through participation
@@ -60,7 +61,7 @@ export class GroupMeter extends BaseModel {
    * Applies updates from incoming real time data
    * @param group: new group data
    */
-  public applyUpdates(group: GroupMeter) {
+  public applyUpdates(group: GroupMeter): void {
     this.total_import = group.total_import;
     this.total_export = group.total_export;
     this.total_gas = group.total_gas;
@@ -117,6 +118,18 @@ export class GroupParticipant extends BaseModel {
   actual_power: number;
   actual_gas: number;
   actual_solar: number;
+
+  residence: {
+    resident_count: number;
+    residence_type: EResidenceType;
+    residence_energy_label: EResidenceEnergyLabel;
+    solar_panel_count: number;
+  } = {
+    resident_count: 4,
+    residence_type: EResidenceType.APARTMENT,
+    residence_energy_label: EResidenceEnergyLabel.AP,
+    solar_panel_count: 6,
+  };
 
   /**
    * Get total power (in/export since joined) for this participant

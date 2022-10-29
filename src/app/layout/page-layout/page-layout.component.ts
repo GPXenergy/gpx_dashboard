@@ -4,7 +4,6 @@ import { NavigationEnd, Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
 import { filter, takeUntil } from 'rxjs/operators';
 import { NavigationBehaviorService } from '@gpx/services/navigation-behavior.service';
-import { ConfigService } from '@gpx/services/config.service';
 import { Meter } from '@gpx/models/meter.model';
 import { MeterSelectionService } from '@gpx/services/meter-selection.service';
 import { User } from '@gpx/models/user.model';
@@ -29,7 +28,6 @@ export class PageLayoutComponent implements OnInit, OnDestroy {
   constructor(private changeDetectorRef: ChangeDetectorRef,
               private authService: AuthService,
               private navigationBehaviorService: NavigationBehaviorService,
-              private configService: ConfigService,
               private meterSelectionService: MeterSelectionService,
               private router: Router) {
 
@@ -42,11 +40,6 @@ export class PageLayoutComponent implements OnInit, OnDestroy {
       filter(event => event instanceof NavigationEnd),
       takeUntil(this._unsubscribeAll)
     ).subscribe(() => {
-      this.triggerNav();
-    });
-
-    // Subscribe to config changes
-    this.configService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe((config) => {
       this.triggerNav();
     });
   }

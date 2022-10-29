@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-energy-net-path',
+  selector: 'gpx-energy-net-path',
   templateUrl: 'energy-net-path.component.html',
   styleUrls: ['./energy-net-path.component.scss'],
 })

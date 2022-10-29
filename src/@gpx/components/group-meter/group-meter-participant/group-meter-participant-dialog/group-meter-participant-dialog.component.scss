@@ -31,5 +31,19 @@
     width: 40px;
     height: 40px;
   }
+
+  .energy-label-display {
+    width: 50px;
+    display: inline-block;
+    padding: 2px 5px 2px 5px;
+    border-radius: 3px;
+    font-weight: bold;
+    color: white;
+    text-shadow:
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;
+  }
 }
 

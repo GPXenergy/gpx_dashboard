@@ -38,12 +38,12 @@
           Onthouden
         </mat-checkbox>
 
-        <!-- <a class="forgot-password b-text-secondary" routerLink="/forgot-password">
+        <a class="forgot-password b-text-secondary" routerLink="/forgot-password">
           Wachtwoord vergeten
-        </a> -->
+        </a>
       </div>
 
-      <button [disabled]="loginForm.invalid" aria-label="LOG IN" class="mt-20 gpx-primary" mat-raised-button>
+      <button [disabled]="loginForm.invalid" aria-label="LOG IN" class="mt-20" color="primary" type="submit" mat-raised-button>
         Inloggen
       </button>
     </form>
@@ -58,6 +58,7 @@
         <a [routerLink]="'/register'" class="gpx-text-primary">Registreer</a>
       </div>
     </div>
+
 
   </mat-card>
 </div>

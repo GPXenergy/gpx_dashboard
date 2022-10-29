@@ -4,7 +4,7 @@ import { AnimationSpeed } from './energy-path/energy-path.component';
 
 
 @Component({
-  selector: 'app-group-meter-participant',
+  selector: 'gpx-group-meter-participant',
   templateUrl: './group-meter-participant.component.html',
   styleUrls: ['./group-meter-participant.component.scss']
 })

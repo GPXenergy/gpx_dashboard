@@ -10,11 +10,12 @@ import { Validators } from '@angular/forms';
 import { SnackBarService } from '@gpx/services/snack-bar.service';
 import { AuthUser } from '@gpx/models/auth-user.model';
 import { MeterService } from '@gpx/services/api/meter.service';
-import { EMeterType, EMeterVisibility, Meter } from '@gpx/models/meter.model';
+import { EMeterType, EMeterVisibility, EResidenceEnergyLabel, EResidenceType } from '@gpx/models/types';
+import { Meter } from '@gpx/models/meter.model';
 
 
 @Component({
-  selector: 'meter-config-content',
+  selector: 'gpx-meter-config-content',
   templateUrl: './meter-configuration-content.component.html',
   styleUrls: ['./meter-configuration-content.component.scss'],
 })
@@ -22,8 +23,11 @@ export class MeterConfigurationContentComponent implements OnInit, OnDestroy {
   private readonly _unsubscribeAll = new Subject<void>();
   meterTypes = EMeterType;
   meterVisibilityTypes = EMeterVisibility;
+  residenceTypes = EResidenceType;
+  residenceEnergyLabels = EResidenceEnergyLabel;
   user: AuthUser;
   selectedMeter: Meter;
+  allMeters: Meter[];
   meterForm: ModelFormGroup<Meter>;
   loading: boolean;
   isCopied: boolean;
@@ -52,6 +56,10 @@ export class MeterConfigurationContentComponent implements OnInit, OnDestroy {
       this.initForm(meter);
       this.loading = false;
     });
+
+    this.meterSelectionService.availableMeters.pipe(takeUntil(this._unsubscribeAll)).subscribe(meters => {
+      this.allMeters = meters;
+    });
   }
 
   ngOnDestroy(): void {
@@ -64,8 +72,19 @@ export class MeterConfigurationContentComponent implements OnInit, OnDestroy {
   initForm(meter: Meter): void {
     this.meterForm = this.formBuilder.modelGroup(Meter, meter, {
       name: ['', Validators.required],
-      visibility_type: [{value: null, disabled: true}, Validators.required],
+      visibility_type: [null, Validators.required],
       type: [null, Validators.required],
+      resident_count: [0, Validators.required],
+      residence_type: [EResidenceType.UNDEFINED, Validators.required],
+      residence_energy_label: [EResidenceEnergyLabel.UNDEFINED, Validators.required],
+      solar_panel_count: [0, Validators.required],
+    });
+
+    this.meterForm.get('type').valueChanges.pipe(takeUntil(this._unsubscribeAll)).subscribe(value => {
+      // To reset solar panel count when not prosumer
+      if (value !== EMeterType.PROSUMER && this.meterForm.get('solar_panel_count').value > 0) {
+        this.meterForm.get('solar_panel_count').patchValue(0);
+      }
     });
   }
 

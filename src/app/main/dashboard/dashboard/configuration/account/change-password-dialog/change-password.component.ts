@@ -11,7 +11,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 
 
 @Component({
-  selector: 'change-password',
+  selector: 'gpx-change-password',
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.scss']
 })

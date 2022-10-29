@@ -27,7 +27,7 @@ export interface CreateGroupMeterDialogResult {
 }
 
 @Component({
-  selector: 'create-group-meter-dialog',
+  selector: 'gpx-create-group-meter-dialog',
   templateUrl: './create-group-meter-dialog.component.html',
   styleUrls: ['./create-group-meter-dialog.component.scss']
 })

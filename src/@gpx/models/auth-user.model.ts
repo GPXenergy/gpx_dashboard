@@ -10,22 +10,13 @@ import { CustomValidators } from '@gpx/forms/custom.validator';
 export class AuthUser extends User {
   api_key: string;
   default_meter: modelRelation<Meter>;
-  confirm_password: string;
 
   password: string;
   new_password: string;
+  confirm_password: string;
 
   public getDefaultMeter(): Meter {
     return BaseModel.getModelProperty(Meter, this.default_meter);
-  }
-
-  cleanFields(): void {
-    super.cleanFields();
-    if (this.first_name && this.last_name) {
-      this.display_name = this.first_name + ' ' + this.last_name;
-    } else {
-      this.display_name = this.username;
-    }
   }
 
   protected createModelRelations(values: modelPropertiesObj<this>): void {
@@ -35,8 +26,8 @@ export class AuthUser extends User {
 
   getValidators(): propertyValidators<AuthUser> {
     const validators: propertyValidators<AuthUser> = {
-      password: [Validators.required, Validators.minLength(8)],
-      new_password: [Validators.required, Validators.minLength(8), CustomValidators.strongPassword()],
+      password: [CustomValidators.strongPassword],
+      new_password: [CustomValidators.strongPassword],
     };
     return Object.assign(validators, super.getValidators());
   }

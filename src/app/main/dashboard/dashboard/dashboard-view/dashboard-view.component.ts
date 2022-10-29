@@ -31,7 +31,7 @@ enum TimestampRange {
 
 
 @Component({
-  selector: 'dashboard-view',
+  selector: 'gpx-dashboard-view',
   templateUrl: './dashboard-view.component.html',
   styleUrls: ['./dashboard-view.component.scss'],
 })

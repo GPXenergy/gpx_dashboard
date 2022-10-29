@@ -15,7 +15,11 @@ import {
 } from './create-group-meter-dialog/create-group-meter-dialog.component';
 import { SnackBarService } from '@gpx/services/snack-bar.service';
 import { AuthUser } from '@gpx/models/auth-user.model';
-import { GroupMeterService, GroupParticipationService } from '@gpx/services/api/group-meter.service';
+import {
+  GroupMeterService,
+  GroupParticipationService,
+  ManageGroupParticipationService
+} from '@gpx/services/api/group-meter.service';
 import { pkType } from '@gpx/models/base';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -30,7 +34,7 @@ import {
 
 
 @Component({
-  selector: 'group-config-content',
+  selector: 'gpx-group-config-content',
   templateUrl: './group-configuration-content.component.html',
   styleUrls: ['./group-configuration-content.component.scss'],
 })
@@ -54,6 +58,7 @@ export class GroupConfigurationContentComponent implements OnInit, OnDestroy {
               private router: Router,
               private _snackBar: SnackBarService,
               private groupMeterService: GroupMeterService,
+              private manageGroupParticipationService: ManageGroupParticipationService,
               private groupParticipantService: GroupParticipationService,
               private meterSelectionService: MeterSelectionService,
               private formBuilder: ModelFormBuilder,
@@ -215,7 +220,7 @@ export class GroupConfigurationContentComponent implements OnInit, OnDestroy {
     });
   }
 
-  leaveGroup(event): void {
+  leaveGroup(): void {
     if (confirm(`Weet je zeker dat je ${this.groupMeter.name} wil verlaten?`)) {
       const participant = new GroupParticipant().deserialize({active: false});
       this.groupParticipantService.updateGroupParticipant(this.user.pk, this.groupParticipant.pk, participant).subscribe(
@@ -232,7 +237,7 @@ export class GroupConfigurationContentComponent implements OnInit, OnDestroy {
     }
   }
 
-  deleteGroup(event): void {
+  deleteGroup(): void {
     if (confirm(`Weet je zeker dat je ${this.groupMeter.name} wil verwijderen? Alle groep-gerelateerde data wordt verwijderd!`)) {
       this.groupMeterService.deleteGroupMeter(this.user.pk, this.groupMeter.pk).subscribe(
         result => {
@@ -245,12 +250,13 @@ export class GroupConfigurationContentComponent implements OnInit, OnDestroy {
     }
   }
 
-  transferManager(event): void {
+  transferManager(participant?: GroupParticipant): void {
     const dialogRef = this.dialog.open(ChangeGroupManagerDialogComponent, {
       width: '500px',
       autoFocus: false,
       data: {
-        group: this.groupMeter
+        group: this.groupMeter,
+        participant: participant,
       }
     });
 
@@ -262,5 +268,19 @@ export class GroupConfigurationContentComponent implements OnInit, OnDestroy {
         this.meterSelectionService.updateMeters(this.user);
       }
     });
+  }
+
+  removeParticipant(participant: GroupParticipant): void {
+    if (confirm(`Weet je zeker dat je ${participant.display_name} uit de groep wil verwijderen? `)) {
+      const patchData = new GroupParticipant().deserialize({active: false});
+      this.manageGroupParticipationService.updateGroupParticipant(this.groupMeter.pk, participant.pk, patchData).subscribe(
+        result => {
+          this._snackBar.success({
+            title: `${participant.display_name} is uit de group verwijderd!`,
+          });
+          this.getGroupMeterData(this.groupMeter.pk);
+        }
+      );
+    }
   }
 }

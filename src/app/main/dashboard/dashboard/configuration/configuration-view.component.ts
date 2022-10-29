@@ -9,7 +9,7 @@ enum eTabIndex {
 
 
 @Component({
-  selector: 'configuration-view',
+  selector: 'gpx-configuration-view',
   templateUrl: './configuration-view.component.html',
   styleUrls: ['./configuration-view.component.scss'],
 })

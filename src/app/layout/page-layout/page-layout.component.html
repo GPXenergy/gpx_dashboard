@@ -1,7 +1,7 @@
 <div id="main">
 
   <!-- TOOLBAR: Above -->
-  <toolbar></toolbar>
+  <gpx-toolbar></gpx-toolbar>
   <!-- / TOOLBAR: Above -->
 
   <mat-sidenav-container [hasBackdrop]="isMobileState" autosize class="main-sidenav-container">
@@ -39,7 +39,7 @@
               </button>
               <mat-divider></mat-divider>
               <button mat-menu-item routerLink="/configure/meter">
-                <em>Extra meters koppelen</em>
+                <em>Andere meters koppelen</em>
               </button>
             </mat-menu>
           </ng-container>
@@ -101,7 +101,7 @@
 
         <!-- CONTENT -->
         <div class="content">
-          <main-content></main-content>
+          <gpx-main-content></gpx-main-content>
         </div>
         <!-- / CONTENT -->
 

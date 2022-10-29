@@ -104,15 +104,15 @@
               <div fxLayout="row">
                 <div fxFlex="95%" fxLayout="column" fxLayoutGap="32px">
                   <ng-container *ngFor="let data of groupMeter.getParticipants()">
-                    <app-group-meter-participant [data]="data" [group]="groupMeter" connection="side">
-                    </app-group-meter-participant>
+                    <gpx-group-meter-participant [data]="data" [group]="groupMeter" connection="side">
+                    </gpx-group-meter-participant>
                   </ng-container>
                 </div>
                 <div fxFlex="5%" fxLayout="column" fxLayoutAlign="center center">
 
-                  <app-energy-net-path [reverse]="groupMeter.actual_power > 0" orientation="vertical"
+                  <gpx-energy-net-path [reverse]="groupMeter.actual_power > 0" orientation="vertical"
                     style="height: 100%;">
-                  </app-energy-net-path>
+                  </gpx-energy-net-path>
 
                 </div>
               </div>
@@ -127,24 +127,24 @@
 
               <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="12px">
                 <div *ngFor="let data of topRowParticipants" fxFlex="20%">
-                  <app-group-meter-participant [data]="data" [group]="groupMeter" connection="bottom">
-                  </app-group-meter-participant>
+                  <gpx-group-meter-participant [data]="data" [group]="groupMeter" connection="bottom">
+                  </gpx-group-meter-participant>
                 </div>
               </div>
 
               <div class="middle-line" fxLayout="row">
-                <app-energy-net-path [reverse]="groupMeter.actual_power > 0" orientation="horizontal"
+                <gpx-energy-net-path [reverse]="groupMeter.actual_power > 0" orientation="horizontal"
                   style="width: 100%">
 
                   <ng-container *ngTemplateOutlet="groupInfo"></ng-container>
-                </app-energy-net-path>
+                </gpx-energy-net-path>
               </div>
 
 
               <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="12px">
                 <div *ngFor="let data of bottomRowParticipants" fxFlex="20%">
-                  <app-group-meter-participant [data]="data" [group]="groupMeter" connection="top">
-                  </app-group-meter-participant>
+                  <gpx-group-meter-participant [data]="data" [group]="groupMeter" connection="top">
+                  </gpx-group-meter-participant>
                 </div>
               </div>
             </div>

@@ -10,7 +10,7 @@ import { MediaObserver } from '@angular/flex-layout';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'group-meter',
+  selector: 'gpx-group-meter',
   templateUrl: './group-meter.component.html',
   styleUrls: ['./group-meter.component.scss'],
 })

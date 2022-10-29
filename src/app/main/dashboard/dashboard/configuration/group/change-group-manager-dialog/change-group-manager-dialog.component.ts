@@ -16,6 +16,7 @@ import { GroupMeter, GroupParticipant } from '@gpx/models/group-meter.model';
 
 export interface ChangeGroupManagerDialogData {
   group: GroupMeter;
+  participant: GroupParticipant;
 }
 
 export interface ChangeGroupManagerDialogResult {
@@ -23,7 +24,7 @@ export interface ChangeGroupManagerDialogResult {
 }
 
 @Component({
-  selector: 'change-group-manager-dialog',
+  selector: 'gpx-change-group-manager-dialog',
   templateUrl: './change-group-manager-dialog.component.html',
   styleUrls: ['./change-group-manager-dialog.component.scss']
 })
@@ -56,7 +57,7 @@ export class ChangeGroupManagerDialogComponent implements OnInit, OnDestroy {
 
   initForm(): void {
     this.groupMeterForm = this.modelFormBuilder.modelGroup(GroupMeter, null, {
-      manager: [null],
+      manager: [this.data.participant?.user_pk],
     });
   }
 
@@ -64,7 +65,7 @@ export class ChangeGroupManagerDialogComponent implements OnInit, OnDestroy {
     this.groupMeterForm.markAsTouched();
 
     if (this.groupMeterForm.valid) {
-      this.manageGroupMeterService.updateGroupMeter(this.user?.pk, this.data.group.pk, this.groupMeterForm.getModel()).subscribe(response => {
+      this.manageGroupMeterService.updateGroupMeter(this.user.pk, this.data.group.pk, this.groupMeterForm.getModel()).subscribe(response => {
         this.dialogRef.close({
           manager: response.getParticipants().find(participant => participant.user_pk === response.getManager().pk)
         });

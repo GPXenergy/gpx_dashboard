@@ -1,131 +1,73 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { fuseAnimations } from '@oanax/animations';
-import { HashService } from '@oanax/services/api/hash.service';
+import { ResetPasswordActionService } from '@gpx/services/api/email-action.service';
+import { ModelFormBuilder, ModelFormGroup } from '@gpx/forms/model-form';
+import { AuthUser } from '@gpx/models/auth-user.model';
+import { CustomValidators } from '@gpx/forms/custom.validator';
 
 
 @Component({
-  selector: 'fuse-reset-password',
+  selector: 'gpx-reset-password',
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.scss'],
-  animations: fuseAnimations
 })
 export class ResetPasswordComponent implements OnInit {
-  resetPasswordForm: FormGroup;
-  resetPasswordFormErrors: any;
+  resetPasswordForm: ModelFormGroup<AuthUser>;
+  showPassword: boolean;
   submitSuccess: boolean;
-  hashValid: boolean;
   hash: string;
 
   loading = true;
+  hashValid: boolean;
 
-  constructor(private formBuilder: FormBuilder,
-              private hashService: HashService,
+  constructor(private formBuilder: ModelFormBuilder,
+              private resetPasswordActionService: ResetPasswordActionService,
               private route: ActivatedRoute) {
-    this.submitSuccess = false;
-    this.hashValid = true;
-    this.resetPasswordFormErrors = {
-      password: {},
-      passwordConfirm: {}
-    };
   }
 
-  ngOnInit() {
-    this.route.queryParams.subscribe(
-      params => {
-        this.hash = params['h'] || '';
-        this.validateHash();
-      }
-    );
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.hash = params.h || '';
+      this.validateHash();
+    });
 
-    this.resetPasswordForm = this.formBuilder.group({
+    this.resetPasswordForm = this.formBuilder.modelGroup(AuthUser, null, {
       password: ['', Validators.required],
-      passwordConfirm: ['', [Validators.required, confirmPassword]]
+      confirm_password: ['', [Validators.required, CustomValidators.equalsField('password')]]
     });
 
-    this.resetPasswordForm.valueChanges.subscribe(() => {
-      this.onForgotPasswordFormValuesChanged();
+    this.resetPasswordForm.get('password').valueChanges.subscribe(() => {
+      this.resetPasswordForm.get('confirm_password').updateValueAndValidity();
     });
   }
 
-  onForgotPasswordFormValuesChanged() {
-    for (const field in this.resetPasswordFormErrors) {
-      if (!this.resetPasswordFormErrors.hasOwnProperty(field)) {
-        continue;
-      }
-
-      // Clear previous errors
-      this.resetPasswordFormErrors[field] = {};
-
-      // Get the control
-      const control = this.resetPasswordForm.get(field);
-
-      if (control && control.dirty && !control.valid) {
-        this.resetPasswordFormErrors[field] = control.errors;
-      }
-    }
-  }
-
-  validateHash() {
-    this.loading = true;
-    this.hashService.resetPassword({'hash': this.hash}).subscribe(
-      res => {
+  validateHash(): void {
+    this.resetPasswordActionService.validateHash(this.hash).subscribe({
+      next: res => {
         // success
         this.hashValid = true;
         this.loading = false;
       },
-      errorResponse => {
-        // fails, check errorResponse.error for {errorField: errorMessage}
-        console.log(errorResponse);
-        this.hashValid = false;
+      error: errorResponse => {
+        this.hashValid = true;
         this.loading = false;
       }
-    );
+    });
   }
 
-  onSubmit() {
-    this.loading = true;
-
-    const formValue = this.resetPasswordForm.getRawValue();
-    formValue['hash'] = this.hash;
-    this.hashService.resetPassword(formValue).subscribe(
-      res => {
+  onSubmit(): void {
+    const formValue = this.resetPasswordForm.getModel();
+    this.resetPasswordActionService.resetPassword(formValue, this.hash).subscribe({
+      next: (res) => {
         // success
         this.submitSuccess = true;
-        this.loading = false;
-
       },
-      errorResponse => {
-        // fails, check errorResponse.error for {errorField: errorMessage}
-        console.log(errorResponse);
-        this.loading = false;
-
-      }
-    );
-  }
-}
-
-
-function confirmPassword(control: AbstractControl) {
-  if (!control.parent || !control) {
-    return;
-  }
-
-  const password = control.parent.get('password');
-  const passwordConfirm = control.parent.get('passwordConfirm');
-
-  if (!password || !passwordConfirm) {
-    return;
-  }
-
-  if (passwordConfirm.value === '') {
-    return;
-  }
-
-  if (password.value !== passwordConfirm.value) {
-    return {
-      passwordsNotMatch: true
-    };
+      error: (e) => {
+        if (e.error && e.status === 400) {
+          this.resetPasswordForm.applyRemoteErrors(e.error);
+        }
+      },
+    });
   }
 }

@@ -15,7 +15,7 @@ export interface IGraphData {
 }
 
 @Component({
-  selector: 'dashboard-graph',
+  selector: 'gpx-dashboard-graph',
   templateUrl: './dashboard-graph.component.html',
   styleUrls: ['./dashboard-graph.component.scss']
 })

@@ -17,7 +17,7 @@ import { debounceTime, filter, share, startWith, switchMap, switchMapTo, takeUnt
  */
 
 @Component({
-  selector: 'simple-popup',
+  selector: 'gpx-simple-popup',
   templateUrl: './simple-popup.component.html',
   styleUrls: ['./simple-popup.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

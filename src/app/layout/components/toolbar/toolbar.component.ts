@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'toolbar',
+  selector: 'gpx-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss'],
   encapsulation: ViewEncapsulation.None,

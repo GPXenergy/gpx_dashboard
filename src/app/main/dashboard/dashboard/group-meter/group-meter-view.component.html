@@ -1,5 +1,5 @@
-<group-meter *ngIf="selectedMeter?.in_group; else noGroup" [as_public]="false" [groupMeter]="groupMeter" fxFlex="100%"
-             fxLayout="column"></group-meter>
+<gpx-group-meter *ngIf="selectedMeter?.in_group; else noGroup" [as_public]="false" [groupMeter]="groupMeter" fxFlex="100%"
+             fxLayout="column"></gpx-group-meter>
 
 <ng-template #noGroup>
   <div fxFlex="100%" fxLayout="column">

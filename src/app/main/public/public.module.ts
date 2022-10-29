@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
-import { PublicLayoutComponent } from './public-layout.component';
 
 const routes: Route[] = [
   {
     path: '',
-    component: PublicLayoutComponent,
     children: [
       {
         path: '',
@@ -36,7 +34,6 @@ const routes: Route[] = [
     RouterModule.forChild(routes),
   ],
   declarations: [
-    PublicLayoutComponent,
   ]
 })
 export class PublicModule {

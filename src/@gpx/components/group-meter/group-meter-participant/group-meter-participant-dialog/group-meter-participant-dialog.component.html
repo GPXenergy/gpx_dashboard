@@ -49,6 +49,43 @@
           Laatste update {{participant.last_activity | date: 'short'}}
         </div>
 
+        <h3 class="mt-20 mb-10">
+          Woninggegevens:
+        </h3>
+
+        <div>
+
+
+          Woningtype:
+          <ng-container [ngSwitch]="participant.residence.residence_type">
+            <span *ngSwitchCase="residenceTypes.UNDEFINED">Onbekend</span>
+            <span *ngSwitchCase="residenceTypes.APARTMENT">Appartement</span>
+            <span *ngSwitchCase="residenceTypes.CORNER_HOUSE">Hoekwoning</span>
+            <span *ngSwitchCase="residenceTypes.TERRACED_HOUSE">Tussenwoning</span>
+            <span *ngSwitchCase="residenceTypes.TWO_ONE_ROOF">Twee onder één kap</span>
+            <span *ngSwitchCase="residenceTypes.DETACHED_HOUSE">Vrijstaande woning</span>
+            <span *ngSwitchCase="residenceTypes.GROUND_FLOOR_APARTMENT">Benedenwoning</span>
+            <span *ngSwitchCase="residenceTypes.UPSTAIRS_APARTMENT">Bovenwoning</span>
+          </ng-container> <br/>
+          Energielabel:
+          <ng-container [ngSwitch]="participant.residence.residence_energy_label">
+            <span *ngSwitchCase="energyLabels.UNDEFINED">Onbekend</span>
+            <span style="background-color: #009037;" class="energy-label-display" *ngSwitchCase="energyLabels.APPPP">A++++</span>
+            <span style="background-color: #009037;" class="energy-label-display" *ngSwitchCase="energyLabels.APPP">A+++</span>
+            <span style="background-color: #009037;" class="energy-label-display" *ngSwitchCase="energyLabels.APP">A++</span>
+            <span style="background-color: #009037;" class="energy-label-display" *ngSwitchCase="energyLabels.AP">A+</span>
+            <span style="background-color: #009037;" class="energy-label-display" *ngSwitchCase="energyLabels.A">A</span>
+            <span style="background-color: #55ab26;" class="energy-label-display" *ngSwitchCase="energyLabels.B">B</span>
+            <span style="background-color: #c8d100;" class="energy-label-display" *ngSwitchCase="energyLabels.C">C</span>
+            <span style="background-color: #ffec00;" class="energy-label-display" *ngSwitchCase="energyLabels.D">D</span>
+            <span style="background-color: #faba00;" class="energy-label-display" *ngSwitchCase="energyLabels.E">E</span>
+            <span style="background-color: #eb6909;" class="energy-label-display" *ngSwitchCase="energyLabels.F">F</span>
+            <span style="background-color: #e2001a;" class="energy-label-display" *ngSwitchCase="energyLabels.G">G</span>
+          </ng-container> <br/>
+          <span *ngIf="participant.residence.resident_count">Grootte huishouden: {{participant.residence.resident_count}} <br/></span>
+          <span *ngIf="participant.residence.solar_panel_count">Aantal zonnepanelen {{participant.residence.solar_panel_count}} <br/></span>
+        </div>
+
       </div>
 
     </mat-drawer>

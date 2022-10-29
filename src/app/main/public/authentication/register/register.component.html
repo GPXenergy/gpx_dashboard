@@ -28,10 +28,19 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input [type]="show_password ? 'text' : 'password'" autocapitalize="none" formControlName="password" matInput
-                 name="pwd" placeholder="Wachtwoord">
-          <mat-icon (click)="show_password = !show_password" class="cursor-pointer" matSuffix>
-            {{show_password ? 'visibility' : 'visibility_off'}}
+          <input autocapitalize="none" formControlName="email" matInput name="email" placeholder="Email">
+          <mat-hint>
+            Optioneel, handig voor als je je wachtwoord vergeet
+          </mat-hint>
+          <mat-error>
+            {{registerForm.errorMessages.email.errorMessage}}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input [type]="showPassword ? 'text' : 'password'" autocapitalize="none" formControlName="password" matInput placeholder="Wachtwoord">
+          <mat-icon (click)="showPassword = !showPassword" class="cursor-pointer" matSuffix>
+            {{showPassword ? 'visibility' : 'visibility_off'}}
           </mat-icon>
           <mat-error>
             {{registerForm.errorMessages.password.errorMessage}}
@@ -39,13 +48,11 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input formControlName="confirm_password" matInput name="pwd_2" placeholder="Bevestig wachtwoord"
-                 type="password">
+          <input formControlName="confirm_password" autocapitalize="none" matInput placeholder="Bevestig wachtwoord" type="password">
           <mat-error>
             {{registerForm.errorMessages.confirm_password.errorMessage}}
           </mat-error>
         </mat-form-field>
-
 
         <mat-error>
           {{registerForm.errorMessages.errorMessage}}
@@ -55,7 +62,7 @@
 
         </div>
 
-        <button [disabled]="registerForm.invalid" aria-label="Register" class="mt-20 gpx-primary" mat-raised-button>
+        <button [disabled]="registerForm.invalid" aria-label="Register" class="mt-20" color="primary" type="submit" mat-raised-button>
           Account aanmaken
         </button>
       </form>

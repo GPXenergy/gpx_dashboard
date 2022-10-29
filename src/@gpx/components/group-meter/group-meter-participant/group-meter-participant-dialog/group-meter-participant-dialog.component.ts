@@ -6,6 +6,7 @@ import { MediaObserver } from '@angular/flex-layout';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ActivatedRoute } from '@angular/router';
 import { GroupMeter, GroupParticipant } from '@gpx/models/group-meter.model';
+import { EResidenceEnergyLabel, EResidenceType } from '../../../../models/types';
 
 
 export interface IGroupMeterParticipantDialogData {
@@ -22,13 +23,16 @@ interface IParticipantTableData{
 }
 
 @Component({
-  selector: 'app-group-meter-participant-dialog',
+  selector: 'gpx-group-meter-participant-dialog',
   templateUrl: './group-meter-participant-dialog.component.html',
   styleUrls: ['./group-meter-participant-dialog.component.scss'],
 })
 export class GroupMeterParticipantDialogComponent implements OnInit, OnDestroy {
   participant: GroupParticipant;
   group: GroupMeter;
+
+  residenceTypes = EResidenceType;
+  energyLabels = EResidenceEnergyLabel;
 
   participantData: IParticipantTableData[] = [];
 

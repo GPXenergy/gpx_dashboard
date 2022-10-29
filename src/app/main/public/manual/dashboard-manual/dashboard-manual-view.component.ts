@@ -4,7 +4,7 @@ import { Title } from '@angular/platform-browser';
 
 
 @Component({
-  selector: 'dashboard-manual-view',
+  selector: 'gpx-dashboard-manual-view',
   templateUrl: './dashboard-manual-view.component.html',
   styleUrls: ['./dashboard-manual-view.component.scss'],
 })

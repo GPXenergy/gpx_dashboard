@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-loading-indicator',
+  selector: 'gpx-loading-indicator',
   templateUrl: './loading-indicator.component.html',
   styles: ['.spinner-container {margin-top:80px; margin-bottom:25px;}']
 

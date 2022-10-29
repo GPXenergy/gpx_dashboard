@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   registerForm: ModelFormGroup<AuthUser>;
   nextUrl: string;
-  show_password = false;
+  showPassword = false;
   isDarkTheme: boolean;
   // UI
   completeView: boolean;
@@ -47,7 +47,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      this.nextUrl = params['next'] || '/login';
+      this.nextUrl = params.next || '/login';
     });
 
     this.authService.user.then(user => {
@@ -58,6 +58,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     this.registerForm = this.modelFormBuilder.modelGroup(AuthUser, null, {
       username: ['', [Validators.required]],
+      email: ['', [Validators.email]],
       password: ['', [Validators.required]],
       confirm_password: ['', [Validators.required, CustomValidators.equalsField('password')]]
     });
@@ -68,13 +69,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.onDestroy.next();
     this.onDestroy.complete();
 
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.registerForm.valid) {
       const new_user = this.registerForm.getModel();
       this.registerForm.disable();

@@ -13,16 +13,17 @@
     "component-class-suffix": true,
     "contextual-lifecycle": true,
     "directive-class-suffix": true,
+    "object-literal-shorthand": [true, "never"],
     "directive-selector": [
       true,
       "attribute",
-      "app",
+      ["app", "gpx"],
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "app",
+      ["app", "gpx"],
       "kebab-case"
     ],
     "eofline": true,

@@ -10,7 +10,7 @@ import { ILEDData, IMeterMake, ledData, meterGroups } from '../manual_data';
 
 
 @Component({
-  selector: 'setup-guide-view',
+  selector: 'gpx-setup-guide-view',
   templateUrl: './setup-view.component.html',
   styleUrls: ['./setup-view.component.scss'],
 })

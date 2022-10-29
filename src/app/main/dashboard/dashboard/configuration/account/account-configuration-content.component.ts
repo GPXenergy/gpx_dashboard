@@ -18,7 +18,7 @@ import { ChangePasswordComponent } from './change-password-dialog/change-passwor
 
 
 @Component({
-  selector: 'account-config-content',
+  selector: 'gpx-account-config-content',
   templateUrl: './account-configuration-content.component.html',
   styleUrls: ['./account-configuration-content.component.scss'],
 })
@@ -50,7 +50,7 @@ export class AccountConfigurationContentComponent implements OnInit, OnDestroy {
     this.userForm = this.formBuilder.modelGroup(User, user, {
       first_name: [''],
       last_name: [''],
-      email: ['', [Validators.maxLength(254), Validators.email, Validators.required]],
+      email: [''],
     });
   }
 
