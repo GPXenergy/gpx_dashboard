@@ -43,17 +43,22 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   validateHash(): void {
-    this.resetPasswordActionService.validateHash(this.hash).subscribe({
-      next: res => {
-        // success
-        this.hashValid = true;
-        this.loading = false;
-      },
-      error: errorResponse => {
-        this.hashValid = true;
-        this.loading = false;
-      }
-    });
+    if (this.hash) {
+      this.resetPasswordActionService.validateHash(this.hash).subscribe({
+        next: res => {
+          // success
+          this.hashValid = true;
+          this.loading = false;
+        },
+        error: errorResponse => {
+          this.hashValid = false;
+          this.loading = false;
+        }
+      });
+    } else {
+      this.hashValid = false;
+      this.loading = false;
+    }
   }
 
   onSubmit(): void {
