@@ -75,7 +75,7 @@
 
           <mat-form-field appearance="outline" fxFlex="100%">
             <mat-label>Beschrijving</mat-label>
-            <textarea autocomplete="off" cdkAutosizeMaxRows="5" cdkAutosizeMinRows="1" cdkTextareaAutosize
+            <textarea autocomplete="off" cdkAutosizeMaxRows="5" cdkAutosizeMinRows="1" cdkTextareaAutosize #summaryInput="matInput"
                       formControlName="summary" matInput placeholder="Een korte beschrijving" style="padding: 0" type="text">
             </textarea>
             <mat-error>
@@ -109,11 +109,11 @@
 
           <div class="mt-8 mr-8 ml-8">
             <mat-checkbox color="primary" formControlName="allow_invite" labelPosition="after">
-              Gebruikers kunnen uitgenodigd worden voor deze groep
+              Gebruikers kunnen uitgenodigd worden voor deze groep.
             </mat-checkbox>
           </div>
 
-          <div *ngIf="groupMeterForm.get('allow_invite').value" class="mb-12" fxLayout="row" fxLayoutGap="15px">
+          <div *ngIf="groupMeterForm.get('allow_invite').value && !groupMeterForm.get('new_invitation_key').value" class="mb-12" fxLayout="row" fxLayoutGap="15px">
             <div fxFlex>
               <mat-form-field appearance="outline" fxFlex="100%">
                 <mat-label>Uitnodigingslink</mat-label>
@@ -127,6 +127,15 @@
                     mat-icon-button matTooltip="Copy" type="button">
               <mat-icon>content_copy</mat-icon>
             </button>
+          </div>
+
+          <div class="mt-8 mr-8 ml-8" *ngIf="groupMeterForm.get('allow_invite').value">
+            <mat-checkbox color="primary" formControlName="new_invitation_key" labelPosition="after">
+              Genereer een nieuwe uitnodigingslink.
+            </mat-checkbox>
+            <mat-hint *ngIf="groupMeterForm.get('new_invitation_key').value">
+              Een nieuwe uitnodigingslink wordt aangemaakt na het opslaan.
+            </mat-hint>
           </div>
 
           <div *ngIf="!groupMeterForm?.pristine" class="mt-20" fxLayout="row" fxLayoutAlign="end" fxLayoutGap="20px">

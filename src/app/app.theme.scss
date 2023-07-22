@@ -34,7 +34,7 @@ $fuse-navy: (
   )
 );
 
-$oanax-accent: (
+$gpx-accent: (
   50 : #e8f4fa,
   100 : #c5e4f2,
   200 : #9ed2ea,
@@ -67,7 +67,7 @@ $oanax-accent: (
   )
 );
 
-$oanax-warn: (
+$gpx-warn: (
   50 : #fce8e7,
   100 : #f9c7c2,
   200 : #f5a19a,
@@ -123,8 +123,8 @@ $typography: mat-typography-config(
 
 // Define the primary, accent and warn palettes
 $default-primary-palette: mat-palette($fuse-navy);
-$default-accent-palette: mat-palette($oanax-accent, 500, 300, 700);
-$default-warn-palette: mat-palette($oanax-warn, 500);
+$default-accent-palette: mat-palette($gpx-accent, 500, 300, 700);
+$default-warn-palette: mat-palette($gpx-warn, 500);
 
 // Create the Material theme object
 $theme: mat-light-theme($default-primary-palette, $default-accent-palette, $default-warn-palette);

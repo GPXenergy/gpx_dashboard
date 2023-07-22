@@ -17,7 +17,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { CreateGroupMeterDialogModule } from './group/create-group-meter-dialog/create-group-meter-dialog.module';
-import { OanaxSnackBarModule } from '@gpx/components/utilities/snack-bar/oanax-snack-bar.module';
+import { GpxSnackBarModule } from '@gpx/components/utilities/snack-bar/gpx-snack-bar.module';
 import { JoinGroupMeterDialogModule } from './group/join-group-meter-dialog/join-group-meter-dialog.module';
 import { MatSelectModule } from '@angular/material/select';
 import { ChangePasswordModule } from './account/change-password-dialog/change-password.module';
@@ -76,7 +76,7 @@ const routes: Route[] = [
     JoinGroupMeterDialogModule,
     ChangeGroupManagerDialogModule,
     ChangePasswordModule,
-    OanaxSnackBarModule,
+    GpxSnackBarModule,
     MatSelectModule,
     MatTableModule,
   ]

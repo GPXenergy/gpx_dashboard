@@ -52,6 +52,8 @@ export class GroupConfigurationContentComponent implements OnInit, OnDestroy {
   timeOut: NodeJS.Timeout;
   private readonly _unsubscribeAll = new Subject<void>();
 
+
+
   constructor(private changeDetectorRef: ChangeDetectorRef,
               private authService: AuthService,
               private route: ActivatedRoute,
@@ -105,7 +107,6 @@ export class GroupConfigurationContentComponent implements OnInit, OnDestroy {
       this.groupMeter = groupMeter;
 
       this.isGroupManager = this.groupMeter.getManager().pk === this.user.pk;
-      this.invitationUrl = this.groupMeter.invitationUrl;
       if (this.isGroupManager) {
         this.initGroupMeterForm(this.groupMeter);
       } else {
@@ -217,7 +218,16 @@ export class GroupConfigurationContentComponent implements OnInit, OnDestroy {
       public: [null],
       public_key: ['', Validators.pattern('[0-9a-zA-Z-]*')],
       allow_invite: [true],
+      new_invitation_key: [false],
     });
+
+    this.groupMeterForm.get('allow_invite').valueChanges.subscribe(val => {
+      if (!val) {
+        this.groupMeterForm.get('new_invitation_key').patchValue(false);
+      }
+    });
+
+    this.invitationUrl = groupMeter.invitationUrl;
   }
 
   leaveGroup(): void {

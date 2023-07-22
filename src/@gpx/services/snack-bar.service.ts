@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
 import { MatSnackBarConfig } from '@angular/material/snack-bar/snack-bar-config';
-import { OanaxSnackBarComponent, OanaxSnackData } from '../components/utilities/snack-bar/oanax-snack-bar.component';
+import { GpxSnackBarComponent, ISnackData } from '../components/utilities/snack-bar/gpx-snack-bar.component';
 
 /**
  * Snackbar service to display snacks in the browser to update/notify the user
@@ -27,7 +27,7 @@ export class SnackBarService {
    * @param data
    * @param snackConfig
    */
-  public info(data: OanaxSnackData, snackConfig: MatSnackBarConfig = {}): MatSnackBarRef<OanaxSnackBarComponent> {
+  public info(data: ISnackData, snackConfig: MatSnackBarConfig = {}): MatSnackBarRef<GpxSnackBarComponent> {
     return this._open({
       ...this._defaultOptions,
       ...snackConfig,
@@ -44,7 +44,7 @@ export class SnackBarService {
    * @param data
    * @param snackConfig
    */
-  public success(data: OanaxSnackData, snackConfig: MatSnackBarConfig = {}): MatSnackBarRef<OanaxSnackBarComponent> {
+  public success(data: ISnackData, snackConfig: MatSnackBarConfig = {}): MatSnackBarRef<GpxSnackBarComponent> {
     return this._open({
       ...this._defaultOptions,
       ...snackConfig,
@@ -62,7 +62,7 @@ export class SnackBarService {
    * @param data
    * @param snackConfig
    */
-  public warn(data: OanaxSnackData, snackConfig: MatSnackBarConfig = {}): MatSnackBarRef<OanaxSnackBarComponent> {
+  public warn(data: ISnackData, snackConfig: MatSnackBarConfig = {}): MatSnackBarRef<GpxSnackBarComponent> {
     return this._open({
       ...this._defaultOptions,
       ...snackConfig,
@@ -79,7 +79,7 @@ export class SnackBarService {
    * @param config
    * @private
    */
-  private _open(config: MatSnackBarConfig): MatSnackBarRef<OanaxSnackBarComponent> {
-    return this._snackBar.openFromComponent(OanaxSnackBarComponent, config);
+  private _open(config: MatSnackBarConfig): MatSnackBarRef<GpxSnackBarComponent> {
+    return this._snackBar.openFromComponent(GpxSnackBarComponent, config);
   }
 }

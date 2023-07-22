@@ -92,6 +92,24 @@ export abstract class BaseModel {
       delete values[field];
     }
   }
+
+  public asObject(): modelPropertiesObj<this> {
+    return Object.keys(this).reduce((obj, key) => {
+      const value = this[key];
+      if (key.startsWith('_') || value instanceof Function) {
+        // Ignore values starting with _, to ignore cached values or other private properties
+        return obj;
+      }
+      if (value instanceof Array && value.length > 0 && value[0] instanceof BaseModel) {
+        obj[key] = value.map((m) => m.asObject());
+      } else if (value instanceof BaseModel) {
+        obj[key] = value.asObject();
+      } else if (value !== undefined) {
+        obj[key] = value;
+      }
+      return obj;
+    }, {});
+  }
 }
 
 

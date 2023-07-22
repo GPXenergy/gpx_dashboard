@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { OanaxSnackBarComponent } from './oanax-snack-bar.component';
+import { GpxSnackBarComponent } from './gpx-snack-bar.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
-    OanaxSnackBarComponent,
+    GpxSnackBarComponent,
   ],
   imports: [
     TranslateModule,
@@ -21,5 +21,5 @@ import { MatIconModule } from '@angular/material/icon';
     MatSnackBarModule,
   ]
 })
-export class OanaxSnackBarModule {
+export class GpxSnackBarModule {
 }

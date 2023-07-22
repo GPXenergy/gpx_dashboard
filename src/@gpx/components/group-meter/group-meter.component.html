@@ -27,7 +27,7 @@
           <div fxFlex>
             <mat-form-field appearance="outline" class="h6" fxFlex="100%">
               <mat-label>Publieke link</mat-label>
-              <input (click)="$event.target.select()" [value]="groupMeter.publicUrl" matInput readonly>
+              <input #publicLink (click)="publicLink.select()" [value]="groupMeter.publicUrl" matInput readonly>
             </mat-form-field>
           </div>
           <button (cdkCopyToClipboardCopied)="copyPublicLink()" [cdkCopyToClipboard]="groupMeter.publicUrl"

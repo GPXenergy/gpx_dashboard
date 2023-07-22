@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TranslateModule } from '@ngx-translate/core';
-import { OanaxPipesModule } from '@gpx/pipes/pipes.module';
+import { GPXPipesModule } from '@gpx/pipes/pipes.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { GPXDirectivesModule } from '@gpx/directives/directives';
@@ -19,7 +19,7 @@ import { GPXDirectivesModule } from '@gpx/directives/directives';
     ReactiveFormsModule,
     FlexLayoutModule,
     TranslateModule,
-    OanaxPipesModule,
+    GPXPipesModule,
     MatSnackBarModule,
     MatTooltipModule,
     GPXDirectivesModule

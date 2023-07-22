@@ -27,7 +27,9 @@
         </div>
 
         <p>
-          Hieronder staan de gegevens van meter <em>{{ selectedMeter.name }}</em><span *ngIf="allMeters.length > 1">, Je kan van meter wisselen rechtsboven in de navigatie</span>.
+          Hieronder staan de gegevens van meter <em>{{ selectedMeter.name }}</em><span *ngIf="allMeters.length > 1">,
+          Je kan van meter wisselen rechtsboven in de navigatie</span>. Wil je een nieuwe of extra meter koppelen aan je
+          account? Scroll dan verder naar onder!
         </p>
 
         <p *ngIf="selectedMeter.gpx_version">
@@ -221,6 +223,11 @@
           dezelfde API key gebruiken om de nieuwe meter aan jouw account te koppelen. Linksboven in het menu kan je
           van meter wisselen. Verschillende meters zijn onafhankelijk van elkaar, en kunnen bij dezelfde of
           verschillende groepsmeters aangesloten zijn.
+        </p>
+
+        <p>
+          Dus als je bijvoorbeeld een nieuwe meter hebt ontvangen, hoef je geen geheel nieuw account te maken! Dezelfde
+          API key kan direct gebruikt worden, daarna jouw verschillende meters voor jou zichtbaar op het dashbord.
         </p>
 
       </mat-card>

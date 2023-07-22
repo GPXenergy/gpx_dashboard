@@ -19,6 +19,7 @@ export class GroupMeter extends BaseModel {
 
   allow_invite: boolean;
   invitation_key: string;  // id to create a link for members to join
+  new_invitation_key: boolean;
 
   /// Participants
   participants: modelRelationArray<GroupParticipant>;

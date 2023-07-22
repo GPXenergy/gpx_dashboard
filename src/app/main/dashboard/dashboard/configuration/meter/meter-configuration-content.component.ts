@@ -12,6 +12,7 @@ import { AuthUser } from '@gpx/models/auth-user.model';
 import { MeterService } from '@gpx/services/api/meter.service';
 import { EMeterType, EMeterVisibility, EResidenceEnergyLabel, EResidenceType } from '@gpx/models/types';
 import { Meter } from '@gpx/models/meter.model';
+import { UserService } from '../../../../../../@gpx/services/api/user.service';
 
 
 @Component({
@@ -38,7 +39,7 @@ export class MeterConfigurationContentComponent implements OnInit, OnDestroy {
               private authService: AuthService,
               private meterService: MeterService,
               private formBuilder: ModelFormBuilder,
-              private formValidator: FormValidatorService,
+              private userService: UserService,
               private meterSelectionService: MeterSelectionService,
               private titleService: Title) {
     this.titleService.setTitle('Meter Instellingen | GPX');
@@ -141,7 +142,17 @@ export class MeterConfigurationContentComponent implements OnInit, OnDestroy {
   }
 
   newApiKey(event): void {
-    // TODO
+    if (confirm(`Met een nieuwe API key verliezen je huidig aangesloten meters hun verbinding! Je zal hierna de nieuwe API key opnieuw moeten instellen op elke GPXconnector die je in gebruik hebt.\nWeet je zeker dat je een nieuwe API key wil aanvragen?`)) {
+      this.userService.updateUser(this.user.pk, new AuthUser().deserialize({new_api_key: true})).subscribe(
+        result => {
+          this._snackBar.success({
+            title: `Je hebt nu een nieuwe API key!`,
+          });
+          this.authService.patchUser(result);
+          this.changeDetectorRef.detectChanges();
+        }
+      );
+    }
   }
 
 }

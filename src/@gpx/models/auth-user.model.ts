@@ -15,6 +15,9 @@ export class AuthUser extends User {
   new_password: string;
   confirm_password: string;
 
+  // If patched true, a new API key will be generated for the user
+  new_api_key: boolean;
+
   public getDefaultMeter(): Meter {
     return BaseModel.getModelProperty(Meter, this.default_meter);
   }

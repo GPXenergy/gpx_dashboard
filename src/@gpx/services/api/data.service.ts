@@ -151,7 +151,7 @@ export abstract class DataService<TList extends TObject[] | PaginatorModel<TObje
     return this.deserializeResponseObject(
       this.http.post<TObject>(
         this.buildUrl(urlParams),
-        JSON.stringify(itemToAdd)
+        JSON.stringify(itemToAdd.asObject())
       )
     );
   }
@@ -165,7 +165,7 @@ export abstract class DataService<TList extends TObject[] | PaginatorModel<TObje
     return this.deserializeResponseObject(
       this.http.patch<TObject>(
         this.buildUrl(urlParams),
-        JSON.stringify(itemToUpdate)
+        JSON.stringify(itemToUpdate.asObject())
       )
     );
   }
@@ -181,7 +181,7 @@ export abstract class DataService<TList extends TObject[] | PaginatorModel<TObje
     return this.deserializeResponseObject(
       this.http.patch<TObject>(
         this.buildUrl(urlParams),
-        JSON.stringify(itemToUpdate),
+        JSON.stringify(itemToUpdate.asObject()),
         {params: query ? query.getParams() : null},
       )
     );

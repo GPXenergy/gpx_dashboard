@@ -13,5 +13,5 @@ import { ShortenPipe } from './shorten.pipe';
     ShortenPipe,
   ]
 })
-export class OanaxPipesModule {
+export class GPXPipesModule {
 }
