@@ -1,0 +1,216 @@
+<div class="mt-20 mb-40" fxFlex="100%" fxLayout="row">
+  <div fxFlex="20%" fxFlex.md="15%" fxFlex.sm="2.5%" fxFlex.xs="2.5%"></div>
+  <div fxFlex="60%" fxFlex.md="70%" fxFlex.sm="95%" fxFlex.xs="95%" fxLayout="column">
+    <h1><a routerLink="/info">Meer informatie</a> / Veelgestelde vragen</h1>
+
+    <p>
+      Ben je niet helemaal thuis in wat er allemaal gebeurt op het GPX dashbord? Dan zit je hier op de juiste plek!
+      <br/>
+      Staat je vraag er niet tussen, of kom je er niet uit?
+      <a target="_blank" href="https://www.gpx.nl/contactpagina/">Neem gerust contact op met GPX!</a>
+    </p>
+
+    <p>
+      Lees je liever van een PDF? Dat kan ook, die is hier:
+      <a target="_blank" href="https://gpx.nl/FAQ-Veelgesteldevragen-v9.pdf">FAQ-Veelgesteldevragen-v9 (pdf)</a>
+    </p>
+
+    <div fxLayout="row wrap" fxLayoutAlign="space-between start">
+      <mat-card class="cursor-pointer mb-12 faq-section-card" fxLayout="column" fxLayoutAlign="center center" fxFlex="49%" fxFlex.xs="100%" [routerLink]="[]" [queryParams]="{questions: 'dashboard'}" queryParamsHandling="merge" replaceUrl="true">
+        <mat-icon class="gpx-text-primary mb-12 mt-12">dashboard</mat-icon>
+        <span class="gpx-text-primary">Vragen over het dashboard</span>
+      </mat-card>
+      <mat-card class="cursor-pointer mb-12 faq-section-card" fxLayout="column" fxLayoutAlign="center center" fxFlex="49%" fxFlex.xs="100%" [routerLink]="[]" [queryParams]="{questions: 'gpxconnector'}" queryParamsHandling="merge" replaceUrl="true">
+        <mat-icon class="gpx-text-primary mb-12 mt-12">electric_meter</mat-icon>
+        <span class="gpx-text-primary">Vragen over de GPXconnector</span>
+      </mat-card>
+      <mat-card class="cursor-pointer mb-12 faq-section-card" fxLayout="column" fxLayoutAlign="center center" fxFlex="49%" fxFlex.xs="100%" [routerLink]="[]" [queryParams]="{questions: 'data'}" queryParamsHandling="merge" replaceUrl="true">
+        <mat-icon class="gpx-text-primary mb-12 mt-12">badge</mat-icon>
+        <span class="gpx-text-primary">Vragen over mijn data</span>
+      </mat-card>
+      <mat-card class="cursor-pointer mb-12 faq-section-card" fxLayout="column" fxLayoutAlign="center center" fxFlex="49%" fxFlex.xs="100%" [routerLink]="[]" [queryParams]="{questions: 'other'}" queryParamsHandling="merge" replaceUrl="true">
+        <mat-icon class="gpx-text-primary mb-12 mt-12">lightbulb</mat-icon>
+        <span class="gpx-text-primary">Andere vragen</span>
+      </mat-card>
+    </div>
+
+    <div class="section" *ngIf="view === 'dashboard'" fxLayout="column">
+
+      <h2>Vragen over het dashboard</h2>
+
+      <gpx-question-panel question="Wat kan het buurt energie platform allemaal?" class="mb-12">
+        <p>
+          BEP als buurtenergieplatform kan laten zien wat er op een collectief niveau met de energie gebeurt. De groepsmeter toont wat er LIVE gebeurt,
+          toont de energie-balans (overschot of tekort van de groep) en het groepstotaal. In de persoonlijke
+          omgeving (beschermd met wachtwoord) zijn de grafieken te zien van stroom en gas.
+        </p>
+        <p>
+          Voorbeeld: <a [routerLink]="['/live', 'groepsmeter1']">Groepsmeter 1</a>
+        </p>
+      </gpx-question-panel>
+
+      <gpx-question-panel question="Kan ik met een andere naam in de groep deelnemen dan de naam waarmee ik me heb aangemeld?" class="mb-12">
+        Ja dat kan. De naam in de groep is vrij te kiezen bij instellingen/groep onder het kopje: Groepsleden.
+      </gpx-question-panel>
+
+      <gpx-question-panel question="Waarom is bij elektrisch de import (–kWh) negatief en bij gas (m3) de import positief?" class="mb-12">
+        <p>
+          Die keuze werd gemaakt omdat gas vrijwel nooit wordt geëxporteerd door deelnemers. We lieten de
+          gas-hoeveelheid ( m3) positief om verwarring te vermijden. Mocht dit toekomstig met waterstof
+          veranderen, dan maken we – net als bij elektriciteit – de import van gas negatief en export positief.
+        </p>
+      </gpx-question-panel>
+
+      <gpx-question-panel question="Hoeveel deelnemers kunnen meedoen in de pilot?" class="mb-12">
+        Er kunnen 50 aansluitingen in deze pilot. Er kunnen 10 deelnemers in een groep.
+      </gpx-question-panel>
+
+      <gpx-question-panel question="Wat voor soort ‘groep’ is er mogelijk? " class="mb-12">
+        In de pilot werken we met een algemene groep
+        (groepsmeter1, 2, 3 enz.) maar er komen ook ‘thema-groepen’ op huistype en voor VVE’s. Ook
+        families kunnen een groep maken. De keuze voor een thema gaat in overleg. De weg vinden op het
+        dashbord is redelijk eenvoudig, maar hulp is voorhanden, zie de contactpagina.
+      </gpx-question-panel>
+
+      <gpx-question-panel question="Zijn groepen persé openbaar?" class="mb-12">
+        Nee, maar voorlopig met de pilot zijn de groepen wel openbaar
+        om daarvan te kunnen leren of het allemaal goed werkt. In een later stadium, na de pilot-fase, kan
+        de groepsbeheerder kiezen voor ‘niet-openbaar’, de groep is dan enkel voor de groepsleden
+        bereikbaar. De persoonlijke pagina (mijn meter) is vooralsnog niet instelbaar en is niet bereikbaar
+        voor andere groepsleden.
+      </gpx-question-panel>
+
+      <gpx-question-panel question="Wat betekent import en export?" class="mb-12">
+        Import is stroom betrekken van het openbare net. Export is
+        stroom leveren aan het openbare net. In de groepsmeter is zichtbaar wanneer de groep importeert of
+        exporteert aan de kleur van het virtuele netwerk (groen of grijs).
+      </gpx-question-panel>
+
+      <gpx-question-panel question="Ik ben mijn username en wachtwoord kwijt, en ik heb geen email aan mijn account. Wat kan ik nu doen?" class="mb-12">
+        Schrijf een bericht aan support@gpx.nl en wij koppelen een email aan jouw account. Daarna sturen wij jou een email met een link om je wachtwoord opnieuw in te stellen!
+      </gpx-question-panel>
+
+    </div>
+
+    <div class="section" *ngIf="view === 'gpxconnector'" fxLayout="column">
+
+      <h2>Vragen over de GPXconnector</h2>
+
+      <gpx-question-panel question="Hoe kom ik aan een GPXconnector?" class="mb-12">
+        GPX heeft een pilot in de wijk Spijkerkwartier in
+        Arnhem. Het is een living lab voor dit energieproject. Voor de pilot zijn een beperkt aantal
+        GPXconnectors beschikbaar. Om deel te nemen in de pilot kan je contact opnemen met GPX. Er
+        komt een vervolg op deze pilot, waarvoor intekenen mogelijk is. De huidige pilot (juni 2021) levert
+        de GPXconnector gratis aan de deelnemers, in ruil voor zinvolle feedback en wat meedenkwerk
+        voor verbetering via een workshop komend najaar.
+      </gpx-question-panel>
+
+      <gpx-question-panel question="Kan een GPXconnector aangesloten worden wanneer er al een ander apparaat aan de P1-poort is verbonden?" class="mb-12">
+        Ja, met een daarvoor klaargemaakte rj12-splitter. GPX heeft deze splitters beschikbaar voor de pilot.
+        Wanneer een ander apparaat is aangesloten die voor de ‘data request’ de voeding geeft, sluit dan de
+        GPXconnector aan op de plek van ‘GPX’ op de splitter en het andere apparaat op de blanco output.
+        De topzijde is dan de aansluiting naar de P1poort van de meter.
+      </gpx-question-panel>
+
+      <gpx-question-panel question="Wanneer de slimme meter buiten bereik is van de wifi, of wanneer geen stopcontact nabij de meter beschikbaar is, zijn er dan nog steeds mogelijkheden om deel te nemen?" class="mb-12">
+        Ja, de GPXextender is een draadloos alternatief voor dit probleem. De GPXextenders zijn
+        echter beperkt beschikbaar. Ze zijn met name praktisch bij woonboten, woonarken of dergelijke. Of
+        waar bijvoorbeeld de meter is een souterrain zit veraf van de wifi. <br/>
+        Neem contact op met GPX voor meer informatie over de GPXextender
+      </gpx-question-panel>
+
+    </div>
+
+    <div class="section" *ngIf="view === 'data'" fxLayout="column">
+
+      <h2>Vragen over mijn data</h2>
+
+      <gpx-question-panel question="Wie kan mijn data inzien?" class="mb-12">
+        <p>
+          Alleen jijzelf hebt toegang tot jouw persoonlijke gegevens en meterdata. Wanneer je met een van jouw meters in
+          een groepsmeter zit, dan kunnen leden van de groep ook jouw huidig verbruik zien. Wanneer de groep publiek is,
+          kan iedereen met de publieke link van jouw groepsmeter ook jouw huidig verbruik zien. Je kan jezelf "anoniem"
+          maken voor anderen door jezelf een andere leuke naam te geven, dit kan onder Instellingen - Groep.
+        </p>
+
+      </gpx-question-panel>
+
+      <gpx-question-panel question="Werkt GPX samen met derden of andere dataverwerkers?" class="mb-12">
+        Nee, daar wordt niemand blij van.
+      </gpx-question-panel>
+
+      <gpx-question-panel question="Wat wordt er dan wel met mijn data gedaan?" class="mb-12">
+        Momenteel wordt de data alleen gebruikt op het dashbord zoals jij dit ook kan zien: Voor jezelf (de grafieken
+        op je persoonlijke pagina) en in de groepsmeter. <br>
+        In de toekomst wil GPX verder gaan met meterdata verwerken om ook grafieken te tonen in de groepsmeter en voor
+        het verwerken van statistieken. GPX vindt het belangrijk dat alle functies en dataverwerking nuttig zijn voor
+        alle deelnemers.
+      </gpx-question-panel>
+
+      <gpx-question-panel question="Gebruikt GPX cookies in mijn browser?" class="mb-12">
+        GPX plaatst 3 cookies in de browser, 100% voor het funcitoneren van de app. Verder worden er geen cookies geplaatst of uitgelezen.
+        <ul>
+          <li>`lang`: Slaat de taal van de app op</li>
+          <li>`session`: Slaat jouw huidige inlog-sessie op. Zo blijf jij ingelogt ook als je de pagina ververst</li>
+          <li>`session-expiry`: Slaat op tot wanneer jouw sessie geldig is, zodat de app daar juist op kan reageren.</li>
+        </ul>
+      </gpx-question-panel>
+
+    </div>
+
+    <div class="section" *ngIf="view === 'other'" fxLayout="column">
+
+      <h2>Andere vragen</h2>
+
+      <gpx-question-panel question="Hoe kan ik mee doen?" class="mb-12">
+        Enkele simpele voorwaarden om deel te nemen zijn:
+        <ol>
+          <li>Het hebbenb van een slimme meter</li>
+          <li>Een telefoonadapter met micro-usb en een stopcontact in de meterkast</li>
+          <li>Een GPXconnector (het ‘kastje van GPX’) met een rj12-kabeltje</li>
+          <li>Een computer met internet</li>
+          <li>WiFi in het bereik van de meter</li>
+        </ol>
+
+        <a target="_blank" href="https://www.gpx.nl/contactpagina/">Vraag hier je GPXconnector aan!</a>
+      </gpx-question-panel>
+
+      <gpx-question-panel question="Wat is de P1-poort van de meter?" class="mb-12">
+        De P1-poort is een klein stopcontact voor aansluiting met
+        een rj12-kabeltje op de elektra-meter, indien het een slimme meter is. De aanduiding op de meter is
+        letterlijk: P1.
+      </gpx-question-panel>
+
+      <gpx-question-panel question="Waar kan ik vragen stellen over mijn jaarnota?" class="mb-12">
+        GPX kan helpen een workshop te organiseren
+        over het ‘lezen en begrijpen’ van de jaarnota voor de geleverde energie. Voor specifieke vragen over
+        het energie-contract of de jaarnota kun je het beste met de energie-leverancier contact opnemen.
+        GPX is geen energie-leverancier of elektrotechnisch buro. Zie www.gpx.nl voor meer informatie.
+        Wil je meedoen met een leuke en nuttige workshop, mail dan aan GPX via de contactpagina.
+      </gpx-question-panel>
+
+      <gpx-question-panel question="Wanneer zijn er workshops?" class="mb-12">
+        Deelnemers krijgen gelegenheid mee te doen aan (online)
+        workshops. Die zijn in het najaar 2021. Belangstelling hiervoor is doorgaans gering, maar u kunt
+        gerust alvast uw belangstelling aanmelden bij GPX of bij SpijkerEnergie via de contactpagina.
+      </gpx-question-panel>
+
+      <gpx-question-panel question="Wat is mijn aansluitwaarde van stroom en gas?" class="mb-12">
+        Elke aansluiting heeft een maximale
+        aansluitwaarde. Bij gas is dat de doorlaatwaarde van de gasmeter en bij stroom is dat de waarde van
+        de (verzegelde) hoofdzekering van de E-aansluiting. Wilt u weten welke waarde uw aansluiting
+        heeft, google dan op netbeheerder en aansluitwaarde. Woont u in Liander-gebied (Arnhem o.a.) dan
+        is dit een directe link: https://www.liander.nl/consument/aansluitingen/capaciteit
+      </gpx-question-panel>
+
+      <gpx-question-panel question="Ik kan de contactpagina niet vinden :(" class="mb-12">
+        Zoek dan niet verder! <a target="_blank" href="https://www.gpx.nl/contactpagina/">Klik hier voor de contactpagina!</a>
+      </gpx-question-panel>
+
+    </div>
+
+    <div class="p-16"></div>
+
+  </div>
+  <div fxFlex="15%" fxFlex.sm="2.5%" fxFlex.xs="2.5%"></div>
+</div>

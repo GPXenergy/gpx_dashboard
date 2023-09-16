@@ -54,7 +54,7 @@ export const appRoutes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, {scrollPositionRestoration: 'enabled'}),
     GPXSharedModule,
     LayoutModule,
     InitialLoadingIndicatorModule,

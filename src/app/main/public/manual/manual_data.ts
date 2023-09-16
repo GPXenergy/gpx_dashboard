@@ -6,6 +6,7 @@ export interface IMeterModel {
     parity: '7E1' | '8N1';
   };
   model: string;
+  note?: string;
 }
 
 export interface IMeterMake {
@@ -110,6 +111,14 @@ export const meterGroups: IMeterMake[] = [
     meters: [{
       value: {baud: 115200, parity: '8N1'},
       model: 'T210-D ESMR5',
+    }]
+  },
+  {
+    name: 'Overig',
+    meters: [{
+      value: {baud: 115200, parity: '8N1'},
+      model: 'Mijn model staat er niet tussen',
+      note: 'Het kan zijn dat je een nieuwer model hebt, dan zijn de onderstaande instellingen hoogstwaarschijnlijk correct. Kom je er niet uit? Dan kan je altijd contact opnemen met GPX!',
     }]
   }
 ];

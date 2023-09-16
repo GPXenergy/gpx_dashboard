@@ -1,14 +1,17 @@
 <mat-drawer-container [hasBackdrop]="false" fxFlex="100%" xmlns="http://www.w3.org/1999/html">
   <mat-drawer #drawer class="drawer-container" position="end" mode="over">
     <div class="p-16" fxLayout="column">
-      <div class="mb-12">
-        <button (click)="drawer.toggle()" class="gpx-primary" mat-icon-button>
-          <mat-icon>arrow_forward</mat-icon>
-        </button>
+      <div class="sticky-top mt--16 bg-white">
+        <div class="mb-12 mt-16">
+          <button (click)="drawer.close()" class="gpx-primary" mat-icon-button>
+            <mat-icon>arrow_forward</mat-icon>
+          </button>
+        </div>
+        <div style="margin-left: -16px; margin-right: -16px">
+          <mat-divider></mat-divider>
+        </div>
       </div>
-      <div style="margin-left: -16px; margin-right: -16px">
-        <mat-divider></mat-divider>
-      </div>
+
       <div class="mt-20">
         <mat-icon>info</mat-icon>
       </div>

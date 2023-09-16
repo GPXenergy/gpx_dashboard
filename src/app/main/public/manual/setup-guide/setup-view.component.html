@@ -1,13 +1,16 @@
 <div class="mt-20 mb-40" fxFlex="100%" fxLayout="row">
   <div fxFlex="20%" fxFlex.md="15%" fxFlex.sm="2.5%" fxFlex.xs="2.5%"></div>
   <div fxFlex="60%" fxFlex.md="70%" fxFlex.sm="95%" fxFlex.xs="95%" fxLayout="column">
-    <h1><a routerLink="/info">Handleidingen</a> / Quick start handleiding</h1>
+    <h1><a routerLink="/info">Meer informatie</a> / GPXconnector installatiehandleiding</h1>
 
     <p>
       Ben je net in bezit gekomen van een GPXconnector en wil je weten hoe je deze in een paar simpele stappen aan de
       praat krijgt? Dan ben je hier op de goede plek! In de Quick-start handleiding wordt je door het proces geleid om
-      het apparaat in te stellen en te installeren in je meterkast! Ben je eerder benieuwd wat het apparaat allemaal
-      doet? Kijk dan in de <a routerLink="/info/gpxconnector">gebruikershandleiding</a>!
+      het apparaat in te stellen en te installeren in je meterkast!
+    </p>
+    <p>
+      Er is ook een pdf versie beschikbaar:
+      <a target="_blank" href="https://gpx.nl/Quickstart-handleiding-v10.pdf">Quickstart-handleiding-v10 (pdf)</a>
     </p>
 
     <div class="img-container">
@@ -63,7 +66,7 @@
       </p>
 
       <mat-card *ngIf="user" class="user-specific">
-        <mat-icon [inline]="true">person</mat-icon>
+        <mat-icon [inline]="true" [matTooltip]="'Dit is account-specifieke informatie voor ' + user.username">person</mat-icon>
         Je bent ingelogd als <b>{{ user.username }}</b>! Ga verder naar stap 3.
       </mat-card>
 
@@ -75,8 +78,8 @@
       <h2>3. GPXconnector configureren</h2>
 
       <p>
-        In stap 3 gaan wij de GPXconnector instellen zodat deze jouw slimme meter kan uitlezen en de gegevens verzend
-        naar het dashboard via jouw wifi!<br/>
+        In stap 3 gaan wij de GPXconnector instellen zodat deze jouw slimme meter kan uitlezen en de gegevens verzendt
+        naar het dashbord via jouw wifi!<br/>
         De GPXconnector kent 2 modi, de actieve modus en de configuratiemodus, waartussen geschakeld kan worden via de
         schakelaar op het apparaat. In de actieve modus wordt de meter uitgelezen en gegevens verzonden. In de
         configuratiemodus start het apparaat een WiFi kanaal waarmee je kan verbinden. In dit hoofdstuk wordt je door de
@@ -144,9 +147,9 @@
       <div>
         <mat-form-field appearance="fill" class="meter-config-help">
           <mat-label>Merk / Model</mat-label>
-          <mat-select (selectionChange)="meterSelection($event)">
+          <mat-select (selectionChange)="meterSelection($event.value)">
             <mat-optgroup *ngFor="let group of meterGroups" [label]="group.name">
-              <mat-option *ngFor="let meter of group.meters" [value]="meter.value">
+              <mat-option *ngFor="let meter of group.meters" [value]="meter">
                 {{meter.model}}
               </mat-option>
             </mat-optgroup>
@@ -154,10 +157,14 @@
         </mat-form-field>
       </div>
 
-      <ul *ngIf="selectedConfig">
-        <li><b>Baud rate: </b> {{selectedConfig.baud}}</li>
-        <li><b>Parity: </b> {{selectedConfig.parity}}</li>
-      </ul>
+      <ng-container *ngIf="selectedConfig">
+        <p *ngIf="selectedConfig.note">{{selectedConfig.note}}</p>
+        <ul>
+          <li><b>Baud rate: </b> {{selectedConfig.value.baud}}</li>
+          <li><b>Parity: </b> {{selectedConfig.value.parity}}</li>
+        </ul>
+      </ng-container>
+
 
       <p>
         Als je beschikt over een omvormer, dan kan je een stroomtang installeren en aansluiten om de zon-productie te
@@ -194,7 +201,7 @@
       </p>
 
       <mat-card *ngIf="user" class="user-specific">
-        <mat-icon [inline]="true">person</mat-icon>
+        <mat-icon [inline]="true" [matTooltip]="'Dit is account-specifieke informatie voor ' + user.username">person</mat-icon>
         Jouw API key is: <span>{{ user.api_key }}</span>
       </mat-card>
 
@@ -234,7 +241,7 @@
       </p>
 
       <mat-card *ngIf="user" class="user-specific">
-        <mat-icon [inline]="true">person</mat-icon>
+        <mat-icon [inline]="true" [matTooltip]="'Dit is account-specifieke informatie voor ' + user.username">person</mat-icon>
         Meters gekoppeld aan jouw account:
         <ul *ngIf="meters">
           <li *ngFor="let meter of meters"><a routerLink="/configure/meter" (click)="meterSelectionService.setMeter(meter.pk)">
@@ -242,7 +249,9 @@
           </a></li>
         </ul>
         <span *ngIf="!meters">Geen</span>
-        <button mat-button class="gpx-primary" [disabled]="refreshDisabled" (click)="refreshMeters()">Ververs gekoppelde meters</button>
+        <button mat-button [ngClass]="{'gpx-primary': !refreshDisabled}" [disabled]="refreshDisabled" (click)="refreshMeters()">
+          Ververs gekoppelde meters <mat-icon *ngIf="refreshDisabled"><mat-spinner diameter="20"></mat-spinner></mat-icon>
+        </button>
       </mat-card>
 
       <p>
@@ -289,6 +298,7 @@
       </p>
     </div>
 
+    <div class="p-12"></div>
   </div>
   <div fxFlex="15%" fxFlex.sm="2.5%" fxFlex.xs="2.5%"></div>
 </div>

@@ -185,12 +185,14 @@
               <mat-icon class="gpx-text-primary">settings</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-              <ng-container>
-                <button (click)="newApiKey($event)" mat-menu-item>
-                  <mat-icon class="gpx-text-action">refresh</mat-icon>
-                  Vraag nieuwe API key aan
-                </button>
-              </ng-container>
+              <button [routerLink]="['/']" mat-menu-item>
+                <mat-icon>info</mat-icon>
+                Meer info over de API key
+              </button>
+              <button (click)="newApiKey($event)" mat-menu-item>
+                <mat-icon class="gpx-text-action">refresh</mat-icon>
+                Vraag nieuwe API key aan
+              </button>
             </mat-menu>
           </div>
         </div>

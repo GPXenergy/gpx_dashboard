@@ -13,11 +13,19 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { GpxConnectorManualViewComponent } from './gpxc-manual/gpx-connector-manual-view.component';
 import { DashboardManualViewComponent } from './dashboard-manual/dashboard-manual-view.component';
+import { FaqComponent } from './faq/faq.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { QuestionPanelComponent } from './faq/question-panel/question-panel.component';
 
 const routes: Route[] = [
   {
     path: '',
     component: InfoViewComponent
+  },
+  {
+    path: 'faq',
+    component: FaqComponent
   },
   {
     path: 'setup',
@@ -46,10 +54,14 @@ const routes: Route[] = [
     MatIconModule,
     MatSelectModule,
     MatTableModule,
+    MatProgressSpinnerModule,
+    MatExpansionModule,
   ],
   declarations: [
-    SetupViewComponent,
     InfoViewComponent,
+    FaqComponent,
+    QuestionPanelComponent,
+    SetupViewComponent,
     GpxConnectorManualViewComponent,
     DashboardManualViewComponent,
   ]

@@ -30,7 +30,7 @@
         </div>
 
 
-        <p>Hieronder kun je jouw gegevens wijzigen en opslaan</p>
+        <p>Hieronder kun je jouw gegevens wijzigen en opslaan. Dit is allemaal optioneel</p>
 
         <form *ngIf="userForm" [formGroup]="userForm" class="mt-20" fxFlex="40%" fxFlex.xs="100%" fxLayout="column"
           fxLayoutGap="12px" name="form" novalidate>
@@ -50,6 +50,9 @@
           <mat-form-field appearance="outline" fxFlex="100%">
             <mat-label>Email</mat-label>
             <input formControlName="email" matInput name="email" placeholder="Email" type="email">
+            <mat-hint>
+              Handig voor als je je wachtwoord een keer vergeet
+            </mat-hint>
             <mat-error>{{userForm.errorMessages.email?.errorMessage}}</mat-error>
           </mat-form-field>
 

@@ -4,9 +4,9 @@
     <h1>Wat is het GPX dashboard?</h1>
 
     <p>
-      Het GPX dashboard, ook wel BuurtEnergiePlatform (BEP), is een online dashboard gebouwd door
+      Het GPX dashboard, ook wel BuurtEnergiePlatform (BEP), is een online dashbord gebouwd door
       <a href="https://www.gpx.nl" target="_blank">GPX</a> om huishoudens inzicht te geven in hun energieverbruik. De
-      meest innovatie feature van dit dashboard is de groepsmeter, een gezamelijke meter waarin meerdere huishoudens
+      meest innovatie feature van dit dashbord is de groepsmeter, een gezamelijke meter waarin meerdere huishoudens
       gekoppeld worden. Deze meter is LIVE in te zien door alle deelnemers van de groep, elke 10 seconden wordt het
       verbruik bijgewerkt. Door een mix te hebben van consumenten, prosumenten (bijv. woning met zonnepaneel) en
       producenten (bijv. een windpark), geeft de groepsmeter een werkelijk beeld van de energie-flow tussen de
@@ -14,7 +14,7 @@
     </p>
 
     <p>
-      GPX Dashboard versie: 1.1.1
+      GPX Dashboard versie: 1.1.2
     </p>
 
     <h3 class="mt-24">Dashboard statistieken</h3>
@@ -23,24 +23,17 @@
       Actieve groepsmeters: {{stats?.total_groups || '...'}}
     </p>
 
-    <h1 class="mt-24">Meer informatie</h1>
+    <h1 class="mt-24">Aan de slag</h1>
     <p>
-      Een dashboard met A. een ‘eigen meter’ pagina en B. een groepsmeter-pagina.
-      <a target="_blank" href="https://gpx.nl/GPX-Introductie-11jun2021.pdf">Introductie: GPX-introductie-11jun2021 (pdf)</a>.
-    </p>
-    <p>
-      Quick Start Handleiding c.q. manual voor de GPXconnector:
-      <a target="_blank" href="https://gpx.nl/Quickstart-handleiding-v10.pdf">Quickstart-handleiding-v10 (pdf)</a>.
+      <a target="_blank" href="https://gpx.nl/GPX-Introductie-11jun2021.pdf">Introductie: Een dashbord met een eigen meter en een groepsmeter</a> (pdf)
     </p>
 
     <p>
-      Veel gestelde vragen:
-      <a target="_blank" href="https://gpx.nl/FAQ-Veelgesteldevragen-v9.pdf">FAQ-Veelgesteldevragen-v9 (pdf)</a>.
+      <a [routerLink]="['setup']">Installatiehandleiding voor de GPXconnector</a>
     </p>
 
     <p>
-      Heb je andere vragen, wil je meedoen of heb problemen met je account?
-      <a target="_blank" href="https://www.gpx.nl/contactpagina/">Neem contact op met GPX!</a>
+      <a [routerLink]="['faq']">Veelgestelde vragen</a>
     </p>
 
     <h1 class="mt-24">GPX communities</h1>

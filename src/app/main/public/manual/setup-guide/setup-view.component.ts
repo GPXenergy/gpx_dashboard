@@ -6,7 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Meter } from '@gpx/models/meter.model';
 import { AuthUser } from '@gpx/models/auth-user.model';
 import { Title } from '@angular/platform-browser';
-import { ILEDData, IMeterMake, ledData, meterGroups } from '../manual_data';
+import { ILEDData, IMeterMake, IMeterModel, ledData, meterGroups } from '../manual_data';
 
 
 @Component({
@@ -23,16 +23,14 @@ export class SetupViewComponent implements OnInit, OnDestroy {
   meterGroups: IMeterMake[] = meterGroups;
   ledData: ILEDData[] = ledData;
 
-  selectedConfig: {
-    baud: 9600 | 115200;
-    parity: '7E1' | '8N1';
-  };
+  selectedConfig: IMeterModel;
 
 
   constructor(private authService: AuthService, public meterSelectionService: MeterSelectionService,
               private titleService: Title) {
     this.titleService.setTitle('Quick-start handleiding | GPX');
 
+    console.log(meterGroups);
   }
 
   ngOnInit(): void {
@@ -51,8 +49,8 @@ export class SetupViewComponent implements OnInit, OnDestroy {
     this._unsubscribeAll.complete();
   }
 
-  meterSelection(e): void {
-    this.selectedConfig = e.value;
+  meterSelection(e: IMeterModel): void {
+    this.selectedConfig = e;
   }
 
   refreshMeters(): void {
