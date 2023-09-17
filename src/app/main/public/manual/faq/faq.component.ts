@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ContentChild, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '@gpx/services/auth.service';
 import { MeterSelectionService } from '@gpx/services/meter-selection.service';
 import { Subject } from 'rxjs';
@@ -17,6 +17,8 @@ export class FaqComponent implements OnInit, OnDestroy {
 
   view: 'dashboard' | 'gpxconnector' | 'data' | 'other';
 
+  @ViewChild('questionArea', {static: true}) questionArea: ElementRef;
+
   constructor(private route: ActivatedRoute, private titleService: Title) {
     this.titleService.setTitle('Veelgestelde vragen | GPX');
 
@@ -24,7 +26,12 @@ export class FaqComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.queryParams.pipe(takeUntil(this._unsubscribeAll)).subscribe(params => {
-      this.view = params.questions || null;
+      this.view = params.q || null;
+      if (this.view) {
+        setTimeout(() => {
+          this.questionArea?.nativeElement?.scrollIntoView({behavior: 'smooth'});
+        }, 50);
+      }
     });
   }
 

@@ -1,42 +1,25 @@
 :host {
   height: 100%;
-}
 
-.img-container {
-  text-align: center;
-
-  img {
-    width: 100%;
-    max-width: 500px;
+  gpx-question-panel {
+    margin-bottom: 12px;
   }
 
-  .img-subtext {
-    padding-top: 0;
-    padding-bottom: 24px;
-    font-style: italic;
+  .section {
+    margin-top: 32px;
   }
-}
 
-.section {
-  margin-top: 32px;
-}
+  .faq-section-card {
+    text-align: center;
 
-.faq-section-card {
-  text-align: center;
-
-  mat-icon {
-    transform: scale(2);
+    mat-icon {
+      transform: scale(2);
+    }
   }
+
+  h3 {
+    font-weight: bold;
+  }
+
 }
 
-h3 {
-  font-weight: bold;
-}
-
-.meter-config-help {
-  width: 300px;
-}
-
-.user-specific {
-  margin-bottom: 12px;
-}

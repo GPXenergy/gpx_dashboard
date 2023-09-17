@@ -90,7 +90,7 @@ export class SocketService extends Socket {
     return this._socketConnected;
   }
 
-  subscribeToGroup(group: GroupMeter, as_public: boolean) {
+  subscribeToGroup(group: GroupMeter, as_public: boolean): void {
     this.emit('group:connect', {
       authorization: this.authService.token,
       group: as_public ? group.public_key : group.pk,
@@ -100,7 +100,7 @@ export class SocketService extends Socket {
     });
   }
 
-  unsubscribeFromGroup(groupPk: number) {
+  unsubscribeFromGroup(groupPk: number): void {
     this.emit('group:disconnect', {
       group: groupPk
     }, (response: IResponse) => {

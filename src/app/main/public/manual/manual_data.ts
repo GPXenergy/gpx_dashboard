@@ -126,7 +126,7 @@ export const meterGroups: IMeterMake[] = [
 export const ledData: ILEDData[] = [
   {
     color: 'Groen + Blauw',
-    blink: 'Geen',
+    blink: '-',
     description: 'GPXconnector is in configuratiemodus',
   }, {
     color: 'Blauw',
@@ -142,7 +142,7 @@ export const ledData: ILEDData[] = [
     description: 'Data wordt succesvol verzonden naar de server!',
   }, {
     color: 'Rood',
-    blink: 'Geen',
+    blink: '-',
     description: 'Kan geen verbinding maken met de WiFi',
   }, {
     color: 'Rood',
@@ -150,8 +150,8 @@ export const ledData: ILEDData[] = [
     description: 'Fout in de uitgelezen data',
   }, {
     color: 'Paars',
-    blink: 'Geen',
-    description: 'Verkeerde API key ingesteld',
+    blink: '-',
+    description: 'Foutieve API-key ingesteld',
   }, {
     color: 'Paars',
     blink: 'Per 2 seconden',

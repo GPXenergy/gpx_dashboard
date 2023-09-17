@@ -29,8 +29,6 @@ export class SetupViewComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService, public meterSelectionService: MeterSelectionService,
               private titleService: Title) {
     this.titleService.setTitle('Quick-start handleiding | GPX');
-
-    console.log(meterGroups);
   }
 
   ngOnInit(): void {

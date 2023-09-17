@@ -25,9 +25,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.titleService.setTitle('Inloggen | GPX');
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.nextUrl = params['next'] || '/personal-meter';
+      this.nextUrl = params?.next || '/personal-meter';
     });
 
     this.authService.user.then(user => {
@@ -45,10 +45,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.loginForm.valid) {
       const credentials = this.loginForm.getModel();
       this.authService.login(credentials).subscribe(
@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  redirectAfterLogin() {
-    this.router.navigateByUrl(this.nextUrl);
+  redirectAfterLogin(): void {
+    this.router.navigateByUrl(this.nextUrl, {replaceUrl: true});
   }
 }
